@@ -337,35 +337,176 @@ z[2, ]
  
 ## Vectorized Calculation
 
+An advantage of working with R is that it is possible to perform vectorized calculations. This means that you can do calculations elementwise, i.e. the same calculation is done on each element of an object. Let’s look at an example.
 
+We first create a vector z with numerical variables. 
+
+```{r} 
+z <- c(1, 2, 3, 4, 5, 6, 7, 8)
+z
+```
+
+Now it is fairly easy to square each element of the vector by typing:
+
+```{r} 
+z^2
+```
+ 
+The ^2 means take the power of 2. We see that each element is squared. These vectorized calculations can be done by using all kinds of mathematical functions, e.g. taking the square root, logarithms, adding constant values to each element, etc. 
+
+## Functions
+
+Functions play an important role in R. Functions can be seen as lines of R code to run all kind of data procedures and to return a result. Let’s write a small function that we name “sum.test” that generates a sequence of numbers from 1 to 5 and sums all values from 1 to the value we define beforehand, which is in our example the value 3.  This means that the function will sum all values from 1 to 3, i.e. 1 + 2 + 3 when it is at the value of 3 and all values from 1 to 4 when we use as input value the value 4. The function can be found in R code 1.26.
+ 
+```{r} 
+print.sum.test <- function(x) 
+{
+ for (i in 1:5) 
+ {
+   if (i==x) y <- sum(1:i)  
+ }
+return(y)
+}
+print.sum.test(3)
+```
+ 
+At the first line we define the function print.sum.test that includes one argument x. Than in de body of the function (in italic) which starts with a left brace and ends with another brace, the actual calculations take place. The return statement gives back the result. At the end we call the function with the statement print.sum.test(3), where the value 3 is actually used in the function.
+ 
+Once the function is defined, we can call the function and plug in other values. For example:
+ 
+```{r} 
+print.sum.test(4)
+```
+
+That will directly lead to the result 10 when the value 4 is used.
+
+You can write functions yourself but in R many functions are available which means that many calculations are done by using function calls. A function name is followed by a set of parentheses which contain some arguments. In the above self-written function, we already made use of a function, which is the sum function. We can use it separately as follows:
+
+```{r} 
+sum(3,4)
+```
+
+The arguments in this function are the numbers 3 and 4 and the result is their sum. This function uses as arguments numbers or complete vectors. If you want to see the formal arguments of each function you can use the args function. You have to type the name of the function as the argument in the args function. For example, we can use it for the matrix function:
+
+```{r} 
+args(matrix)
+```
+
+As a result the arguments of the functions are listed with their default settings. In this case the arguments are:
+
+data: an optional data vector (including a list or expression vector). 
+
+nrow: the desired number of rows.
+
+ncol: the desired number of columns.
+
+byrow: logical. If FALSE (the default) the matrix is filled by columns, otherwise the matrix is filled by rows.
+
+dimnames: A dimnames attribute for the matrix: NULL or a list of length 2 giving the row and column names respectively. An empty list is treated as NULL, and a list of length one as row names. The list can be named, and the list names will be used as names for the dimensions.
+
+## The Help function
+
+There are several possibilities to start the help facilities in R and to get more information about functions and their arguments in R. 
+
+You can just type help or use the question mark as follows:
+
+help(matrix)
+?matrix
+
+In both ways the help tutorial for the matrix function will be activated and appear in your web browser or in help tab in the right corner below when you use R studio.
+
+## Working with script files
+
+If you want to use R code and functions more than once it is useful to work with scripts files. In this way you can type and save R code and reuse it. To create a script file in R is easy. 
+
+After you have started RStudio you go to File -> New File -> R Scripts. Now a new window will open on the left side above. In that file you can type for example the self-written function print.sum.test. (Figure \@ref(fig:fig11)). Now you can save the script file by using the Save option under the File menu, open it again and use it whenever you want.
 
 ```{r fig11, echo = FALSE, fig.cap="Script file example in RStudio", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig1.11.png")
 ```
 
+## Creating a working directory
+
+It is a good idea to keep your R files at the same place when you are doing data analysis for some kind of project. If you do not use a separate directory, R will use a default directory, that will mostly be in Windows in the documents folder. All files that you have to use during your R session are assumed to be in that directory. Further, all files that you save during your session will be in that directory. To locate your working directory, you can type in the Console window:
+
+```{r} 
+getwd()
+```
+
+If you want to change your working directory to for example C:\Users\MWHeymans\Documents\R (Note that the path in R uses forward slashes and the path in Windows backward slashes!), you can type:
+
+```{r} 
+setwd("C:/Users/MWHeymans/Documents/R")
+getwd()
+```
+
+In Rstudio there is another way to get information about the current working directory and another way to change the working directory. Go in RStudio to the window on the right site below and go to the Files tab and click on the right site of the screen on the three dots. Than a window will open and you can browse to your preferred folder. Then choose for More in the Files tab and then select “Set As Working Directory” (Figure \@ref(fig:fig12)). Now you have set your preferred working directory. You can check if your directory is set correctly by choosing  “Go To Working Directory”.
+
 ```{r fig12, echo = FALSE, fig.cap="Working directory selection in RStudio", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig1.12.png")
 ```
+
+## Reading in SPSS data in RStudio
+
+There are several procedures in RStudio to read in datasets. 
+
+1.	Import datasets via “Import Dataset”
+An easy way to do that is via the window at the right site above. There you will find the button which is called “Import Dataset”. When you click on it you can choose between different kind of file types, i.e. CVS, Excel, SPSS, SAS and Stata files (Figure 1.13). 
 
 ```{r fig13, echo = FALSE, fig.cap="Screen to import datasets in RStudio", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig1.13.png")
 ```
 
+In this example we choose for SPSS. When you approach this procedure for the first time it could be that RStudio asks for your permission to download a package called “haven”. This package is built to import and export data from several types. The following window will then appear (Figure 1.14).
+
 ```{r fig14, echo = FALSE, fig.cap="Window to install the haven package", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig1.14.png")
 ```
+
+Click Yes and the download will start from the CRAN website. After the package is installed a new window will open which is called “Import Statistical Data” (Figure 1.15).
 
 ```{r fig15, echo = FALSE, fig.cap="The Import Statistical Data window in RStudio", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig1.15.png")
 ```
 
+At the top right site of the window you find the button which is called “Browse”. That button allows you to browse to your dataset on your computer. After you have opened your dataset you see a preview of your dataset in RStudio (Figure 1.16).
+
 ```{r fig16, echo = FALSE, fig.cap="A preview of the dataset in RStudio", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig1.16.png")
 ```
 
+Under Code Preview, under in the window, you see the code that was used by RStudio to read in the dataset:
+
+R code 1.33
+library(haven)
+Backpain50 <- read_sav("C:/Users/MWHeymans/Martijn_MissingData/MissingData_Manual/Text/Manual Version 2/Ch 1/Backpain50.sav")
+View(Backpain50)
+The dataset is automatically assigned to the object: Backpain50, which is the original name of the dataset. When you click on Import, the dataset is imported in the RStudio environment (Figure 1.17).
+
 ```{r fig17, echo = FALSE, fig.cap="Imported dataset in RStudio", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig1.17.png")
 ```
+
+Another way to import an SPSS dataset is by making use of the foreign package. You can find this package under the Packages Tab in the window at the right site below under the heading “System Library”. Install that package first. The foreign package includes the function “read.spss”. Let’s first explore the function arguments of this function by using:
+
+```{r} 
+?read.spss
+```
+
+Now the following information can be found in the right window below, under the Help tab:
+
+read.spss(file, use.value.labels = TRUE, to.data.frame = FALSE,
+          max.value.labels = Inf, trim.factor.names = FALSE,
+          trim_values = TRUE, reencode = NA, use.missings = to.data.frame)
+
+The most important arguments to change for us are the file and to.data.frame arguments. 
+When you are in the correct working directory, i.e. the working directory where the file that you want to import is stored, you use the following code to import the dataset:
+
+R code 1.35
+> dataset <- read.spss(file= "Backpain50.sav", to.data.frame = T)
+re-encoding from UTF-8
+
+
 
 ```{r fig19, echo = FALSE, fig.cap="Step 1 of the Text Import Wizard", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig1.19.png")
