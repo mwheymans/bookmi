@@ -115,11 +115,227 @@ This is the main window to run R code (see below for more information about the 
 
 When you enter code in the Console window you will directly receive a result. For example, you can type the following code and the result will appear directly in the Console window.
 
-**R code 1.1**
-
 ```{r} 
 3 + 3
 ```
+
+As you can see, you can use R as a large calculator. Other multiplication procedures as divide, square, etc. can also be executed. However, the main use for R is its functions. For example, when you generate 20 random numbers you can use the following function code (we will discuss more about functions in R later):
+
+```{r} 
+rnorm(20)
+```
+
+The number [1] between brackets is the index of the first number or item in the vector. That can be useful when you have many numbers printed in the Console window.  
+
+## R assignments and objects
+
+In R it is possible to create objects and to assign values to these objects. In this way it is for example possible to store some intermediate results and recall or use them later on. Assigning values to objects is done by using the assignment operator <- (R code below). You can also use the = sign as an assignment operator. This is not recommended because this is also a symbol used for some mathematical operations. For example, when we want to assign the value 3 to the object x, we use the following code.
+
+```{r} 
+x <- 3 
+```
+
+When we subsequently type in the letter x we get the following result:
+
+```{r} 
+x 
+```
+
+As result we see the value 3 again. Now the value 3 is assigned to the object x. In R all kind of information can be assigned to an object, i.e. one number, a vector of numbers, results from analysis or other R objects such as data frames, matrices or lists. Objects can have all kinds of different names, composed of different letters and numbers. Here are some examples where number 3 is assigned to different objects with different names:
+
+```{r} 
+x 
+```
+
+As result we see the value 3 again. Now the value 3 is assigned to the object x. In R all kind of information can be assigned to an object, i.e. one number, a vector of numbers, results from analysis or other R objects such as data frames, matrices or lists. Objects can have all kinds of different names, composed of different letters and numbers. Here are some examples where number 3 is assigned to different objects with different names:
+
+```{r} 
+test <- 3
+test.1 <- 3
+test.manual <- 3
+test
+test.1
+test.manual 
+```
+
+Note that some letters and words are used by R itself. It is not recommended to use these leters as names for objects in R that you create yourself. For example, the letter T and F are used as TRUE and FALSE by R. Other letters that are already in use are c, q, t, C, D, I and diff, df, and pt.
+
+## Vectors, matrices, lists and data frames
+
+*Vectors*
+In the previous paragraph we created the one-vector x, i.e. a vector that contained only one number, the number 3. Mostly you do your analysis on more numbers than just one. R has several possibilities to create objects with more data. We start with a simple dataset, called a data vector, which is an array of numbers (such as created in R code 1.2. A vector can be created by the following code:
+
+```{r} 
+y <- c(1, 2, 3, 4, 5)
+y
+```
+
+Now the numbers 1, 2, 3, 4 and 5 are assigned to the data vector y. The “c” in the above code stand for concatenate which makes that all separate (one-vector) numbers are merged into one vector. It is also possible to create character vectors, which are vectors that contain strings (text). An example:
+
+```{r} 
+y <- c("a", "b", "test")
+y
+```
+
+Vectors can also be made by using the “:” symbol. With that symbol it is easy to generate a sequence of numbers. An example:
+
+```{r} 
+y <- 1:10
+y
+y <- 2:6
+y
+```
+
+Both lines of code produce a vector containing a sequence of numbers. The first example produces the numbers 1 to 10 and the second example the numbers 2 to 6.
+
+*Matrix*
+A matrix in R contains rows and columns and can be created by using the matrix function.
+
+```{r} 
+matrix(c(1, 2, 3, 4, 5, 6), nrow=2, ncol=3)
+```
+
+Now we have created a matrix with 2 rows and 3 columns. In essence we converted the vector c(1, 2, 3, 4, 5, 6) into a matrix. 
+
+*List*
+Another popular R object class is a list. The advantage of a list is that it can contain components of different formats. Let’s look at an example using the following code:
+
+```{r} 
+x <- 1:5
+x
+y <- c("a", "b", "test")
+z <- list(x=x, y=y)
+z
+```
+
+The code created the list object z consisting of the two components x and y which are the vectors that were created above. You can see that in a list two components of different data type can be combined, a numeric and a character factor. The names of the list components are indicated by the dollar sign, $. The list component can be obtained separately by typing z$x for component x or x$y for component y.
+
+*Dataframe*
+Mostly we work with datasets that contain information of different variables and persons. In R such a dataset is called a dataframe. In essence, a dataframe in R is a list, where each component of the list is a vector of equal length. This example code first creates a list, consisting of 3 vectors of the same length. Than this list is converted into a dataframe, using the data.frame function. 
+
+```{r} 
+k <- list(a=1:10, b=11:20, c=21:30)
+k
+z <- data.frame(k)
+z
+```
+
+Typically, a dataframe is created by reading in an existing dataset. How to create a dataframe by reading in a dataset will be further discussed in the paragraph “Reading in and saving data”.
+
+## Indexing Vectors, Matrices, Lists and Data frames
+
+*Vectors*
+An important operation in R is to select a subset of a given vector. This is called indexing vectors. This subset of the vector elements can be assigned to another vector. An example how to do this:
+
+```{r} 
+y <- c(3, 5, 2, 8, 5, 4, 8, 1, 3, 6)
+y[c(1, 4)]
+```
+
+The R code y[c(1, 4)], extracts the first and fourth element of the vector. Another example is by using the “:” symbol, to extract several subsequent elements:
+
+```{r} 
+y[2:5]
+```
+
+The R code y[2:5], extracts the second to the fifth element of the vector.
+
+A minus sign excludes the specific element from the vector, like:
+
+```{r} 
+y[-3]
+```
+
+The R code y[-3], excludes the third element of the vector (i.e. 2).
+A new vector z can be created where the third and fourth element of the y vector are excluded, by using the following code:
+
+```{r} 
+z <- y[-c(3, 4)]
+z
+```
+
+*Matrices*
+When we index matrices we can choose to index rows, columns or both. Here are some examples:
+
+First we construct the matrix
+
+```{r} 
+z <- matrix(1:9, nrow=3)
+z
+```
+
+We extract from the first row the number in the second column
+
+```{r} 
+z[1, 2]
+```
+
+We extract all numbers in each column in the first row
+```{r} 
+z[1, ]
+```
+
+We extract all numbers in each row of the first column
+```{r} 
+z[, 1]
+```
+
+A minus sign can also be used to delete specific elements or complete rows or columns.
+
+Omit the first row from the matrix
+
+```{r} 
+z[-1, ]
+```
+
+*Lists*
+We first create a list with 3 components, each component consists of a vector of the same length and with 10 elements each.
+
+```{r} 
+k <- list(a=1:10, b=11:20, c=21:30)
+k
+```
+
+
+There are several options to index list components and elements of the components. If we want to index the individual component b we can use the following code:
+
+```{r} 
+k$b
+k[["b"]]
+k[[2]]
+```
+
+As you have may noticed, to extract individual list components double square brackets are used, compared to single brackets for indexing vectors and matrices. 
+
+When we use single brackets, we get the following results:
+
+```{r} 
+k["b"]
+```
+
+The difference between using single and double brackets is that single brackets return the component data type, which is in this case a vector (but could be any kind of data type) and single brackets always return a list.
+
+*Data frames*
+Indexing data frames follows the same method as indexing matrices, but we can also use the method that is used to index lists, since data frames are essentially lists of vectors of the same length. Data frames consist of rows and columns which can be accessed separately or both to extract specific elements. We use the data frame that was constructed in R code 1.11.
+
+```{r} 
+z
+```
+
+Examples of indexing the first column are:
+
+```{r} 
+z[, 1]
+k$a
+```
+
+The second row can be accessed by using:
+
+```{r} 
+z[2, ]
+```
+ 
+## Vectorized Calculation
 
 
 
