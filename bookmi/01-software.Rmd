@@ -1,0 +1,194 @@
+# Software applications
+
+Statistical software programs can help us to analyze our data. SPSS and R are such programs. Although SPSS and R are among the most popular programs to do statistical data analyses nowadays, they do not have much in common. One of the greatest differences is that SPSS works with menu options that make windows appear and you can click buttons to select options, whereas R works with lines of code that you have to type in to run analyses. This makes SPSS more user-friendly than R for applied researchers. In SPSS you are overloaded with output tables, and in R you only get output on demand. In this Chapter we will explore the different possibilities of the SPSS (IBM 2016) and the R software language (Matloff, 2011, Dalgaard, 2008). We will run R via RStudio, the integrated development environment (IDE) for R. RStudio includes a wide range of productivity enhancing features, which makes it easier to work with than with the R console on its own.  
+
+## SPSS, Data and Variable View windows
+
+In this manual we work with SPSS version 24 (IBM, 2016). When you start SPSS Version 24 a start-up window appears. In this window, you can directly open the files that were active during your previous use of SPSS. These files can be found and easily opened in the “Recent files” window (Figure \@ref(fig:fig1)). If you do not want to see this window the next time that you open SPSS, select “Don’t show this dialog in the future”.
+
+```{r fig1, echo = FALSE, fig.cap="First window after you have started SPSS", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.1.png")
+```
+
+When you click on Close on the right side below, the window will close and you will see an empty Data View window. Now you are in the SPSS Data Editor window. This window is always open when you start SPSS. The name “SPSS Data Editor” is also visible at the top of the screen and is called “IBM SPSS Statistics Data Editor” (Figure \@ref(fig:fig2)).
+
+```{r fig2, echo = FALSE, fig.cap="Data View window in SPSS", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.2.png")
+```
+
+In the SPSS Data Editor, you have the possibility to go to the Data View and Variable View windows. In the Data View window, you can enter data yourself or read in data by using the options in the file menu. In Figure 1.2 you see an example of a dataset in the Data View window. Each row in the Data View window represents a case and in the columns you will find the variable names. In the Data View window, you can do all kind of data manipulations by using the different menu’s above in the window. From here you can click on the tab Variable View, in the lower left corner of the window. Than the Variable view window will appear (Figure \@ref(fig:fig3)).
+
+```{r fig3, echo = FALSE, fig.cap="Variable View window in SPSS", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.3.png")
+```
+
+In the Variable View window, you can add new variables, by entering the name in the name column. Further, you can change the columns by using the following options:
+Type: Here you can change the type of variables in your dataset. Mostly you work with numeric variables, i.e. a variable whose values are numbers. Other possibilities are Date variables which is a numeric variable whose values are displayed in one of several calendar-date or clock-time formats or String variables, a character (text) variable that can contain any characters up to the defined length. String values are not numeric and therefore are not used in calculations. 
+Width: By default SPSS defines a numeric variable with 8 digits for each new variable.
+
+Decimals: the number of decimal places displayed.
+
+Label: The variable name.
+
+Values: To assign numbers to the categories of a variable. To define Variable values do the following:
+1.	Click the button in the Values cell for the variable that you want to define.
+2.	For each value, enter the value and a label.
+3.	Click Add to enter the value label.
+4.	Click OK.
+
+Missing: Here you can define specified data values as user-missing. You can enter up to three discrete (individual) missing values, a range of missing values, or a range plus one discrete value.
+
+Columns: To change the number of characters displayed in the Data View window.
+
+Align: Here you can specify the alignment of your data.
+
+Measure: Here you can specify the level of each variable, scale (continuous), ordinal or nominal.
+
+Role: Here you can define the role of the variable during your analysis. Examples are, Input for independent variable, Target for dependent or outcome variable, Both, independent and dependent variable. There are more possibilities, but most of the times you use the default Input setting.
+
+## Analyzing data in SPSS
+
+All statistical procedures in SPSS can be found under the Analyze button (Figure \@ref(fig:fig4)). Here you also will find the option “Multiple Imputation” which plays an important role in this manual. We will use this menu later on in Chapter 4.
+
+```{r fig4, echo = FALSE, fig.cap="Statistical procedures that can be found under the Analyze menu in SPSS", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.4.png")
+```
+
+## Data Transformations in SPSS
+
+Two other interesting buttons are Data and Transform. The Data menu allows you to make changes to the data editor. Here you can add new variables or cases. You can also use the Split File option, to get analyses results separately for categories of a variable. The Transform menu allows you to manipulate your variables by for example dichotomizing a numeric variable.
+
+## The Output window in SPSS
+
+If you have run your analyses in SPSS, an SPSS Output (or viewer) Window will pop-up. The main body of the Output Window consists of two panes (left and right panes). In the left pane you will find an outline of the output. In the right pane you will find the actual output of your statistical procedure (Figure \@ref(fig:fig5)).
+
+```{r fig5, echo = FALSE, fig.cap="Part of the Output or Viewer window in SPSS after making use of Descriptive Statistics under the Analyze menu", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.5.png")
+```
+
+## The Syntax Editor in SPSS
+
+In the syntax editor of SPSS, you use the SPSS syntax programming language. You can run all SPSS procedures by typing in commands in this syntax editor window, instead of using the graphical user interface, i.e. by using your mouse and clicking on the menu´s. You can get access to the syntax window in two ways. The first is just by opening a new syntax file by navigating to File -> New -> Syntax. This will open a new syntax window (Figure \@ref(fig:fig6)). 
+
+```{r fig6, echo = FALSE, fig.cap="Screenshot of new syntax file", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.6.png")
+```
+
+Now you can start writing your syntax directly in this window. You can also generate syntax by accessing statistical procedures through the dropdown menus and clicking the Paste button instead of clicking the OK button after you have specified the options. When you have clicked the Paste button, a new Syntax Editor window will pop up or the new syntax will automatically be added to the open Syntax Editor window. This is a very useful way to keep track of the analysis that you have performed. An example can be found in Figure \@ref(fig:fig7), where the syntax is shown for the Descriptive Statistics procedure of Figure \@ref(fig:fig5).
+
+```{r fig7, echo = FALSE, fig.cap="Screenshot of Syntax editor of SPSS including the Syntax code for descriptive statisitcs", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.7.png")
+```
+
+By using the SPSS Syntax it is possible for users to perform the same analyses over and over again or to adapt the analysis via the syntax code for complex calculations in the data. In this manual we will not use SPSS syntax code to access statistical procedures, however we recommend to use the SPSS syntax to keep track of the analysis that you have performed. SPSS is most frequently used via the graphical user interface, and we will use that method also in this manual.
+
+## Reading and saving data in SPSS
+
+Reading in data in SPSS is very easy; via the menu File choose for File -> Open -> Data. All kind of file types can be selected. Of course the SPSS .sav files, but also .por, .xlsx, .cvs, SAS, Stata, etc. (Figure 1.8). After you have selected a specific file type you may have to go through several steps before you see the data in the Data View window. These steps are not necessary for SPSS files, they open directly in the data editor.
+
+```{r fig8, echo = FALSE, fig.cap="Window to read in different file types in SPSS", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.8.png")
+```
+
+Saving files in SPSS is possible via the Save Data As option under the menu File. You can choose the same kind of file types (Figure \@ref(fig:fig9)).
+
+```{r fig9, echo = FALSE, fig.cap="Option Save Data As under the menu File", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.9.png")
+```
+
+## R and RStudio
+
+RStudio is an integrated environment to work with the software program R. Consequently, to work with RStudio, R has to be installed. RStudio uses the R language and is also freely available. In this manual we will only show some possibilities and options in RStudio that are needed to run the R code and the programs that are discussed in this manual. For more information about RStudio and its possibilities visit the RStudio website at www.rstudio.com. When you open RStudio the following screen will appear.
+
+```{r fig10, echo = FALSE, fig.cap="First screen that appears after you have started RStudio", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.10.png")
+```
+
+There are three windows opened:
+
+1. On the left is the Console window
+
+This is the main window to run R code (see below for more information about the Console window).
+
+2. Right above is the window where you can choose between the Environment and History tabs (e.g. history tracks the code you typed in the Console window).
+3. At the right site below is the window where you can choose between Files, Plots, Packages, Help and Viewer tabs.
+
+When you enter code in the Console window you will directly receive a result. For example, you can type the following code and the result will appear directly in the Console window.
+
+**R code 1.1**
+
+```{r} 
+3 + 3
+```
+
+
+
+```{r fig11, echo = FALSE, fig.cap="Script file example in RStudio", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.11.png")
+```
+
+```{r fig12, echo = FALSE, fig.cap="Working directory selection in RStudio", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.12.png")
+```
+
+```{r fig13, echo = FALSE, fig.cap="Screen to import datasets in RStudio", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.13.png")
+```
+
+```{r fig14, echo = FALSE, fig.cap="Window to install the haven package", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.14.png")
+```
+
+```{r fig15, echo = FALSE, fig.cap="The Import Statistical Data window in RStudio", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.15.png")
+```
+
+```{r fig16, echo = FALSE, fig.cap="A preview of the dataset in RStudio", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.16.png")
+```
+
+```{r fig17, echo = FALSE, fig.cap="Imported dataset in RStudio", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.17.png")
+```
+
+```{r fig19, echo = FALSE, fig.cap="Step 1 of the Text Import Wizard", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.19.png")
+```
+
+```{r fig20, echo = FALSE, fig.cap="Step 2 of the Text Import Wizard", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.20.png")
+```
+
+```{r fig21, echo = FALSE, fig.cap="Step 3 of the Text Import Wizard", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.21.png")
+```
+
+```{r fig22, echo = FALSE, fig.cap="Step 4 of the Text Import Wizard", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.22.png")
+```
+
+```{r fig23, echo = FALSE, fig.cap="Step 5 of the Text Import Wizard", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.23.png")
+```
+
+```{r fig24, echo = FALSE, fig.cap="Step 6 of the Text Import Wizard", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.24.png")
+```
+
+```{r fig25, echo = FALSE, fig.cap="Install packages Window in RStudio to install packages from the CRAN website", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.25.png")
+```
+
+```{r fig25b, echo = FALSE, fig.cap="Enlarged Install packages Window in RStudio to install packages from the CRAN website", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.25b.png")
+```
+
+```{r fig26a, echo = FALSE, fig.cap="Install packages Window in RStudio to install packages from zip files", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.26a.png")
+```
+
+```{r fig26b, echo = FALSE, fig.cap="Enlarged Install packages Window in RStudio to install packages from zip files", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig1.26b.png")
+```
+
+
