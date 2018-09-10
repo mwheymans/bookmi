@@ -428,11 +428,12 @@ It is a good idea to keep your R files at the same place when you are doing data
 getwd()
 ```
 
-If you want to change your working directory to for example C:\Users\MWHeymans\Documents\R (Note that the path in R uses forward slashes and the path in Windows backward slashes!), you can type:
+If you want to change your working directory to for example C:\Users\MWHeymans\Documents\R (Note that the path in R uses forward slashes and the path in Windows backward slashes!), you can type: \code{setwd("C:/Users/MWHeyamns/Documents/R")}
+\code{getwd()}
 
 ```{r, echo = FALSE, eval=FALSE} 
-setwd("C:/Users/MWHeymans/Documents/R")
-getwd()
+#setwd("C:/Users/MWHeymans/Documents/R")
+#getwd()
 ```
 
 In Rstudio there is another way to get information about the current working directory and another way to change the working directory. Go in RStudio to the window on the right site below and go to the Files tab and click on the right site of the screen on the three dots. Than a window will open and you can browse to your preferred folder. Then choose for More in the Files tab and then select “Set As Working Directory” (Figure \@ref(fig:fig12)). Now you have set your preferred working directory. You can check if your directory is set correctly by choosing  “Go To Working Directory”.
@@ -474,7 +475,7 @@ Under Code Preview, under in the window, you see the code that was used by RStud
 
 ```{r, echo = FALSE, eval=FALSE} 
 library(haven)
-Backpain50 <- read_sav("C:/Users/MWHeymans/Martijn_MissingData/MissingData_Manual/Text/Manual Version 2/Ch 1/Backpain50.sav")
+Backpain50 <- read_sav("data/Backpain50.sav")
 ```
 
 The dataset is automatically assigned to the object: Backpain50, which is the original name of the dataset. When you click on Import, the dataset is imported in the RStudio environment (Figure 1.17).
