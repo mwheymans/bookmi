@@ -40,6 +40,6 @@ R code of the procedures used in the manual is marked grey and the explanation i
 # Activate the foreign package and read in the SPSS dataset
 
 library(foreign)
-dataset <- read.spss(file="Backpain 50 missing.sav", to.data.frame=T)
+dataset <- read.spss(file="data/Backpain 50 missing.sav", to.data.frame=T)
 
 ```

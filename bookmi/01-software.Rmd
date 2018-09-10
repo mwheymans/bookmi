@@ -428,11 +428,12 @@ It is a good idea to keep your R files at the same place when you are doing data
 getwd()
 ```
 
-If you want to change your working directory to for example C:\Users\MWHeymans\Documents\R (Note that the path in R uses forward slashes and the path in Windows backward slashes!), you can type:
+If you want to change your working directory to for example C:\Users\MWHeymans\Documents\R (Note that the path in R uses forward slashes and the path in Windows backward slashes!), you can type: \code{setwd("C:/Users/MWHeyamns/Documents/R")}
+\code{getwd()}
 
 ```{r, echo = FALSE, eval=FALSE} 
-setwd("C:/Users/MWHeymans/Documents/R")
-getwd()
+#setwd("C:/Users/MWHeymans/Documents/R")
+#getwd()
 ```
 
 In Rstudio there is another way to get information about the current working directory and another way to change the working directory. Go in RStudio to the window on the right site below and go to the Files tab and click on the right site of the screen on the three dots. Than a window will open and you can browse to your preferred folder. Then choose for More in the Files tab and then select “Set As Working Directory” (Figure \@ref(fig:fig12)). Now you have set your preferred working directory. You can check if your directory is set correctly by choosing  “Go To Working Directory”.
@@ -474,7 +475,7 @@ Under Code Preview, under in the window, you see the code that was used by RStud
 
 ```{r, echo = FALSE, eval=FALSE} 
 library(haven)
-Backpain50 <- read_sav("C:/Users/MWHeymans/Martijn_MissingData/MissingData_Manual/Text/Manual Version 2/Ch 1/Backpain50.sav")
+Backpain50 <- read_sav("data/Backpain50.sav")
 ```
 
 The dataset is automatically assigned to the object: Backpain50, which is the original name of the dataset. When you click on Import, the dataset is imported in the RStudio environment (Figure 1.17).
@@ -500,7 +501,7 @@ When you are in the correct working directory, i.e. the working directory where 
 
 ```{r, echo = FALSE, eval=FALSE} 
 library(foreign)
-dataset <- read.spss(file= "Backpain50.sav", to.data.frame = T)
+dataset <- read.spss(file= "data/Backpain50.sav", to.data.frame = T)
 ```
 
 ### Saving and Reading R data in RStudio
@@ -513,8 +514,8 @@ Datasets can be saved and read in R using different commands.
 The write.table function can be used to write matrices and data frames (datasets) to the working directory. The R code is:
 
 ```{r, echo = FALSE, eval=FALSE} 
-dataset <- read.spss(file= "Backpain50.sav", to.data.frame = T)
-write.table(dataset, file="Backpain50 R file")
+dataset <- read.spss(file= "data/Backpain50.sav", to.data.frame = T)
+write.table(dataset, file="data/Backpain50 R file")
 ```
 
 Files that have been written with write.table can be easily read in, in SPSS by using the steps that will be discussed in the next paragraph. 
@@ -523,7 +524,7 @@ Files that have been written with write.table can be easily read in, in SPSS by 
 The read.table function can be used to read in matrices and data frames by using:
 
 ```{r, echo = FALSE, eval=FALSE} 
-dataset <- read.table(file="Backpain50 R file")
+dataset <- read.table(file="data/Backpain50 R file")
 dataset
 ```
 
@@ -533,26 +534,26 @@ dataset
 You can also use the command save to save datasets, according to (notice the .RData extension):
 
 ```{r, echo = FALSE, eval=FALSE} 
-save(dataset, file="Backpain50 R file.RData")
+save(dataset, file="data/Backpain50 R file.RData")
 ```
 
 *Load*
 Loading the dataset again in the workspace can be done by using:
 
 ```{r, echo = FALSE, eval=FALSE} 
-load(file="Backpain50 R file.RData")
+load(file="data/Backpain50 R file.RData")
 ```
 
 You can also use save by using the default options in the following way to save your datasets:
 
 ```{r, echo = FALSE, eval=FALSE} 
-save(dataset, file="Backpain50 R file")
+save(dataset, file="data/Backpain50 R file")
 ```
 
 To get direct access to the data that you have saved, you can use the get function in combination with the load function like this:
 
 ```{r, echo = FALSE, eval=FALSE} 
-get(load(file="Backpain50 R file"))
+get(load(file="data/Backpain50 R file"))
 ```
 
 With save, you can save any R object, also lists such as:
@@ -560,13 +561,13 @@ With save, you can save any R object, also lists such as:
 ```{r, echo = FALSE, eval=FALSE} 
 x <- list(a=1, b="example", c=3)
 
-save(x, file="listsave.RData")
+save(x, file="data/listsave.RData")
 ```
 
 Subsequently, after you have removed object x from the workspace, you can load it again by using:
 
 ```{r, echo = FALSE, eval=FALSE} 
-load(file="listsave.RData")
+load(file="data/listsave.RData")
 ```
 
 ### Reading in (R)Studio data into SPSS
@@ -574,7 +575,7 @@ load(file="listsave.RData")
 When you have used the write.table function to save data in R you can easily read them in into SPSS. First you have to use write.table in the following way:
 
 ```{r, echo = FALSE, eval=FALSE} 
-write.table(dataset, file="Backpain50 R file", sep=";", dec=",", row.names=F)
+write.table(dataset, file="data/Backpain50 R file", sep=";", dec=",", row.names=F)
 ```
 
 The extra parameter settings, mean:
