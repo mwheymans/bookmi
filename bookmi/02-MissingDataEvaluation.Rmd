@@ -78,6 +78,31 @@ From this menu we first transfer all variables of interest in the correct Quanti
 knitr::include_graphics("images/fig2.4.png")
 ```
 
-As default procedure univariate statistics are presented including output information about the number and percentages of missing data and other descriptive statistics for each variable (Table 2.1a). Information about the missing data patterns is provided in the Tabulated patterns table (Table 2.1b). On the left column of that table, named “Number of Cases”, the number of cases are presented with that specific missing data pattern. In our example, there are 75 cases in total without any missing values and 13 cases with a missing value in only the Tampa scale variable (see row 1 and 2 of Table 2.1b). In the right column of that table named “Complete if…”, the total number of subjects is presented if the variables that contain missing data in that pattern are not used in the analysis. Those variables are marked with the “X” symbol.  For example, 88 subjects will be included in the analysis when the variable Tampa scale is not used in the analysis, those are the 75 subjects that have completely observed data on top of  the 13 subjects with missing data in the Tampa scale variable only.
 
+As default procedure univariate statistics are presented including output information about the number and percentages of missing data and other descriptive statistics for each variable. Information about the missing data patterns is provided in the Tabulated patterns table. On the left column of that table, named “Number of Cases”, the number of cases are presented with that specific missing data pattern. In our example, there are 75 cases in total without any missing values and 13 cases with a missing value in only the Tampa scale variable (see row 1 and 2 of Table 2.1). In the right column of that table named “Complete if…”, the total number of subjects is presented if the variables that contain missing data in that pattern are not used in the analysis. Those variables are marked with the “X” symbol.  For example, 88 subjects will be included in the analysis when the variable Tampa scale is not used in the analysis, those are the 75 subjects that have completely observed data on top of  the 13 subjects with missing data in the Tampa scale variable only.
 
+```{r tab1, echo = FALSE, fig.cap="Descriptive missing data statistics and the missing data patterns.", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/tab2.1a.png")
+knitr::include_graphics("images/tab2.1b.png")
+
+```
+
+Another way to obtain information about the missing data patterns is via the Multiple Imputation option. To access this option, choose: Analyze -> Multiple Imputation -> Analyze Patterns…  A new window “Analyze Patterns” will open (Figure 2.5).
+
+```{r fig5, echo = FALSE, fig.cap="Analyse Patterns menu.", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fit2.5.png")
+```
+
+Now transfer all variables that have to be analyzed for their missing values to the window “Analyze Across Variables”. We choose for the following output options in that window: 
+Summary of missing values (displays missing data information in pie charts, Patterns of missing values (displays tabulated patterns of missing values) and Variables with the highest frequency of missing values (displays a table of analysis variables sorted by percent of missing values in decreasing order). To get the full list of all patterns set the “Minimum percentage missing for variable to be displayed” at 0. You can also adjust the maximum number of variables displayed. This procedure will generate the following output (Figure 2.6).
+
+```{r fig5, echo = FALSE, fig.cap="Output as a result of the Analyze Patterns menu under Multiple Imputation.", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fit2.6a.png")
+knitr::include_graphics("images/fit2.6b.png")
+knitr::include_graphics("images/fit2.6c.png")
+knitr::include_graphics("images/fit2.6d.png")
+```
+
+###Studying Missing data patterns in R
+
+To generate the missing data patterns in R we can make use of the mice and VIM packages. We start with the mice package. That package contains the `md.pattern` function that can generate the missing data pattern.
