@@ -21,30 +21,29 @@ In R the missing values are denoted by NA which means “Not Available”. If we
 
 ```{r}
 library(haven)
-#dataset <- read_sav("data/")
-#dataset
-## kan hier de goede dataset niet vinden
+dataset <- read_sav("data/CH2 example.sav")
+head(dataset,10)
 ```
 
 
 The Variable Gestational Age (GA) contains the values for GA (e.g. 36, 29, etc.), the value 8 for males and the NA’s. In R the value 8 will be treated as a real value, so we have to recode that value to NA by using the following code.
 
 ```{r}
-#dataset$GA[dataset$GA==8] <- NA
-#dataset
+dataset$GA[dataset$GA==8] <- NA
+head(dataset,10)
 ```
 
 The `NA` values will be recognized as missing values. For most functions in R the handling of `NA` values has to be defined. For example, the following code to obtain the mean of Gestational Age results in an `NA` because the handling of missing data is not defined.
 
 ```{r}
-#mean(data$GA)
+mean(dataset$GA)
 ```
 
 To obtain the mean of the observed data the following code has to be used:
 
 
 ```{r}
-#mean(data$GA, na.rm=TRUE)
+mean(dataset$GA, na.rm=TRUE)
 ```
 
 
@@ -63,16 +62,16 @@ A univariate missing data pattern is a pattern with missing values in only one v
 
 ###	Missing data patterns in SPSS
 
-To evaluate the missing data pattern, we can make use of the options under the Missing Value Analysis (MVA) procedure in SPSS (IBM, 2016). We use as an example a dataset that contains information of 150 Back pain patients and 9 study variables. The variables are Pain (continuous), Tampa scale (continuous), Radiation in the leg (dichotomous), Disability (continuous), Body Weight (continuous), Body Length (continuous), Age (continuous), Smoking (dichotomous), Gender (dichotomous). Only the variables Gender and Age are completely observed.
+>To evaluate the missing data pattern, we can make use of the options under the Missing Value Analysis (MVA) procedure in SPSS (IBM, 2016). We use as an example a dataset that contains information of 150 Back pain patients and 9 study variables. The variables are Pain (continuous), Tampa scale (continuous), Radiation in the leg (dichotomous), Disability (continuous), Body Weight (continuous), Body Length (continuous), Age (continuous), Smoking (dichotomous), Gender (dichotomous). Only the variables Gender and Age are completely observed.
 
-To access the MVA function in the SPSS menu choose: Analyze -> Missing Value Analysis…  A new window will open that is called “Missing Value Analysis” (Figure 2.3)
+>To access the MVA function in the SPSS menu choose: Analyze -> Missing Value Analysis…  A new window will open that is called “Missing Value Analysis” (Figure 2.3)
 
 
 ```{r fig3, echo = FALSE, fig.cap="The Missing Value Analysis menu", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig2.3.png")
 ```
 
-From this menu we first transfer all variables of interest in the correct Quantitative and Categorical variables window and then choose for the Patterns option. From the Patterns menu choose for the options “Tabulated cases, grouped by missing value patterns” and “sort variables by missing value pattern”. To obtain the full list of all patterns that occur in the data, set the “Omit patterns with less than 1% of cases at 0% (Figure 2.4), then click on continue and OK. This will produce the output table that is displayed in Tables 2.1a and 2.1b.
+>From this menu we first transfer all variables of interest in the correct Quantitative and Categorical variables window and then choose for the Patterns option. From the Patterns menu choose for the options “Tabulated cases, grouped by missing value patterns” and “sort variables by missing value pattern”. To obtain the full list of all patterns that occur in the data, set the “Omit patterns with less than 1% of cases at 0%, then click on continue and OK. This will produce the output table that is displayed in Tables 2.1a and 2.1b.
 
 ```{r fig4, echo = FALSE, fig.cap="The Patterns menu", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig2.4.png")
@@ -87,29 +86,30 @@ knitr::include_graphics("images/tab2.1b.png")
 
 ```
 
-Another way to obtain information about the missing data patterns is via the Multiple Imputation option. To access this option, choose: Analyze -> Multiple Imputation -> Analyze Patterns…  A new window “Analyze Patterns” will open (Figure 2.5).
+>Another way to obtain information about the missing data patterns is via the Multiple Imputation option. To access this option, choose: Analyze -> Multiple Imputation -> Analyze Patterns…  A new window “Analyze Patterns” will open (Figure 2.5).
 
 ```{r fig5, echo = FALSE, fig.cap="Analyse Patterns menu.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fit2.5.png")
 ```
 
-Now transfer all variables that have to be analyzed for their missing values to the window “Analyze Across Variables”. We choose for the following output options in that window: 
-Summary of missing values (displays missing data information in pie charts, Patterns of missing values (displays tabulated patterns of missing values) and Variables with the highest frequency of missing values (displays a table of analysis variables sorted by percent of missing values in decreasing order). To get the full list of all patterns set the “Minimum percentage missing for variable to be displayed” at 0. You can also adjust the maximum number of variables displayed. This procedure will generate the following output (Figure 2.6).
+>Now transfer all variables that have to be analyzed for their missing values to the window “Analyze Across Variables”. We choose for the following output options in that window: 
+Summary of missing values (displays missing data information in pie charts, Patterns of missing values (displays tabulated patterns of missing values) and Variables with the highest frequency of missing values (displays a table of analysis variables sorted by percent of missing values in decreasing order). To get the full list of all patterns set the “Minimum percentage missing for variable to be displayed” at 0. You can also adjust the maximum number of variables displayed. This procedure will generate the following output.
 
-```{r fig5, echo = FALSE, fig.cap="Output as a result of the Analyze Patterns menu under Multiple Imputation.", out.width='90%', fig.align='center'}
+```{r fig6, echo = FALSE, fig.cap="Output as a result of the Analyze Patterns menu under Multiple Imputation.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fit2.6a.png")
 knitr::include_graphics("images/fit2.6b.png")
 knitr::include_graphics("images/fit2.6c.png")
 knitr::include_graphics("images/fit2.6d.png")
 ```
 
-###Studying Missing data patterns in R
+###Missing data patterns in R
 
-To generate the missing data patterns in R we can make use of the mice and VIM packages. We start with the mice package. That package contains the `md.pattern` function that can generate the missing data pattern.
+To generate the missing data patterns in R we can make use of the mice and `VIM` packages. We start with the `mice` package. That package contains the `md.pattern` function that can generate the missing data pattern.
 
 
 ```{r}
-#md.pattern(dataset)
+library(mice)
+md.pattern(dataset)
 ```
 
 
@@ -118,8 +118,8 @@ The first row contains the variable names. Each other row represents a missing d
 To obtain a visual impression of the missing data patterns in R we use the `VIM` package. That package contains the function `aggr` As a result of using this function, the univariate proportion of missing data is given in the Console window together with two graphs.
 
 ```{r}
-#aggr_pattern <- aggr(dataset[, -1], col=c('white','red'), numbers=TRUE, sortVars=TRUE, labels=names(dataset[, -1]), cex.axis=.7, gap=3, 
-#+     ylab=c("Percentage of missing data","Missing Data Pattern"))
+library(VIM)
+aggr(dataset, col=c('white','red'), numbers=TRUE, sortVars=TRUE, cex.axis=.7, gap=3, ylab=c("Percentage of missing data","Missing Data Pattern"))
 
 ```
 
@@ -205,13 +205,7 @@ $$LN(\frac{R_{Tampa=1}}{1-R_{Tampa=1}}) = \beta_0 + \beta_1 * Pain + \beta_2 * R
 From these models we observe that the missing data models can be defined by other observed variables in the dataset and/or missing data (which we do not observe). 
 It should be noted however, that we can never be completely sure about the reason why data are missing. The above mentioned relationships are therefore statistical relationships from descriptive models and not from causal models. 
 
-> Take Away Messages:
-
-> The MCAR assumption is mostly very strict and not realistic in practice.
-
-> The MAR assumption is more realistic and mostly assumed in practice.
-
-> The difference bewteen MAR and MNAR is that in MNAR the probability of missingness is also related to the unobserved (missing) data.
+In summary, the MCAR assumption is mostly very strict and not realistic in practice.The MAR assumption is more realistic and mostly assumed in practice.The difference bewteen MAR and MNAR is that in MNAR the probability of missingness is also related to the unobserved (missing) data.
 
 ###The Role of Auxiliary Variables
 
@@ -230,7 +224,7 @@ Researchers need to be aware that the assumptions that underlie an independent t
 
 ####Descriptive Statistics
 
-To get descriptive information of variables with missing data we again make use of the options under Missing Value Analysis (MVA) in SPSS, more specific from the possibilities under “Descriptive”. To find these, from the menus choose: Analyze -> Missing Value Analysis... than transfer all variables in the correct Quantitative and Categorical variables window and then choose for Descriptives option  -> Univariate statistics. 
+>Descriptive information of variables can be obtained via the following options of the Missing Value Analysis (MVA) module in the SPSS menu: Analyze -> Missing Value Analysis... than transfer all variables in the correct Quantitative and Categorical variables window and then clock Descriptives option  -> Univariate statistics. 
 
 ```{r fig10, echo = FALSE, fig.cap="Missing value Analysis menu in SPSS", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig2.10.png")
@@ -248,7 +242,7 @@ These descriptive information of variables with missing data gives us a quick ov
 
 When we use the t-test procedure, SPSS first creates an indicator variable, to distinguish the cases with missing values from the cases with values that are present in each variable with missing values. Then, group means are estimated and compared for other variables that are complete with groups formed by the indicator variable, using Student's t test. As a result, the t-statistic, degrees of freedom, counts of missing and non-missing values, and means of the two groups are displayed. You can also display any two-tailed probabilities associated with the t statistic.
 
-The t-test procedure can be found in the Missing Value Analysis window under Descriptives. In that window choose for “t-tests with groups formed by indicator variables” and “include probabilities in table” under the Indicator Variable Statistics options and then Click on Continue -> OK.
+>The t-test procedure can be found in the Missing Value Analysis window under Descriptives. In that window choose for “t-tests with groups formed by indicator variables” and “include probabilities in table” under the Indicator Variable Statistics options and then Click on Continue -> OK.
 
 ```{r fig11, echo = FALSE, fig.cap="The T-test procedure as part of the Missing Value Analysis menu", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig2.11.png")
@@ -261,7 +255,7 @@ knitr::include_graphics("images/tab2.5.png")
 
 On the left side oft the output table the names of the variables with missing values are presented which are the Tampa scale and Disability variables. Of these variables, indicator variables are defined which are used to compare group means of other variables, that can be tested for significance using independent t-tests. The results of these t-tests are given in the table according to the information in separate rows on the left side with the t-value (t), degrees of freedom (df), P-value (P(2-tail)), numbers of observed and missing cases (# Present and # Missing) and means of observed and missing cases (Mean(Present) and Mean(Missing)) presented. The variables for which the indicator groups are compared, are listed in the columns of the table and are the Pain, Tampa scale, Disability and Age variables. For the Tampa scale variable that contain missing values, only the observed mean is presented, because for the missing cases the values are missing! Notice that in the row of the Tampa scale variable the means of the Disability variable can still be compared between the observed and missing cases, because they do not miss values for exactly the same cases. Table 2.5 shows that patients that have observed values on the Tampa scale variable (row Mean(Present)) differ significantly from patients with missing values on the Tampa scale variable (row Mean(Missing)) on Pain (P(2-tail = 0.033) and Disability (P(2-tail = 0.039). When we look at the means of the Pain variable, we see that the mean of patients with missing values on the Tampa scale variable is higher compared to the mean of patients with observed scores. This means that there is a higher probability of missing data on the Tampa scale variable for patients with higher pain scores. If Tampa scale and Pain scores are correlated, the missing values on the Tampa scale variable can also be explained by the Pain score variable. This is also the case for the Age variable, but now the t-test is not significant. For the Disability variable, it is the other way around. We see more missing data on the Tampa scale variable for lower Disability scores.
 
-In the Missing Value Analysis window under the Indicator Variable Statistics options you can also choose for “Crosstabulations of categorical and indicator variables”. In that case a separate table is displayed for each categorical variable with missing values. For each category of the variable, the frequency and percentages of non-missing values for the other variables is displayed as well as the percentages of each type of missing value. To reduce the size of the table, you can omit statistics that are computed for only a small number of cases by adjusting the option “Omit variables missing less than % of cases”.
+>In the Missing Value Analysis window under the Indicator Variable Statistics options you can also choose for “Crosstabulations of categorical and indicator variables”. In that case a separate table is displayed for each categorical variable with missing values. For each category of the variable, the frequency and percentages of non-missing values for the other variables is displayed as well as the percentages of each type of missing value. To reduce the size of the table, you can omit statistics that are computed for only a small number of cases by adjusting the option “Omit variables missing less than % of cases”.
 
 
 
@@ -298,10 +292,10 @@ knitr::include_graphics("images/tab2.7e.png")
 
 ####Little's MCAR test in R
 
-Little´s MCAR test is available in the BaylorEdPsych package for R as the LittleMCAR function. To apply the test, we take a subset of only the continuous variables. An example is given in R code 2.9 were we use the dataset of 150 low back pain patients with missing data in the Tampa scale and Disability variable.
+Little´s MCAR test is available in the `BaylorEdPsych` package for R as the LittleMCAR function. To apply the test, we select only the continuous variables. In the example blowe we use the dataset of 150 low back pain patients with missing data in Genstatstional Age (GA). The p-value for the test is not-siginificant, indicating that the missings seem to be compeletely at random.
 
 ```{r}
-#dataset <- dataset[, c("Pain", "Tampascale", "Disability", "Age")]
-#LittleMCAR(dataset)
+library(BaylorEdPsych)
+LittleMCAR(dataset[,c("Pain", "Tampascale","Disability", "GA")])
 
 ``` 
