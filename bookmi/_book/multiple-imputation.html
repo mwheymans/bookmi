@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Applied Missing data analysis with SPSS and R(Studio)</title>
+  <meta name="description" content="Applied Missing data analysis with SPSS and R(Studio)">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Applied Missing data analysis with SPSS and R(Studio)" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Applied Missing data analysis with SPSS and R(Studio)" />
+  
+  
+  
+
+<meta name="author" content="Martijn Heymans and Iris Eekhout">
+
+
+<meta name="date" content="2018-09-19">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="missing-data-evaluation.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Applied Missing Data Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#the-goal-of-this-manual"><i class="fa fa-check"></i><b>0.1</b> The goal of this Manual</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#multiple-imputation-in-spss-and-r"><i class="fa fa-check"></i><b>0.2</b> Multiple Imputation in SPSS and R</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#notation-and-annotation-in-this-manual"><i class="fa fa-check"></i><b>0.3</b> Notation and annotation in this manual</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="software-applications.html"><a href="software-applications.html"><i class="fa fa-check"></i><b>1</b> Software applications</a><ul>
+<li class="chapter" data-level="1.1" data-path="software-applications.html"><a href="software-applications.html#spss-data-and-variable-view-windows"><i class="fa fa-check"></i><b>1.1</b> SPSS, Data and Variable View windows</a></li>
+<li class="chapter" data-level="1.2" data-path="software-applications.html"><a href="software-applications.html#analyzing-data-in-spss"><i class="fa fa-check"></i><b>1.2</b> Analyzing data in SPSS</a></li>
+<li class="chapter" data-level="1.3" data-path="software-applications.html"><a href="software-applications.html#data-transformations-in-spss"><i class="fa fa-check"></i><b>1.3</b> Data Transformations in SPSS</a></li>
+<li class="chapter" data-level="1.4" data-path="software-applications.html"><a href="software-applications.html#the-output-window-in-spss"><i class="fa fa-check"></i><b>1.4</b> The Output window in SPSS</a></li>
+<li class="chapter" data-level="1.5" data-path="software-applications.html"><a href="software-applications.html#the-syntax-editor-in-spss"><i class="fa fa-check"></i><b>1.5</b> The Syntax Editor in SPSS</a></li>
+<li class="chapter" data-level="1.6" data-path="software-applications.html"><a href="software-applications.html#reading-and-saving-data-in-spss"><i class="fa fa-check"></i><b>1.6</b> Reading and saving data in SPSS</a></li>
+<li class="chapter" data-level="1.7" data-path="software-applications.html"><a href="software-applications.html#r-and-rstudio"><i class="fa fa-check"></i><b>1.7</b> R and RStudio</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="software-applications.html"><a href="software-applications.html#the-role-of-the-console-window"><i class="fa fa-check"></i><b>1.7.1</b> The role of the Console Window</a></li>
+<li class="chapter" data-level="1.7.2" data-path="software-applications.html"><a href="software-applications.html#r-assignments-and-objects"><i class="fa fa-check"></i><b>1.7.2</b> R assignments and objects</a></li>
+<li class="chapter" data-level="1.7.3" data-path="software-applications.html"><a href="software-applications.html#vectors-matrices-lists-and-data-frames"><i class="fa fa-check"></i><b>1.7.3</b> Vectors, matrices, lists and data frames</a></li>
+<li class="chapter" data-level="1.7.4" data-path="software-applications.html"><a href="software-applications.html#indexing-vectors-matrices-lists-and-data-frames"><i class="fa fa-check"></i><b>1.7.4</b> Indexing Vectors, Matrices, Lists and Data frames</a></li>
+<li class="chapter" data-level="1.7.5" data-path="software-applications.html"><a href="software-applications.html#vectorized-calculation"><i class="fa fa-check"></i><b>1.7.5</b> Vectorized Calculation</a></li>
+<li class="chapter" data-level="1.7.6" data-path="software-applications.html"><a href="software-applications.html#r-functions"><i class="fa fa-check"></i><b>1.7.6</b> R Functions</a></li>
+<li class="chapter" data-level="1.7.7" data-path="software-applications.html"><a href="software-applications.html#the-help-function"><i class="fa fa-check"></i><b>1.7.7</b> The Help function</a></li>
+<li class="chapter" data-level="1.7.8" data-path="software-applications.html"><a href="software-applications.html#working-with-script-files"><i class="fa fa-check"></i><b>1.7.8</b> Working with script files</a></li>
+<li class="chapter" data-level="1.7.9" data-path="software-applications.html"><a href="software-applications.html#creating-a-working-directory"><i class="fa fa-check"></i><b>1.7.9</b> Creating a working directory</a></li>
+<li class="chapter" data-level="1.7.10" data-path="software-applications.html"><a href="software-applications.html#reading-in-spss-data-in-rstudio"><i class="fa fa-check"></i><b>1.7.10</b> Reading in SPSS data in RStudio</a></li>
+<li class="chapter" data-level="1.7.11" data-path="software-applications.html"><a href="software-applications.html#saving-and-reading-r-data-in-rstudio"><i class="fa fa-check"></i><b>1.7.11</b> Saving and Reading R data in RStudio</a></li>
+<li class="chapter" data-level="1.7.12" data-path="software-applications.html"><a href="software-applications.html#reading-in-rstudio-data-into-spss"><i class="fa fa-check"></i><b>1.7.12</b> Reading in (R)Studio data into SPSS</a></li>
+<li class="chapter" data-level="1.7.13" data-path="software-applications.html"><a href="software-applications.html#installing-r-packages"><i class="fa fa-check"></i><b>1.7.13</b> Installing R Packages</a></li>
+<li class="chapter" data-level="1.7.14" data-path="software-applications.html"><a href="software-applications.html#loading-r-packages"><i class="fa fa-check"></i><b>1.7.14</b> Loading R Packages</a></li>
+<li class="chapter" data-level="1.7.15" data-path="software-applications.html"><a href="software-applications.html#updating-r-packages"><i class="fa fa-check"></i><b>1.7.15</b> Updating R Packages</a></li>
+<li class="chapter" data-level="1.7.16" data-path="software-applications.html"><a href="software-applications.html#useful-missing-data-packages-and-links"><i class="fa fa-check"></i><b>1.7.16</b> Useful Missing data Packages and links</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html"><i class="fa fa-check"></i><b>2</b> Missing Data Evaluation</a><ul>
+<li class="chapter" data-level="2.1" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#definition-of-missing-data"><i class="fa fa-check"></i><b>2.1</b> Definition of Missing Data</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#defining-missing-data-in-spss"><i class="fa fa-check"></i><b>2.1.1</b> Defining Missing Data in SPSS</a></li>
+<li class="chapter" data-level="2.1.2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-in-r"><i class="fa fa-check"></i><b>2.1.2</b> Missing data in R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-patterns"><i class="fa fa-check"></i><b>2.2</b> Missing data Patterns</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-patterns-in-spss"><i class="fa fa-check"></i><b>2.2.1</b> Missing data patterns in SPSS</a></li>
+<li class="chapter" data-level="2.2.2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-patterns-in-r"><i class="fa fa-check"></i><b>2.2.2</b> Missing data patterns in R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-mechanisms"><i class="fa fa-check"></i><b>2.3</b> 2.3 Missing data Mechanisms</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-completely-at-random"><i class="fa fa-check"></i><b>2.3.1</b> 2.3.1 Missing Completely At Random</a></li>
+<li class="chapter" data-level="2.3.2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-at-random"><i class="fa fa-check"></i><b>2.3.2</b> Missing At Random</a></li>
+<li class="chapter" data-level="2.3.3" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-not-at-random"><i class="fa fa-check"></i><b>2.3.3</b> Missing Not At Random</a></li>
+<li class="chapter" data-level="2.3.4" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#the-missing-data-indicator"><i class="fa fa-check"></i><b>2.3.4</b> The Missing Data Indicator</a></li>
+<li class="chapter" data-level="2.3.5" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#the-role-of-auxiliary-variables"><i class="fa fa-check"></i><b>2.3.5</b> The Role of Auxiliary Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-evaluation-1"><i class="fa fa-check"></i><b>2.4</b> Missing Data evaluation</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-evaluation-in-spss"><i class="fa fa-check"></i><b>2.4.1</b> Missing data Evaluation in SPSS</a></li>
+<li class="chapter" data-level="2.4.2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-evaluation-in-r"><i class="fa fa-check"></i><b>2.4.2</b> Missing data Evaluation in R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="multiple-imputation.html"><a href="multiple-imputation.html"><i class="fa fa-check"></i><b>3</b> Multiple Imputation</a><ul>
+<li class="chapter" data-level="3.1" data-path="multiple-imputation.html"><a href="multiple-imputation.html#multiple-imputation-1"><i class="fa fa-check"></i><b>3.1</b> Multiple Imputation</a></li>
+<li class="chapter" data-level="3.2" data-path="multiple-imputation.html"><a href="multiple-imputation.html#multivariate-imputation-by-chained-equation-mice"><i class="fa fa-check"></i><b>3.2</b> Multivariate Imputation by Chained Equation (MICE)</a></li>
+<li class="chapter" data-level="3.3" data-path="multiple-imputation.html"><a href="multiple-imputation.html#a-small-note-on-bayesian-imputation"><i class="fa fa-check"></i><b>3.3</b> 4.1. A small note on Bayesian Imputation</a></li>
+<li class="chapter" data-level="3.4" data-path="multiple-imputation.html"><a href="multiple-imputation.html#running-multiple-imputation-in-r"><i class="fa fa-check"></i><b>3.4</b> 4.2. Running Multiple Imputation in R</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="multiple-imputation.html"><a href="multiple-imputation.html#the-mice-alogorithm-iand-iteration-steps"><i class="fa fa-check"></i><b>3.4.1</b> The mice alogorithm iand iteration steps</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="multiple-imputation.html"><a href="multiple-imputation.html#customizing-the-imputation-model"><i class="fa fa-check"></i><b>3.5</b> 4.3 Customizing the Imputation model</a></li>
+<li class="chapter" data-level="3.6" data-path="multiple-imputation.html"><a href="multiple-imputation.html#output-of-the-mice-function"><i class="fa fa-check"></i><b>3.6</b> Output of the <code>mice</code> function</a></li>
+<li class="chapter" data-level="3.7" data-path="multiple-imputation.html"><a href="multiple-imputation.html#checking-convergence-in-r"><i class="fa fa-check"></i><b>3.7</b> Checking Convergence in R</a></li>
+<li class="chapter" data-level="3.8" data-path="multiple-imputation.html"><a href="multiple-imputation.html#imputation-diagnostics-in-r"><i class="fa fa-check"></i><b>3.8</b> Imputation diagnostics in R</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Applied Missing data analysis with SPSS and R(Studio)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="multiple-imputation" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Multiple Imputation</h1>
+<div id="multiple-imputation-1" class="section level2">
+<h2><span class="header-section-number">3.1</span> Multiple Imputation</h2>
+<p>In this Chapter we discuss an advanced missing data handling method, that is called Multiple Imputation (MI). With MI, each missing value is replaced by several different values and consequently several different completed datasets are generated. The complete data is copied repeatedly in the completed datasets. The concept of MI can be made clear by the following figure 4.1.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig41"></span>
+<img src="images/fig4.1.png" alt="Graphical presentation of the MI procedure. " width="90%" />
+<p class="caption">
+Figure 3.1: Graphical presentation of the MI procedure.
+</p>
+</div>
+<p>The large square on the left represents a dataset with missing values, with the missing values indicated as small solid black squares. The squares in the middle that are numbered from 1 to 5 are the separate imputed and completed datasets and the square on the right represents the combined study results.</p>
+<p>Figure 4.1 shows that the imputation of missing values consists of three steps, first the missing values are imputed, subsequently statistical analyses are applied in each completed dataset and finally the statistical test results from these analyses are synthesized by combining the sperate analysis results into one pooled estimate.</p>
+</div>
+<div id="multivariate-imputation-by-chained-equation-mice" class="section level2">
+<h2><span class="header-section-number">3.2</span> Multivariate Imputation by Chained Equation (MICE)</h2>
+<p>The main MI method that is discussed in this manual is Multivariate imputation by chained equations (MICE), also known as Sequential Regression Imputation, Fully Conditional Specification or Gibbs sampling (ref). In the MICE algorithm, a chain of regression equations is used to obtain imputations, which means that variables with missing data are imputed one by one using a chain of regression models. These regression models make use of information of all other variables in the model, i.e. conditional imputation models. Essentially, applying MI is the same as repeating stochastic regression imputation over several imputation runs or chains to impute the missing data sequentially in different variables.</p>
+<p>Another multiple imputation procedure is called multivariate normal</p>
+<p>In this Chapter, the first phase in multiple imputation, that of the imputation step is the main topic. In the next Chapter, the analysis and pooling phase will be discussed. First, we start with a small note about Bayesian statistics because the default imputation procedure in MI uses Bayesian statistics to generate the missing values and this is important to understand. We will discuss Bayesian statistics conceptually. For a better understanding of Bayesian statistics, we refer to the books of Knight, Enders (2010), Gelman (2004), Box and Tiao (1973) and Rubin (1987). The book of Enders is the least technical and a good book to start with as an introduction into Bayesian statistics for missing data and to get a better understanding of Bayesian estimation. The other books are theoretical and you must have a firm understanding of statistics and no fear of formulas to read those.</p>
+</div>
+<div id="a-small-note-on-bayesian-imputation" class="section level2">
+<h2><span class="header-section-number">3.3</span> 4.1. A small note on Bayesian Imputation</h2>
+<p>Within the MI algorithm we account for imputation uncertainty by replacing the missing values multiple times. Values are predicted by using regression parameters. With regression parameters we mean the parameters that result from applying a regression model to a dataset. The estimates from a (regression) model, like regression coefficients or the error variance, are called parameters in statistics. What separates the non-Bayesian from the Bayesian imputation procedures is how the regression parameters are estimated. In the context of linear regression modeling these parameters are the regression coefficients and the residual error variance. Non-Bayesian regression imputation models account for the uncertainty in the missing values, by adding error variance to imputed values that are estimated from the regression line as in stochastic regression imputation (paragraph 3.5). This is done in each imputed dataset. Bayesian regression imputation models also add variation to the regression coefficients as in Bayesian stochastic regression imputation (paragraph 3.6). Thus, the difference between non-Bayesian and Bayesian imputation is that in the latter procedure not only extra variation is added via the residual error variance, but also via the (population) regression coefficients (in essence also for the error variance component a Bayesian estimate is used).</p>
+<p>We have seen an example of Bayesian and non-Bayesian imputation in Chapter 3 when we compared the Bayesian and non-Bayesian stochastic regression imputation procedure. By adding extra variation to the regression coefficients, as with Bayesian Stochastic regression imputation models, we take into account that the regression coefficient by itself is surrounded by uncertainty. In other words, we use the idea that there is not one true (population) regression coefficient but that the regression coefficient, as the (true) population parameter, follows a (probability) distribution itself. This is in contrast to a frequentist idea, which assumes that there is one true population parameter and that the uncertainty (by using a confidence interval) around the population parameter can be interpreted as a probability statement of the result if the study would be repeated infinite times. In the frequentist approach the sample regression coefficient is estimated by assuming that the regression coefficient, when repeating the study infinite times, follow a normal distribution. We use the sample regression coefficient as the best estimator of the population regression coefficient and present these with the confidence interval for the true population estimate. In contrast, in a Bayesian context, a Bayesian interval is a direct reflection of the uncertainty of the population regression coefficient. This means that, for Bayesian estimates, we directly compute the probability distribution of the regression coefficient itself. In other words, Bayesian statistics assume that the regression coefficient is a random variable that has a distribution.</p>
+<pre><code>What makes Bayesian estimation complex is that the distribution of the regression coefficient itself has to be estimated. This means that an estimation method has to be used to derive this distribution. Markov Chain Monte Carlo (MCMC) methods can help with this. A popular MCMC method to construct this distribution is the Gibbs Sampler. The Gibbs sampler produces a chain of iterations and updates regression parameters at each iteration step. This procedure is also used by the Multivariate Imputation by Chained Equations (MICE) package, that is the main MI method discussed in this manual, and therefore the MICE procedure is also called Gibbs sampling.
+
+Bayesian estimates are used to incorporate parameter uncertainty, e.g. uncertainty in the regression coefficient, that is used to generate the imputed values (on top of the error variance). Consequently, imputed values are drawn from their posterior predictive distribution, conditional on the values of other variables. Posterior, in Bayesian statistics, refers to an estimate, e.g. a regression coefficient estimate, that is estimated by using the sample data together with prior information about the value of the regression coefficient. This combination of sample data and prior information leads to a posterior estimated value of the regression coefficient, i.e. the posterior distribution. The Gibbs sampler helps to estimate this posterior value, that is subsequently used in a regression model to generate imputed values. Conditional, means loosely that we make use of the idea that variables are related to each other. For example, the value of the Tampa scale variable, relates to  for example the Pain, Gender and Disability variables. The more we know about the values of Pain, Gender or Disability, the better we can estimate the value for the Tampa scale. This relation is important because this relation can be used to generate imputations for the Tampa scale variable. If Tampa scale values are missing for specific values of Pain, Gender and Disability, these variables can be used to impute the Tampa scale scores. These relationships are captured by specifying a regression model with the Tampa scale as the outcome variable and Pain, Gender and Disability as the independent variables. We use these regression models to estimate imputed values for the Tampa scale score conditional on the Pain, Gender and Disability scores. A posterior predictive distribution means that we first use the posterior distribution, i.e. determined by using the Gibbs sampler, to draw a regression coefficient from and that we use that regression coefficient and the observed data to predict the missing value by using a regression equation. </code></pre>
+</div>
+<div id="running-multiple-imputation-in-r" class="section level2">
+<h2><span class="header-section-number">3.4</span> 4.2. Running Multiple Imputation in R</h2>
+<p>Multipl imputation in R can be performed with the <code>mice</code> function from the <code>mice</code> package. As an example we will apply this function to deal with the missing values in the LBP dataset of 50 low back pain patients. The dataset contains missing data in the two continuous variables, the Tampa scale and the Disability variable. The other variables in the dataset are Pain and Radiation, which are completely observed.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw">read_sav</span>(<span class="st">&quot;data/Backpain50 MI missing.sav&quot;</span>)
+<span class="kw">head</span>(data,<span class="dv">15</span>)</code></pre></div>
+<pre><code>## # A tibble: 15 x 5
+##       ID  Pain Tampascale Disability Radiation
+##    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+##  1     1     9         45         20         1
+##  2     2     6         NA         10         0
+##  3     3     1         36          1         0
+##  4     4     5         38         NA         0
+##  5     5     6         44         14         1
+##  6     6     7         NA         11         1
+##  7     7     8         43         NA         0
+##  8     8     6         43         11         1
+##  9     9     2         NA         11         1
+## 10    10     4         36         NA         0
+## 11    11     5         38         16         1
+## 12    12     9         47         14         0
+## 13    13     0         32          3         1
+## 14    14     6         NA         12         0
+## 15    15     3         34         13         0</code></pre>
+<p>The variable with missing values is always defined as the dependent variable and all other variables in the imputation model are the independent variables. During each iteration, all variables with missing values are imputed.</p>
+<p>The following options are used in the <code>mice</code> function to start MI, <code>m=5</code>, to generate 5 imputed datasets, <code>maxit=10</code>, to use 10 iterations for each imputed dataset (i.e. 10 chains of regression imputation models), <code>method=”pmm”</code>, which is the default imputation procedure in mice (see <code>?mice</code> for all settings of the mice function). We can also add a seed value to be able to obtain the same results when we repeat the analysis.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mice)
+imp &lt;-<span class="st"> </span><span class="kw">mice</span>(data, <span class="dt">m=</span><span class="dv">5</span>, <span class="dt">maxit=</span><span class="dv">10</span>, <span class="dt">method=</span><span class="st">&quot;pmm&quot;</span>, <span class="dt">seed=</span><span class="dv">1050</span>)</code></pre></div>
+<pre><code>## 
+##  iter imp variable
+##   1   1  Tampascale  Disability
+##   1   2  Tampascale  Disability
+##   1   3  Tampascale  Disability
+##   1   4  Tampascale  Disability
+##   1   5  Tampascale  Disability
+##   2   1  Tampascale  Disability
+##   2   2  Tampascale  Disability
+##   2   3  Tampascale  Disability
+##   2   4  Tampascale  Disability
+##   2   5  Tampascale  Disability
+##   3   1  Tampascale  Disability
+##   3   2  Tampascale  Disability
+##   3   3  Tampascale  Disability
+##   3   4  Tampascale  Disability
+##   3   5  Tampascale  Disability
+##   4   1  Tampascale  Disability
+##   4   2  Tampascale  Disability
+##   4   3  Tampascale  Disability
+##   4   4  Tampascale  Disability
+##   4   5  Tampascale  Disability
+##   5   1  Tampascale  Disability
+##   5   2  Tampascale  Disability
+##   5   3  Tampascale  Disability
+##   5   4  Tampascale  Disability
+##   5   5  Tampascale  Disability
+##   6   1  Tampascale  Disability
+##   6   2  Tampascale  Disability
+##   6   3  Tampascale  Disability
+##   6   4  Tampascale  Disability
+##   6   5  Tampascale  Disability
+##   7   1  Tampascale  Disability
+##   7   2  Tampascale  Disability
+##   7   3  Tampascale  Disability
+##   7   4  Tampascale  Disability
+##   7   5  Tampascale  Disability
+##   8   1  Tampascale  Disability
+##   8   2  Tampascale  Disability
+##   8   3  Tampascale  Disability
+##   8   4  Tampascale  Disability
+##   8   5  Tampascale  Disability
+##   9   1  Tampascale  Disability
+##   9   2  Tampascale  Disability
+##   9   3  Tampascale  Disability
+##   9   4  Tampascale  Disability
+##   9   5  Tampascale  Disability
+##   10   1  Tampascale  Disability
+##   10   2  Tampascale  Disability
+##   10   3  Tampascale  Disability
+##   10   4  Tampascale  Disability
+##   10   5  Tampascale  Disability</code></pre>
+<p>After we have run the mice function, information is provided about the iteration and imputation steps for the variable that are imputed under the columns named “iter”, “imp” and “variable”. This information can be turned off by setting the mice function parameter printFlag = FALSE, which results in silent computation of the missing values. However, the printed information gives feedback about at which iteration step the imputation algorithm is, which gives you an idea how long it takes until the imputations are finished. The results from the imputation can be viewed by calling the imp object.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp</code></pre></div>
+<pre><code>## Class: mids
+## Number of multiple imputations:  5 
+## Imputation methods:
+##         ID       Pain Tampascale Disability  Radiation 
+##         &quot;&quot;         &quot;&quot;      &quot;pmm&quot;      &quot;pmm&quot;         &quot;&quot; 
+## PredictorMatrix:
+##            ID Pain Tampascale Disability Radiation
+## ID          0    1          1          1         1
+## Pain        1    0          1          1         1
+## Tampascale  1    1          0          1         1
+## Disability  1    1          1          0         1
+## Radiation   1    1          1          1         0</code></pre>
+<p>Under this object is information of the function that is called call (function settings that we used for mice), the number of imputed datasets, the missing values in each variable, the imputation method, the information under VisitSequence which is information about the sequence of variables that are firstly, secondly, etc. imputed during the imputation process, information of the PredictorMatrix (see paragraph XX) and the seed value of the random number generator.</p>
+<p>The MI datasets can be extracted by using the complete function (R code 4.4). The settings action=”long” and include=T mean that the imputed datasets are stacked under each other and that the original dataset (with missings) is also included (see ?complete for more possibilities how to store the imputed datasets).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mi_long &lt;-<span class="st"> </span><span class="kw">complete</span>(imp, <span class="dt">action=</span><span class="st">&quot;long&quot;</span>, <span class="dt">include=</span>T)</code></pre></div>
+<p>In the imputed datasets two variables are added, an .id variable and an .imp variable to distinguish the cases in the dataset and the imputed datasets. The imputed datasets can be further used in mice to conduct pooled analyses or to store them for further use in other software packages as SPSS.</p>
+<div id="the-mice-alogorithm-iand-iteration-steps" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> The mice alogorithm iand iteration steps</h3>
+<p>Imputed dataset 1 Per imputed dataset we start with iteration number 0 (not shown in output).</p>
+<p>Iteration 0: Data points are randomly drawn from the observed values of the Tampascale and the Disability variable and these are used to replace the missing values in these variables.</p>
+<p>Iteration 1 (cycle 1): The Tampascale values are set back to missing. Then, a linear regression model is applied in the available data (i.e. complete case analysis) with the Tampascale as the dependent and Pain, Disability and Radiation as independent variables to their regression coefficient estimates that are used to predict the missing values in the Tampascale variable together with the completed variables, i.e. the completed Disability variable from iteration 0 (indicated by Disability0, because only the Disability variable contained missing data at this stage) and the available data from the Pain and Radiation variable (which were complete). This regression equation is defined as:</p>
+<p>〖Tampascale〗_mis= β_0+ β_1× Pain+ β_2× 〖Disability〗_0+ β_3× Radiation</p>
+<p>The same procedure is repeated for the Disability variable. The Disability scores are first set back to missing, then the regression coefficients of the Pain, Tampa scale and Radiation variables are obtained in the complete case dataset and imputations are generated from these regression coefficients. The missing values for Disability are imputed by using the imputed values in the Tampa scale variable (indicated by Tampa scale1, i.e. which were imputed from the previous regression model).</p>
+<p>〖Disability〗_mis= β_0+ β_1× Pain+ β_2× 〖Tampascale〗_1+ β_3× Radiation</p>
+<p>Iteration 2 (cycle 2):</p>
+<p>The Tampascale values are again set back to missing and (new) updated regression coefficients for Pain, Disability and Radiation are obtained, making use of the imputed values in the Disability variable from iteration 1 (indicated by Disability1) and the complete data of the Pain and Radiation variables. Subsequently, missing values are updated from that regression model.</p>
+<p>〖Tampascale〗_mis= β_0+ β_1× Pain+ β_2× 〖Disability〗_1+ β_3× Radiation</p>
+<p>The same holds for the Disability variable. The missing values are updated by making use of the imputed values in the Tampascale variable within iteration 2 (indicated by Tampascale2) and updated regression coefficients.</p>
+<p>〖Disability〗_mis= β_0+ β_1× Pain+ β_2× 〖Tampascale〗_2+ β_3× Radiation</p>
+<p>Iteration 3 to prespecified number of iterations: This process is repeated within each iteration</p>
+<p>Last iteration: The imputed values from the last iteration are used in the imputed dataset. For the next imputed dataset, the entire process of iterations is repeated.</p>
+</div>
+</div>
+<div id="customizing-the-imputation-model" class="section level2">
+<h2><span class="header-section-number">3.5</span> 4.3 Customizing the Imputation model</h2>
+<pre><code>With MI the variables Tampa scale and Disability will be imputed with the help of the variables Pain and Radiation. The latter two variables are called auxiliary variables when they are not part of the main analysis model but they help to impute the Tampa scale and Function variables. Variables that are used to impute other variables can be switched off and on in the predictormatrix. As we saw in R code 4.3 above, the predictor matrix for our MI procedure is</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp<span class="op">$</span>PredictorMatrix</code></pre></div>
+<pre><code>## NULL</code></pre>
+<p>The predictor matrix is a matrix with the names of the variables that are part of the imputation model in the dataset listed in the rows and the column. The variables in the columns can be switched on or off which is the same as in- or excluding them from the imputation model to impute the missing data in the row variable. This works as follows for our LBP dataset. The first and fourth rows contain only zero´s, which is logical, because the Pain and Radiation variables did not have missing values. The variable in the second row contains missing values and the 1´s in this row mean that the column variables, Pain, Disability and Radiation will be included in the (regression) imputation model. To impute the missing data in the Disability variable, the column variables Pain, Tampa scale and Radiation are used. As a default setting all variables will be included in the imputation model to predict missing values in other variables, i.e. as default all combinations of variables that are complete and have missing values in the matrix will be switched on, i.e. are assigned a value 1 in the predictormatrix. The diagonal of the predictormatrix is always zero. The predictormatrix can also be adapted when for example a variable that contains a high percentage of missing data must be excluded from the imputation model to impute other variables. For example, if we want to exclude the variable Disability from the imputation model of the Tampa scale variable and re-run the MI, we can use the following code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pred &lt;-imp<span class="op">$</span>PredictorMatrix
+pred[<span class="st">&quot;Tampascale&quot;</span>, <span class="st">&quot;Disability&quot;</span>] &lt;-<span class="st"> </span><span class="dv">0</span>
+pred
+
+imp2 &lt;-<span class="st"> </span><span class="kw">mice</span>(data,<span class="dt">m=</span><span class="dv">5</span>, <span class="dt">maxit=</span><span class="dv">10</span>, <span class="dt">method=</span><span class="st">&quot;pmm&quot;</span>, <span class="dt">predictorMatrix =</span> pred, <span class="dt">seed=</span><span class="dv">1050</span>)</code></pre></div>
+<p>For information about the imputation model can be foud in REF van buuren, REF White etc. A summary of guidelines for building the imptuation model is as follows:</p>
+<ol style="list-style-type: decimal">
+<li><p>Include the outcome variable (Moons, 2006).</p></li>
+<li><p>Include all variables that are part of the analysis model.</p></li>
+<li><p>Include the variables at the same way in the imputation model as they appear in the analysis model (i.e. if interaction terms are in the analysis model they also have to be included in the imputation model).</p></li>
+<li><p>Include as many predictor variables that are related to missingness in other variables or that are correlated to the variable with missing values (auxiliary variables).</p></li>
+</ol>
+</div>
+<div id="output-of-the-mice-function" class="section level2">
+<h2><span class="header-section-number">3.6</span> Output of the <code>mice</code> function</h2>
+<p>The mice function returns a mids (multiple imputed data set) object. In our example that is the imp object. Under this object, all kind of imputation information is stored and can be extracted by typing <code>imp$</code>, followed by the type of information you want.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp<span class="op">$</span>m</code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp<span class="op">$</span>nmis</code></pre></div>
+<pre><code>##         ID       Pain Tampascale Disability  Radiation 
+##          0          0         13          9          0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp<span class="op">$</span>seed</code></pre></div>
+<pre><code>## [1] 1050</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp<span class="op">$</span>iteration</code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<p>The above objects contain the the number of imputed datasets, missing values in each variable, the specified seed value and the number of iterations. The original data can be found in:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp<span class="op">$</span>data</code></pre></div>
+<pre><code>##    ID Pain Tampascale Disability Radiation
+## 1   1    9         45         20         1
+## 2   2    6         NA         10         0
+## 3   3    1         36          1         0
+## 4   4    5         38         NA         0
+## 5   5    6         44         14         1
+## 6   6    7         NA         11         1
+## 7   7    8         43         NA         0
+## 8   8    6         43         11         1
+## 9   9    2         NA         11         1
+## 10 10    4         36         NA         0
+## 11 11    5         38         16         1
+## 12 12    9         47         14         0
+## 13 13    0         32          3         1
+## 14 14    6         NA         12         0
+## 15 15    3         34         13         0
+## 16 16    6         42         NA         1
+## 17 17    3         35         11         0
+## 18 18    1         31          1         0
+## 19 19    2         31          7         0
+## 20 20    4         32          9         1
+## 21 21    5         NA         13         0
+## 22 22    5         39         12         0
+## 23 23    4         34          8         1
+## 24 24    8         47         13         1
+## 25 25    5         NA          6         0
+## 26 26    5         38         16         1
+## 27 27    9         NA         23         1
+## 28 28    3         36         NA         1
+## 29 29    2         36          9         0
+## 30 30    6         37         16         0
+## 31 31   10         NA         21         1
+## 32 32    4         37          8         0
+## 33 33   10         42         20         1
+## 34 34    2         37          3         0
+## 35 35    6         NA         12         1
+## 36 36    3         38          7         1
+## 37 37    8         NA          8         0
+## 38 38    3         38          6         1
+## 39 39    3         39         NA         0
+## 40 40    7         44         15         0
+## 41 41    7         45         NA         0
+## 42 42    6         40         12         1
+## 43 43    7         40         16         1
+## 44 44    1         NA          2         0
+## 45 45    9         41         NA         0
+## 46 46    5         41         17         0
+## 47 47    6         43         11         0
+## 48 48    3         39         NA         0
+## 49 49    2         NA          6         1
+## 50 50    8         NA         19         0</code></pre>
+<p>The imputed values for each variable in the imptued values can be found under:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp<span class="op">$</span>imp</code></pre></div>
+<pre><code>## $ID
+## [1] 1 2 3 4 5
+## &lt;0 rows&gt; (or 0-length row.names)
+## 
+## $Pain
+## [1] 1 2 3 4 5
+## &lt;0 rows&gt; (or 0-length row.names)
+## 
+## $Tampascale
+##     1  2  3  4  5
+## 2  44 43 37 37 40
+## 6  44 45 37 43 43
+## 9  36 36 36 36 31
+## 14 44 37 43 43 40
+## 21 44 41 37 39 41
+## 25 47 42 44 40 44
+## 27 44 43 44 45 44
+## 31 45 43 43 47 43
+## 35 44 37 42 40 40
+## 37 42 47 47 47 47
+## 44 38 31 37 35 31
+## 49 34 38 34 36 37
+## 50 45 44 43 47 45
+## 
+## $Disability
+##     1  2  3  4  5
+## 4  12 13 12 14 13
+## 7  13 19 16 14 13
+## 10 13  8  6  6  6
+## 16 11 12  9 11 16
+## 28  6 12  6 11 11
+## 39 11 11  7 11  9
+## 41 12 11 10 12 10
+## 45 20 20 14 23 14
+## 48  9 11  6  7  7
+## 
+## $Radiation
+## [1] 1 2 3 4 5
+## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
+<p>The imputation methods used:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp<span class="op">$</span>method</code></pre></div>
+<pre><code>##         ID       Pain Tampascale Disability  Radiation 
+##         &quot;&quot;         &quot;&quot;      &quot;pmm&quot;      &quot;pmm&quot;         &quot;&quot;</code></pre>
+<p>The predictor matrix:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp<span class="op">$</span>predictorMatrix</code></pre></div>
+<pre><code>##            ID Pain Tampascale Disability Radiation
+## ID          0    1          1          1         1
+## Pain        1    0          1          1         1
+## Tampascale  1    1          0          1         1
+## Disability  1    1          1          0         1
+## Radiation   1    1          1          1         0</code></pre>
+<p>The sequence of the variables used in the imputeon procedure:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp<span class="op">$</span>visitSequence</code></pre></div>
+<pre><code>## [1] &quot;ID&quot;         &quot;Pain&quot;       &quot;Tampascale&quot; &quot;Disability&quot; &quot;Radiation&quot;</code></pre>
+<p>The imputed values (or means) during each iteration can also be extracted. These are stored as chainMean. The number of Chains is equal to the number of imputed datasets. A Chain refers to the chain of regression models that is used to generate the missing values. The length of each chain is equally large as the number of iterations. The Chains contain the means of the imputed values. This object can be used for monitoring convergence (by for example displaying the results in a convergence plot. See the next paragraph).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp<span class="op">$</span>chainMean</code></pre></div>
+<pre><code>## , , Chain 1
+## 
+##                   1        2        3        4        5        6        7
+## ID              NaN      NaN      NaN      NaN      NaN      NaN      NaN
+## Pain            NaN      NaN      NaN      NaN      NaN      NaN      NaN
+## Tampascale 39.30769 41.38462 40.92308 39.84615 39.38462 38.92308 41.23077
+## Disability 12.00000 12.33333 13.88889 11.55556 11.55556 12.44444 11.55556
+## Radiation       NaN      NaN      NaN      NaN      NaN      NaN      NaN
+##                    8        9       10
+## ID               NaN      NaN      NaN
+## Pain             NaN      NaN      NaN
+## Tampascale 38.846154 39.07692 42.38462
+## Disability  9.111111 12.77778 11.88889
+## Radiation        NaN      NaN      NaN
+## 
+## , , Chain 2
+## 
+##                   1        2        3        4        5        6         7
+## ID              NaN      NaN      NaN      NaN      NaN      NaN       NaN
+## Pain            NaN      NaN      NaN      NaN      NaN      NaN       NaN
+## Tampascale 40.76923 40.53846 39.92308 39.76923 41.53846 40.92308 40.538462
+## Disability 11.44444 12.22222 13.66667 11.00000 10.22222 11.77778  9.666667
+## Radiation       NaN      NaN      NaN      NaN      NaN      NaN       NaN
+##                   8        9       10
+## ID              NaN      NaN      NaN
+## Pain            NaN      NaN      NaN
+## Tampascale 39.53846 39.76923 40.53846
+## Disability 11.44444 11.77778 13.00000
+## Radiation       NaN      NaN      NaN
+## 
+## , , Chain 3
+## 
+##                    1        2        3        4         5        6
+## ID               NaN      NaN      NaN      NaN       NaN      NaN
+## Pain             NaN      NaN      NaN      NaN       NaN      NaN
+## Tampascale 39.384615 39.69231 41.23077 40.69231 39.769231 40.76923
+## Disability  9.333333 12.33333 11.55556 10.33333  9.555556 11.22222
+## Radiation        NaN      NaN      NaN      NaN       NaN      NaN
+##                   7        8        9        10
+## ID              NaN      NaN      NaN       NaN
+## Pain            NaN      NaN      NaN       NaN
+## Tampascale 40.76923 41.61538 40.61538 40.307692
+## Disability 11.66667 11.11111 11.44444  9.555556
+## Radiation       NaN      NaN      NaN       NaN
+## 
+## , , Chain 4
+## 
+##                   1        2        3        4         5        6        7
+## ID              NaN      NaN      NaN      NaN       NaN      NaN      NaN
+## Pain            NaN      NaN      NaN      NaN       NaN      NaN      NaN
+## Tampascale 39.76923 39.53846 40.15385 41.07692 40.076923 41.00000 39.84615
+## Disability 11.44444 11.66667 10.55556 11.33333  9.222222 13.11111 14.22222
+## Radiation       NaN      NaN      NaN      NaN       NaN      NaN      NaN
+##                   8        9       10
+## ID              NaN      NaN      NaN
+## Pain            NaN      NaN      NaN
+## Tampascale 40.84615 39.92308 41.15385
+## Disability 11.00000 12.00000 12.11111
+## Radiation       NaN      NaN      NaN
+## 
+## , , Chain 5
+## 
+##                   1        2        3        4        5        6        7
+## ID              NaN      NaN      NaN      NaN      NaN      NaN      NaN
+## Pain            NaN      NaN      NaN      NaN      NaN      NaN      NaN
+## Tampascale 40.23077 40.30769 40.07692 40.00000 40.15385 41.00000 40.15385
+## Disability 10.55556 10.11111 10.88889 12.77778 11.55556 11.66667 10.33333
+## Radiation       NaN      NaN      NaN      NaN      NaN      NaN      NaN
+##                   8        9       10
+## ID              NaN      NaN      NaN
+## Pain            NaN      NaN      NaN
+## Tampascale 39.23077 41.46154 40.46154
+## Disability 10.77778 10.00000 11.00000
+## Radiation       NaN      NaN      NaN</code></pre>
+</div>
+<div id="checking-convergence-in-r" class="section level2">
+<h2><span class="header-section-number">3.7</span> Checking Convergence in R</h2>
+<p>When you use the mice function to create imputations it is a good idea to check if the imputation runs were successful and if you can thrust the imputations. This can be done by visualizing a convergence plot. On a convergence plot the means or standard deviations within imputation chains can be plotted, this can be done by presenting the information under the object LBP_imp$chainMean at the y-axis and the iterations on the x-axis. The convergence plot of the imputations from the imputations of R code 4.5 is presented in Figure 4.3 (we used 50 iterations to create the plot). In this plot you see that the variance between the imputation chains is almost equally large as that within the chains. If this is the case than there is healthy convergence. To create a convergence plot for only the Tampascale variable just use:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(imp)</code></pre></div>
+<p><img src="Book_MI_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
+</div>
+<div id="imputation-diagnostics-in-r" class="section level2">
+<h2><span class="header-section-number">3.8</span> Imputation diagnostics in R</h2>
+<p>It can also be of interest to compare the values that are imputed with those that are observed. For that, the stripplot function can be used in mice. This function can easily be used in combination with the mice function (R code 4.10). With this function it is possible to plot the observed and imputed values in one plot. An example is given in Figure 4.4. By comparing the observed and the imputed data points we get an idea if the imputed values can be thrusted. If there are no large differences between the imputed and observed values under MAR than we can conclude the imputed values are correct.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">stripplot</span>(imp)</code></pre></div>
+<p><img src="Book_MI_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="missing-data-evaluation.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["Book_MI.pdf", "Book_MI.epub"],
+"toc": {
+"collapse": "subsection"
+},
+"split_by": "section"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
