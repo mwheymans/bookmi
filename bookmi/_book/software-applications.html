@@ -25,7 +25,7 @@
 <meta name="author" content="Martijn Heymans and Iris Eekhout">
 
 
-<meta name="date" content="2018-09-04">
+<meta name="date" content="2018-09-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="index.html">
-<link rel="next" href="references.html">
+<link rel="next" href="missing-data-evaluation.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -134,7 +134,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.7.16" data-path="software-applications.html"><a href="software-applications.html#useful-missing-data-packages-and-links"><i class="fa fa-check"></i><b>1.7.16</b> Useful Missing data Packages and links</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html"><i class="fa fa-check"></i><b>2</b> Missing Data Evaluation</a></li>
+<li class="chapter" data-level="3" data-path="multiple-imputation.html"><a href="multiple-imputation.html"><i class="fa fa-check"></i><b>3</b> Multiple Imputation</a></li>
 </ul>
 
       </nav>
@@ -272,10 +273,10 @@ Figure 1.10: First screen that appears after you have started RStudio
 <pre><code>## [1] 6</code></pre>
 <p>As you can see, you can use R as a large calculator. Other multiplication procedures as divide, square, etc. can also be executed. However, the main use for R is its functions. For example, when you generate 20 random numbers you can use the following function code (we will discuss more about functions in R later):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rnorm</span>(<span class="dv">20</span>)</code></pre></div>
-<pre><code>##  [1] -0.83691133 -1.02270611  1.20870988  0.59442366  0.20538960
-##  [6] -1.85271464 -0.69006987 -1.17203002 -1.02228044 -0.67901954
-## [11] -0.98024791  0.81072035 -0.04646819 -1.52278600  1.38214866
-## [16] -0.10384478 -0.56257695 -1.23565133  3.20518398  0.92787693</code></pre>
+<pre><code>##  [1]  0.701499436 -0.001716470  0.194045550 -0.846125116  0.512352501
+##  [6] -0.116643058 -0.605882316  1.112902216 -0.007864232 -0.453239796
+## [11]  1.064566014 -0.564571371  0.308849366  0.775563804 -3.011080258
+## [16] -1.559764897 -0.572381900 -0.016194169  0.176602240  0.650055514</code></pre>
 <p>The number [1] between brackets is the index of the first number or item in the vector. That can be useful when you have many numbers printed in the Console window.</p>
 </div>
 <div id="r-assignments-and-objects" class="section level3">
@@ -504,7 +505,7 @@ Figure 1.11: Script file example in RStudio
 <div id="creating-a-working-directory" class="section level3">
 <h3><span class="header-section-number">1.7.9</span> Creating a working directory</h3>
 <p>It is a good idea to keep your R files at the same place when you are doing data analysis for some kind of project. If you do not use a separate directory, R will use a default directory, that will mostly be in Windows in the documents folder. All files that you have to use during your R session are assumed to be in that directory. Further, all files that you save during your session will be in that directory. To locate your working directory, you can type in the Console window:</p>
-<p>If you want to change your working directory to for example C:(Note that the path in R uses forward slashes and the path in Windows backward slashes!), you can type:</p>
+<p>If you want to change your working directory to for example C:(Note that the path in R uses forward slashes and the path in Windows backward slashes!), you can type:  </p>
 <p>In Rstudio there is another way to get information about the current working directory and another way to change the working directory. Go in RStudio to the window on the right site below and go to the Files tab and click on the right site of the screen on the three dots. Than a window will open and you can browse to your preferred folder. Then choose for More in the Files tab and then select “Set As Working Directory” (Figure <a href="software-applications.html#fig:fig12">1.12</a>). Now you have set your preferred working directory. You can check if your directory is set correctly by choosing “Go To Working Directory”.</p>
 <div class="figure" style="text-align: center"><span id="fig:fig12"></span>
 <img src="images/fig1.12.png" alt="Working directory selection in RStudio" width="90%" />
@@ -698,7 +699,7 @@ Figure 1.28: Enlarged Install packages Window in RStudio to install packages fro
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="missing-data-evaluation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
