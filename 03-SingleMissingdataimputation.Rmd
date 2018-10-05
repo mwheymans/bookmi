@@ -9,23 +9,23 @@ Complete case analysis (CCA) means that the statistical analysis is performed in
 
 ## Missing data imputation
 
-In this Chapter, we will discuss several single imputation methods. These imputation methods will be considered by using a dataset containing information of 50 Low Back Pain (LBP) patients. Although, this dataset is small, the methods easily generalize to larger datasets with missing values in more variables. From these 50 patients, data is obtained about Pain, Tampa scale, Disability and if Radiation in the leg is present or not. The SPSS dataset is shown in (Figure \@ref(fig:fig1)) (first 15 patients are shown):
+In this Chapter, we will discuss several single imputation methods. These imputation methods will be considered by using a dataset containing information of 50 Low Back Pain (LBP) patients. Although, this dataset is small, the methods easily generalize to larger datasets with missing values in more variables. From these 50 patients, data is obtained about Pain, Tampa scale, Disability and if Radiation in the leg is present or not. The SPSS dataset is shown in (Figure \@ref(fig:fig31)) (first 15 patients are shown):
 
-```{r fig3_1, echo = FALSE, fig.cap="SPSS dataset with missing values in the Tampa scale variable", out.width='90%', fig.align='center'}
+```{r fig31, echo = FALSE, fig.cap="SPSS dataset with missing values in the Tampa scale variable", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.1.png")
 ```
 
-Assume that we are interested in the relationship between Pain and the Tampa scale variable. To get a first impression about this relationship we make a scatterplot. The scatterplots of the complete and incomplete datasets are displayed in (Figure \@ref(fig:fig3)):
+Assume that we are interested in the relationship between Pain and the Tampa scale variable. To get a first impression about this relationship we make a scatterplot. The scatterplots of the complete and incomplete datasets are displayed in (Figure \@ref(fig:fig32) and \@ref(fig:fig33)):
 
-```{r fig3_2a, echo = FALSE, fig.cap=" Relationship between the Tampa scale and Pain variables (green dots are observed and red dots are assumed to be missing data", out.width='90%', fig.align='center'}
+```{r fig32, echo = FALSE, fig.cap=" Relationship between the Tampa scale and Pain variables (green dots are observed and red dots are assumed to be missing data", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.2a.png")
 ```
 
-```{r fig3_2b, echo = FALSE, fig.cap="Relationship between the Tampa scale and Pain variable. Missing data are excluded", out.width='90%', fig.align='center'}
+```{r fig33, echo = FALSE, fig.cap="Relationship between the Tampa scale and Pain variable. Missing data are excluded", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.2b.png")
 ```
 
-The green dots represent the observed data and the red dots the missing data points. In essence, in our dataset we have the data points that are visualized in Figure 3.2b. We will use this relationship to discuss what it means when we use single imputation methods. These will be discussed below.
+The green dots represent the observed data and the red dots the missing data points. In essence, in our dataset we have the data points that are visualized in Figure \@ref(fig:fig33). We will use this relationship to discuss what it means when we use single imputation methods. These will be discussed below.
 
 ## Mean Imputation
 
@@ -34,49 +34,48 @@ The green dots represent the observed data and the red dots the missing data poi
 Mean imputation in SPSS can be applied by using three different methods. One is to first compute the mean of the variable by using *Descriptive Statistics*, and replace all missing values by the mean value, the other is by using the *Replace Missing Values* procedure under Transform and the last one is by using the *Linear Regression* procedure. We will start with the first. 
 
 Descriptive Statistics
-Via Analyze -> Descriptive statistics, the descriptive statistics are calculated. The results are shown in Table 3.2. 
-
-```{r fig3_2t, echo = FALSE, fig.cap="Descriptive statistics of the complete data of the Tampa scale variable.", out.width='90%', fig.align='center'}
+Via Analyze -> Descriptive statistics, the descriptive statistics are calculated. The results are shown in Figure\@ref(fig:fig34). 
+```{r fig34, echo = FALSE, fig.cap="Descriptive statistics of the complete data of the Tampa scale variable.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/table3.2.png")
 ```
 
-The mean of the Tampa scale variable is 38.86. Replacing the missing values by the mean result in the following complete dataset (Figure 3.3). We see that all missing values have the same value, which is 38.86, i.e. the mean value of the Tampa scale variable in the dataset after the missing values have been replaced (first 15 patients are shown). 
+The mean of the Tampa scale variable is 38.86. Replacing the missing values by the mean result in the following complete dataset (Figure \@ref(fig:fig35)). We see that all missing values have the same value, which is 38.86, i.e. the mean value of the Tampa scale variable in the dataset after the missing values have been replaced (first 15 patients are shown). 
 
-```{r fig3_3, echo = FALSE, fig.cap="Mean imputation of missing values of the Tampascale variable.", out.width='90%', fig.align='center'}
+```{r fig35, echo = FALSE, fig.cap="Mean imputation of missing values of the Tampascale variable.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.3.png")
 ```
 
-The scatterplot between the Pain and the Tampa scale variable clearly shows the result of this imputation procedure, all imputed values are located at the mean value (Figure 3.4).
+The scatterplot between the Pain and the Tampa scale variable clearly shows the result of this imputation procedure, all imputed values are located at the mean value (Figure \@ref(fig:fig36)).
 
-```{r fig3_4, echo = FALSE, fig.cap="Scatterplot between the Tampa scale and Pain variable, after the missing values of the Tampa scale variable have been replaced by the mean.", out.width='90%', fig.align='center'}
+```{r fig36, echo = FALSE, fig.cap="Scatterplot between the Tampa scale and Pain variable, after the missing values of the Tampa scale variable have been replaced by the mean.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.4.png")
 ```
 
 *Replace Missing Values procedure*
-You can also find the Replace Missing Values dialog box via Transform -> Replace Missing Values. The following window will appear (Figure 3.5).
+You can also find the Replace Missing Values dialog box via Transform -> Replace Missing Values. The following window will appear (Figure \@ref(fig:fig37)).
 
-```{r fig3_5, echo = FALSE, fig.cap="Window for mean imputation via the Replace Missing Values procedure.", out.width='90%', fig.align='center'}
+```{r fig37, echo = FALSE, fig.cap="Window for mean imputation via the Replace Missing Values procedure.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.5.png")
 ```
 
-Now transport the Tampa scale variable to the New variable(s) window (Figure 3.6). The default imputation procedure is Mean imputation or called “Series mean”. 
+Now transport the Tampa scale variable to the New variable(s) window (Figure \@ref(fig:fig38)). The default imputation procedure is Mean imputation or called “Series mean”. 
 
-```{r fig3_6, echo = FALSE, fig.cap="Window for mean imputation of the Tampa scale variable.", out.width='90%', fig.align='center'}
+```{r fig38, echo = FALSE, fig.cap="Window for mean imputation of the Tampa scale variable.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.6.png")
 ```
 
-When you click on OK, a new variable is created in the dataset using the existing variable name followed by an underscore and a sequential number. The result of the procedure is shown in Figure 3.7.
+When you click on OK, a new variable is created in the dataset using the existing variable name followed by an underscore and a sequential number. The result of the procedure is shown in Figure \@ref(fig:fig39.
 
-```{r fig3_7, echo = FALSE, fig.cap="Mean imputation of the Tampa scale variable with the Replace Missing Values procedure.", out.width='90%', fig.align='center'}
+```{r fig39, echo = FALSE, fig.cap="Mean imputation of the Tampa scale variable with the Replace Missing Values procedure.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.7.png")
 ```
 
 *Linear Regression*
 Mean imputation in SPSS is also integrated in the Linear Regression menu. This can be approached by following the route:
 
-Analyze -> Regression -> Linear -> Options. In the Missing Values group you can choose for Replace with mean (Figure 3.8).
+Analyze -> Regression -> Linear -> Options. In the Missing Values group you can choose for Replace with mean (Figure \@ref(fig:fig40)).
 
-```{r fig3_8, echo = FALSE, fig.cap="The option Replace with mean in the Linear Regression menu.", out.width='90%', fig.align='center'}
+```{r fig40, echo = FALSE, fig.cap="The option Replace with mean in the Linear Regression menu.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.8.png")
 ```
 
@@ -131,35 +130,35 @@ In SPSS regression imputation can be done via the Missing Value Analysis procedu
 Step 1
 From the menus choose: Analyze -> Missing Value Analysis...
 
-```{r fig3_9, echo = FALSE, fig.cap="The Missing Value Analysis dialog box.", out.width='90%', fig.align='center'}
+```{r fig41, echo = FALSE, fig.cap="The Missing Value Analysis dialog box.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.9.png")
 ```
 
 Step 2
-In the main Missing Value Analysis dialog box, select the variable(s) that you want to use for the regression method and select EM in the Estimation group (Figure 3.10).
+In the main Missing Value Analysis dialog box, select the variable(s) that you want to use for the regression method and select EM in the Estimation group (Figure \@ref(fig:fig42)).
 
-```{r fig3_10, echo = FALSE, fig.cap="EM Selection in the Missing Value Analysis window.", out.width='90%', fig.align='center'}
+```{r fig42, echo = FALSE, fig.cap="EM Selection in the Missing Value Analysis window.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.10.png")
 ```
 
 Step 3
-To specify predicted and predictor variables, click Variables. Place the Tampascale variable in the window of the Predicted variables and the Pain variable in the Predictor Variables window (Figure 3.11).
+To specify predicted and predictor variables, click Variables. Place the Tampascale variable in the window of the Predicted variables and the Pain variable in the Predictor Variables window (Figure \@ref(fig:fig43)).
 
-```{r fig3_11, echo = FALSE, fig.cap="Transfer of the Tampascale and Pain variables to the Predicted and Predictor Variables windows.", out.width='90%', fig.align='center'}
+```{r fig43, echo = FALSE, fig.cap="Transfer of the Tampascale and Pain variables to the Predicted and Predictor Variables windows.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.11.png")
 ```
 
 Step 4
-Click on Continue -> EM and Choose for Normal in the Distribution group. Than thick Save completed data and give the dataset a name, for example “ImpTampa_EM” (Figure 3.12). 
+Click on Continue -> EM and Choose for Normal in the Distribution group. Than thick Save completed data and give the dataset a name, for example “ImpTampa_EM” (Figure \@ref(fig:fig44)). 
 
-```{r fig3_12, echo = FALSE, fig.cap="Name of dataset to save the EM results in.", out.width='90%', fig.align='center'}
+```{r fig44, echo = FALSE, fig.cap="Name of dataset to save the EM results in.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.12.png")
 ```
 
 Step 5
-Then Click Continue -> OK. The new dataset “ImpTampa_EM” will open in a new window in SPSS. In this dataset the imputed data of the Tampascale Variable together with the original data is stored (Figure 3.13, first 15 patients are shown). Adjust the Width and Decimals of the Tampa scale variable in the Variable View window to 4 and 3 respectively to get the same results as in Figure 3.13. 
+Then Click Continue -> OK. The new dataset “ImpTampa_EM” will open in a new window in SPSS. In this dataset the imputed data of the Tampascale Variable together with the original data is stored (Figure \@ref(fig:fig45), first 15 patients are shown). Adjust the Width and Decimals of the Tampa scale variable in the Variable View window to 4 and 3 respectively to get the same results as in Figure 3.13. 
 
-```{r fig3_13, echo = FALSE, fig.cap="Result of the EM procedure.", out.width='90%', fig.align='center'}
+```{r fig45, echo = FALSE, fig.cap="Result of the EM procedure.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.13.png")
 ```
 
@@ -170,13 +169,13 @@ The imputations are generated from the linear regression model of the relationsh
 To estimate the linear regression model:
 From the menus choose: Analyze -> Regression -> Linear
 
-```{r fig3_14, echo = FALSE, fig.cap="Linear regression analysis with the Tampa scale as the outcome and Pain as the independent variable.", out.width='90%', fig.align='center'}
+```{r fig46, echo = FALSE, fig.cap="Linear regression analysis with the Tampa scale as the outcome and Pain as the independent variable.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.14.png")
 ```
 
-Transfer the Tampa scale variable to the Dependent variable window and the Pain variable to the window of the Block 1 of 1 group. Then click OK. The following coefficients will be estimated (Table 3.3).
+Transfer the Tampa scale variable to the Dependent variable window and the Pain variable to the window of the Block 1 of 1 group. Then click OK. The following coefficients will be estimated (Figure \@ref(fig:fig47)).
 
-```{r fig3_3t, echo = FALSE, fig.cap="Result of the linear regression analysis.", out.width='90%', fig.align='center'}
+```{r fig47, echo = FALSE, fig.cap="Result of the linear regression analysis.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/table3.3.png")
 ```
 
@@ -186,13 +185,13 @@ Tampascale=32.005+1.410 ×Pain
 
 When we use this regression model to impute the missing values in the Tampa scale variable and we compare them with the EM estimates, we see that the results are the same.
 
-```{r fig3_15, echo = FALSE, fig.cap="Predictions of the missing Tampa scale values on basis of the regression model estimated in the dataset after the missing values were excluded.", out.width='90%', fig.align='center'}
+```{r fig48, echo = FALSE, fig.cap="Predictions of the missing Tampa scale values on basis of the regression model estimated in the dataset after the missing values were excluded.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.15.png")
 ```
 
-When we make a scatterplot of the imputations from the regression model we see that as expected the imputed values lie directly on the regression line (Figure 3.16).
+When we make a scatterplot of the imputations from the regression model we see that as expected the imputed values lie directly on the regression line (Figure \@ref(fig:fig49)).
 
-```{r fig3_16, echo = FALSE, fig.cap="Relationship between the Tampa scale and the Pain variable.", out.width='90%', fig.align='center'}
+```{r fig49, echo = FALSE, fig.cap="Relationship between the Tampa scale and the Pain variable.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.16.png")
 ```
 
@@ -245,9 +244,9 @@ Bayesian stochastic regression imputation can be applied in SPSS and R. We start
 
 ### Bayesian Stochastic regression imputation in SPSS
 
-Bayesian Stochastic regression imputation can be performed via the multiple imputation menu in SPSS (IBM Cooperation 2016). The Multiple Imputation procedure in SPSS, and its settings, will be discussed in more detail in the next Chapter. For now, we will show the steps that have to be taken to apply Stochastic regression imputation. Again, we will make use of the same dataset as above with missing data in only the Tampa scale variable. To generate the imputations, we will make use of the Pain variable as the only predictor variable in the imputation model (Figure 3.14, first 15 patients shown). 
+Bayesian Stochastic regression imputation can be performed via the multiple imputation menu in SPSS (IBM Cooperation 2016). The Multiple Imputation procedure in SPSS, and its settings, will be discussed in more detail in the next Chapter. For now, we will show the steps that have to be taken to apply Stochastic regression imputation. Again, we will make use of the same dataset as above with missing data in only the Tampa scale variable. To generate the imputations, we will make use of the Pain variable as the only predictor variable in the imputation model (Figure \@ref(fig:fig50), first 15 patients shown). 
 
-```{r fig3_17, echo = FALSE, fig.cap="The example dataset with missing data in the Tampa scale variable.", out.width='90%', fig.align='center'}
+```{r fig50, echo = FALSE, fig.cap="The example dataset with missing data in the Tampa scale variable.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.17.png")
 ```
 
@@ -255,49 +254,49 @@ To apply Bayesian stochastic regression imputation, we make use of Multiple Impu
 
 Step 1
 
-To start the imputation procedure, Go to Analyze -> Multiple Imputation -> Impute Missing Data Values. The first window that appears is the Variables window. In this window you can define which variables you want to include in the imputation model, which are the Tampascale and Pain variables. The number of imputed datasets you want to generate, which you have to set to 1, and the name of the dataset where you want to copy your imputed Tampascale values to. We give this dataset the name “ImpStoch_Tampa”, as in Figure 3.15.
+To start the imputation procedure, Go to Analyze -> Multiple Imputation -> Impute Missing Data Values. The first window that appears is the Variables window. In this window you can define which variables you want to include in the imputation model, which are the Tampascale and Pain variables. The number of imputed datasets you want to generate, which you have to set to 1, and the name of the dataset where you want to copy your imputed Tampascale values to. We give this dataset the name “ImpStoch_Tampa”, as in Figure \@ref(fig:fig51).
 
-```{r fig3_18, echo = FALSE, fig.cap="The Variables window.", out.width='90%', fig.align='center'}
+```{r fig51, echo = FALSE, fig.cap="The Variables window.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.18.png")
 ```
 
 Step 2
 
-In the Methods window you have two options for the Imputation Method. The Automatic and the Custom method. We would not advise you to use the automatic procedure. With this procedure the data will be scanned by SPSS and a monotone imputation method will be used if the data shows a monotone pattern of missing values (see paragraph on missing data patterns). Otherwise, fully conditional specification is used. You can better customize your imputation method so that you are sure the best procedure for your data will be used. We will use the Custom option and choose for fully conditional specification (MCMC). Set the Maximum iterations number at 50. This specifies the number of iterations, that is part of the FCS method (Figure 3.16). We further use the default settings.
+In the Methods window you have two options for the Imputation Method. The Automatic and the Custom method. We would not advise you to use the automatic procedure. With this procedure the data will be scanned by SPSS and a monotone imputation method will be used if the data shows a monotone pattern of missing values (see paragraph on missing data patterns). Otherwise, fully conditional specification is used. You can better customize your imputation method so that you are sure the best procedure for your data will be used. We will use the Custom option and choose for fully conditional specification (MCMC). Set the Maximum iterations number at 50. This specifies the number of iterations, that is part of the FCS method (Figure \@ref(fig:fig52)). We further use the default settings.
 
-```{r fig3_19, echo = FALSE, fig.cap="The Methods window.", out.width='90%', fig.align='center'}
+```{r fig52, echo = FALSE, fig.cap="The Methods window.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.19.png")
 ```
 
 Step 3
-In the constraints window (Figure 3.17) you can scan the data and put constraints on the minimum and maximum values of the imputed variables. It is also possible to constrain the variables in the imputation model. This will further be discussed in the next Chapter. For now, we scan the data and use for other settings the default setting. 
+In the constraints window (Figure \@ref(fig:fig53)) you can scan the data and put constraints on the minimum and maximum values of the imputed variables. It is also possible to constrain the variables in the imputation model. This will further be discussed in the next Chapter. For now, we scan the data and use for other settings the default setting. 
 
-```{r fig3_20, echo = FALSE, fig.cap="Stochastic regression imputation", out.width='90%', fig.align='center'}
+```{r fig53, echo = FALSE, fig.cap="Stochastic regression imputation", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.20.png")
 ```
 
 Step 4
 In the Output window we only use the default settings. 
 
-```{r fig3_21, echo = FALSE, fig.cap="The Output window.", out.width='90%', fig.align='center'}
+```{r fig54, echo = FALSE, fig.cap="The Output window.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.21.png")
 ```
 
 Step 5
 After you click on OK the imputation procedure will start.
-The output dataset consists of the original data with missing data plus a set of cases with imputed values for each imputation. These imputed datasets are stacked under each other. The file also contains a new variable, Imputation_, a numeric variable that indicates the number of the imputed dataset (0 for original data and > 0 for the imputed datasets). Figure 3.19a and b are the imputed datasets. In Figure 19a the variable Imputation_ is added to the dataset and in Figure 19b, the imputed values are marked yellow. 
+The output dataset consists of the original data with missing data plus a set of cases with imputed values for each imputation. These imputed datasets are stacked under each other. The file also contains a new variable, Imputation_, a numeric variable that indicates the number of the imputed dataset (0 for original data and > 0 for the imputed datasets). Figure \@ref(fig:fig55) and Figure \@ref(fig:fig56) are the imputed datasets. In Figure \@ref(fig:fig55) the variable Imputation_ is added to the dataset and in Figure \@ref(fig:fig56), the imputed values are marked yellow. 
 
-```{r fig3_22a, echo = FALSE, fig.cap="Imputed dataset with the variable Imputation_ to distinguish the original and imputed datasets.", out.width='90%', fig.align='center'}
+```{r fig55, echo = FALSE, fig.cap="Imputed dataset with the variable Imputation_ to distinguish the original and imputed datasets.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.22a.png")
 ```
 
-```{r fig3_22b, echo = FALSE, fig.cap="Imputed dataset with the imputed values marked yellow.", out.width='90%', fig.align='center'}
+```{r fig56, echo = FALSE, fig.cap="Imputed dataset with the imputed values marked yellow.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.22b.png")
 ```
 
-When we make a scatterplot of the Pain and the Tampascale variable (Figure 3.20) we see that there is more variation in the Tampascale variable, or you could say that the variation in the Tampascale variable is “repaired”.
+When we make a scatterplot of the Pain and the Tampascale variable (Figure \@ref(fig:fig57)) we see that there is more variation in the Tampascale variable, or you could say that the variation in the Tampascale variable is “repaired”.
 
-```{r fig3_23, echo = FALSE, fig.cap="Scatterplot of the relationship between Tampascale and the Pain variable, including the imputed values for the Tampascale variable (red dots).", out.width='90%', fig.align='center'}
+```{r fig57, echo = FALSE, fig.cap="Scatterplot of the relationship between Tampascale and the Pain variable, including the imputed values for the Tampascale variable (red dots).", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig3.23.png")
 ```
 

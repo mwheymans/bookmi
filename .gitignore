@@ -2,3 +2,12 @@
 .Rhistory
 .RData
 .Ruserdata
+_book/*.Rmd
+01-software.Rmd
+04-MultipleImputation.Rmd
+05-AfterMultipleImputation.Rmd
+Book_MI.log
+Book_MI.pdf
+Book_MI.tex
+_output.yml
+bookmi.Rproj

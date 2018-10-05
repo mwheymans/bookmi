@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Software applications
 
 Statistical software programs can help us to analyze our data. SPSS and R are such programs. Although SPSS and R are among the most popular programs to do statistical data analyses nowadays, they do not have much in common. One of the greatest differences is that SPSS works with menu options that make windows appear and you can click buttons to select options, whereas R works with lines of code that you have to type in to run analyses. This makes SPSS more user-friendly than R for applied researchers. In SPSS you are overloaded with output tables, and in R you only get output on demand. In this Chapter we will explore the different possibilities of the SPSS (IBM 2016) and the R software language (Matloff, 2011, Dalgaard, 2008). We will run R via RStudio, the integrated development environment (IDE) for R. RStudio includes a wide range of productivity enhancing features, which makes it easier to work with than with the R console on its own.  
