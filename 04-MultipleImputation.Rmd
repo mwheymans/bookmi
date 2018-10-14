@@ -4,11 +4,7 @@
 
 In this Chapter we discuss an advanced missing data handling method, that is called Multiple Imputation (MI). With MI, each missing value is replaced by several different values and consequently several different completed datasets are generated. The complete data is copied repeatedly in the completed datasets. The concept of MI can be made clear by the following figure 4.1.
 
-<<<<<<< HEAD:bookmi/04-MultipleImputation.Rmd
-```{r fig4.1, echo = FALSE, fig.cap="Graphical presentation of the MI procedure. ", out.width='90%', fig.align='center'}
-=======
 ```{r fig41, echo = FALSE, fig.cap="Graphical presentation of the MI procedure. ", out.width='90%', fig.align='center'}
->>>>>>> master:04-MultipleImputation.Rmd
 knitr::include_graphics("images/fig4.1.png")
 ```
 
@@ -118,13 +114,8 @@ The predictor matrix is a matrix with the names of the variables that are part o
 	As a default setting all variables will be included in the imputation model to predict missing values in other variables, i.e. as default all combinations of variables that are complete and have missing values in the matrix will be switched on, i.e. are assigned a value 1 in the predictormatrix. The diagonal of the predictormatrix is always zero. 
 	The predictormatrix can also be adapted when for example a variable that contains a high percentage of missing data must be excluded from the imputation model to impute other variables. For example, if we want to exclude the variable Disability from the imputation model of the Tampa scale variable and re-run the MI, we can use the following code:
 
-<<<<<<< HEAD:bookmi/04-MultipleImputation.Rmd
-```{r}
-pred <-imp$predictorMatrix
-=======
 ```{r, eval=FALSE}
 pred <-imp$PredictorMatrix
->>>>>>> master:04-MultipleImputation.Rmd
 pred["Tampascale", "Disability"] <- 0
 pred
 
