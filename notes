@@ -1,0 +1,5 @@
+Notes:
+
+CH6
+- technische stukken over P value pooling eruit en alleen toepassing uitleggen. Voor technische achtergrond verwijzen naar het Paper. Met Martijn overleggen of dit oke is?
+- weglaten van id variabele in imptuatie in prediction model en niet in data, want anders raak je id kwijt.
