@@ -18,12 +18,12 @@
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 % use microtype if available
 \IfFileExists{microtype.sty}{%
-\usepackage{microtype}
+\usepackage[]{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\usepackage[margin=1in]{geometry}
-\usepackage{hyperref}
-\hypersetup{unicode=true,
+\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
+\usepackage[unicode=true]{hyperref}
+\hypersetup{
             pdftitle={Applied Missing data analysis with SPSS and R(Studio)},
             pdfauthor={Martijn Heymans and Iris Eekhout},
             pdfborder={0 0 0},
@@ -72,6 +72,8 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\NormalTok}[1]{#1}
 \usepackage{longtable,booktabs}
+% Fix footnotes in tables (requires footnote package)
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{long table}}{}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -101,34 +103,31 @@
 \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
-
-%%% Change title format to be more compact
-\usepackage{titling}
-
-% Create subtitle command for use in maketitle
-\newcommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
-}
-
-\setlength{\droptitle}{-2em}
-
-  \title{Applied Missing data analysis with SPSS and R(Studio)}
-    \pretitle{\vspace{\droptitle}\centering\huge}
-  \posttitle{\par}
-    \author{Martijn Heymans and Iris Eekhout}
-    \preauthor{\centering\large\emph}
-  \postauthor{\par}
-      \predate{\centering\large\emph}
-  \postdate{\par}
-    \date{2018-09-19}
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
 
 \usepackage{booktabs}
 
+\title{Applied Missing data analysis with SPSS and R(Studio)}
+\author{Martijn Heymans and Iris Eekhout}
+\date{2018-10-02}
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[chapter]
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}[chapter]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{solution}{Solution}
 \begin{document}
 \maketitle
 
@@ -566,10 +565,10 @@ will discuss more about functions in R later):
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -0.34856279 -0.90024815  1.63862714  1.17861626  0.03059941
-##  [6] -1.19207296  0.93739296  0.09470795  1.22563277  0.12140848
-## [11] -0.61991184  1.01064413 -1.18046004  0.01268044  2.58441690
-## [16] -0.17549766 -0.21294877 -0.01599572  1.83793974 -1.59347635
+##  [1]  0.92131529  2.65701851  1.90415747  0.85969862  0.08844802
+##  [6] -1.90699760  0.79545041 -0.28056647 -0.33686286 -1.23675298
+## [11] -0.37910063  1.49171080  0.67527605 -0.05150813  1.53159985
+## [16] -2.95832118 -0.81409661 -0.60473972 -0.32302686 -0.09596981
 \end{verbatim}
 
 The number {[}1{]} between brackets is the index of the first number or
@@ -1742,9 +1741,9 @@ present in the dataset and can be recognized by an empty cell (or dot).
 User missing data is data that is coded as missing value in the dataset
 by the user for some specific kind of reason. As an example we use a
 small dataset with 50 Backpain patients consisting of males (coded as 1)
-and females (coded as 0) patients (Figure 2.1). The female patients in
-this dataset have been pregnant and the Gestational Age (GA) variable,
-contains the duration of their pregnancy in weeks.
+and females (coded as 0) patients (Figure \ref{fig:fig2-1}). The female
+patients in this dataset have been pregnant and the Gestational Age (GA)
+variable, contains the duration of their pregnancy in weeks.
 
 \begin{figure}
 
@@ -1752,7 +1751,7 @@ contains the duration of their pregnancy in weeks.
 
 }
 
-\caption{SPSS dataset containing variables with system and user missing data}\label{fig:fig27}
+\caption{SPSS dataset containing variables with system and user missing data}\label{fig:fig2-1}
 \end{figure}
 
 The Variable GA in the dataset consists of different values, like real
@@ -1870,7 +1869,7 @@ handling method (Little and Rubin, 2002). Currently, the missing data
 pattern is less important because the most advanced (missing) data
 analysis methods as multiple imputation can handle almost any missing
 data pattern. We will discuss some frequently seen missing data
-patterns, which are graphically displayed in Figure 2.2.
+patterns, which are graphically displayed in Figure \ref{fig:fig2-2}.
 
 \begin{figure}
 
@@ -1878,34 +1877,32 @@ patterns, which are graphically displayed in Figure 2.2.
 
 }
 
-\caption{Missing data patterns (ID means person identification number, X1 to X3 represent variables, Time 1 to 3 means that data is measured at 3 time points over time, Study means study number). The white cells represent the missing data}\label{fig:fig28}
+\caption{Missing data patterns (ID means person identification number, X1 to X3 represent variables, Time 1 to 3 means that data is measured at 3 time points over time, Study means study number). The white cells represent the missing data}\label{fig:fig2-2}
 \end{figure}
 
 A univariate missing data pattern is a pattern with missing values in
-only one variable (Figure 2.2a). An example of such a pattern is when
-the independent variables are completely observed, but the outcome
-variable is not, or when a selection of subjects refuse to fill in a
-specific question such as their income level. Figure 2.2b and Figure
-2.2c present examples of multivariate missing data patterns, where
-multiple variables contain missing values. Figure 2.2b shows an example
-where subjects miss values of the same two variables and Figure 2.2c
-shows a more general pattern where different subject miss different
-variable scores. A monotone pattern of missing data may occur in a
-longitudinal study with data repeatedly assessed over time, and subjects
-``drop-out'' of the study (Figure 2.2d). An example could be an elderly
-study where persons become too frail to participate or just because
-persons do not want to attend the study anymore because they are not
-interested to fill in several questionnaires. A pattern called File
-Matching can be observed when data from several studies is merged for an
-individual participant data analysis and variables are not assessed in
-all studies (Figure 2.2e). In our example, one variable is observed in
-both studies (X1), but X2 and is only observed in study 1 and X3 in
-study 2.
+only one variable. An example of such a pattern is when the independent
+variables are completely observed, but the outcome variable is not, or
+when a selection of subjects refuse to fill in a specific question such
+as their income level. The second and third pattern are examples of
+multivariate missing data patterns, where multiple variables contain
+missing values. The second pattern is an example where subjects miss
+values of the same two variables and the third pattern a more general
+pattern where different subject miss different variable scores. A
+monotone pattern of missing data may occur in a longitudinal study with
+data repeatedly assessed over time, and subjects ``drop-out'' of the
+study (fourth pattern). An example could be an elderly study where
+persons become too frail to participate or just because persons do not
+want to attend the study anymore because they are not interested to fill
+in several questionnaires. A pattern called File Matching can be
+observed when data from several studies is merged for an individual
+participant data analysis and variables are not assessed in all studies.
+In our example, one variable is observed in both studies (X1), but X2
+and is only observed in study 1 and X3 in study 2.
 
 \subsection{Missing data patterns in
 SPSS}\label{missing-data-patterns-in-spss}
 
-\begin{quote}
 To evaluate the missing data pattern, we can make use of the options
 under the Missing Value Analysis (MVA) procedure in SPSS (IBM, 2016). We
 use as an example a dataset that contains information of 150 Back pain
@@ -1914,13 +1911,12 @@ Tampa scale (continuous), Radiation in the leg (dichotomous), Disability
 (continuous), Body Weight (continuous), Body Length (continuous), Age
 (continuous), Smoking (dichotomous), Gender (dichotomous). Only the
 variables Gender and Age are completely observed.
-\end{quote}
 
-\begin{quote}
-To access the MVA function in the SPSS menu choose: Analyze
--\textgreater{} Missing Value Analysis\ldots{} A new window will open
-that is called ``Missing Value Analysis'' (Figure 2.3)
-\end{quote}
+To access the MVA function in the SPSS menu choose:
+\textgreater{}Analyze -\textgreater{} Missing Value Analysis\ldots{}
+
+A new window will open that is called ``Missing Value Analysis'' (Figure
+\ref{fig:fig2-3})
 
 \begin{figure}
 
@@ -1928,10 +1924,28 @@ that is called ``Missing Value Analysis'' (Figure 2.3)
 
 }
 
-\caption{The Missing Value Analysis menu}\label{fig:fig29}
+\caption{The Missing Value Analysis menu}\label{fig:fig2-3}
 \end{figure}
 
-\begin{quote}
+From this menu we first transfer all variables of interest in the
+correct Quantitative and Categorical variables window and then choose
+for the Patterns option. From the Patterns menu choose for the options
+\texttt{Tabulated\ cases,\ grouped\ by\ missing\ value\ patterns} and
+\texttt{sort\ variables\ by\ missing\ value\ pattern}. To obtain the
+full list of all patterns that occur in the data, set the ``Omit
+patterns with less than 1\% of cases at 0\%, then click on continue and
+OK. This will produce the output table that is displayed in Figure
+\ref{fig:tab2-1}.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig2.3} 
+
+}
+
+\caption{The Patterns menu}\label{fig:fig2-4}
+\end{figure}
+
 From this menu we first transfer all variables of interest in the
 correct Quantitative and Categorical variables window and then choose
 for the Patterns option. From the Patterns menu choose for the options
@@ -1940,7 +1954,6 @@ variables by missing value pattern''. To obtain the full list of all
 patterns that occur in the data, set the ``Omit patterns with less than
 1\% of cases at 0\%, then click on continue and OK. This will produce
 the output table that is displayed in Tables 2.1a and 2.1b.
-\end{quote}
 
 \begin{figure}
 
@@ -1974,23 +1987,20 @@ the Tampa scale variable only.
 
 }
 
-\caption{Descriptive missing data statistics and the missing data patterns.}\label{fig:tab1}
+\caption{Descriptive missing data statistics and the missing data patterns.}\label{fig:tab2-1}
 \end{figure}\begin{figure}
 
 {\centering \includegraphics[width=0.9\linewidth]{images/tab2.1b} 
 
 }
 
-\caption{Descriptive missing data statistics and the missing data patterns.}\label{fig:tab1}
+\caption{Descriptive missing data statistics and the missing data patterns.}\label{fig:tab2-1}
 \end{figure}
 
-\begin{quote}
 Another way to obtain information about the missing data patterns is via
-the Multiple Imputation option. To access this option, choose: Analyze
--\textgreater{} Multiple Imputation -\textgreater{} Analyze
-Patterns\ldots{} A new window ``Analyze Patterns'' will open (Figure
-2.5).
-\end{quote}
+the Multiple Imputation option. To access this option, choose:
+\textgreater{} Analyze -\textgreater{} Multiple Imputation
+-\textgreater{} Analyze Patterns\ldots{}
 
 \begin{figure}
 
@@ -1998,22 +2008,21 @@ Patterns\ldots{} A new window ``Analyze Patterns'' will open (Figure
 
 }
 
-\caption{Analyse Patterns menu.}\label{fig:fig31}
+\caption{Analyse Patterns menu.}\label{fig:fig2-5}
 \end{figure}
 
-\begin{quote}
 Now transfer all variables that have to be analyzed for their missing
 values to the window ``Analyze Across Variables''. We choose for the
-following output options in that window: Summary of missing values
-(displays missing data information in pie charts, Patterns of missing
-values (displays tabulated patterns of missing values) and Variables
-with the highest frequency of missing values (displays a table of
-analysis variables sorted by percent of missing values in decreasing
-order). To get the full list of all patterns set the ``Minimum
-percentage missing for variable to be displayed'' at 0. You can also
-adjust the maximum number of variables displayed. This procedure will
-generate the following output.
-\end{quote}
+following output options in that window:
+
+Summary of missing values (displays missing data information in pie
+charts, Patterns of missing values (displays tabulated patterns of
+missing values) and Variables with the highest frequency of missing
+values (displays a table of analysis variables sorted by percent of
+missing values in decreasing order). To obtain the full list of all
+patterns set the ``Minimum percentage missing for variable to be
+displayed'' at 0. You can also adjust the maximum number of variables
+displayed. This procedure will generate the following output:
 
 \begin{figure}
 
@@ -2021,29 +2030,38 @@ generate the following output.
 
 }
 
-\caption{Output as a result of the Analyze Patterns menu under Multiple Imputation.}\label{fig:fig32}
+\caption{Output as a result of the Analyze Patterns menu under Multiple Imputation.}\label{fig:fig2-6}
 \end{figure}\begin{figure}
 
 {\centering \includegraphics[width=0.9\linewidth]{images/fit2.6b} 
 
 }
 
-\caption{Output as a result of the Analyze Patterns menu under Multiple Imputation.}\label{fig:fig32}
+\caption{Output as a result of the Analyze Patterns menu under Multiple Imputation.}\label{fig:fig2-6}
 \end{figure}\begin{figure}
 
 {\centering \includegraphics[width=0.9\linewidth]{images/fit2.6c} 
 
 }
 
-\caption{Output as a result of the Analyze Patterns menu under Multiple Imputation.}\label{fig:fig32}
+\caption{Output as a result of the Analyze Patterns menu under Multiple Imputation.}\label{fig:fig2-6}
 \end{figure}\begin{figure}
 
 {\centering \includegraphics[width=0.9\linewidth]{images/fit2.6d} 
 
 }
 
-\caption{Output as a result of the Analyze Patterns menu under Multiple Imputation.}\label{fig:fig32}
+\caption{Output as a result of the Analyze Patterns menu under Multiple Imputation.}\label{fig:fig2-6}
 \end{figure}
+
+Summary of missing values (displays missing data information in pie
+charts, Patterns of missing values (displays tabulated patterns of
+missing values) and Variables with the highest frequency of missing
+values (displays a table of analysis variables sorted by percent of
+missing values in decreasing order). To get the full list of all
+patterns set the ``Minimum percentage missing for variable to be
+displayed'' at 0. You can also adjust the maximum number of variables
+displayed. This procedure will generate the following output.
 
 \subsection{Missing data patterns in
 R}\label{missing-data-patterns-in-r}
@@ -2056,6 +2074,26 @@ missing data pattern.
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(mice)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: lattice
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'mice'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     cbind, rbind
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \KeywordTok{md.pattern}\NormalTok{(dataset)}
 \end{Highlighting}
 \end{Shaded}
@@ -2086,6 +2124,45 @@ two graphs.
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(VIM)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: colorspace
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: grid
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: data.table
+\end{verbatim}
+
+\begin{verbatim}
+## VIM is ready to use. 
+##  Since version 4.0.0 the GUI is in its own package VIMGUI.
+## 
+##           Please use the package to use the new (and old) GUI.
+\end{verbatim}
+
+\begin{verbatim}
+## Suggestions and bug-reports can be submitted at: https://github.com/alexkowa/VIM/issues
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'VIM'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:datasets':
+## 
+##     sleep
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \KeywordTok{aggr}\NormalTok{(dataset, }\DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\StringTok{'white'}\NormalTok{,}\StringTok{'red'}\NormalTok{), }\DataTypeTok{numbers=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{sortVars=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{cex.axis=}\NormalTok{.}\DecValTok{7}\NormalTok{, }\DataTypeTok{gap=}\DecValTok{3}\NormalTok{, }\DataTypeTok{ylab=}\KeywordTok{c}\NormalTok{(}\StringTok{"Percentage of missing data"}\NormalTok{,}\StringTok{"Missing Data Pattern"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -2201,22 +2278,22 @@ of other measured variables in the data (i.e.~pain).
 
 }
 
-\caption{Examples of MCAR, MAR and MNAR data.}\label{fig:fig33}
+\caption{Examples of MCAR, MAR and MNAR data.}\label{fig:fig2-7}
 \end{figure}
 
 This phenomenon for the Tampa scale variable in the LBP study is shown
-in Table 2.2 below. This Table shows that the percentages (or observed
-probabilities) of missing data are equally large for lower, middle and
-higher values of the Tampa scale variable. These values are presented as
-Percentile Groups of Tampa scale values with a range of 28-34, 35-37,
-38-40, 41-44, 45-50 respectively. Over the whole range, the percentage
-of missing data is around 25\% (equally large for different values and
-(not shown) this is also the case for lower and higher values of other
-variables e.g.~pain). In general, The MCAR mechanism does not lead to
-parameter estimation problems as for example invalid mean or regression
-coefficient estimates. However, excluding cases with MCAR data will
-result in a smaller dataset for the analysis and thus larger standard
-errors (i.e.~lower power).
+in Figure \ref@(fig:tab2-2) below. This shows that the percentages (or
+observed probabilities) of missing data are equally large for lower,
+middle and higher values of the Tampa scale variable. These values are
+presented as Percentile Groups of Tampa scale values with a range of
+28-34, 35-37, 38-40, 41-44, 45-50 respectively. Over the whole range,
+the percentage of missing data is around 25\% (equally large for
+different values and (not shown) this is also the case for lower and
+higher values of other variables e.g.~pain). In general, The MCAR
+mechanism does not lead to parameter estimation problems as for example
+invalid mean or regression coefficient estimates. However, excluding
+cases with MCAR data will result in a smaller dataset for the analysis
+and thus larger standard errors (i.e.~lower power).
 
 \begin{figure}
 
@@ -2224,7 +2301,7 @@ errors (i.e.~lower power).
 
 }
 
-\caption{MCAR missing data in the Tampa scale variable.}\label{fig:tab2}
+\caption{MCAR missing data in the Tampa scale variable.}\label{fig:tab2-2}
 \end{figure}
 
 \subsection{Missing At Random}\label{missing-at-random}
@@ -2234,29 +2311,29 @@ for a variable is missing is related to other observed values in the
 dataset but not to the variable itself. The reason of missing data may
 lie outside the dataset but observed variables in the dataset capture
 this by their associations. An example of MAR data is presented in the
-MAR column of Figure 2.9 and in Table 2.3 below for 150 LBP patients. In
-Figure 2.9 you can see in the MAR column that 4 Tampa scale scores are
-missing for pain scores that are ≥ 6 and 1 for a pain score \textless{}
-6, in other words the probability of missing data in the Tampa scale
-scores is higher for higher pain scores. In other words, patients with
-higher pain scores (≥ 6) have more missing values on the Tampa scale
-variable than patients with lower pain scores (\textless{} 6). However,
-within the category of pain scores with values ≥ 6, the Tampa scale
-scores are MCAR, because within each category Tampa scale scores are
-randomly missing for lower and higher values. In Table 2.3 the Tampa
-scale data is split for at lower and higher pain score categories. It
-can be observed that the means and standard deviations do not differ
-between the observed and missing data for the Tampa scale variable.
-Which is an indication that the Tampa scale data are MAR. (for
-educational purposes we know the values of the missing values). A reason
-could be that patients with higher Tampa scale scores were less likely
-to show up at a next Tampa scale measurement because their back hurted
-more. In a MAR missing data situation, missing values can be explained
-by other (observed) variables, like for the Tampa scale and Pain
-variable in the example above, due to the their (statistical)
-relationship in the dataset. Further, within categories of the pain
-variable (for low and high pain values) the Tampa scale scores are MCAR
-(Raghunathan, 2016). However, it is not possible to test this
+MAR column of Figure \ref{fig:fig2-7} and Figure \ref{fig:tab2-3} for
+150 LBP patients. In Figure \ref{fig:fig2-7} you can see in the MAR
+column that 4 Tampa scale scores are missing for pain scores that are ≥
+6 and 1 for a pain score \textless{} 6, in other words the probability
+of missing data in the Tampa scale scores is higher for higher pain
+scores. In other words, patients with higher pain scores (≥ 6) have more
+missing values on the Tampa scale variable than patients with lower pain
+scores (\textless{} 6). However, within the category of pain scores with
+values ≥ 6, the Tampa scale scores are MCAR, because within each
+category Tampa scale scores are randomly missing for lower and higher
+values. In \ref{fig:tab2-3} the Tampa scale data is split for at lower
+and higher pain score categories. It can be observed that the means and
+standard deviations do not differ between the observed and missing data
+for the Tampa scale variable. Which is an indication that the Tampa
+scale data are MAR. (for educational purposes we know the values of the
+missing values). A reason could be that patients with higher Tampa scale
+scores were less likely to show up at a next Tampa scale measurement
+because their back hurted more. In a MAR missing data situation, missing
+values can be explained by other (observed) variables, like for the
+Tampa scale and Pain variable in the example above, due to the their
+(statistical) relationship in the dataset. Further, within categories of
+the pain variable (for low and high pain values) the Tampa scale scores
+are MCAR (Raghunathan, 2016). However, it is not possible to test this
 assumption, because for that you need information of the missing values
 and that is impossible. In general, excluding MAR data leads to false
 estimates of your statistical tests, like for example, regression
@@ -2269,7 +2346,7 @@ Multiple Imputation (Chapter 4).
 
 }
 
-\caption{MAR missing data in the Tampa scale variable.}\label{fig:tab34}
+\caption{MAR missing data in the Tampa scale variable.}\label{fig:tab2-3}
 \end{figure}
 
 \subsection{Missing Not At Random}\label{missing-not-at-random}
@@ -2280,24 +2357,25 @@ scores are missing, and this missing data problem cannot be captured
 anymore by other measured variables in the dataset because they are not
 available in the dataset. In case of the LBP example, MNAR data occurs
 when patients with the highest scores on the Tampa scale have missing
-values. This is shown in the MNAR column of Figure 2.9. The MNAR column
-shows that the values that are most frequently missing are the highest
-Tampa scale scores, i.e.~for the patients that fear their back problems
-most. A reason may be that these patients were so afraid to move (which
-is assessed by the Tamp scale), that they were not able to visit an
-assessment center. MNAR missing data can also occur indirectly through
-the relationship of the variable with missing data with another variable
-that is not available in the dataset. For example, it could also be that
-patients that worry the most do not want to be confronted with questions
-about their fear to move their back and therefore skip questions of the
-Tampa scale. In case of a positive relationship between worriedness and
-fear of movement, the highest values on the Tampa scale variable will be
-missing for those patients that worry the most. If worriedness is not
-measured in the dataset, the missing data in the Tampa scale variable
-will be MNAR. The difference with MAR is that with MNAR, the missing
-data problem cannot be handled by the observed variables in the dataset
-or by using a technique as Multiple Imputation. However, as with MAR
-data, MNAR data can also not be verified.
+values. This is shown in the MNAR column of Figure \ref{fig:fig2-7}. The
+MNAR column shows that the values that are most frequently missing are
+the highest Tampa scale scores, i.e.~for the patients that fear their
+back problems most. A reason may be that these patients were so afraid
+to move (which is assessed by the Tamp scale), that they were not able
+to visit an assessment center. MNAR missing data can also occur
+indirectly through the relationship of the variable with missing data
+with another variable that is not available in the dataset. For example,
+it could also be that patients that worry the most do not want to be
+confronted with questions about their fear to move their back and
+therefore skip questions of the Tampa scale. In case of a positive
+relationship between worriedness and fear of movement, the highest
+values on the Tampa scale variable will be missing for those patients
+that worry the most. If worriedness is not measured in the dataset, the
+missing data in the Tampa scale variable will be MNAR. The difference
+with MAR is that with MNAR, the missing data problem cannot be handled
+by the observed variables in the dataset or by using a technique as
+Multiple Imputation. However, as with MAR data, MNAR data can also not
+be verified.
 
 \subsection{The Missing Data
 Indicator}\label{the-missing-data-indicator}
@@ -2315,12 +2393,12 @@ respectively. In case of the Tampa scale variable this means that the
 observed data is coded by a 0 and a 1 is used for the Tampa scale values
 that are missing. This dichotomous coding variable is called the missing
 data indicator or R variable which means that the complete and missing
-data are defined according to this variable. Figure 2.10 shows the R
-indicator variable for the observed and missing data in the Tampa scale
-variable. The R variable is now a single variable because there is
-missing data in only the Tampa scale variable. When more variables
-contain missing data, the R variable becomes a dataset of variables that
-consist of 0´s and 1´s.
+data are defined according to this variable. Figure \ref{fig:fig2-8}
+shows the R indicator variable for the observed and missing data in the
+Tampa scale variable. The R variable is now a single variable because
+there is missing data in only the Tampa scale variable. When more
+variables contain missing data, the R variable becomes a dataset of
+variables that consist of 0´s and 1´s.
 
 \begin{figure}
 
@@ -2328,7 +2406,7 @@ consist of 0´s and 1´s.
 
 }
 
-\caption{The missing data in the Tampa scale variable coded according to the missing data indicator variable R.}\label{fig:fig34}
+\caption{The missing data in the Tampa scale variable coded according to the missing data indicator variable R.}\label{fig:fig2-8}
 \end{figure}
 
 Using the R indicator variable implies that missing values (or the
@@ -2351,7 +2429,7 @@ scale variable that contain missing values is the outcome variable.
 
 }
 
-\caption{MCAR}\label{fig:fig35}
+\caption{MCAR}\label{fig:fig2-9a}
 \end{figure}
 
 There is no relationship between, how the data became missing (indicated
@@ -2363,7 +2441,7 @@ by R) and observed and unobserved variables.
 
 }
 
-\caption{MAR}\label{fig:fig36}
+\caption{MAR}\label{fig:fig2-9b}
 \end{figure}
 
 There is a relationship between, how the data became missing (indicated
@@ -2375,7 +2453,7 @@ by R) and observed variables.
 
 }
 
-\caption{MNAR}\label{fig:fig37}
+\caption{MNAR}\label{fig:fig2-9c}
 \end{figure}
 
 There is a relationship between, how the data got missing (indicated by
@@ -2492,13 +2570,18 @@ SPSS}\label{missing-data-evaluation-in-spss}
 
 \subsubsection{Descriptive Statistics}\label{descriptive-statistics}
 
-\begin{quote}
 Descriptive information of variables can be obtained via the following
 options of the Missing Value Analysis (MVA) module in the SPSS menu:
-Analyze -\textgreater{} Missing Value Analysis\ldots{} than transfer all
-variables in the correct Quantitative and Categorical variables window
-and then clock Descriptives option -\textgreater{} Univariate
-statistics.
+
+\begin{quote}
+Analyze -\textgreater{} Missing Value Analysis\ldots{}
+\end{quote}
+
+Transfer all variables in the correct Quantitative and Categorical
+variables window and then click
+
+\begin{quote}
+Descriptives option -\textgreater{} Univariate statistics.
 \end{quote}
 
 \begin{figure}
@@ -2507,7 +2590,7 @@ statistics.
 
 }
 
-\caption{Missing value Analysis menu in SPSS}\label{fig:fig38}
+\caption{Missing value Analysis menu in SPSS}\label{fig:fig2-10}
 \end{figure}
 
 \begin{figure}
@@ -2516,7 +2599,7 @@ statistics.
 
 }
 
-\caption{Univariate descriptive statistics of variables with and without missing data.}\label{fig:tab4}
+\caption{Univariate descriptive statistics of variables with and without missing data.}\label{fig:tab2-4}
 \end{figure}
 
 Under the column N, the information of all cases in the dataset are
@@ -2547,13 +2630,11 @@ missing and non-missing values, and means of the two groups are
 displayed. You can also display any two-tailed probabilities associated
 with the t statistic.
 
-\begin{quote}
-The t-test procedure can be found in the Missing Value Analysis window
-under Descriptives. In that window choose for ``t-tests with groups
-formed by indicator variables'' and ``include probabilities in table''
-under the Indicator Variable Statistics options and then Click on
-Continue -\textgreater{} OK.
-\end{quote}
+The t-test procedure can be found in: \textgreater{}Analyze
+-\textgreater{} Missing Value Analysis\ldots{} -\textgreater{}
+Descriptives -\textgreater{} click ``t-tests with groups formed by
+indicator variables'' and ``include probabilities in table''
+-\textgreater{} Continue -\textgreater{} OK.
 
 \begin{figure}
 
@@ -2561,7 +2642,7 @@ Continue -\textgreater{} OK.
 
 }
 
-\caption{The T-test procedure as part of the Missing Value Analysis menu}\label{fig:fig39}
+\caption{The T-test procedure as part of the Missing Value Analysis menu}\label{fig:fig2-11}
 \end{figure}
 
 \begin{figure}
@@ -2570,7 +2651,7 @@ Continue -\textgreater{} OK.
 
 }
 
-\caption{Output table of the t-test procedure.}\label{fig:tab5}
+\caption{Output table of the t-test procedure.}\label{fig:tab2-5}
 \end{figure}
 
 On the left side oft the output table the names of the variables with
@@ -2605,7 +2686,6 @@ t-test is not significant. For the Disability variable, it is the other
 way around. We see more missing data on the Tampa scale variable for
 lower Disability scores.
 
-\begin{quote}
 In the Missing Value Analysis window under the Indicator Variable
 Statistics options you can also choose for ``Crosstabulations of
 categorical and indicator variables''. In that case a separate table is
@@ -2615,7 +2695,6 @@ values for the other variables is displayed as well as the percentages
 of each type of missing value. To reduce the size of the table, you can
 omit statistics that are computed for only a small number of cases by
 adjusting the option ``Omit variables missing less than \% of cases''.
-\end{quote}
 
 \subsubsection{Logistic Regression
 Analysis}\label{logistic-regression-analysis}
@@ -2638,7 +2717,7 @@ below:
 
 }
 
-\caption{Logistic regression analysis with variable that contain missing data as the outcome variable.}\label{fig:tab6}
+\caption{Logistic regression analysis with variable that contain missing data as the outcome variable.}\label{fig:tab2-6}
 \end{figure}
 
 We can observe that the variable Pain is significantly related to the
@@ -2662,12 +2741,10 @@ the whole dataset is evaluated, because each missing data pattern is
 included in the analysis. To conduct this test, you choose from the SPSS
 menu:
 
-\begin{quote}
 Analyze -\textgreater{} Missing Value Analysis\ldots{}In the main
 Missing Value Analysis dialog box, select the variable(s) for which you
 want to estimate missing values (use only continuous variables) and
 Select EM in the Estimation group and Click OK.
-\end{quote}
 
 \begin{figure}
 
@@ -2675,7 +2752,7 @@ Select EM in the Estimation group and Click OK.
 
 }
 
-\caption{EM selection in the Missing Value Analysis menu.}\label{fig:fig40}
+\caption{EM selection in the Missing Value Analysis menu.}\label{fig:fig2-12}
 \end{figure}
 
 \begin{figure}
@@ -2684,35 +2761,35 @@ Select EM in the Estimation group and Click OK.
 
 }
 
-\caption{Output tables with information of Little’s MCAR test.}\label{fig:tab7}
+\caption{Output tables with information of Little’s MCAR test.}\label{fig:tab2-7}
 \end{figure}\begin{figure}
 
 {\centering \includegraphics[width=0.9\linewidth]{images/tab2.7b} 
 
 }
 
-\caption{Output tables with information of Little’s MCAR test.}\label{fig:tab7}
+\caption{Output tables with information of Little’s MCAR test.}\label{fig:tab2-7}
 \end{figure}\begin{figure}
 
 {\centering \includegraphics[width=0.9\linewidth]{images/tab2.7c} 
 
 }
 
-\caption{Output tables with information of Little’s MCAR test.}\label{fig:tab7}
+\caption{Output tables with information of Little’s MCAR test.}\label{fig:tab2-7}
 \end{figure}\begin{figure}
 
 {\centering \includegraphics[width=0.9\linewidth]{images/tab2.7d} 
 
 }
 
-\caption{Output tables with information of Little’s MCAR test.}\label{fig:tab7}
+\caption{Output tables with information of Little’s MCAR test.}\label{fig:tab2-7}
 \end{figure}\begin{figure}
 
 {\centering \includegraphics[width=0.9\linewidth]{images/tab2.7e} 
 
 }
 
-\caption{Output tables with information of Little’s MCAR test.}\label{fig:tab7}
+\caption{Output tables with information of Little’s MCAR test.}\label{fig:tab2-7}
 \end{figure}
 
 \subsection{Missing data Evaluation in
@@ -2733,6 +2810,10 @@ seem to be compeletely at random.
 \KeywordTok{LittleMCAR}\NormalTok{(dataset[,}\KeywordTok{c}\NormalTok{(}\StringTok{"Pain"}\NormalTok{, }\StringTok{"Tampascale"}\NormalTok{,}\StringTok{"Disability"}\NormalTok{, }\StringTok{"GA"}\NormalTok{)])}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## Loading required package: mvnmle
+\end{verbatim}
 
 \begin{verbatim}
 ## this could take a while
@@ -2874,7 +2955,7 @@ is present or not. The SPSS dataset is shown in (Figure \ref{fig:fig1})
 
 }
 
-\caption{SPSS dataset with missing values in the Tampa scale variable}\label{fig:fig50}
+\caption{SPSS dataset with missing values in the Tampa scale variable}(\#fig:fig3_1)
 \end{figure}
 
 Assume that we are interested in the relationship between Pain and the
@@ -2884,20 +2965,20 @@ datasets are displayed in (Figure \ref{fig:fig3}):
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{images/fig3.2} 
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.2a} 
 
 }
 
-\caption{ Relationship between the Tampa scale and Pain variables (green dots are observed and red dots are assumed to be missing data}\label{fig:fig51}
+\caption{ Relationship between the Tampa scale and Pain variables (green dots are observed and red dots are assumed to be missing data}(\#fig:fig3_2a)
 \end{figure}
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{images/fig3.3} 
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.2b} 
 
 }
 
-\caption{Relationship between the Tampa scale and Pain variable. Missing data are excluded}\label{fig:fig52}
+\caption{Relationship between the Tampa scale and Pain variable. Missing data are excluded}(\#fig:fig3_2b)
 \end{figure}
 
 The green dots represent the observed data and the red dots the missing
@@ -2911,15 +2992,896 @@ below.
 \subsection{Mean imputation in SPSS}\label{mean-imputation-in-spss}
 
 Mean imputation in SPSS can be applied by using three different methods.
-One is to first compute the mean of the variable by using Descriptive
-Statistics, and replace all missing values by the mean value, the other
-is by using the Replace Missing Values procedure under Transform and the
-last one is by using the Linear Regression procedure. We will start with
-the first.
+One is to first compute the mean of the variable by using
+\emph{Descriptive Statistics}, and replace all missing values by the
+mean value, the other is by using the \emph{Replace Missing Values}
+procedure under Transform and the last one is by using the \emph{Linear
+Regression} procedure. We will start with the first.
 
 Descriptive Statistics Via Analyze -\textgreater{} Descriptive
 statistics, the descriptive statistics are calculated. The results are
 shown in Table 3.2.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/table3.2} 
+
+}
+
+\caption{Descriptive statistics of the complete data of the Tampa scale variable.}(\#fig:fig3_2t)
+\end{figure}
+
+The mean of the Tampa scale variable is 38.86. Replacing the missing
+values by the mean result in the following complete dataset (Figure
+3.3). We see that all missing values have the same value, which is
+38.86, i.e.~the mean value of the Tampa scale variable in the dataset
+after the missing values have been replaced (first 15 patients are
+shown).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.3} 
+
+}
+
+\caption{Mean imputation of missing values of the Tampascale variable.}(\#fig:fig3_3)
+\end{figure}
+
+The scatterplot between the Pain and the Tampa scale variable clearly
+shows the result of this imputation procedure, all imputed values are
+located at the mean value (Figure 3.4).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.4} 
+
+}
+
+\caption{Scatterplot between the Tampa scale and Pain variable, after the missing values of the Tampa scale variable have been replaced by the mean.}(\#fig:fig3_4)
+\end{figure}
+
+\emph{Replace Missing Values procedure} You can also find the Replace
+Missing Values dialog box via Transform -\textgreater{} Replace Missing
+Values. The following window will appear (Figure 3.5).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.5} 
+
+}
+
+\caption{Window for mean imputation via the Replace Missing Values procedure.}(\#fig:fig3_5)
+\end{figure}
+
+Now transport the Tampa scale variable to the New variable(s) window
+(Figure 3.6). The default imputation procedure is Mean imputation or
+called ``Series mean''.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.6} 
+
+}
+
+\caption{Window for mean imputation of the Tampa scale variable.}(\#fig:fig3_6)
+\end{figure}
+
+When you click on OK, a new variable is created in the dataset using the
+existing variable name followed by an underscore and a sequential
+number. The result of the procedure is shown in Figure 3.7.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.7} 
+
+}
+
+\caption{Mean imputation of the Tampa scale variable with the Replace Missing Values procedure.}(\#fig:fig3_7)
+\end{figure}
+
+\emph{Linear Regression} Mean imputation in SPSS is also integrated in
+the Linear Regression menu. This can be approached by following the
+route:
+
+Analyze -\textgreater{} Regression -\textgreater{} Linear
+-\textgreater{} Options. In the Missing Values group you can choose for
+Replace with mean (Figure 3.8).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.8} 
+
+}
+
+\caption{The option Replace with mean in the Linear Regression menu.}(\#fig:fig3_8)
+\end{figure}
+
+\subsection{Mean imputation in R}\label{mean-imputation-in-r}
+
+We use the same Backpain dataset as above to impute the missing data in
+the Tampa scale variable. First, we read in the dataset in R (first 15
+patients are shown).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(foreign)}
+\NormalTok{dataset <-}\StringTok{ }\KeywordTok{read.spss}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Backpain 50 missing.sav"}\NormalTok{, }\DataTypeTok{to.data.frame=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## re-encoding from UTF-8
+\end{verbatim}
+
+With the following code we apply mean imputation:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(mice) }\CommentTok{# Activate the mice package to use the mice function}
+\NormalTok{imp_mean <-}\StringTok{ }\KeywordTok{mice}\NormalTok{(dataset, }\DataTypeTok{method=}\StringTok{"mean"}\NormalTok{, }\DataTypeTok{m=}\DecValTok{1}\NormalTok{, }\DataTypeTok{maxit=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  iter imp variable
+##   1   1  Tampascale
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{imp_mean}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Class: mids
+## Number of multiple imputations:  1 
+## Imputation methods:
+##         ID       Pain Tampascale Disability  Radiation 
+##         ""         ""     "mean"         ""         "" 
+## PredictorMatrix:
+##            ID Pain Tampascale Disability Radiation
+## ID          0    1          1          1         1
+## Pain        1    0          1          1         1
+## Tampascale  1    1          0          1         1
+## Disability  1    1          1          0         1
+## Radiation   1    1          1          1         0
+\end{verbatim}
+
+The information under iter and imp means that we used one step (1
+iteration) to impute the missing values with the mean in one dataset,
+indicated by the 1 under imp. The mice function is designed to use
+multiple imputation. This function will be explained in more detail in
+Chapter 4. The following R code 3.3 can be used to extract the imputed
+values in the Tampa scale variable:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{imp_mean}\OperatorTok{$}\NormalTok{imp}\OperatorTok{$}\NormalTok{Tampascale}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           1
+## 2  38.86486
+## 6  38.86486
+## 9  38.86486
+## 14 38.86486
+## 21 38.86486
+## 25 38.86486
+## 27 38.86486
+## 31 38.86486
+## 35 38.86486
+## 37 38.86486
+## 44 38.86486
+## 49 38.86486
+## 50 38.86486
+\end{verbatim}
+
+The completed dataset can be extracted by using the following R code
+(first 15 shown):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{complete}\NormalTok{(imp_mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Regression imputation}\label{regression-imputation}
+
+\subsection{Regression imputation in
+SPSS}\label{regression-imputation-in-spss}
+
+In SPSS regression imputation can be done via the Missing Value Analysis
+procedures. There are two options that can be used for regression
+imputation, the Regression option and the EM option. This latter
+abbreviation stands for Expectation Maximization (EM). Because the
+Regression option in SPSS has some flaws in the estimation of the
+regression parameters (see paper von Hippel 2004) we take as an example
+the EM algorithm. This algorithm is a likelihood-based procedure. This
+means that the most likely values of the regression coefficients are
+estimated given the data and these regression coefficients are
+subsequently used to impute the missing value. This EM procedure gives
+the same results as first performing a normal regression analysis in the
+dataset and subsequently estimate the missing values from the regression
+equation, after the missing values have been excluded. We will compare
+the EM and regression procedures below. We take as an example the
+imputations that are used for the missing values in the Tampa scale
+variable by the regression of the Tampa scale on Pain. In other words,
+we use for this example one predictor variable for the missing data in
+the Tampa scale variable. With this prediction model that is used to
+impute the missing data in the Tampa scale variable, the Tampa scale
+variable becomes the outcome variable. We will use the Backpain 50
+missing.sav dataset. Step 1 to 5 below explains how to apply the
+procedures.
+
+Step 1 From the menus choose: Analyze -\textgreater{} Missing Value
+Analysis\ldots{}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.9} 
+
+}
+
+\caption{The Missing Value Analysis dialog box.}(\#fig:fig3_9)
+\end{figure}
+
+Step 2 In the main Missing Value Analysis dialog box, select the
+variable(s) that you want to use for the regression method and select EM
+in the Estimation group (Figure 3.10).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.10} 
+
+}
+
+\caption{EM Selection in the Missing Value Analysis window.}(\#fig:fig3_10)
+\end{figure}
+
+Step 3 To specify predicted and predictor variables, click Variables.
+Place the Tampascale variable in the window of the Predicted variables
+and the Pain variable in the Predictor Variables window (Figure 3.11).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.11} 
+
+}
+
+\caption{Transfer of the Tampascale and Pain variables to the Predicted and Predictor Variables windows.}(\#fig:fig3_11)
+\end{figure}
+
+Step 4 Click on Continue -\textgreater{} EM and Choose for Normal in the
+Distribution group. Than thick Save completed data and give the dataset
+a name, for example ``ImpTampa\_EM'' (Figure 3.12).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.12} 
+
+}
+
+\caption{Name of dataset to save the EM results in.}(\#fig:fig3_12)
+\end{figure}
+
+Step 5 Then Click Continue -\textgreater{} OK. The new dataset
+``ImpTampa\_EM'' will open in a new window in SPSS. In this dataset the
+imputed data of the Tampascale Variable together with the original data
+is stored (Figure 3.13, first 15 patients are shown). Adjust the Width
+and Decimals of the Tampa scale variable in the Variable View window to
+4 and 3 respectively to get the same results as in Figure 3.13.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.13} 
+
+}
+
+\caption{Result of the EM procedure.}(\#fig:fig3_13)
+\end{figure}
+
+The imputations are generated from the linear regression model of the
+relationship between Pain and Function. Be aware that SPSS uses as
+default only quantitative variables to impute the missing values with
+the EM algorithm. If you want to include categorical variables in the
+imputation model as auxiliary variables, you have to define them as
+scale variables. Let's now compare the EM procedure with a two-step
+procedure. We first estimate the relationship between Pain and the Tampa
+scale variable in the dataset with linear regression after we have
+excluded the cases with missing values in the Tampa scale variable.
+Subsequently, we use the regression coefficients from this regression
+model to estimate the imputed values in the Tampa scale variable. We
+start by estimating the linear regression model with the Tampa scale
+variable as outcome variable (because we have to predict missing values
+in this variable). The Pain variable is now the independent variable.
+
+To estimate the linear regression model: From the menus choose: Analyze
+-\textgreater{} Regression -\textgreater{} Linear
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.14} 
+
+}
+
+\caption{Linear regression analysis with the Tampa scale as the outcome and Pain as the independent variable.}(\#fig:fig3_14)
+\end{figure}
+
+Transfer the Tampa scale variable to the Dependent variable window and
+the Pain variable to the window of the Block 1 of 1 group. Then click
+OK. The following coefficients will be estimated (Table 3.3).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/table3.3} 
+
+}
+
+\caption{Result of the linear regression analysis.}(\#fig:fig3_3t)
+\end{figure}
+
+The linear regression model can be described as:
+
+Tampascale=32.005+1.410 ×Pain
+
+When we use this regression model to impute the missing values in the
+Tampa scale variable and we compare them with the EM estimates, we see
+that the results are the same.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.15} 
+
+}
+
+\caption{Predictions of the missing Tampa scale values on basis of the regression model estimated in the dataset after the missing values were excluded.}(\#fig:fig3_15)
+\end{figure}
+
+When we make a scatterplot of the imputations from the regression model
+we see that as expected the imputed values lie directly on the
+regression line (Figure 3.16).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.16} 
+
+}
+
+\caption{Relationship between the Tampa scale and the Pain variable.}(\#fig:fig3_16)
+\end{figure}
+
+The Tampa scale variable is located on the y-axis. The imputed values of
+the Tampa scale variable (red dots) are located on the regression line
+that was used to generate the imputed values. The green dots are the
+observed data values.
+
+\subsection{Regression imputation in
+R}\label{regression-imputation-in-r}
+
+We will now continue with the application of regression imputation in R.
+We use the same dataset as we did for regression imputation in SPSS
+above. Regression imputation can be done in R by using the R code 3.5
+with as method ``norm.predict''. Only the Pain variable will be used to
+predict the missing values in the Tampa scale variable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(foreign)}
+\NormalTok{dataset <-}\StringTok{ }\KeywordTok{read.spss}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Mean imputation.sav"}\NormalTok{, }\DataTypeTok{to.data.frame=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## re-encoding from UTF-8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataset <-}\StringTok{ }\NormalTok{dataset[, }\KeywordTok{c}\NormalTok{(}\StringTok{"Pain"}\NormalTok{, }\StringTok{"Tampascale"}\NormalTok{)]}
+
+\NormalTok{imp.regress <-}\StringTok{ }\KeywordTok{mice}\NormalTok{(dataset, }\DataTypeTok{method=}\StringTok{"norm.predict"}\NormalTok{, }\DataTypeTok{m=}\DecValTok{1}\NormalTok{, }\DataTypeTok{maxit=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  iter imp variable
+##   1   1  Tampascale
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{imp.regress}\OperatorTok{$}\NormalTok{imp}\OperatorTok{$}\NormalTok{Tampascale }\CommentTok{# Extract the imputed values}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           1
+## 2  40.46554
+## 6  41.87566
+## 9  34.82506
+## 14 40.46554
+## 21 39.05542
+## 25 39.05542
+## 27 44.69590
+## 31 46.10602
+## 35 40.46554
+## 37 43.28578
+## 44 33.41494
+## 49 34.82506
+## 50 43.28578
+\end{verbatim}
+
+Expectantly, this gives comparable results as the regression imputation
+with SPSS above. The method ``norm.predict'' in the mice package is a
+short notation of the function mice.impute.norm.predict. This function
+fits a linear regression model in the dataset without missing data and
+generates the imputed values for the Tampa scale variable by using the
+regression coefficients of the linear regression model. The same
+regression coefficients are used to predict the missing values in the
+Tampa scale variable as was shown in Table 3.3. The completed dataset
+can be extracted by using the complete function in the mice package.
+
+\subsection{Stochastic regression
+imputation}\label{stochastic-regression-imputation}
+
+Multiple Imputation accounts for the uncertainty in the estimation of
+imputed values. This imputation uncertainty can be accounted for by
+using Stochastic regression models. With Stochastic regression models
+the imputation uncertainty is accounted for by adding extra error
+variance to the predicted values that are generated by the linear
+regression model. Stochastic regression can be activated in SPSS via the
+Missing Value Analysis and the Regression Estimation option. However,
+the Regression Estimation option generates incorrect regression
+coefficient estimates (von Hippel, 2004) and will therefore not further
+discussed or applied in this manual. Stochastic regression models
+estimated using Bayesian methods (where extra error variance is also
+added to the regression coefficients) can be applied in SPSS by using
+the Multiple Imputation procedure. This is the topic of paragraph 3.5.1.
+We will continue with the application of stochastic regression
+imputation in R.
+
+\subsection{Stochastic regression imputation in
+R}\label{stochastic-regression-imputation-in-r}
+
+In R stochastic regression imputation can be done with the mice
+function. There are two versions available in the mice function to apply
+stochastic regression imputation, one that is non-Bayesian and one that
+is called Bayesian stochastic regression imputation. We start with
+non-Bayesian stochastic regression imputation. We will use only the Pain
+variable to predict the missing values in the Tampa scale variable. The
+function that mice uses for this procedure is the mice.impute.norm.nob
+function. We will use for the example the same dataset as above
+including 50 low back pain patients with missing values in the Tampa
+scale variable. Stochastic regression imputation is applied in R code
+3.7 by using the ``norm.nob'' method.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataset <-}\StringTok{ }\KeywordTok{read.spss}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Backpain 50 missing.sav"}\NormalTok{, }\DataTypeTok{to.data.frame=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## re-encoding from UTF-8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataset <-}\StringTok{ }\NormalTok{dataset[, }\KeywordTok{c}\NormalTok{(}\StringTok{"Pain"}\NormalTok{, }\StringTok{"Tampascale"}\NormalTok{)]}
+
+\NormalTok{imp_nob <-}\StringTok{ }\KeywordTok{mice}\NormalTok{(dataset, }\DataTypeTok{method=}\StringTok{"norm.nob"}\NormalTok{, }\DataTypeTok{m=}\DecValTok{1}\NormalTok{, }\DataTypeTok{maxit=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  iter imp variable
+##   1   1  Tampascale
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{imp_nob}\OperatorTok{$}\NormalTok{imp}\OperatorTok{$}\NormalTok{Tampascale }\CommentTok{# Extract the imputed values}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           1
+## 2  40.27879
+## 6  41.84286
+## 9  39.26556
+## 14 36.23514
+## 21 38.23287
+## 25 36.81404
+## 27 47.54728
+## 31 50.48237
+## 35 42.32658
+## 37 45.41236
+## 44 35.32757
+## 49 35.50338
+## 50 38.54857
+\end{verbatim}
+
+The completed dataset can be extracted by using the complete function in
+the mice package.
+
+\section{Bayesian Stochastic regression
+imputation}\label{bayesian-stochastic-regression-imputation}
+
+The difference between non-Bayesian and Bayesian imputation is that to
+the latter imputed values also extra variation is added to the
+(population) regression coefficients. In other words, we use the idea
+that there is not one true (population) regression coefficient but that
+the regression coefficient as the true population parameter follows a
+(probability) distribution itself. This is in contrast to a frequentist
+idea, which assume that there is one true population parameter and that
+the uncertainty (by using a confidence interval) around the population
+parameter is interpreted as a probability statement of the result if the
+research would be repeatedly conducted.\\
+Bayesian methods also incorporate uncertainty in the parameters
+estimates of the regression model, which are the regression coefficients
+and the residual variance. In the context of missing data, Bayesian
+estimates are used to incorporate parameter uncertainty that estimate
+the missing values (above adding error variance). In the missing data
+literature, it is said that the missing values are drawn from the
+posterior predictive distribution, conditional on the values of other
+variables. This means in the context of imputation that for the
+parameters of the regression model, which are the regression
+coefficients and the error variance, the posterior distribution is
+estimated first. For more information about the theory of Bayesian
+statistics we refer to the books of Box and Tiao (1992), Enders (2012)
+and Gelman et al. (2004). Bayesian stochastic regression imputation can
+be applied in SPSS and R. We start with an explanation of Bayesian
+Stochastic regression imputation in SPSS, followed by an application in
+R.
+
+\subsection{Bayesian Stochastic regression imputation in
+SPSS}\label{bayesian-stochastic-regression-imputation-in-spss}
+
+Bayesian Stochastic regression imputation can be performed via the
+multiple imputation menu in SPSS (IBM Cooperation 2016). The Multiple
+Imputation procedure in SPSS, and its settings, will be discussed in
+more detail in the next Chapter. For now, we will show the steps that
+have to be taken to apply Stochastic regression imputation. Again, we
+will make use of the same dataset as above with missing data in only the
+Tampa scale variable. To generate the imputations, we will make use of
+the Pain variable as the only predictor variable in the imputation model
+(Figure 3.14, first 15 patients shown).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.17} 
+
+}
+
+\caption{The example dataset with missing data in the Tampa scale variable.}(\#fig:fig3_17)
+\end{figure}
+
+To apply Bayesian stochastic regression imputation, we make use of
+Multiple Imputation procedure. That will be explained in Step 1 to 5
+below.
+
+Step 1
+
+To start the imputation procedure, Go to Analyze -\textgreater{}
+Multiple Imputation -\textgreater{} Impute Missing Data Values. The
+first window that appears is the Variables window. In this window you
+can define which variables you want to include in the imputation model,
+which are the Tampascale and Pain variables. The number of imputed
+datasets you want to generate, which you have to set to 1, and the name
+of the dataset where you want to copy your imputed Tampascale values to.
+We give this dataset the name ``ImpStoch\_Tampa'', as in Figure 3.15.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.18} 
+
+}
+
+\caption{The Variables window.}(\#fig:fig3_18)
+\end{figure}
+
+Step 2
+
+In the Methods window you have two options for the Imputation Method.
+The Automatic and the Custom method. We would not advise you to use the
+automatic procedure. With this procedure the data will be scanned by
+SPSS and a monotone imputation method will be used if the data shows a
+monotone pattern of missing values (see paragraph on missing data
+patterns). Otherwise, fully conditional specification is used. You can
+better customize your imputation method so that you are sure the best
+procedure for your data will be used. We will use the Custom option and
+choose for fully conditional specification (MCMC). Set the Maximum
+iterations number at 50. This specifies the number of iterations, that
+is part of the FCS method (Figure 3.16). We further use the default
+settings.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.19} 
+
+}
+
+\caption{The Methods window.}(\#fig:fig3_19)
+\end{figure}
+
+Step 3 In the constraints window (Figure 3.17) you can scan the data and
+put constraints on the minimum and maximum values of the imputed
+variables. It is also possible to constrain the variables in the
+imputation model. This will further be discussed in the next Chapter.
+For now, we scan the data and use for other settings the default
+setting.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.20} 
+
+}
+
+\caption{Stochastic regression imputation}(\#fig:fig3_20)
+\end{figure}
+
+Step 4 In the Output window we only use the default settings.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.21} 
+
+}
+
+\caption{The Output window.}(\#fig:fig3_21)
+\end{figure}
+
+Step 5 After you click on OK the imputation procedure will start. The
+output dataset consists of the original data with missing data plus a
+set of cases with imputed values for each imputation. These imputed
+datasets are stacked under each other. The file also contains a new
+variable, Imputation\_, a numeric variable that indicates the number of
+the imputed dataset (0 for original data and \textgreater{} 0 for the
+imputed datasets). Figure 3.19a and b are the imputed datasets. In
+Figure 19a the variable Imputation\_ is added to the dataset and in
+Figure 19b, the imputed values are marked yellow.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.22a} 
+
+}
+
+\caption{Imputed dataset with the variable Imputation_ to distinguish the original and imputed datasets.}(\#fig:fig3_22a)
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.22b} 
+
+}
+
+\caption{Imputed dataset with the imputed values marked yellow.}(\#fig:fig3_22b)
+\end{figure}
+
+When we make a scatterplot of the Pain and the Tampascale variable
+(Figure 3.20) we see that there is more variation in the Tampascale
+variable, or you could say that the variation in the Tampascale variable
+is ``repaired''.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig3.23} 
+
+}
+
+\caption{Scatterplot of the relationship between Tampascale and the Pain variable, including the imputed values for the Tampascale variable (red dots).}(\#fig:fig3_23)
+\end{figure}
+
+\subsection{Bayesian Stochastic regression imputation in
+R}\label{bayesian-stochastic-regression-imputation-in-r}
+
+The package mice also include a Bayesian stochastic regression
+imputation procedure. This method also accounts for imputation
+uncertainty, not only via the residuals (error variance), but also via
+the regression coefficients, which means that extra noise (or random
+error) is added to the regression coefficients. This imputation
+procedure is done by using the mice.impute.norm function. For the
+example to apply this method in R code 3.8 we use the same dataset as
+above with missing values in the Tampa scale variable and the pain
+variable as the only predictor variable for these missing values.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataset <-}\StringTok{ }\KeywordTok{read.spss}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Backpain 50 missing.sav"}\NormalTok{, }\DataTypeTok{to.data.frame=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## re-encoding from UTF-8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataset <-}\StringTok{ }\NormalTok{dataset[, }\KeywordTok{c}\NormalTok{(}\StringTok{"Pain"}\NormalTok{, }\StringTok{"Tampascale"}\NormalTok{)]}
+
+\NormalTok{imp_b <-}\StringTok{ }\KeywordTok{mice}\NormalTok{(dataset, }\DataTypeTok{method=}\StringTok{"norm"}\NormalTok{, }\DataTypeTok{m=}\DecValTok{1}\NormalTok{, }\DataTypeTok{maxit=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  iter imp variable
+##   1   1  Tampascale
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{imp_b}\OperatorTok{$}\NormalTok{imp}\OperatorTok{$}\NormalTok{Tampascale }\CommentTok{# Extract the imputed values}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           1
+## 2  41.04984
+## 6  46.88998
+## 9  35.70485
+## 14 38.92294
+## 21 38.94581
+## 25 37.06709
+## 27 46.27198
+## 31 46.05307
+## 35 40.21461
+## 37 38.30080
+## 44 34.29511
+## 49 35.23732
+## 50 38.55449
+\end{verbatim}
+
+The completed dataset can be extracted by using the complete function in
+the mice package.
+
+\section{Predictive Mean Matching}\label{predictive-mean-matching}
+
+Predictive mean matching (PMM) is an imputation method that predicts
+values and subsequently selects observed values to be used to replace
+the missing values. It is the default imputation procedure in the mice
+package to impute missing data in continuous variables (Rubin, 1987,
+p.~168). It is applied in combination with stochastic regression
+imputation.
+
+\subsection{A data example of Predictive Mean
+Matching}\label{a-data-example-of-predictive-mean-matching}
+
+We use the LBP dataset and the Tampa scale and Pain variables, with
+missing data in the Tampa scale variable and complete data in the Pain
+variable. We will show how PMM works for the first missing value in the
+Tampa scale variable. The first missing value is located in ID 2,
+i.e.~in the second row and is marked white (R code 3.9)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataset <-}\StringTok{ }\KeywordTok{read.spss}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Backpain 50 missing.sav"}\NormalTok{, }\DataTypeTok{to.data.frame=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## re-encoding from UTF-8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataset <-}\StringTok{ }\NormalTok{dataset[, }\KeywordTok{c}\NormalTok{(}\StringTok{"ID"}\NormalTok{, }\StringTok{"Pain"}\NormalTok{, }\StringTok{"Tampascale"}\NormalTok{)]}
+\KeywordTok{head}\NormalTok{(dataset, }\DecValTok{15}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    ID Pain Tampascale
+## 1   1    9         45
+## 2   2    6         NA
+## 3   3    1         36
+## 4   4    5         38
+## 5   5    6         44
+## 6   6    7         NA
+## 7   7    8         43
+## 8   8    6         43
+## 9   9    2         NA
+## 10 10    4         36
+## 11 11    5         38
+## 12 12    9         47
+## 13 13    0         32
+## 14 14    6         NA
+## 15 15    3         34
+\end{verbatim}
+
+At the first step a simple linear regression analysis is applied in the
+complete cases (i.e.~complete case analysis), with the Tampa scale
+variable as the outcome and Pain as the predictor variable. By using
+this model, all observed Tampa scale values are replaced by the
+predicted values using the intercept, the regression coefficient for
+Pain and the Pain values of the observed patients. This is the same as
+applying simple regression imputation, where the predicted values are
+taken from the regression line. We call these values the
+Predictedobserved values. Subsequently, all missing values of the Tampa
+scale variable are replaced by values that are generated by using
+Bayesian stochastic regression imputation and these values are called
+the Predictedmissing values. These values are predicted according to the
+same steps as for simple linear regression, but now Bayesian versions of
+the regression coefficients for Pain are used to generate the predicted
+values of the Tampa scale variable. The Predictedobserved and the
+Predictedmissing values for the Tampa scale variable are shown as the
+Tampascale\_Pred variable in R code 3.10. R code 3.10 shows the original
+dataset with the Pain and Tampa scale variables, the Tampascale\_Pred
+variable and a group variable, to indicate if a Tampa scale value is
+missing (Group=1) or not (Group=0). At the next step the first value
+that is predicted for the first missing value of ID 2 (the value
+40.55550 under Tampascale\_Pred) is subtracted from all observed
+predicted values. These differences can be found under the column that
+is called d. In this column the differences between the
+Predictedobserved values and the value 40.55550 (first predicted value
+for the first missing value of the Tampa scale variable) can be found,
+i.e.~44.69636 - 40.55550 = 4.14086. This d value is used to select the
+donors that contain the smallest difference between the
+Predictedobserved and the Predictedmissing values for the Tampa scale
+and that will be used to replace the missing values. In our example the
+smallest difference is 0.09006. Finally, one of these donors is selected
+randomly and the observed Tampa scale value that is related to that
+donor is used to replace the first missing value in the Tampa scale
+variable. In our example the first missing value in the Tampascale
+variable, when we would use 3 donors to randomly draw from, would get
+the value 42, 37 or 40. This procedure is repeated for every missing
+value.
+
+To summarize, the following steps are followed by PMM to replace missing
+values:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Predicted values of observed Tampa scale values are estimated by using
+  the Pain variable as predictor and the regression coefficients
+  estimated in the observed data (complete case analysis). In other
+  words, only the observed data is used to generate predicted Tampa
+  scale values. These values are the Predictedobserved values. This
+  regression model can be described by the red regression line in Figure
+  3.21.
+\item
+  From the regression coefficients under 1, draws are taken from the
+  Bayesian posterior distribution to get Bayesian estimates and these
+  are used to generate predicted values for the missing Tampa scale
+  values by using the Pain variable as predictor. These are the
+  Predictedmissing values and can be derived from the blue regression
+  line in Figure 3.21.
+\item
+  From all Predictedobserved values, each Predictedmissing value is
+  subtracted, i.e.~starting with the first Predictedmissing value to
+  replace the first missing value. The first value that is subtracted is
+  the value 40.5555, which is marked white in R code 3.9 above. That
+  subtraction results in the values under the column named d.
+\item
+  These differences in the d column are sorted from low to high.
+\item
+  The three cases with the lowest values are than matched to the
+  observed values of the Tampa scale variable. These are recognizable by
+  the numbers 1, 2 and 3 in the R code 3.10 above. To prevent duplicate
+  values, a small value is added to these values (not shown). Than from
+  these cases a random selected value of the observed Tampa scale
+  variable is drawn, i.e.~from the values 42, 37 and 40 when 3 donors
+  are used.
+\item
+  Finally, one value of these observed values is randomly chosen and
+  used to replace the missing value in the Tampa scale variable.
+\item
+  This process is repeated for each case with a missing value in the
+  Tampa scale variable.
+\end{enumerate}
+
+Note that matching of donors is done using the predicted values (of the
+observed and missing values) of the variable with missing data, and not
+on the observed values. The observed values are used to fill in the
+missing values.
 
 \chapter{Multiple Imputation}\label{multiple-imputation}
 
@@ -3663,7 +4625,7 @@ convergence plot for only the Tampascale variable just use:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Book_MI_files/figure-latex/unnamed-chunk-71-1.pdf}
+\includegraphics{Book_MI_files/figure-latex/unnamed-chunk-80-1.pdf}
 
 \section{Imputation diagnostics in R}\label{imputation-diagnostics-in-r}
 
@@ -3683,9 +4645,505 @@ can conclude the imputed values are correct.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Book_MI_files/figure-latex/unnamed-chunk-72-1.pdf}
+\includegraphics{Book_MI_files/figure-latex/unnamed-chunk-81-1.pdf}
+
+\section{Multiple imputation in SPSS}\label{multiple-imputation-in-spss}
+
+The multiple imputation procedure in SPSS is based on the MICE algorithm
+that was developed in R. It is therefore no surprise that the settings
+of the mice function in R, are almost all covered by the options in
+SPSS. In SPSS these settings are presented in Window menu's. Before you
+start the MI procedure it is important to set the measurement level of
+the variables with missing data in the Variable View window of your
+data. They are important for the regression model that is used to
+estimate the missing values in that variable. For example, if you define
+a variable as scale, then linear regression models are used, for
+categorical variables, logistic regression models are used.
+
+\subsection{The setting for multiple imputation in
+SPSS}\label{the-setting-for-multiple-imputation-in-spss}
+
+Before we start the multiple imputation procedure, we set the starting
+point of the random number generator in SPSS at the fixed value of 950
+(in R we use the seed for this). In this way we are able to reproduce
+our results. This fixing of starting values for the random number
+generator is in general not advisable, we use it here for educational
+purposes.
+
+We set the random number generator in SPSS via
+
+\begin{quote}
+Transform -\textgreater{} Random Number Generators -\textgreater{} Set
+Starting point -\textgreater{} Fixed Value
+\end{quote}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig4.5} 
+
+}
+
+\caption{Set the Random Number Generator }\label{fig:fig4-5}
+\end{figure}
+
+The multiple imputation procedure in SPSS can be started via
+
+\begin{quote}
+Analyze -\textgreater{} Multiple Imputation -\textgreater{} Impute
+Missing Data Values.
+\end{quote}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig4.6} 
+
+}
+
+\caption{The variables Tab}\label{fig:fig4-6}
+\end{figure}
+
+In the Variables tab the variables that are part of the imputation model
+have to be transported to the window ``Variables in Model''. The
+variables are imputed sequentially in the order in which they are listed
+in the variables list. These variables are in our example the Pain,
+Tampascale, Disability and Radiation variables. Further, the number of
+imputed datasets can be defined as well as the dataset to which the
+imputed data values are saved. We choose for 5 imputations and call the
+dataset in which the imputed values will be stored ``LBP\_Imp''. In the
+Methods Tab the imputation method is defined.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig4.7} 
+
+}
+
+\caption{The Methods Tab}\label{fig:fig4-7}
+\end{figure}
+
+In the Method tab we choose for a ``Custom'' under Imputation Method and
+for Fully conditional specification. The Fully Conditional Specification
+(FCS) procedure is the Bayesian sequential regression imputation method
+as explained in \emph{section 4.3 and 4.4}. Under Model type for scale
+(continuous) variables we choose for Predictive Mean Matching. This
+procedure was explained in \emph{section 3.7}. In the MICE package PMM
+is the default procedure for continuous variables with missing data. In
+SPSS the default is the linear regression procedure. In the Constraints
+Tab the options per variable are defined.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig4.8} 
+
+}
+
+\caption{The Constraints Tab}\label{fig:fig4-8}
+\end{figure}
+
+In the Constraints tab the role of a variable during the imputation
+process is defined and it is possible to restrict the range of imputed
+values of a scale variable. In addition, you can restrict the analysis
+to variables with less than a maximum percentage of missing values. When
+the PMM method is selected in the Method Tab, the Constraints tab can be
+skipped. The Constraints tab can be useful when the Linear Regression
+method is selected in the Method Tab \emph{(see Appendix XX)}. Finally,
+in the Output Tab the generated output can be defined.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig4.9} 
+
+}
+
+\caption{The Output Tab}\label{fig:fig4-9}
+\end{figure}
+
+Display the Imputation model and the Descriptive statistics for
+variables with imputed values options can be selected for information
+about the imputation. When the FCS imputation method is used, you can
+request a dataset that contains iteration history data for FCS
+imputation. In our example this iteration history information is stored
+in the dataset ``Iter\_Backpain''. The dataset contains means and
+standard deviations by iteration for each scale variable for which
+values are imputed. You can plot the data to help assess model
+convergence \emph{paragraph 4.9}.
+
+\subsection{The output for Multiple imputation in
+SPSS}\label{the-output-for-multiple-imputation-in-spss}
+
+After the multiple imputation procedure is done, a new data window opens
+that contains the imputed datasets. These multiple imputed datasets are
+stacked on top of each other. In this file the imputed values are marked
+yellow. There is also an extra variable added to the file which is
+called \texttt{Imputation\_} (Figure \ref{fig:fig4-10}). The imputed
+values can be marked and unmarked via \textgreater{} View
+-\textgreater{} Mark Imputed data
+
+If you switch this possibility on, SPSS automatically recognizes the
+dataset as a multiple imputed dataset. If you switch this possibility
+off, SPSS treats the dataset as one dataset. This marking and unmarking
+can also be done in the Data view window via the button with yellow and
+white squares on the right site above (Figure \ref{fig:fig4-11}). If you
+click the button, a selection box appears with ``Original data''
+selected,where you can easily move to the different imputed datasets.
+The variable \texttt{Imputation\_} is a variable with a nominal measure.
+You can compare the use of this variable with the Split File option in
+SPSS where all analyses are done separately for the categories of the
+variable use to split the analyses. The difference is that with the
+\texttt{Imputation\_} variable you also obtain pooled estimates for the
+statistical analyses.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig4.10} 
+
+}
+
+\caption{Example of Multiple Imputed dataset}\label{fig:fig4-10}
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig4.11} 
+
+}
+
+\caption{Button and selection box to mark imputed values}\label{fig:fig4-11}
+\end{figure}
+
+The iteration history is stored in the Iter\_Backpain dataset as we
+defined in the Output window. In this dataset the means and standard
+deviations of the imputed values at each iteration are stored. These
+values can be used to construct Convergence plots. More about making
+convergence plots will be discussed in the next paragraph.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig4.12} 
+
+}
+
+\caption{The iteration history data}\label{fig:fig4-12}
+\end{figure}
+
+Based on our settings, SPSS produces the following results in the output
+window. In the Imputation Specifications table, information is provided
+on the imputation method used, the number of imputations, the model used
+for the scale variables, if interactions were included in the imputation
+models, the setting for the maximum percentage of missing values and the
+setting for the maximum number of parameters in the imputation model
+(Figure \ref{fig:tab4-4}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/tab4.4} 
+
+}
+
+\caption{Imputation Specifications table}\label{fig:tab4-4}
+\end{figure}
+
+A second table, called Imputation Results, is presented with information
+about the imputation method, the number of fully conditional
+specification methods, the variables that are imputed and not imputed
+and the imputation sequence(Figure \ref{fig:tab4-5}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/tab4.5} 
+
+}
+
+\caption{Imputation Results}\label{fig:tab4-5}
+\end{figure}
+
+The Imputation Models table presents information about the imputation
+models used for the variables with missing data (Figure
+\ref{fig:tab4-6}). Information is provided about the method of
+imputation, under the type column, the effect estimates used to impute
+the missing values, the number of missing and imputed values. For
+example for the Tampascale variable 13 values were missing and m=5 times
+13 is 65 values were imputed.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/tab4.6} 
+
+}
+
+\caption{Imputation Models}\label{fig:tab4-6}
+\end{figure}
+
+The Descriptive statistics displaye the descriptive information of the
+original, imputed and completed data of the Tampascale and the
+Disability variable. In this way you can compare the completed data
+after MI with the original data.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/tab4.7} 
+
+}
+
+\caption{Descriptive statistics}\label{fig:tab4-7}
+\end{figure}\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/tab4.8} 
+
+}
+
+\caption{Descriptive statistics}\label{fig:tab4-7}
+\end{figure}
+
+\subsection{Checking Convergence after Multiple imputation in
+SPSS}\label{checking-convergence-after-multiple-imputation-in-spss}
+
+The dataset Iter\_Backpain in the previous paragraph contains the means
+and standard deviations of the imputed values at each iteration and
+imputation round. This information is similar as the information in
+\texttt{imp\$chainMean} in R. This dataset can be used to generate
+convergence plots, to check if the imputed values have the expected
+variation between the iterations.The iteration can be checked for the
+means and standard deviations seperately. In order to obtain seperate
+plots for htese summary statistics, the split file option in SPSS can be
+activated.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig4.17} 
+
+}
+
+\caption{Split file}\label{fig:fig4-17}
+\end{figure}
+
+After activation of the split file option, the Graph menu in SPSS can be
+used to make the plots.
+
+\begin{quote}
+Graph -\textgreater{} Char Builder.
+\end{quote}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig4.13} 
+
+}
+
+\caption{Graph menu}\label{fig:fig4-13}
+\end{figure}
+
+Two windows will open that can be used to build a chart:
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig4.14} 
+
+}
+
+\caption{Chart Builder}\label{fig:fig4-14}
+\end{figure}
+
+On the x-axis the put the \texttt{iteration\ number} variable and on the
+y-axis the variable for which we want to display the iteration history.
+The \texttt{Imputation\ Number} variable is dragged to the
+\texttt{set\ color} top-right.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig4.15} 
+
+}
+
+\caption{Chart Builder}\label{fig:fig4-15}
+\end{figure}
+
+As a result two plots appear with the iteation history for each
+imputation run.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig4.18} 
+
+}
+
+\caption{Convergence plots}\label{fig:fig4-18}
+\end{figure}\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig4.19} 
+
+}
+
+\caption{Convergence plots}\label{fig:fig4-18}
+\end{figure}
+
+\section{Number of Imputed datasets and
+iterations}\label{number-of-imputed-datasets-and-iterations}
+
+Researchers assume that the number of imputations needed to generate
+valid imputations has to be set at 3-5 imputations. This idea was based
+on the work of Rubin (1987). He showed that the precision of a pooled
+parameter becomes lower when a finite number of multiply imputed
+datasets is used compared to an infinite number (finite means a limited
+number of imputed datasets, like 5 imputed datasets and infinite means
+unlimited and can be recognized by the mathematical symbol ∞). The
+precision of a parameter is often represented by the sampling variance
+(or standard error (SE) estimate; the sampling variance is equal to SE2)
+of for example a regression coefficient. In case of multiple imputed
+datasets precision is determined by the pooled sampling variance or
+pooled SE. A measure to value the amount of precision (i.e.~between the
+pooled sampling variance estimated in a finite compared to an infinite
+number of imputed datasets) is the relative efficiency (RE). The RE will
+be low when the number of imputations is high (and the precision becomes
+larger) and is defined as:
+
+Formula 4.1
+
+RE= 1/(1+ FMI/m)
+
+FMI is the fraction of missing information and m is the number of
+imputed datasets. Where FMI is roughly equal to the percentage of
+missing data in the simplest case of one variable with missing data.
+When there are more variables in the imputation model, and these
+variables are correlated with the variables with missing data the FMI
+becomes lower (see paragraph 5.2 for more information about the FMI).
+
+The relationship between the RE and the pooled sampling variance TPooled
+(or 〖SE〗\_Pooled\^{}2) can also be written as (van Buuren 2012):
+
+Formula 4.2:
+
+T\_(Pooled,finite)=RE×T\_(Pooled,infinite)
+
+which is equal to,
+
+Formula 4.3:
+
+〖SE〗\emph{(Pooled,finite)\^{}2=RE×〖SE〗}(Pooled,infinite)\^{}2
+
+Formula's 4.2 and 4.3 can be interpreted as follows: if the RE is 0.93
+or 93\% (when for example FMI=0.4 and m=5), formula 4.2 becomes:
+
+T\_(Pooled,finite)=0.93×T\_(Pooled,infinite),
+
+This is the same as saying that the SE when 5 imputed datasets are used
+is √0.93=0.96 times as large as the SE when an infinite number of
+imputed datasets will be used (the SE is the squared sampling variance,
+taking the square root of the sampling variance gives the SE). Because
+the RE is divided by 1, this is the same as saying that the SE when 5
+imputed datasets are used is 1/√0.93=1.04 times larger (or 4\%) as the
+SE when an infinite number of imputed datasets will be used. Graham
+(2007) also studied the loss in power when infinite numbers of imputed
+datasets are used. They recommended that at least 20 imputed datasets
+are needed to restrict the loss of power when testing a relationship
+between variables. Bodner (2008) proposed the following guidelines after
+a simulation study using different values for the FMI to determine the
+number of imputed datasets. For FMI´s of 0.05, 0.1, 0.2, 0.3, 0.5 the
+following number of imputed dataets are needed: ≥3, 6, 12, 24, 59
+respectively. Following the study of Bodner (2008), White et al. (2010),
+proposed a rule of thumb, based on the idea that the FMI is frequently
+lower than the percentage of missing cases. Their rule of thumb states
+that the number of imputed datasets should be at least equal to the
+percentage of missing cases. This means that when 10\% is missing, 10
+datasets should be generated, with 20\% missing cases, 20 datasets, etc.
+
+Iterations Van Buuren (2012) states that the number of iterations may
+depend on among others the correlation between variables and the
+percentage of missing data in variables. He proposed that a number of
+5-20 iterations is enough to reach convergence. This number may be
+adjusted when the percentage of missing data is high. Nowadays computers
+are fast so that a higher number of iterations can easily be used.
+
+\chapter{Data analysis after Multiple
+Imputation}\label{data-analysis-after-multiple-imputation}
+
+In the previous Chapter we discussed multiple imputation (MI) and how
+imputations in multiple datasets are generated. After the imputations
+have been generated, the data analysis and pooling steps follow. This
+chapter explains these steps. In the data analysis step, the statistical
+model is applied in the imputed datasets. In the pooling step, the
+analysis results from the analysis step, are summarized into one final
+result. The biggest challenge is to summarize the statistical results
+into one estimate with the related pooled standard errors, confidence
+intervals and a pooled p-value. Rubin (1987) provided rules which can be
+applied to many different statistical tests. Rubin´s rules are not
+available for all statistical procedures in SPSS. Many test procedures
+that do not have pooling results not available in SPSS are available in
+R. We will start this Chapter with an example of applying t-tests in
+multiple imputed datasets. With this procedure we can explain the use of
+Rubin´s Rules (RR), and the derivation of the degrees of freedom for
+hypothesis testing, which can become complex. We will further discuss
+missing data measures that are derived from RR, such as the fraction of
+missing information (FMI), the relative increase in variance due to
+missing data (Relative Increase Variance) and Relative Efficiency. We
+will further show other pooling procedures for frequently used
+statistical techniques and how to apply them in multiply imputed
+datasets. The availability of each method in SPSS and R, are discussed
+and their application is presented. Specific pooling methods that are
+not available in SPSS are discussed by using examples in R.
+
+\section{Rubin´s Rules -- A first
+example}\label{rubins-rules-a-first-example}
+
+Rubin proposed methods to combine statistical test results into one
+(pooled) summary estimate. These so-called Rubin´s Rules (RR) are
+designed to pool parameter estimates, such as means differences and
+regression coefficients, standard errors and to derive confidence
+intervals and p-values. T-tests are frequently used and suitable to
+discuss all aspects of using RR, from pooling parameter estimates to
+deriving degrees of freedom and p-values. We will first illustrate the
+use of RR with a t-test example in 3 generated multiple imputed datasets
+in SPSS. In this example we will pool the mean differences and standard
+errors. The derivation of the test statistic t for hypothesis testing,
+degrees of freedom and p-value may differ between the statistical method
+used. These derivations are explained but also discussed in more detail.
+As an illustration, we use de LBP study again, and test the Tampascale
+mean difference (dependent variable) between backpain patients with and
+without radiation in the leg (dependent variable). The output of the
+t-test in the multiple imputed data can be found in Table 5.1.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/table5.1} 
+
+}
+
+\caption{T-test for difference in mean Tampascale values between patients with and without Radiation in the leg applied in multiple imputed datasets.}(\#fig:fig5_1)
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/table5.1b} 
+
+}
+
+\caption{T-test for difference in mean Tampascale values between patients with and without Radiation in the leg applied in multiple imputed datasets.}(\#fig:fig5_1b)
+\end{figure}
+
+In Table 5.1 the relationship in the original dataset is presented in
+the row that is indicated by Imputation\_ number 0 as well as in each
+imputed dataset which are indicated by Imputation\_ number 1 to 3. In
+the last row which is indicated as ``Pooled'', the summary estimates of
+the parameters are presented. With parameters we mean the parameters of
+interest which are here the mean differences and standard errors. We
+will explain now by using RR how these pooled mean differences and
+standard errors are estimated.
+
+\subsection{Pooling Parameters}\label{pooling-parameters}
+
+When RR are used, it is assumed that the repeated parameter estimates in
+each imputed dataset (e.g.~mean differences), are normally distributed.
+This cannot be assumed for all statistical test statistics,
+e.g.~correlation coefficients. For these test statistics,
+transformations have to be performed before RR can be applied to assume
+normality (will be discussed below). To illustrate the use of RR, we
+start with the T-test example of Table 5.1
+
+To calculate the pooled parameter estimate the following formula is
+used:
+
+\[\bar{x}\]
 
 \bibliography{book.bib,packages.bib}
-
 
 \end{document}
