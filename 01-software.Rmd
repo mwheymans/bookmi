@@ -410,8 +410,10 @@ There are several possibilities to start the help facilities in R and to get mor
 
 You can just type help or use the question mark as follows:
 
+```{r ,eval=FALSE} 
 help(matrix)
 ?matrix
+```
 
 In both ways the help tutorial for the matrix function will be activated and appear in your web browser or in help tab in the right corner below when you use R studio.
 
@@ -429,16 +431,8 @@ knitr::include_graphics("images/fig1.11.png")
 
 It is a good idea to keep your R files at the same place when you are doing data analysis for some kind of project. If you do not use a separate directory, R will use a default directory, that will mostly be in Windows in the documents folder. All files that you have to use during your R session are assumed to be in that directory. Further, all files that you save during your session will be in that directory. To locate your working directory, you can type in the Console window:
 
-```{r, echo = FALSE, eval=FALSE} 
+```{r, eval=FALSE} 
 getwd()
-```
-
-If you want to change your working directory to for example C:\Users\MWHeymans\Documents\R (Note that the path in R uses forward slashes and the path in Windows backward slashes!), you can type: \code{setwd("C:/Users/MWHeyamns/Documents/R")}
-\code{getwd()}
-
-```{r, echo = FALSE, eval=FALSE} 
-#setwd("C:/Users/MWHeymans/Documents/R")
-#getwd()
 ```
 
 In Rstudio there is another way to get information about the current working directory and another way to change the working directory. Go in RStudio to the window on the right site below and go to the Files tab and click on the right site of the screen on the three dots. Than a window will open and you can browse to your preferred folder. Then choose for More in the Files tab and then select “Set As Working Directory” (Figure \@ref(fig:fig12)). Now you have set your preferred working directory. You can check if your directory is set correctly by choosing  “Go To Working Directory”.
@@ -663,11 +657,11 @@ The mice package will be automatically downloaded from the CRAN website.
 
 Another way is to use the window on the right site below and go to the Packages tab. When you click “Install” a new window is opened. Than you can type “mice” on the blank line under “Packages (separate multiple with space or comma):” (Figure 1.25a and b).   
 
-```{r fig25a, echo = FALSE, fig.cap="Install packages Window in RStudio to install packages from the CRAN website", out.width='90%', fig.align='center'}
+```{r fig25, echo = FALSE, fig.cap="Install packages Window in RStudio to install packages from the CRAN website", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig1.25a.png")
 ```
 
-```{r fig25b, echo = FALSE, fig.cap="Enlarged Install packages Window in RStudio to install packages from the CRAN website", out.width='90%', fig.align='center'}
+```{r fig26, echo = FALSE, fig.cap="Enlarged Install packages Window in RStudio to install packages from the CRAN website", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig1.25b.png")
 ```
 
@@ -675,11 +669,11 @@ After you have clicked on “Install” the package will be downloaded from the 
 
 Another way is to go to the CRAN website and download the package as a zip file in a directory on your computer, for example your working directory or in your library. Again use the window on the right site below and go to the Packages tab. When you choose Install a new window is opened. Now under “Install from:” choose for “Package Archive File (.zip; .tar.gz)”  (Figure 1.26a and 1.26b).  Than you can browse to the zip file and install the package.
 
-```{r fig26a, echo = FALSE, fig.cap="Install packages Window in RStudio to install packages from zip files", out.width='90%', fig.align='center'}
+```{r fig27, echo = FALSE, fig.cap="Install packages Window in RStudio to install packages from zip files", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig1.26a.png")
 ```
 
-```{r fig26b, echo = FALSE, fig.cap="Enlarged Install packages Window in RStudio to install packages from zip files", out.width='90%', fig.align='center'}
+```{r fig28, echo = FALSE, fig.cap="Enlarged Install packages Window in RStudio to install packages from zip files", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig1.26b.png")
 ```
 
