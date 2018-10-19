@@ -2,7 +2,6 @@
 
 This Chapter is a follow-up on the previous Chapters 4 and 5 about data analysis with Multiple Imputation. In this Chapter, we will deal with some specific topics when you perform regression modeling in multiple imputed datasets. 
 
-
 ##Imputing the Outcome variable
 
 In previous literature that has been discussion about how to deal with the outcome variable (i.e. dependent variable) as part of the imputation procedure. For a full overview of the arguments you can review the original literature. There are roughly two situations when the outcome can be considered. Below we will briefly summarize the situations and provide the concluding advice from literature. 
@@ -49,10 +48,11 @@ with m and ω ̅  as above,  j = 1 …, m  the index of  each separate imputed d
 											Formula 6.3
 P=Pra[F_(k,v)>W_chi]
 
-The application of the function to pool Chi-square values can be found in the R code below where the function `miPoolChi` is applied. Input values in the function are the Chi-square values of each imputed dataset that are shown in Table 6.1 and the degrees of freedom of the Chi-square test, which is 2 here.
+The application of the function to pool Chi-square values can be found in the R code below where the function `micombine.chisquare` is applied. Input values in the function are the Chi-square values of each imputed dataset that are shown in Table 6.1 and the degrees of freedom of the Chi-square test, which is 2 here.
 
 ```{r}
-miPoolChi(c(1.815,
+library(miceadds)
+micombine.chisquare(c(1.815,
             1.303,
             2.826,
             1.759,
