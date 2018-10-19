@@ -16,12 +16,12 @@ Advice: include the outcome variable in the imputation model. I In other words, 
 
 ##Logistic regression with a categorical covariate in SPSS
 
-For categorical covariates, SPSS does not generate a pooled p-value for the overall Wald test. This is equal to not presenting a pooled Chi-square value in SPSS because the overall Wald value is a Chi-square value that represents the relationship between variables with > 2 categories and the outcome. An example is shown in Table 6.1a and 6.1b to show that the pooled Chi-square value for the Wald test is presented for the logistic and Cox regression models in SPSS respectively. As an example, we use a categorical version of the Tampascale variable with the categories 0 = low fear of movement, 1 = middle fear of movement and 2 is a high fear of movement. This variable contains missing data and was imputed with MI. We used 5 imputed datasets. The output Tables for the analyses can be found in Figure \@ref(fig:fig6-1).
+For categorical covariates, SPSS does not generate a pooled p-value for the overall Wald test. This is equal to not presenting a pooled Chi-square value in SPSS because the overall Wald value is a Chi-square value that represents the relationship between variables with > 2 categories and the outcome. An example is shown in Table 6.1a and 6.1b to show that the pooled Chi-square value for the Wald test is presented for the logistic and Cox regression models in SPSS respectively. As an example, we use a categorical version of the Tampascale variable with the categories 0 = low fear of movement, 1 = middle fear of movement and 2 is a high fear of movement. This variable contains missing data and was imputed with MI. We used 5 imputed datasets. The output Tables for the analyses can be found in Figure \@ref(fig:tab6-1a).
 
 
-```{r fig6-1, echo = FALSE, fig.cap="Logistic and Cox Regresion with an independent categorical variable.", out.width='90%', fig.align='center'}
-knitr::include_graphics("images/fig6.1.png")
-knitr::include_graphics("images/fig6.1b.png")
+```{r tab6-1a, echo = FALSE, fig.cap="Logistic and Cox Regresion with an independent categorical variable.", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/tab6.1a.png")
+knitr::include_graphics("images/tab6.1b.png")
 ```
 
 The information of the overall Wald test can normally be found in the output table in the row above the regression coefficient estimates of the separate categories of the categorical variable. In SPSS, this row only provides information of the overall Wald value, the degrees of freedom and the level of significance (abbreviated as Sig. which is the p-value). In the output tables you see that besides the regression estimates for each different category, no pooled estimates are provided for the overall Wald test (this whole row is missing). 
@@ -210,33 +210,29 @@ The imputation of weight should take the interaction between weight and gender i
 
 ###Imputation of interaction terms in SPSS
 
-To impute the missing data in the Bodyweight variable in the example, the fact that the relation between bodyweight and blood pressure depends on gender needs to be taken into account in the imputation. This can be done by using the Split file procedure in SPSS. The example dataset contains information about the variables that are presented in \@ref(fig:fig6-2).
+To impute the missing data in the Bodyweight variable in the example, the fact that the relation between bodyweight and blood pressure depends on gender needs to be taken into account in the imputation. This can be done by using the Split file procedure in SPSS. The example dataset contains information about the variables that are presented in \@ref(fig:fig6-1).
 
 
-```{r fig6-2, echo = FALSE, fig.cap="Bodyweight dataset with missing values in the Bodyweight variable.", out.width='90%', fig.align='center'}
-knitr::include_graphics("images/fig6.2.png")
+```{r fig6-1, echo = FALSE, fig.cap="Bodyweight dataset with missing values in the Bodyweight variable.", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig6.1.png")
 ```
 
 Compare Groups and move the Gender variable to the window: Group based on, then click OK. In the right corner below it you see the information “Split by Gender”, which means that for the next analyses procedures the procedures will be done separately for males and females.
 
-```{r fig6-3, echo = FALSE, fig.cap="The Split File procedure in SPSS.", out.width='90%', fig.align='center'}
-knitr::include_graphics("images/fig6.3.png")
+```{r fig6-2, echo = FALSE, fig.cap="The Split File procedure in SPSS.", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig6.2.png")
 ```
 
 Perform MI and use all variables in the imputation model, except for the Gender variable. Because the Gender variable was used as a split variable it cannot be included in the imputation model. MI will now be separately performed for Males and Females. Set M=20, use Predictive Mean Matching and 50 iterations and store the imputed datasets in the file Imp_Bodyweight.  In the SPSS output file, in the Imputation Results and the Imputation Models tables you can check that the imputation process was performed for males and females separately.
 
 
-```{r fig6-4, echo = FALSE, fig.cap="Imputation models, splitted for males and Females", out.width='90%', fig.align='center'}
+```{r fig6-3, echo = FALSE, fig.cap="Imputation models, splitted for males and Females", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig6.3.png")
 knitr::include_graphics("images/fig6.4.png")
-knitr::include_graphics("images/fig6.5.png")
 
 ```
 
 Compute the Interaction term of Bodyweight times Gender in the dataset that contains the imputed values.Now turn on the split on the variable Imputation_. That will automatically turn off the split on the Gender variable in the imputed datasets (in the Data View window of the imputed datasets in the corner on the right below you see the statement “Split by Imputation_ Gender”. To include the variable Gender in the model we first have to unsplit the data by Gender). 
-
-```{r fig6-5, echo = FALSE, fig.cap="The Split File procedure is used to split on the variable Imputation_.", out.width='90%', fig.align='center'}
-knitr::include_graphics("images/fig6.7.png")
-```
 
 Then the analysis can be performed as planned with th interaction term as one of the predictors. 
 
@@ -274,6 +270,12 @@ In table 6.6 the procedures to impute missing data and taking into account inter
 
 
 Table 6.6. Overview of similarities and dissimilarities between the SMC-FCS and Split group imputation methods.
+
+```{r tab6-6, echo = FALSE, fig.cap="Overview of similarities and dissimilarities between the SMC-FCS and Split group imputation methods.", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/tab6.6.png")
+```
+
+
 SMC-FCS	Split group Imputation
 
 Available for linear, logistic and Cox models 	
