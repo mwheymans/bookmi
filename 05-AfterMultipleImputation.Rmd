@@ -93,7 +93,7 @@ Wald_{Pooled} =\frac{(\overline{\theta} - {\theta_0})^2}{V_T}
   (\#eq:wald-pooled)
 \end{equation}
 
-where $\overline{\theta}$ and $V_T$ is the total variance and is equal to the $SE_P$ or the pooled standard error that was derived in the previous paragraph), and θ_0  is the parameter value under the null hypothesis (which is mostly 0). The univariate Wald test can be used to test all kind of univariate parameters of interest, mean differences and univariate regression coefficients in linear and logistic regression models. In our example, we use the univariate Wald test to test the pooled mean difference for significance.  The univariate Wald test in our example is calculated using the values from (Figure \@ref(fig:tab5-1a)):
+where $\overline{\theta}$ and $V_T$ is the total variance and is equal to the $SE_P$ or the pooled standard error that was derived in the previous paragraph), and $\theta_0$  is the parameter value under the null hypothesis (which is mostly 0). The univariate Wald test can be used to test all kind of univariate parameters of interest, mean differences and univariate regression coefficients in linear and logistic regression models. In our example, we use the univariate Wald test to test the pooled mean difference for significance.  The univariate Wald test in our example is calculated using the values from (Figure \@ref(fig:tab5-1a)):
 
 $$Wald_{Pooled} =\frac{(\overline{\theta} - {\theta_0})^2}{V_T}=\frac{1.971}{\sqrt{0.849084}}=2.139$$
 The univariate pooled Wald value follows a t-distribution. This distribution is used to derive the p-value. The value for t depends on the degrees of freedom, according to:
