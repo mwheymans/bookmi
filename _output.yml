@@ -10,7 +10,7 @@ bookdown::pdf_book:
   template: null
   includes:
     in_header: preamble.tex
-  latex_engine: xelatex
+    latex_engine: xelatex
   citation_package: natbib
   keep_tex: yes
 bookdown::epub_book: default

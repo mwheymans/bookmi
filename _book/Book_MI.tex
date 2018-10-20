@@ -112,7 +112,7 @@
 
 \title{Applied Missing data analysis with SPSS and R(Studio)}
 \author{Martijn Heymans and Iris Eekhout}
-\date{2018-10-19}
+\date{2018-10-20}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -258,1473 +258,6 @@ in RStudio. Example:
 \end{verbatim}
 
 \chapter{Software applications}\label{software-applications}
-
-Statistical software programs can help us to analyze our data. SPSS and
-R are such programs. Although SPSS and R are among the most popular
-programs to do statistical data analyses nowadays, they do not have much
-in common. One of the greatest differences is that SPSS works with menu
-options that make windows appear and you can click buttons to select
-options, whereas R works with lines of code that you have to type in to
-run analyses. This makes SPSS more user-friendly than R for applied
-researchers. In SPSS you are overloaded with output tables, and in R you
-only get output on demand. In this Chapter we will explore the different
-possibilities of the SPSS (IBM 2016) and the R software language
-(Matloff, 2011, Dalgaard, 2008). We will run R via RStudio, the
-integrated development environment (IDE) for R. RStudio includes a wide
-range of productivity enhancing features, which makes it easier to work
-with than with the R console on its own.
-
-\section{SPSS, Data and Variable View
-windows}\label{spss-data-and-variable-view-windows}
-
-In this manual we work with SPSS version 24 (IBM, 2016). When you start
-SPSS Version 24 a start-up window appears. In this window, you can
-directly open the files that were active during your previous use of
-SPSS. These files can be found and easily opened in the ``Recent files''
-window (Figure \ref{fig:fig1}). If you do not want to see this window
-the next time that you open SPSS, select ``Don't show this dialog in the
-future''.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.1} 
-
-}
-
-\caption{First window after you have started SPSS}\label{fig:fig1}
-\end{figure}
-
-When you click on Close on the right side below, the window will close
-and you will see an empty Data View window. Now you are in the SPSS Data
-Editor window. This window is always open when you start SPSS. The name
-``SPSS Data Editor'' is also visible at the top of the screen and is
-called ``IBM SPSS Statistics Data Editor'' (Figure \ref{fig:fig2}).
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.2} 
-
-}
-
-\caption{Data View window in SPSS}\label{fig:fig2}
-\end{figure}
-
-In the SPSS Data Editor, you have the possibility to go to the Data View
-and Variable View windows. In the Data View window, you can enter data
-yourself or read in data by using the options in the file menu. In
-Figure 1.2 you see an example of a dataset in the Data View window. Each
-row in the Data View window represents a case and in the columns you
-will find the variable names. In the Data View window, you can do all
-kind of data manipulations by using the different menu's above in the
-window. From here you can click on the tab Variable View, in the lower
-left corner of the window. Than the Variable view window will appear
-(Figure \ref{fig:fig3}).
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.3} 
-
-}
-
-\caption{Variable View window in SPSS}\label{fig:fig3}
-\end{figure}
-
-In the Variable View window, you can add new variables, by entering the
-name in the name column. Further, you can change the columns by using
-the following options: Type: Here you can change the type of variables
-in your dataset. Mostly you work with numeric variables, i.e.~a variable
-whose values are numbers. Other possibilities are Date variables which
-is a numeric variable whose values are displayed in one of several
-calendar-date or clock-time formats or String variables, a character
-(text) variable that can contain any characters up to the defined
-length. String values are not numeric and therefore are not used in
-calculations. Width: By default SPSS defines a numeric variable with 8
-digits for each new variable.
-
-Decimals: the number of decimal places displayed.
-
-Label: The variable name.
-
-Values: To assign numbers to the categories of a variable. To define
-Variable values do the following: 1. Click the button in the Values cell
-for the variable that you want to define. 2. For each value, enter the
-value and a label. 3. Click Add to enter the value label. 4. Click OK.
-
-Missing: Here you can define specified data values as user-missing. You
-can enter up to three discrete (individual) missing values, a range of
-missing values, or a range plus one discrete value.
-
-Columns: To change the number of characters displayed in the Data View
-window.
-
-Align: Here you can specify the alignment of your data.
-
-Measure: Here you can specify the level of each variable, scale
-(continuous), ordinal or nominal.
-
-Role: Here you can define the role of the variable during your analysis.
-Examples are, Input for independent variable, Target for dependent or
-outcome variable, Both, independent and dependent variable. There are
-more possibilities, but most of the times you use the default Input
-setting.
-
-\section{Analyzing data in SPSS}\label{analyzing-data-in-spss}
-
-All statistical procedures in SPSS can be found under the Analyze button
-(Figure \ref{fig:fig4}). Here you also will find the option ``Multiple
-Imputation'' which plays an important role in this manual. We will use
-this menu later on in Chapter 4.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.4} 
-
-}
-
-\caption{Statistical procedures that can be found under the Analyze menu in SPSS}\label{fig:fig4}
-\end{figure}
-
-\section{Data Transformations in
-SPSS}\label{data-transformations-in-spss}
-
-Two other interesting buttons are Data and Transform. The Data menu
-allows you to make changes to the data editor. Here you can add new
-variables or cases. You can also use the Split File option, to get
-analyses results separately for categories of a variable. The Transform
-menu allows you to manipulate your variables by for example
-dichotomizing a numeric variable.
-
-\section{The Output window in SPSS}\label{the-output-window-in-spss}
-
-If you have run your analyses in SPSS, an SPSS Output (or viewer) Window
-will pop-up. The main body of the Output Window consists of two panes
-(left and right panes). In the left pane you will find an outline of the
-output. In the right pane you will find the actual output of your
-statistical procedure (Figure \ref{fig:fig5}).
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.5} 
-
-}
-
-\caption{Part of the Output or Viewer window in SPSS after making use of Descriptive Statistics under the Analyze menu}\label{fig:fig5}
-\end{figure}
-
-\section{The Syntax Editor in SPSS}\label{the-syntax-editor-in-spss}
-
-In the syntax editor of SPSS, you use the SPSS syntax programming
-language. You can run all SPSS procedures by typing in commands in this
-syntax editor window, instead of using the graphical user interface,
-i.e.~by using your mouse and clicking on the menu´s. You can get access
-to the syntax window in two ways. The first is just by opening a new
-syntax file by navigating to File -\textgreater{} New -\textgreater{}
-Syntax. This will open a new syntax window (Figure \ref{fig:fig6}).
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.6} 
-
-}
-
-\caption{Screenshot of new syntax file}\label{fig:fig6}
-\end{figure}
-
-Now you can start writing your syntax directly in this window. You can
-also generate syntax by accessing statistical procedures through the
-dropdown menus and clicking the Paste button instead of clicking the OK
-button after you have specified the options. When you have clicked the
-Paste button, a new Syntax Editor window will pop up or the new syntax
-will automatically be added to the open Syntax Editor window. This is a
-very useful way to keep track of the analysis that you have performed.
-An example can be found in Figure \ref{fig:fig7}, where the syntax is
-shown for the Descriptive Statistics procedure of Figure \ref{fig:fig5}.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.7} 
-
-}
-
-\caption{Screenshot of Syntax editor of SPSS including the Syntax code for descriptive statisitcs}\label{fig:fig7}
-\end{figure}
-
-By using the SPSS Syntax it is possible for users to perform the same
-analyses over and over again or to adapt the analysis via the syntax
-code for complex calculations in the data. In this manual we will not
-use SPSS syntax code to access statistical procedures, however we
-recommend to use the SPSS syntax to keep track of the analysis that you
-have performed. SPSS is most frequently used via the graphical user
-interface, and we will use that method also in this manual.
-
-\section{Reading and saving data in
-SPSS}\label{reading-and-saving-data-in-spss}
-
-Reading in data in SPSS is very easy; via the menu File choose for File
--\textgreater{} Open -\textgreater{} Data. All kind of file types can be
-selected. Of course the SPSS .sav files, but also .por, .xlsx, .cvs,
-SAS, Stata, etc. (Figure 1.8). After you have selected a specific file
-type you may have to go through several steps before you see the data in
-the Data View window. These steps are not necessary for SPSS files, they
-open directly in the data editor.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.8} 
-
-}
-
-\caption{Window to read in different file types in SPSS}\label{fig:fig8}
-\end{figure}
-
-Saving files in SPSS is possible via the Save Data As option under the
-menu File. You can choose the same kind of file types (Figure
-\ref{fig:fig9}).
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.9} 
-
-}
-
-\caption{Option Save Data As under the menu File}\label{fig:fig9}
-\end{figure}
-
-\section{R and RStudio}\label{r-and-rstudio}
-
-RStudio is an integrated environment to work with the software program
-R. Consequently, to work with RStudio, R has to be installed. RStudio
-uses the R language and is also freely available. In this manual we will
-only show some possibilities and options in RStudio that are needed to
-run the R code and the programs that are discussed in this manual. For
-more information about RStudio and its possibilities visit the RStudio
-website at www.rstudio.com. When you open RStudio the following screen
-will appear.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.10} 
-
-}
-
-\caption{First screen that appears after you have started RStudio}\label{fig:fig10}
-\end{figure}
-
-There are three windows opened:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  On the left is the Console window
-\end{enumerate}
-
-This is the main window to run R code (see below for more information
-about the Console window).
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
-\tightlist
-\item
-  Right above is the window where you can choose between the Environment
-  and History tabs (e.g.~history tracks the code you typed in the
-  Console window).
-\item
-  At the right site below is the window where you can choose between
-  Files, Plots, Packages, Help and Viewer tabs.
-\end{enumerate}
-
-\subsection{The role of the Console
-Window}\label{the-role-of-the-console-window}
-
-When you enter code in the Console window you will directly receive a
-result. For example, you can type the following code and the result will
-appear directly in the Console window.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DecValTok{3} \OperatorTok{+}\StringTok{ }\DecValTok{3}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 6
-\end{verbatim}
-
-As you can see, you can use R as a large calculator. Other
-multiplication procedures as divide, square, etc. can also be executed.
-However, the main use for R is its functions. For example, when you
-generate 20 random numbers you can use the following function code (we
-will discuss more about functions in R later):
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{rnorm}\NormalTok{(}\DecValTok{20}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##  [1]  1.527157708  0.757667934  1.191958525 -0.813445875 -0.012191939
-##  [6]  0.248547958  1.127951022 -1.426587031  0.091210138  2.042825247
-## [11] -0.205885557  0.598678660  0.239252273  0.849224968 -1.046721603
-## [16] -0.208877703 -1.000698096 -1.318114177  0.007642213 -0.860383522
-\end{verbatim}
-
-The number {[}1{]} between brackets is the index of the first number or
-item in the vector. That can be useful when you have many numbers
-printed in the Console window.
-
-\subsection{R assignments and objects}\label{r-assignments-and-objects}
-
-In R it is possible to create objects and to assign values to these
-objects. In this way it is for example possible to store some
-intermediate results and recall or use them later on. Assigning values
-to objects is done by using the assignment operator \textless{}- (R code
-below). You can also use the = sign as an assignment operator. This is
-not recommended because this is also a symbol used for some mathematical
-operations. For example, when we want to assign the value 3 to the
-object x, we use the following code.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{x <-}\StringTok{ }\DecValTok{3} 
-\end{Highlighting}
-\end{Shaded}
-
-When we subsequently type in the letter x we get the following result:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{x }
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 3
-\end{verbatim}
-
-As result we see the value 3 again. Now the value 3 is assigned to the
-object x. In R all kind of information can be assigned to an object,
-i.e.~one number, a vector of numbers, results from analysis or other R
-objects such as data frames, matrices or lists. Objects can have all
-kinds of different names, composed of different letters and numbers.
-Here are some examples where number 3 is assigned to different objects
-with different names:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{test <-}\StringTok{ }\DecValTok{3}
-\NormalTok{test.}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\DecValTok{3}
-\NormalTok{test.manual <-}\StringTok{ }\DecValTok{3}
-\NormalTok{test}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 3
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{test.}\DecValTok{1}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 3
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{test.manual }
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 3
-\end{verbatim}
-
-Note that some letters and words are used by R itself. It is not
-recommended to use these leters as names for objects in R that you
-create yourself. For example, the letter T and F are used as TRUE and
-FALSE by R. Other letters that are already in use are c, q, t, C, D, I
-and diff, df, and pt.
-
-\subsection{Vectors, matrices, lists and data
-frames}\label{vectors-matrices-lists-and-data-frames}
-
-\emph{Vectors} In the previous paragraph we created the one-vector x,
-i.e.~a vector that contained only one number, the number 3. Mostly you
-do your analysis on more numbers than just one. R has several
-possibilities to create objects with more data. We start with a simple
-dataset, called a data vector, which is an array of numbers (such as
-created in R code 1.2. A vector can be created by the following code:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{y <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{)}
-\NormalTok{y}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 1 2 3 4 5
-\end{verbatim}
-
-Now the numbers 1, 2, 3, 4 and 5 are assigned to the data vector y. The
-``c'' in the above code stand for concatenate which makes that all
-separate (one-vector) numbers are merged into one vector. It is also
-possible to create character vectors, which are vectors that contain
-strings (text). An example:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{y <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"test"}\NormalTok{)}
-\NormalTok{y}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] "a"    "b"    "test"
-\end{verbatim}
-
-Vectors can also be made by using the ``:'' symbol. With that symbol it
-is easy to generate a sequence of numbers. An example:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{y <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\DecValTok{10}
-\NormalTok{y}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##  [1]  1  2  3  4  5  6  7  8  9 10
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{y <-}\StringTok{ }\DecValTok{2}\OperatorTok{:}\DecValTok{6}
-\NormalTok{y}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 2 3 4 5 6
-\end{verbatim}
-
-Both lines of code produce a vector containing a sequence of numbers.
-The first example produces the numbers 1 to 10 and the second example
-the numbers 2 to 6.
-
-\emph{Matrix} A matrix in R contains rows and columns and can be created
-by using the matrix function.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{), }\DataTypeTok{nrow=}\DecValTok{2}\NormalTok{, }\DataTypeTok{ncol=}\DecValTok{3}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##      [,1] [,2] [,3]
-## [1,]    1    3    5
-## [2,]    2    4    6
-\end{verbatim}
-
-Now we have created a matrix with 2 rows and 3 columns. In essence we
-converted the vector c(1, 2, 3, 4, 5, 6) into a matrix.
-
-\emph{List} Another popular R object class is a list. The advantage of a
-list is that it can contain components of different formats. Let's look
-at an example using the following code:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{x <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\DecValTok{5}
-\NormalTok{x}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 1 2 3 4 5
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{y <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"test"}\NormalTok{)}
-\NormalTok{z <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{x=}\NormalTok{x, }\DataTypeTok{y=}\NormalTok{y)}
-\NormalTok{z}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## $x
-## [1] 1 2 3 4 5
-## 
-## $y
-## [1] "a"    "b"    "test"
-\end{verbatim}
-
-The code created the list object z consisting of the two components x
-and y which are the vectors that were created above. You can see that in
-a list two components of different data type can be combined, a numeric
-and a character factor. The names of the list components are indicated
-by the dollar sign,
-\(. The list component can be obtained separately by typing z\)x for
-component x or x\$y for component y.
-
-\emph{Dataframe} Mostly we work with datasets that contain information
-of different variables and persons. In R such a dataset is called a
-dataframe. In essence, a dataframe in R is a list, where each component
-of the list is a vector of equal length. This example code first creates
-a list, consisting of 3 vectors of the same length. Than this list is
-converted into a dataframe, using the data.frame function.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{k <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{a=}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{, }\DataTypeTok{b=}\DecValTok{11}\OperatorTok{:}\DecValTok{20}\NormalTok{, }\DataTypeTok{c=}\DecValTok{21}\OperatorTok{:}\DecValTok{30}\NormalTok{)}
-\NormalTok{k}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## $a
-##  [1]  1  2  3  4  5  6  7  8  9 10
-## 
-## $b
-##  [1] 11 12 13 14 15 16 17 18 19 20
-## 
-## $c
-##  [1] 21 22 23 24 25 26 27 28 29 30
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{z <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(k)}
-\NormalTok{z}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##     a  b  c
-## 1   1 11 21
-## 2   2 12 22
-## 3   3 13 23
-## 4   4 14 24
-## 5   5 15 25
-## 6   6 16 26
-## 7   7 17 27
-## 8   8 18 28
-## 9   9 19 29
-## 10 10 20 30
-\end{verbatim}
-
-Typically, a dataframe is created by reading in an existing dataset. How
-to create a dataframe by reading in a dataset will be further discussed
-in the paragraph ``Reading in and saving data''.
-
-\subsection{Indexing Vectors, Matrices, Lists and Data
-frames}\label{indexing-vectors-matrices-lists-and-data-frames}
-
-\emph{Vectors} An important operation in R is to select a subset of a
-given vector. This is called indexing vectors. This subset of the vector
-elements can be assigned to another vector. An example how to do this:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{y <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{6}\NormalTok{)}
-\NormalTok{y[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{)]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 3 8
-\end{verbatim}
-
-The R code y{[}c(1, 4){]}, extracts the first and fourth element of the
-vector. Another example is by using the ``:'' symbol, to extract several
-subsequent elements:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{y[}\DecValTok{2}\OperatorTok{:}\DecValTok{5}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 5 2 8 5
-\end{verbatim}
-
-The R code y{[}2:5{]}, extracts the second to the fifth element of the
-vector.
-
-A minus sign excludes the specific element from the vector, like:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{y[}\OperatorTok{-}\DecValTok{3}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 3 5 8 5 4 8 1 3 6
-\end{verbatim}
-
-The R code y{[}-3{]}, excludes the third element of the vector (i.e.~2).
-A new vector z can be created where the third and fourth element of the
-y vector are excluded, by using the following code:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{z <-}\StringTok{ }\NormalTok{y[}\OperatorTok{-}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{)]}
-\NormalTok{z}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 3 5 5 4 8 1 3 6
-\end{verbatim}
-
-\emph{Matrices} When we index matrices we can choose to index rows,
-columns or both. Here are some examples:
-
-First we construct the matrix
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{z <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{9}\NormalTok{, }\DataTypeTok{nrow=}\DecValTok{3}\NormalTok{)}
-\NormalTok{z}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##      [,1] [,2] [,3]
-## [1,]    1    4    7
-## [2,]    2    5    8
-## [3,]    3    6    9
-\end{verbatim}
-
-We extract from the first row the number in the second column
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{z[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 4
-\end{verbatim}
-
-We extract all numbers in each column in the first row
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{z[}\DecValTok{1}\NormalTok{, ]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 1 4 7
-\end{verbatim}
-
-We extract all numbers in each row of the first column
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{z[, }\DecValTok{1}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 1 2 3
-\end{verbatim}
-
-A minus sign can also be used to delete specific elements or complete
-rows or columns.
-
-Omit the first row from the matrix
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{z[}\OperatorTok{-}\DecValTok{1}\NormalTok{, ]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##      [,1] [,2] [,3]
-## [1,]    2    5    8
-## [2,]    3    6    9
-\end{verbatim}
-
-\emph{Lists} We first create a list with 3 components, each component
-consists of a vector of the same length and with 10 elements each.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{k <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{a=}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{, }\DataTypeTok{b=}\DecValTok{11}\OperatorTok{:}\DecValTok{20}\NormalTok{, }\DataTypeTok{c=}\DecValTok{21}\OperatorTok{:}\DecValTok{30}\NormalTok{)}
-\NormalTok{k}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## $a
-##  [1]  1  2  3  4  5  6  7  8  9 10
-## 
-## $b
-##  [1] 11 12 13 14 15 16 17 18 19 20
-## 
-## $c
-##  [1] 21 22 23 24 25 26 27 28 29 30
-\end{verbatim}
-
-There are several options to index list components and elements of the
-components. If we want to index the individual component b we can use
-the following code:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{k}\OperatorTok{$}\NormalTok{b}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##  [1] 11 12 13 14 15 16 17 18 19 20
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{k[[}\StringTok{"b"}\NormalTok{]]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##  [1] 11 12 13 14 15 16 17 18 19 20
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{k[[}\DecValTok{2}\NormalTok{]]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##  [1] 11 12 13 14 15 16 17 18 19 20
-\end{verbatim}
-
-As you have may noticed, to extract individual list components double
-square brackets are used, compared to single brackets for indexing
-vectors and matrices.
-
-When we use single brackets, we get the following results:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{k[}\StringTok{"b"}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## $b
-##  [1] 11 12 13 14 15 16 17 18 19 20
-\end{verbatim}
-
-The difference between using single and double brackets is that single
-brackets return the component data type, which is in this case a vector
-(but could be any kind of data type) and single brackets always return a
-list.
-
-\emph{Data frames} Indexing data frames follows the same method as
-indexing matrices, but we can also use the method that is used to index
-lists, since data frames are essentially lists of vectors of the same
-length. Data frames consist of rows and columns which can be accessed
-separately or both to extract specific elements. We use the data frame
-that was constructed in R code 1.11.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{z}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##      [,1] [,2] [,3]
-## [1,]    1    4    7
-## [2,]    2    5    8
-## [3,]    3    6    9
-\end{verbatim}
-
-Examples of indexing the first column are:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{z[, }\DecValTok{1}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 1 2 3
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{k}\OperatorTok{$}\NormalTok{a}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##  [1]  1  2  3  4  5  6  7  8  9 10
-\end{verbatim}
-
-The second row can be accessed by using:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{z[}\DecValTok{2}\NormalTok{, ]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 2 5 8
-\end{verbatim}
-
-\subsection{Vectorized Calculation}\label{vectorized-calculation}
-
-An advantage of working with R is that it is possible to perform
-vectorized calculations. This means that you can do calculations
-elementwise, i.e.~the same calculation is done on each element of an
-object. Let's look at an example.
-
-We first create a vector z with numerical variables.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{z <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{)}
-\NormalTok{z}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 1 2 3 4 5 6 7 8
-\end{verbatim}
-
-Now it is fairly easy to square each element of the vector by typing:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{z}\OperatorTok{^}\DecValTok{2}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1]  1  4  9 16 25 36 49 64
-\end{verbatim}
-
-The \^{}2 means take the power of 2. We see that each element is
-squared. These vectorized calculations can be done by using all kinds of
-mathematical functions, e.g.~taking the square root, logarithms, adding
-constant values to each element, etc.
-
-\subsection{R Functions}\label{r-functions}
-
-Functions play an important role in R. Functions can be seen as lines of
-R code to run all kind of data procedures and to return a result. Let's
-write a small function that we name ``sum.test'' that generates a
-sequence of numbers from 1 to 5 and sums all values from 1 to the value
-we define beforehand, which is in our example the value 3. This means
-that the function will sum all values from 1 to 3, i.e.~1 + 2 + 3 when
-it is at the value of 3 and all values from 1 to 4 when we use as input
-value the value 4. The function can be found in R code 1.26.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{print.sum.test <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) }
-\NormalTok{\{}
- \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{) }
-\NormalTok{ \{}
-   \ControlFlowTok{if}\NormalTok{ (i}\OperatorTok{==}\NormalTok{x) y <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{i)  }
-\NormalTok{ \}}
-\KeywordTok{return}\NormalTok{(y)}
-\NormalTok{\}}
-\KeywordTok{print.sum.test}\NormalTok{(}\DecValTok{3}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 6
-\end{verbatim}
-
-At the first line we define the function print.sum.test that includes
-one argument x. Than in de body of the function (in italic) which starts
-with a left brace and ends with another brace, the actual calculations
-take place. The return statement gives back the result. At the end we
-call the function with the statement print.sum.test(3), where the value
-3 is actually used in the function.
-
-Once the function is defined, we can call the function and plug in other
-values. For example:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{print.sum.test}\NormalTok{(}\DecValTok{4}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 10
-\end{verbatim}
-
-That will directly lead to the result 10 when the value 4 is used.
-
-You can write functions yourself but in R many functions are available
-which means that many calculations are done by using function calls. A
-function name is followed by a set of parentheses which contain some
-arguments. In the above self-written function, we already made use of a
-function, which is the sum function. We can use it separately as
-follows:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{sum}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 7
-\end{verbatim}
-
-The arguments in this function are the numbers 3 and 4 and the result is
-their sum. This function uses as arguments numbers or complete vectors.
-If you want to see the formal arguments of each function you can use the
-args function. You have to type the name of the function as the argument
-in the args function. For example, we can use it for the matrix
-function:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{args}\NormalTok{(matrix)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## function (data = NA, nrow = 1, ncol = 1, byrow = FALSE, dimnames = NULL) 
-## NULL
-\end{verbatim}
-
-As a result the arguments of the functions are listed with their default
-settings. In this case the arguments are:
-
-data: an optional data vector (including a list or expression vector).
-
-nrow: the desired number of rows.
-
-ncol: the desired number of columns.
-
-byrow: logical. If FALSE (the default) the matrix is filled by columns,
-otherwise the matrix is filled by rows.
-
-dimnames: A dimnames attribute for the matrix: NULL or a list of length
-2 giving the row and column names respectively. An empty list is treated
-as NULL, and a list of length one as row names. The list can be named,
-and the list names will be used as names for the dimensions.
-
-\subsection{The Help function}\label{the-help-function}
-
-There are several possibilities to start the help facilities in R and to
-get more information about functions and their arguments in R.
-
-You can just type help or use the question mark as follows:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{help}\NormalTok{(matrix)}
-\NormalTok{?matrix}
-\end{Highlighting}
-\end{Shaded}
-
-In both ways the help tutorial for the matrix function will be activated
-and appear in your web browser or in help tab in the right corner below
-when you use R studio.
-
-\subsection{Working with script files}\label{working-with-script-files}
-
-If you want to use R code and functions more than once it is useful to
-work with scripts files. In this way you can type and save R code and
-reuse it. To create a script file in R is easy.
-
-After you have started RStudio you go to File -\textgreater{} New File
--\textgreater{} R Scripts. Now a new window will open on the left side
-above. In that file you can type for example the self-written function
-print.sum.test. (Figure \ref{fig:fig11}). Now you can save the script
-file by using the Save option under the File menu, open it again and use
-it whenever you want.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.11} 
-
-}
-
-\caption{Script file example in RStudio}\label{fig:fig11}
-\end{figure}
-
-\subsection{Creating a working
-directory}\label{creating-a-working-directory}
-
-It is a good idea to keep your R files at the same place when you are
-doing data analysis for some kind of project. If you do not use a
-separate directory, R will use a default directory, that will mostly be
-in Windows in the documents folder. All files that you have to use
-during your R session are assumed to be in that directory. Further, all
-files that you save during your session will be in that directory. To
-locate your working directory, you can type in the Console window:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{getwd}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-In Rstudio there is another way to get information about the current
-working directory and another way to change the working directory. Go in
-RStudio to the window on the right site below and go to the Files tab
-and click on the right site of the screen on the three dots. Than a
-window will open and you can browse to your preferred folder. Then
-choose for More in the Files tab and then select ``Set As Working
-Directory'' (Figure \ref{fig:fig12}). Now you have set your preferred
-working directory. You can check if your directory is set correctly by
-choosing ``Go To Working Directory''.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.12} 
-
-}
-
-\caption{Working directory selection in RStudio}\label{fig:fig12}
-\end{figure}
-
-\subsection{Reading in SPSS data in
-RStudio}\label{reading-in-spss-data-in-rstudio}
-
-There are several procedures in RStudio to read in datasets.
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Import datasets via ``Import Dataset'' An easy way to do that is via
-  the window at the right site above. There you will find the button
-  which is called ``Import Dataset''. When you click on it you can
-  choose between different kind of file types, i.e.~CVS, Excel, SPSS,
-  SAS and Stata files (Figure 1.13).
-\end{enumerate}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.13} 
-
-}
-
-\caption{Screen to import datasets in RStudio}\label{fig:fig13}
-\end{figure}
-
-In this example we choose for SPSS. When you approach this procedure for
-the first time it could be that RStudio asks for your permission to
-download a package called ``haven''. This package is built to import and
-export data from several types. The following window will then appear
-(Figure 1.14).
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.14} 
-
-}
-
-\caption{Window to install the haven package}\label{fig:fig14}
-\end{figure}
-
-Click Yes and the download will start from the CRAN website. After the
-package is installed a new window will open which is called ``Import
-Statistical Data'' (Figure 1.15).
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.15} 
-
-}
-
-\caption{The Import Statistical Data window in RStudio}\label{fig:fig15}
-\end{figure}
-
-At the top right site of the window you find the button which is called
-``Browse''. That button allows you to browse to your dataset on your
-computer. After you have opened your dataset you see a preview of your
-dataset in RStudio (Figure 1.16).
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.16} 
-
-}
-
-\caption{A preview of the dataset in RStudio}\label{fig:fig16}
-\end{figure}
-
-Under Code Preview, under in the window, you see the code that was used
-by RStudio to read in the dataset:
-
-The dataset is automatically assigned to the object: Backpain50, which
-is the original name of the dataset. When you click on Import, the
-dataset is imported in the RStudio environment (Figure 1.17).
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.17} 
-
-}
-
-\caption{Imported dataset in RStudio}\label{fig:fig17}
-\end{figure}
-
-Another way to import an SPSS dataset is by making use of the foreign
-package. You can find this package under the Packages Tab in the window
-at the right site below under the heading ``System Library''. Install
-that package first. The foreign package includes the function
-``read.spss''. Let's first explore the function arguments of this
-function by using:
-
-Now the following information can be found in the right window below,
-under the Help tab:
-
-read.spss(file, use.value.labels = TRUE, to.data.frame = FALSE,
-max.value.labels = Inf, trim.factor.names = FALSE, trim\_values = TRUE,
-reencode = NA, use.missings = to.data.frame)
-
-The most important arguments to change for us are the file and
-to.data.frame arguments. When you are in the correct working directory,
-i.e.~the working directory where the file that you want to import is
-stored, you use the following code to import the dataset:
-
-\subsection{Saving and Reading R data in
-RStudio}\label{saving-and-reading-r-data-in-rstudio}
-
-Datasets can be saved and read in R using different commands.
-
-\emph{Write.table} and \emph{Read.table}
-
-\emph{Write.table} The write.table function can be used to write
-matrices and data frames (datasets) to the working directory. The R code
-is:
-
-Files that have been written with write.table can be easily read in, in
-SPSS by using the steps that will be discussed in the next paragraph.
-
-\emph{Read.table} The read.table function can be used to read in
-matrices and data frames by using:
-
-\emph{Save and Load}
-
-\emph{Save} You can also use the command save to save datasets,
-according to (notice the .RData extension):
-
-\emph{Load} Loading the dataset again in the workspace can be done by
-using:
-
-You can also use save by using the default options in the following way
-to save your datasets:
-
-To get direct access to the data that you have saved, you can use the
-get function in combination with the load function like this:
-
-With save, you can save any R object, also lists such as:
-
-Subsequently, after you have removed object x from the workspace, you
-can load it again by using:
-
-\subsection{Reading in (R)Studio data into
-SPSS}\label{reading-in-rstudio-data-into-spss}
-
-When you have used the write.table function to save data in R you can
-easily read them in into SPSS. First you have to use write.table in the
-following way:
-
-The extra parameter settings, mean: sep=``;'', separate each variable by
-an ``;'' indicator. dec=``,'', use for decimals a ``,'' instead of an
-``.''. row.names=F , Do not add an extra column with row.names.
-
-Follow the next steps to read in the data into SPSS: choose File
--\textgreater{} Open data -\textgreater{} ``All files (\emph{.})'', than
-you will see the file you want to read in into SPSS. In this example we
-will use the file ``Backpain50 R file'' from R code 1.41 (Figure 1.18).
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.18} 
-
-}
-
-\caption{Choosing the dataset to import in SPSS}\label{fig:fig18}
-\end{figure}
-
-Then click Open (wait a couple of seconds) and click on next. You will
-see the following window that is part of the Text Import Wizard
-procedure in SPSS (Figure 1.19):
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.19} 
-
-}
-
-\caption{Step 1 of the Text Import Wizard}\label{fig:fig19}
-\end{figure}
-
-Then click the ``Next \textgreater{}'' button 5 times, passing by the
-following windows:
-
-Step 2 of 6 (Figure 1.20): To change how variables are arranged: here
-delimited To include variable names included at the top of the file:
-here Yes. To set the decimal symbol: here a comma.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.20} 
-
-}
-
-\caption{Step 2 of the Text Import Wizard}\label{fig:fig20}
-\end{figure}
-
-Step 3 of 6 (Figure 1.21):
-
-On which line number begins the first case: here 2 How cases are
-represented: Each line is a case. How many cases you want to import:
-here all cases.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.21} 
-
-}
-
-\caption{Step 3 of the Text Import Wizard}\label{fig:fig21}
-\end{figure}
-
-Step 4 of 6 (Figure 1.22): The delimiters that appear between variables;
-here the Semicolon. The text qualifier: here Double quote. Remove
-trailing spaces from string values: skip.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.22} 
-
-}
-
-\caption{Step 4 of the Text Import Wizard}\label{fig:fig22}
-\end{figure}
-
-Step 5 of 6 (Figure 1.23): Here you can overwrite the Data format of the
-variable (you can also change that in the Variable View window, when the
-data has been read in).
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.23} 
-
-}
-
-\caption{Step 5 of the Text Import Wizard}\label{fig:fig23}
-\end{figure}
-
-Step 6 of 6: This step allows you to save your specifications of the
-previous steps into a separate file (Figure 1.24).
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.24} 
-
-}
-
-\caption{Step 6 of the Text Import Wizard}\label{fig:fig24}
-\end{figure}
-
-Then click finish and the data will be read in, into a new SPSS file. In
-that file you can of course change all kind of variable and data
-settings in the Variable View Window.
-
-You can also skip step 2 to 5 by clicking the Finish button twice when
-you are at step 1. Than you use all default settings, which is most of
-the times a good option.
-
-\subsection{Installing R Packages}\label{installing-r-packages}
-
-When R is installed on your computer also a folder called library is
-created. This folder contains packages that are part of the basic
-installation. A package is a collection of different functions written
-in the R language. Besides packages that are part of the basic
-installation of R there are also packages that are not part of the basic
-installation but are written by others, i.e.~the add-on packages.
-Packages can be downloaded from the CRAN website
-(\url{https://cran.r-project.org/}). Currently, there are thousands of
-user-written packages available on the CRAN website.
-
-Before you can use a specific package that is not part of the basic
-installation, you have to install it in your R library. In this manual
-we will use the mice package to do all kind of imputation procedures,
-such as multiple imputation. mice is not part of the basic installation
-so we have to install it first. There are several procedures in RStudio
-to install a package. One way is to use the install.packages function in
-the Console window as follows:
-
-The mice package will be automatically downloaded from the CRAN website.
-
-Another way is to use the window on the right site below and go to the
-Packages tab. When you click ``Install'' a new window is opened. Than
-you can type ``mice'' on the blank line under ``Packages (separate
-multiple with space or comma):'' (Figure 1.25a and b).
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.25a} 
-
-}
-
-\caption{Install packages Window in RStudio to install packages from the CRAN website}\label{fig:fig25}
-\end{figure}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.25b} 
-
-}
-
-\caption{Enlarged Install packages Window in RStudio to install packages from the CRAN website}\label{fig:fig26}
-\end{figure}
-
-After you have clicked on ``Install'' the package will be downloaded
-from the CRAN website automatically and will be listed in the Package
-list named ``User Library''.
-
-Another way is to go to the CRAN website and download the package as a
-zip file in a directory on your computer, for example your working
-directory or in your library. Again use the window on the right site
-below and go to the Packages tab. When you choose Install a new window
-is opened. Now under ``Install from:'' choose for ``Package Archive File
-(.zip; .tar.gz)'' (Figure 1.26a and 1.26b). Than you can browse to the
-zip file and install the package.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.26a} 
-
-}
-
-\caption{Install packages Window in RStudio to install packages from zip files}\label{fig:fig27}
-\end{figure}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.26b} 
-
-}
-
-\caption{Enlarged Install packages Window in RStudio to install packages from zip files}\label{fig:fig28}
-\end{figure}
-
-\subsection{Loading R Packages}\label{loading-r-packages}
-
-Once an add-on (user written) R package has been installed it has to be
-loaded to get access to all functions that are part of that package. To
-load a library, you can use the function library() or require(). R code
-1.43 shows an example of loading the mice package.
-
-The require() function is used in the same way. You have to load add-on
-packages each time you start a new R session.
-
-\subsection{Updating R Packages}\label{updating-r-packages}
-
-To keep the add-on packages up to date you can use the update.packages()
-function in R. R code 1.44 presents an example.
-
-R will ask you if you want to update each package. If you type ``y'' in
-the Console window, R will update the package.
-
-In RStudio updating packages can be done in the Package tab as well. You
-can click on the Update button. A new window will open that contains a
-list of all packages that need to be updated. Subsequently you can
-select the packages you want to update.
-
-\subsection{Useful Missing data Packages and
-links}\label{useful-missing-data-packages-and-links}
-
-The main package that we will use in this manual is mice which stand for
-Multivariate Imputation by Chained Equations (MICE) (Van Buuren, 2009).
-
-Other packages that are related to MICE are miceadds and micemd:
-miceadds: this package contains some additional multiple imputation
-functions (Robitzsch et al., 2017). See for more information:
-\href{https://cran.r-project.org/web/packages/miceadds/index.html}{linked
-phrase}
-
-micemd: this package contains additional functions for the mice package
-to perform multiple imputation in two-level (Multilevel) data (Audigier
-\& Resche-Rigon, 2017). See for more information:
-\href{https://cran.r-project.org/web/packages/micemd/index.html}{linked
-phrase}
-
-mi: provides functions for data manipulation, imputing missing values in
-an approximate Bayesian framework, diagnostics of the models used to
-generate the imputations, confidence-building mechanisms to validate
-some of the assumptions of the imputation algorithm, and functions to
-analyze multiply imputed data sets (Gelman et al., 2015). See for more
-information:
-\href{https://cran.r-project.org/web/packages/mi/index.html}{linked
-phrase}
-
-MItools: small package to perform analyses and combine results from
-multiple-imputation datasets (Lumley, 2015). See for more information:
-\href{https://cran.r-project.org/web/packages/mitools/index.html}{linked
-phrase}
-
-norm: this package is for the Analysis of multivariate normal datasets
-with missing values. It contains the mi.inference function. This
-function combines estimates and standard errors to produce a single
-inference. Uses the technique described by Rubin (1987), which are
-called the Rubin's Rules (RR) (Novo, 2015). See for more information:
-\href{https://cran.r-project.org/web/packages/norm/index.html}{linked
-phrase}
-
-vim (visualization and imputation of missing values): This package
-includes tools for the visualization of missing and/or imputed values.
-In addition, the quality of imputation can be visually explored using
-various univariate, bivariate, multiple and multivariate plot methods
-(Templ et al., 2017). See for more information:
-\href{https://cran.r-project.org/web/packages/mi/index.html}{linked
-phrase}
-
-BaylorEdPsych: R Package for Baylor University Educational Psychology
-Quantitative Courses. This package included Little's MCAR test
-(Beaujean, 2015). See for more information:
-\href{https://cran.r-project.org/web/packages/BaylorEdPsych/index.html}{linked
-phrase}
-
-MKmisc: Contains several functions for statistical data analysis;
-e.g.~for sample size and power calculations, computation of confidence
-intervals, and generation of similarity matrices. This package contains
-the mi.t.test function for pooling t-tests after multiple imputation
-(Kohl, 2016). See for more information:
-\href{https://cran.r-project.org/web/packages/MKmisc/index.html}{linked
-phrase}
-
-mvnmle: This package estimates the maximum likelihood estimate of the
-mean vector and variance-covariance matrix for multivariate normal data
-with missing values. This package is needed for the mlest function this
-is used for Little's MCAR test in Cahpter 2. See for more information:
-\href{https://cran.r-project.org/web/packages/mvnmle/index.html}{linked
-phrase}
 
 \chapter{Missing Data Evaluation}\label{missing-data-evaluation}
 
@@ -2104,7 +637,7 @@ missing data pattern.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Book_MI_files/figure-latex/unnamed-chunk-55-1.pdf}
+\includegraphics{Book_MI_files/figure-latex/unnamed-chunk-6-1.pdf}
 
 \begin{verbatim}
 ##    ID Pain Tampascale Disability Radiation Gender GA   
@@ -2173,7 +706,7 @@ two graphs.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Book_MI_files/figure-latex/unnamed-chunk-56-1.pdf}
+\includegraphics{Book_MI_files/figure-latex/unnamed-chunk-7-1.pdf}
 
 \begin{verbatim}
 ## 
@@ -2319,27 +852,28 @@ lie outside the dataset but observed variables in the dataset capture
 this by their associations. An example of MAR data is presented in the
 MAR column of Figure \ref{fig:fig2-7} and Figure \ref{fig:tab2-3} for
 150 LBP patients. In Figure \ref{fig:fig2-7} you can see in the MAR
-column that 4 Tampa scale scores are missing for pain scores that are ≥
-6 and 1 for a pain score \textless{} 6, in other words the probability
-of missing data in the Tampa scale scores is higher for higher pain
-scores. In other words, patients with higher pain scores (≥ 6) have more
-missing values on the Tampa scale variable than patients with lower pain
-scores (\textless{} 6). However, within the category of pain scores with
-values ≥ 6, the Tampa scale scores are MCAR, because within each
-category Tampa scale scores are randomly missing for lower and higher
-values. In \ref{fig:tab2-3} the Tampa scale data is split for at lower
-and higher pain score categories. It can be observed that the means and
-standard deviations do not differ between the observed and missing data
-for the Tampa scale variable. Which is an indication that the Tampa
-scale data are MAR. (for educational purposes we know the values of the
-missing values). A reason could be that patients with higher Tampa scale
-scores were less likely to show up at a next Tampa scale measurement
-because their back hurted more. In a MAR missing data situation, missing
-values can be explained by other (observed) variables, like for the
-Tampa scale and Pain variable in the example above, due to the their
-(statistical) relationship in the dataset. Further, within categories of
-the pain variable (for low and high pain values) the Tampa scale scores
-are MCAR (Raghunathan, 2016). However, it is not possible to test this
+column that 4 Tampa scale scores are missing for pain scores that are
+\textgreater{} 5 and 1 for a pain score \textless{} 6, in other words
+the probability of missing data in the Tampa scale scores is higher for
+higher pain scores. In other words, patients with higher pain scores
+(\textgreater{} 5) have more missing values on the Tampa scale variable
+than patients with lower pain scores (\textless{} 6). However, within
+the category of pain scores with values \textgreater{} 5, the Tampa
+scale scores are MCAR, because within each category Tampa scale scores
+are randomly missing for lower and higher values. In \ref{fig:tab2-3}
+the Tampa scale data is split for at lower and higher pain score
+categories. It can be observed that the means and standard deviations do
+not differ between the observed and missing data for the Tampa scale
+variable. Which is an indication that the Tampa scale data are MAR. (for
+educational purposes we know the values of the missing values). A reason
+could be that patients with higher Tampa scale scores were less likely
+to show up at a next Tampa scale measurement because their back hurted
+more. In a MAR missing data situation, missing values can be explained
+by other (observed) variables, like for the Tampa scale and Pain
+variable in the example above, due to the their (statistical)
+relationship in the dataset. Further, within categories of the pain
+variable (for low and high pain values) the Tampa scale scores are MCAR
+(Raghunathan, 2016). However, it is not possible to test this
 assumption, because for that you need information of the missing values
 and that is impossible. In general, excluding MAR data leads to false
 estimates of your statistical tests, like for example, regression
@@ -2475,7 +1009,7 @@ the Tampa scale variable, the model would be empty:
 MAR: Variables in the dataset, like Pain and Radiation in the Leg
 explain the missingness in the Tampa scale variable and the model would
 be:
-\[LN(\frac{R_{Tampa=1}}{1-R_{Tampa=1}}) = \beta_0 + \beta_1 * Pain + \beta_2 * Radiation\]
+\[LN(\frac{R_{Tampa=1}}{1-R_{Tampa=1}}) = \beta_0 + \beta_1 * Pain +\beta_2 * Radiation\]
 
 MNAR: Missingness in the Tampa scale variable can be explained by
 variables in the dataset and by the score on the Tampa scale itself:
@@ -2667,8 +1201,8 @@ used to compare group means of other variables, that can be tested for
 significance using independent t-tests. The results of these t-tests are
 given in the table according to the information in separate rows on the
 left side with the t-value (t), degrees of freedom (df), P-value
-(P(2-tail)), numbers of observed and missing cases (\# Present and \#
-Missing) and means of observed and missing cases (Mean(Present) and
+(P(2-tail)), numbers of observed and missing cases (Present and Missing)
+and means of observed and missing cases (Mean(Present) and
 Mean(Missing)) presented. The variables for which the indicator groups
 are compared, are listed in the columns of the table and are the Pain,
 Tampa scale, Disability and Age variables. For the Tampa scale variable
@@ -3520,19 +2054,19 @@ variable as the only predictor variable for these missing values.
 
 \begin{verbatim}
 ##           1
-## 2  44.82017
-## 6  40.57989
-## 9  35.81428
-## 14 38.51385
-## 21 41.74788
-## 25 36.84913
-## 27 43.26841
-## 31 46.38045
-## 35 42.06285
-## 37 41.28095
-## 44 36.92255
-## 49 32.62036
-## 50 45.31010
+## 2  39.61640
+## 6  38.37983
+## 9  39.26314
+## 14 44.25092
+## 21 39.84177
+## 25 43.30906
+## 27 44.06634
+## 31 45.51121
+## 35 41.00540
+## 37 44.59234
+## 44 30.83428
+## 49 33.89814
+## 50 38.07383
 \end{verbatim}
 
 The completed dataset can be extracted by using the complete function in
@@ -3546,1177 +2080,6 @@ continuous variables (Rubin, 1987, p.~168). The strength of this
 procedure is that missing data is replaced by data that is observed in
 the dataset and not replaced by unrealistic values (as negative body
 weight values).
-
-\chapter{Multiple Imputation}\label{multiple-imputation}
-
-\section{Multiple Imputation}\label{multiple-imputation-1}
-
-In this Chapter we discuss an advanced missing data handling method,
-that is called Multiple Imputation (MI). With MI, each missing value is
-replaced by several different values and consequently several different
-completed datasets are generated. The complete data is copied repeatedly
-in the completed datasets. The concept of MI can be made clear by the
-following figure 4.1.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig4.1} 
-
-}
-
-\caption{Graphical presentation of the MI procedure. }(\#fig:fig4.1)
-\end{figure}
-
-The large square on the left represents a dataset with missing values,
-with the missing values indicated as small solid black squares. The
-squares in the middle that are numbered from 1 to 5 are the separate
-imputed and completed datasets and the square on the right represents
-the combined study results.
-
-Figure 4.1 shows that the imputation of missing values consists of three
-steps, first the missing values are imputed, subsequently statistical
-analyses are applied in each completed dataset and finally the
-statistical test results from these analyses are synthesized by
-combining the sperate analysis results into one pooled estimate.
-
-\section{Multivariate Imputation by Chained Equation
-(MICE)}\label{multivariate-imputation-by-chained-equation-mice}
-
-The main MI method that is discussed in this manual is Multivariate
-imputation by chained equations (MICE), also known as Sequential
-Regression Imputation, Fully Conditional Specification or Gibbs sampling
-(ref). In the MICE algorithm, a chain of regression equations is used to
-obtain imputations, which means that variables with missing data are
-imputed one by one using a chain of regression models. These regression
-models make use of information of all other variables in the model,
-i.e.~conditional imputation models. Essentially, applying MI is the same
-as repeating stochastic regression imputation over several imputation
-runs or chains to impute the missing data sequentially in different
-variables.
-
-Another multiple imputation procedure is called multivariate normal
-
-In this Chapter, the first phase in multiple imputation, that of the
-imputation step is the main topic. In the next Chapter, the analysis and
-pooling phase will be discussed. First, we start with a small note about
-Bayesian statistics because the default imputation procedure in MI uses
-Bayesian statistics to generate the missing values and this is important
-to understand. We will discuss Bayesian statistics conceptually. For a
-better understanding of Bayesian statistics, we refer to the books of
-Knight, Enders (2010), Gelman (2004), Box and Tiao (1973) and Rubin
-(1987). The book of Enders is the least technical and a good book to
-start with as an introduction into Bayesian statistics for missing data
-and to get a better understanding of Bayesian estimation. The other
-books are theoretical and you must have a firm understanding of
-statistics and no fear of formulas to read those.
-
-\section{4.1. A small note on Bayesian
-Imputation}\label{a-small-note-on-bayesian-imputation}
-
-Within the MI algorithm we account for imputation uncertainty by
-replacing the missing values multiple times. Values are predicted by
-using regression parameters. With regression parameters we mean the
-parameters that result from applying a regression model to a dataset.
-The estimates from a (regression) model, like regression coefficients or
-the error variance, are called parameters in statistics. What separates
-the non-Bayesian from the Bayesian imputation procedures is how the
-regression parameters are estimated. In the context of linear regression
-modeling these parameters are the regression coefficients and the
-residual error variance. Non-Bayesian regression imputation models
-account for the uncertainty in the missing values, by adding error
-variance to imputed values that are estimated from the regression line
-as in stochastic regression imputation (paragraph 3.5). This is done in
-each imputed dataset. Bayesian regression imputation models also add
-variation to the regression coefficients as in Bayesian stochastic
-regression imputation (paragraph 3.6). Thus, the difference between
-non-Bayesian and Bayesian imputation is that in the latter procedure not
-only extra variation is added via the residual error variance, but also
-via the (population) regression coefficients (in essence also for the
-error variance component a Bayesian estimate is used).
-
-We have seen an example of Bayesian and non-Bayesian imputation in
-Chapter 3 when we compared the Bayesian and non-Bayesian stochastic
-regression imputation procedure. By adding extra variation to the
-regression coefficients, as with Bayesian Stochastic regression
-imputation models, we take into account that the regression coefficient
-by itself is surrounded by uncertainty. In other words, we use the idea
-that there is not one true (population) regression coefficient but that
-the regression coefficient, as the (true) population parameter, follows
-a (probability) distribution itself. This is in contrast to a
-frequentist idea, which assumes that there is one true population
-parameter and that the uncertainty (by using a confidence interval)
-around the population parameter can be interpreted as a probability
-statement of the result if the study would be repeated infinite times.
-In the frequentist approach the sample regression coefficient is
-estimated by assuming that the regression coefficient, when repeating
-the study infinite times, follow a normal distribution. We use the
-sample regression coefficient as the best estimator of the population
-regression coefficient and present these with the confidence interval
-for the true population estimate. In contrast, in a Bayesian context, a
-Bayesian interval is a direct reflection of the uncertainty of the
-population regression coefficient. This means that, for Bayesian
-estimates, we directly compute the probability distribution of the
-regression coefficient itself. In other words, Bayesian statistics
-assume that the regression coefficient is a random variable that has a
-distribution.
-
-\begin{verbatim}
-What makes Bayesian estimation complex is that the distribution of the regression coefficient itself has to be estimated. This means that an estimation method has to be used to derive this distribution. Markov Chain Monte Carlo (MCMC) methods can help with this. A popular MCMC method to construct this distribution is the Gibbs Sampler. The Gibbs sampler produces a chain of iterations and updates regression parameters at each iteration step. This procedure is also used by the Multivariate Imputation by Chained Equations (MICE) package, that is the main MI method discussed in this manual, and therefore the MICE procedure is also called Gibbs sampling.
-
-Bayesian estimates are used to incorporate parameter uncertainty, e.g. uncertainty in the regression coefficient, that is used to generate the imputed values (on top of the error variance). Consequently, imputed values are drawn from their posterior predictive distribution, conditional on the values of other variables. Posterior, in Bayesian statistics, refers to an estimate, e.g. a regression coefficient estimate, that is estimated by using the sample data together with prior information about the value of the regression coefficient. This combination of sample data and prior information leads to a posterior estimated value of the regression coefficient, i.e. the posterior distribution. The Gibbs sampler helps to estimate this posterior value, that is subsequently used in a regression model to generate imputed values. Conditional, means loosely that we make use of the idea that variables are related to each other. For example, the value of the Tampa scale variable, relates to  for example the Pain, Gender and Disability variables. The more we know about the values of Pain, Gender or Disability, the better we can estimate the value for the Tampa scale. This relation is important because this relation can be used to generate imputations for the Tampa scale variable. If Tampa scale values are missing for specific values of Pain, Gender and Disability, these variables can be used to impute the Tampa scale scores. These relationships are captured by specifying a regression model with the Tampa scale as the outcome variable and Pain, Gender and Disability as the independent variables. We use these regression models to estimate imputed values for the Tampa scale score conditional on the Pain, Gender and Disability scores. A posterior predictive distribution means that we first use the posterior distribution, i.e. determined by using the Gibbs sampler, to draw a regression coefficient from and that we use that regression coefficient and the observed data to predict the missing value by using a regression equation. 
-\end{verbatim}
-
-\section{4.2. Running Multiple Imputation in
-R}\label{running-multiple-imputation-in-r}
-
-Multipl imputation in R can be performed with the \texttt{mice} function
-from the \texttt{mice} package. As an example we will apply this
-function to deal with the missing values in the LBP dataset of 50 low
-back pain patients. The dataset contains missing data in the two
-continuous variables, the Tampa scale and the Disability variable. The
-other variables in the dataset are Pain and Radiation, which are
-completely observed.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{data <-}\StringTok{ }\KeywordTok{read_sav}\NormalTok{(}\StringTok{"data/Backpain50 MI missing.sav"}\NormalTok{)}
-\KeywordTok{head}\NormalTok{(data,}\DecValTok{15}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 15 x 5
-##       ID  Pain Tampascale Disability Radiation
-##    <dbl> <dbl>      <dbl>      <dbl>     <dbl>
-##  1     1     9         45         20         1
-##  2     2     6         NA         10         0
-##  3     3     1         36          1         0
-##  4     4     5         38         NA         0
-##  5     5     6         44         14         1
-##  6     6     7         NA         11         1
-##  7     7     8         43         NA         0
-##  8     8     6         43         11         1
-##  9     9     2         NA         11         1
-## 10    10     4         36         NA         0
-## 11    11     5         38         16         1
-## 12    12     9         47         14         0
-## 13    13     0         32          3         1
-## 14    14     6         NA         12         0
-## 15    15     3         34         13         0
-\end{verbatim}
-
-The variable with missing values is always defined as the dependent
-variable and all other variables in the imputation model are the
-independent variables. During each iteration, all variables with missing
-values are imputed.
-
-The following options are used in the \texttt{mice} function to start
-MI, \texttt{m=5}, to generate 5 imputed datasets, \texttt{maxit=10}, to
-use 10 iterations for each imputed dataset (i.e.~10 chains of regression
-imputation models), \texttt{method=”pmm”}, which is the default
-imputation procedure in mice (see \texttt{?mice} for all settings of the
-mice function). We can also add a seed value to be able to obtain the
-same results when we repeat the analysis.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(mice)}
-\NormalTok{imp <-}\StringTok{ }\KeywordTok{mice}\NormalTok{(data, }\DataTypeTok{m=}\DecValTok{5}\NormalTok{, }\DataTypeTok{maxit=}\DecValTok{10}\NormalTok{, }\DataTypeTok{method=}\StringTok{"pmm"}\NormalTok{, }\DataTypeTok{seed=}\DecValTok{1050}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-##  iter imp variable
-##   1   1  Tampascale  Disability
-##   1   2  Tampascale  Disability
-##   1   3  Tampascale  Disability
-##   1   4  Tampascale  Disability
-##   1   5  Tampascale  Disability
-##   2   1  Tampascale  Disability
-##   2   2  Tampascale  Disability
-##   2   3  Tampascale  Disability
-##   2   4  Tampascale  Disability
-##   2   5  Tampascale  Disability
-##   3   1  Tampascale  Disability
-##   3   2  Tampascale  Disability
-##   3   3  Tampascale  Disability
-##   3   4  Tampascale  Disability
-##   3   5  Tampascale  Disability
-##   4   1  Tampascale  Disability
-##   4   2  Tampascale  Disability
-##   4   3  Tampascale  Disability
-##   4   4  Tampascale  Disability
-##   4   5  Tampascale  Disability
-##   5   1  Tampascale  Disability
-##   5   2  Tampascale  Disability
-##   5   3  Tampascale  Disability
-##   5   4  Tampascale  Disability
-##   5   5  Tampascale  Disability
-##   6   1  Tampascale  Disability
-##   6   2  Tampascale  Disability
-##   6   3  Tampascale  Disability
-##   6   4  Tampascale  Disability
-##   6   5  Tampascale  Disability
-##   7   1  Tampascale  Disability
-##   7   2  Tampascale  Disability
-##   7   3  Tampascale  Disability
-##   7   4  Tampascale  Disability
-##   7   5  Tampascale  Disability
-##   8   1  Tampascale  Disability
-##   8   2  Tampascale  Disability
-##   8   3  Tampascale  Disability
-##   8   4  Tampascale  Disability
-##   8   5  Tampascale  Disability
-##   9   1  Tampascale  Disability
-##   9   2  Tampascale  Disability
-##   9   3  Tampascale  Disability
-##   9   4  Tampascale  Disability
-##   9   5  Tampascale  Disability
-##   10   1  Tampascale  Disability
-##   10   2  Tampascale  Disability
-##   10   3  Tampascale  Disability
-##   10   4  Tampascale  Disability
-##   10   5  Tampascale  Disability
-\end{verbatim}
-
-After we have run the mice function, information is provided about the
-iteration and imputation steps for the variable that are imputed under
-the columns named ``iter'', ``imp'' and ``variable''. This information
-can be turned off by setting the mice function parameter printFlag =
-FALSE, which results in silent computation of the missing values.
-However, the printed information gives feedback about at which iteration
-step the imputation algorithm is, which gives you an idea how long it
-takes until the imputations are finished. The results from the
-imputation can be viewed by calling the imp object.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{imp}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Class: mids
-## Number of multiple imputations:  5 
-## Imputation methods:
-##         ID       Pain Tampascale Disability  Radiation 
-##         ""         ""      "pmm"      "pmm"         "" 
-## PredictorMatrix:
-##            ID Pain Tampascale Disability Radiation
-## ID          0    1          1          1         1
-## Pain        1    0          1          1         1
-## Tampascale  1    1          0          1         1
-## Disability  1    1          1          0         1
-## Radiation   1    1          1          1         0
-\end{verbatim}
-
-Under this object is information of the function that is called call
-(function settings that we used for mice), the number of imputed
-datasets, the missing values in each variable, the imputation method,
-the information under VisitSequence which is information about the
-sequence of variables that are firstly, secondly, etc. imputed during
-the imputation process, information of the PredictorMatrix (see
-paragraph XX) and the seed value of the random number generator.
-
-The MI datasets can be extracted by using the complete function (R code
-4.4). The settings action=''long'' and include=T mean that the imputed
-datasets are stacked under each other and that the original dataset
-(with missings) is also included (see ?complete for more possibilities
-how to store the imputed datasets).
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{mi_long <-}\StringTok{ }\KeywordTok{complete}\NormalTok{(imp, }\DataTypeTok{action=}\StringTok{"long"}\NormalTok{, }\DataTypeTok{include=}\NormalTok{T)}
-\end{Highlighting}
-\end{Shaded}
-
-In the imputed datasets two variables are added, an .id variable and an
-.imp variable to distinguish the cases in the dataset and the imputed
-datasets. The imputed datasets can be further used in mice to conduct
-pooled analyses or to store them for further use in other software
-packages as SPSS.
-
-\subsection{The mice alogorithm iand iteration
-steps}\label{the-mice-alogorithm-iand-iteration-steps}
-
-Imputed dataset 1 Per imputed dataset we start with iteration number 0
-(not shown in output).
-
-Iteration 0: Data points are randomly drawn from the observed values of
-the Tampascale and the Disability variable and these are used to replace
-the missing values in these variables.
-
-Iteration 1 (cycle 1): The Tampascale values are set back to missing.
-Then, a linear regression model is applied in the available data
-(i.e.~complete case analysis) with the Tampascale as the dependent and
-Pain, Disability and Radiation as independent variables to their
-regression coefficient estimates that are used to predict the missing
-values in the Tampascale variable together with the completed variables,
-i.e.~the completed Disability variable from iteration 0 (indicated by
-Disability0, because only the Disability variable contained missing data
-at this stage) and the available data from the Pain and Radiation
-variable (which were complete). This regression equation is defined as:
-
-〖Tampascale〗\_mis= β\_0+ β\_1× Pain+ β\_2× 〖Disability〗\_0+ β\_3×
-Radiation
-
-The same procedure is repeated for the Disability variable. The
-Disability scores are first set back to missing, then the regression
-coefficients of the Pain, Tampa scale and Radiation variables are
-obtained in the complete case dataset and imputations are generated from
-these regression coefficients. The missing values for Disability are
-imputed by using the imputed values in the Tampa scale variable
-(indicated by Tampa scale1, i.e.~which were imputed from the previous
-regression model).
-
-〖Disability〗\_mis= β\_0+ β\_1× Pain+ β\_2× 〖Tampascale〗\_1+ β\_3×
-Radiation
-
-Iteration 2 (cycle 2):
-
-The Tampascale values are again set back to missing and (new) updated
-regression coefficients for Pain, Disability and Radiation are obtained,
-making use of the imputed values in the Disability variable from
-iteration 1 (indicated by Disability1) and the complete data of the Pain
-and Radiation variables. Subsequently, missing values are updated from
-that regression model.
-
-〖Tampascale〗\_mis= β\_0+ β\_1× Pain+ β\_2× 〖Disability〗\_1+ β\_3×
-Radiation
-
-The same holds for the Disability variable. The missing values are
-updated by making use of the imputed values in the Tampascale variable
-within iteration 2 (indicated by Tampascale2) and updated regression
-coefficients.
-
-〖Disability〗\_mis= β\_0+ β\_1× Pain+ β\_2× 〖Tampascale〗\_2+ β\_3×
-Radiation
-
-Iteration 3 to prespecified number of iterations: This process is
-repeated within each iteration
-
-Last iteration: The imputed values from the last iteration are used in
-the imputed dataset. For the next imputed dataset, the entire process of
-iterations is repeated.
-
-\section{4.3 Customizing the Imputation
-model}\label{customizing-the-imputation-model}
-
-\begin{verbatim}
-With MI the variables Tampa scale and Disability will be imputed with the help of the variables Pain and Radiation. The latter two variables are called auxiliary variables when they are not part of the main analysis model but they help to impute the Tampa scale and Function variables. Variables that are used to impute other variables can be switched off and on in the predictormatrix. As we saw in R code 4.3 above, the predictor matrix for our MI procedure is
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{imp}\OperatorTok{$}\NormalTok{PredictorMatrix}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## NULL
-\end{verbatim}
-
-The predictor matrix is a matrix with the names of the variables that
-are part of the imputation model in the dataset listed in the rows and
-the column. The variables in the columns can be switched on or off which
-is the same as in- or excluding them from the imputation model to impute
-the missing data in the row variable. This works as follows for our LBP
-dataset. The first and fourth rows contain only zero´s, which is
-logical, because the Pain and Radiation variables did not have missing
-values. The variable in the second row contains missing values and the
-1´s in this row mean that the column variables, Pain, Disability and
-Radiation will be included in the (regression) imputation model. To
-impute the missing data in the Disability variable, the column variables
-Pain, Tampa scale and Radiation are used. As a default setting all
-variables will be included in the imputation model to predict missing
-values in other variables, i.e.~as default all combinations of variables
-that are complete and have missing values in the matrix will be switched
-on, i.e.~are assigned a value 1 in the predictormatrix. The diagonal of
-the predictormatrix is always zero. The predictormatrix can also be
-adapted when for example a variable that contains a high percentage of
-missing data must be excluded from the imputation model to impute other
-variables. For example, if we want to exclude the variable Disability
-from the imputation model of the Tampa scale variable and re-run the MI,
-we can use the following code:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{pred <-imp}\OperatorTok{$}\NormalTok{PredictorMatrix}
-\NormalTok{pred[}\StringTok{"Tampascale"}\NormalTok{, }\StringTok{"Disability"}\NormalTok{] <-}\StringTok{ }\DecValTok{0}
-\NormalTok{pred}
-
-\NormalTok{imp2 <-}\StringTok{ }\KeywordTok{mice}\NormalTok{(data,}\DataTypeTok{m=}\DecValTok{5}\NormalTok{, }\DataTypeTok{maxit=}\DecValTok{10}\NormalTok{, }\DataTypeTok{method=}\StringTok{"pmm"}\NormalTok{, }\DataTypeTok{predictorMatrix =}\NormalTok{ pred, }\DataTypeTok{seed=}\DecValTok{1050}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-For information about the imputation model can be foud in REF van
-buuren, REF White etc. A summary of guidelines for building the
-imptuation model is as follows:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  Include the outcome variable (Moons, 2006).
-\item
-  Include all variables that are part of the analysis model.
-\item
-  Include the variables at the same way in the imputation model as they
-  appear in the analysis model (i.e.~if interaction terms are in the
-  analysis model they also have to be included in the imputation model).
-\item
-  Include as many predictor variables that are related to missingness in
-  other variables or that are correlated to the variable with missing
-  values (auxiliary variables).
-\end{enumerate}
-
-\section{\texorpdfstring{Output of the \texttt{mice}
-function}{Output of the mice function}}\label{output-of-the-mice-function}
-
-The mice function returns a mids (multiple imputed data set) object. In
-our example that is the imp object. Under this object, all kind of
-imputation information is stored and can be extracted by typing
-\texttt{imp\$}, followed by the type of information you want.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{imp}\OperatorTok{$}\NormalTok{m}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 5
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{imp}\OperatorTok{$}\NormalTok{nmis}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##         ID       Pain Tampascale Disability  Radiation 
-##          0          0         13          9          0
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{imp}\OperatorTok{$}\NormalTok{seed}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 1050
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{imp}\OperatorTok{$}\NormalTok{iteration}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 10
-\end{verbatim}
-
-The above objects contain the the number of imputed datasets, missing
-values in each variable, the specified seed value and the number of
-iterations. The original data can be found in:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{imp}\OperatorTok{$}\NormalTok{data}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##    ID Pain Tampascale Disability Radiation
-## 1   1    9         45         20         1
-## 2   2    6         NA         10         0
-## 3   3    1         36          1         0
-## 4   4    5         38         NA         0
-## 5   5    6         44         14         1
-## 6   6    7         NA         11         1
-## 7   7    8         43         NA         0
-## 8   8    6         43         11         1
-## 9   9    2         NA         11         1
-## 10 10    4         36         NA         0
-## 11 11    5         38         16         1
-## 12 12    9         47         14         0
-## 13 13    0         32          3         1
-## 14 14    6         NA         12         0
-## 15 15    3         34         13         0
-## 16 16    6         42         NA         1
-## 17 17    3         35         11         0
-## 18 18    1         31          1         0
-## 19 19    2         31          7         0
-## 20 20    4         32          9         1
-## 21 21    5         NA         13         0
-## 22 22    5         39         12         0
-## 23 23    4         34          8         1
-## 24 24    8         47         13         1
-## 25 25    5         NA          6         0
-## 26 26    5         38         16         1
-## 27 27    9         NA         23         1
-## 28 28    3         36         NA         1
-## 29 29    2         36          9         0
-## 30 30    6         37         16         0
-## 31 31   10         NA         21         1
-## 32 32    4         37          8         0
-## 33 33   10         42         20         1
-## 34 34    2         37          3         0
-## 35 35    6         NA         12         1
-## 36 36    3         38          7         1
-## 37 37    8         NA          8         0
-## 38 38    3         38          6         1
-## 39 39    3         39         NA         0
-## 40 40    7         44         15         0
-## 41 41    7         45         NA         0
-## 42 42    6         40         12         1
-## 43 43    7         40         16         1
-## 44 44    1         NA          2         0
-## 45 45    9         41         NA         0
-## 46 46    5         41         17         0
-## 47 47    6         43         11         0
-## 48 48    3         39         NA         0
-## 49 49    2         NA          6         1
-## 50 50    8         NA         19         0
-\end{verbatim}
-
-The imputed values for each variable in the imptued values can be found
-under:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{imp}\OperatorTok{$}\NormalTok{imp}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## $ID
-## [1] 1 2 3 4 5
-## <0 rows> (or 0-length row.names)
-## 
-## $Pain
-## [1] 1 2 3 4 5
-## <0 rows> (or 0-length row.names)
-## 
-## $Tampascale
-##     1  2  3  4  5
-## 2  44 43 37 37 40
-## 6  44 45 37 43 43
-## 9  36 36 36 36 31
-## 14 44 37 43 43 40
-## 21 44 41 37 39 41
-## 25 47 42 44 40 44
-## 27 44 43 44 45 44
-## 31 45 43 43 47 43
-## 35 44 37 42 40 40
-## 37 42 47 47 47 47
-## 44 38 31 37 35 31
-## 49 34 38 34 36 37
-## 50 45 44 43 47 45
-## 
-## $Disability
-##     1  2  3  4  5
-## 4  12 13 12 14 13
-## 7  13 19 16 14 13
-## 10 13  8  6  6  6
-## 16 11 12  9 11 16
-## 28  6 12  6 11 11
-## 39 11 11  7 11  9
-## 41 12 11 10 12 10
-## 45 20 20 14 23 14
-## 48  9 11  6  7  7
-## 
-## $Radiation
-## [1] 1 2 3 4 5
-## <0 rows> (or 0-length row.names)
-\end{verbatim}
-
-The imputation methods used:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{imp}\OperatorTok{$}\NormalTok{method}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##         ID       Pain Tampascale Disability  Radiation 
-##         ""         ""      "pmm"      "pmm"         ""
-\end{verbatim}
-
-The predictor matrix:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{imp}\OperatorTok{$}\NormalTok{predictorMatrix}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##            ID Pain Tampascale Disability Radiation
-## ID          0    1          1          1         1
-## Pain        1    0          1          1         1
-## Tampascale  1    1          0          1         1
-## Disability  1    1          1          0         1
-## Radiation   1    1          1          1         0
-\end{verbatim}
-
-The sequence of the variables used in the imputeon procedure:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{imp}\OperatorTok{$}\NormalTok{visitSequence}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] "ID"         "Pain"       "Tampascale" "Disability" "Radiation"
-\end{verbatim}
-
-The imputed values (or means) during each iteration can also be
-extracted. These are stored as chainMean. The number of Chains is equal
-to the number of imputed datasets. A Chain refers to the chain of
-regression models that is used to generate the missing values. The
-length of each chain is equally large as the number of iterations. The
-Chains contain the means of the imputed values. This object can be used
-for monitoring convergence (by for example displaying the results in a
-convergence plot. See the next paragraph).
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{imp}\OperatorTok{$}\NormalTok{chainMean}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## , , Chain 1
-## 
-##                   1        2        3        4        5        6        7
-## ID              NaN      NaN      NaN      NaN      NaN      NaN      NaN
-## Pain            NaN      NaN      NaN      NaN      NaN      NaN      NaN
-## Tampascale 39.30769 41.38462 40.92308 39.84615 39.38462 38.92308 41.23077
-## Disability 12.00000 12.33333 13.88889 11.55556 11.55556 12.44444 11.55556
-## Radiation       NaN      NaN      NaN      NaN      NaN      NaN      NaN
-##                    8        9       10
-## ID               NaN      NaN      NaN
-## Pain             NaN      NaN      NaN
-## Tampascale 38.846154 39.07692 42.38462
-## Disability  9.111111 12.77778 11.88889
-## Radiation        NaN      NaN      NaN
-## 
-## , , Chain 2
-## 
-##                   1        2        3        4        5        6         7
-## ID              NaN      NaN      NaN      NaN      NaN      NaN       NaN
-## Pain            NaN      NaN      NaN      NaN      NaN      NaN       NaN
-## Tampascale 40.76923 40.53846 39.92308 39.76923 41.53846 40.92308 40.538462
-## Disability 11.44444 12.22222 13.66667 11.00000 10.22222 11.77778  9.666667
-## Radiation       NaN      NaN      NaN      NaN      NaN      NaN       NaN
-##                   8        9       10
-## ID              NaN      NaN      NaN
-## Pain            NaN      NaN      NaN
-## Tampascale 39.53846 39.76923 40.53846
-## Disability 11.44444 11.77778 13.00000
-## Radiation       NaN      NaN      NaN
-## 
-## , , Chain 3
-## 
-##                    1        2        3        4         5        6
-## ID               NaN      NaN      NaN      NaN       NaN      NaN
-## Pain             NaN      NaN      NaN      NaN       NaN      NaN
-## Tampascale 39.384615 39.69231 41.23077 40.69231 39.769231 40.76923
-## Disability  9.333333 12.33333 11.55556 10.33333  9.555556 11.22222
-## Radiation        NaN      NaN      NaN      NaN       NaN      NaN
-##                   7        8        9        10
-## ID              NaN      NaN      NaN       NaN
-## Pain            NaN      NaN      NaN       NaN
-## Tampascale 40.76923 41.61538 40.61538 40.307692
-## Disability 11.66667 11.11111 11.44444  9.555556
-## Radiation       NaN      NaN      NaN       NaN
-## 
-## , , Chain 4
-## 
-##                   1        2        3        4         5        6        7
-## ID              NaN      NaN      NaN      NaN       NaN      NaN      NaN
-## Pain            NaN      NaN      NaN      NaN       NaN      NaN      NaN
-## Tampascale 39.76923 39.53846 40.15385 41.07692 40.076923 41.00000 39.84615
-## Disability 11.44444 11.66667 10.55556 11.33333  9.222222 13.11111 14.22222
-## Radiation       NaN      NaN      NaN      NaN       NaN      NaN      NaN
-##                   8        9       10
-## ID              NaN      NaN      NaN
-## Pain            NaN      NaN      NaN
-## Tampascale 40.84615 39.92308 41.15385
-## Disability 11.00000 12.00000 12.11111
-## Radiation       NaN      NaN      NaN
-## 
-## , , Chain 5
-## 
-##                   1        2        3        4        5        6        7
-## ID              NaN      NaN      NaN      NaN      NaN      NaN      NaN
-## Pain            NaN      NaN      NaN      NaN      NaN      NaN      NaN
-## Tampascale 40.23077 40.30769 40.07692 40.00000 40.15385 41.00000 40.15385
-## Disability 10.55556 10.11111 10.88889 12.77778 11.55556 11.66667 10.33333
-## Radiation       NaN      NaN      NaN      NaN      NaN      NaN      NaN
-##                   8        9       10
-## ID              NaN      NaN      NaN
-## Pain            NaN      NaN      NaN
-## Tampascale 39.23077 41.46154 40.46154
-## Disability 10.77778 10.00000 11.00000
-## Radiation       NaN      NaN      NaN
-\end{verbatim}
-
-\section{Checking Convergence in R}\label{checking-convergence-in-r}
-
-When you use the mice function to create imputations it is a good idea
-to check if the imputation runs were successful and if you can thrust
-the imputations. This can be done by visualizing a convergence plot. On
-a convergence plot the means or standard deviations within imputation
-chains can be plotted, this can be done by presenting the information
-under the object LBP\_imp\$chainMean at the y-axis and the iterations on
-the x-axis. The convergence plot of the imputations from the imputations
-of R code 4.5 is presented in Figure 4.3 (we used 50 iterations to
-create the plot). In this plot you see that the variance between the
-imputation chains is almost equally large as that within the chains. If
-this is the case than there is healthy convergence. To create a
-convergence plot for only the Tampascale variable just use:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(imp)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Book_MI_files/figure-latex/unnamed-chunk-77-1.pdf}
-
-\section{Imputation diagnostics in R}\label{imputation-diagnostics-in-r}
-
-It can also be of interest to compare the values that are imputed with
-those that are observed. For that, the stripplot function can be used in
-mice. This function can easily be used in combination with the mice
-function (R code 4.10). With this function it is possible to plot the
-observed and imputed values in one plot. An example is given in Figure
-4.4. By comparing the observed and the imputed data points we get an
-idea if the imputed values can be thrusted. If there are no large
-differences between the imputed and observed values under MAR than we
-can conclude the imputed values are correct.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{stripplot}\NormalTok{(imp)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Book_MI_files/figure-latex/unnamed-chunk-78-1.pdf}
-
-\section{Multiple imputation in SPSS}\label{multiple-imputation-in-spss}
-
-The multiple imputation procedure in SPSS is based on the MICE algorithm
-that was developed in R. It is therefore no surprise that the settings
-of the mice function in R, are almost all covered by the options in
-SPSS. In SPSS these settings are presented in Window menu's. Before you
-start the MI procedure it is important to set the measurement level of
-the variables with missing data in the Variable View window of your
-data. They are important for the regression model that is used to
-estimate the missing values in that variable. For example, if you define
-a variable as scale, then linear regression models are used, for
-categorical variables, logistic regression models are used.
-
-\subsection{The setting for multiple imputation in
-SPSS}\label{the-setting-for-multiple-imputation-in-spss}
-
-Before we start the multiple imputation procedure, we set the starting
-point of the random number generator in SPSS at the fixed value of 950
-(in R we use the seed for this). In this way we are able to reproduce
-our results. This fixing of starting values for the random number
-generator is in general not advisable, we use it here for educational
-purposes.
-
-We set the random number generator in SPSS via
-
-\begin{quote}
-Transform -\textgreater{} Random Number Generators -\textgreater{} Set
-Starting point -\textgreater{} Fixed Value
-\end{quote}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig4.5} 
-
-}
-
-\caption{Set the Random Number Generator }\label{fig:fig4-5}
-\end{figure}
-
-The multiple imputation procedure in SPSS can be started via
-
-\begin{quote}
-Analyze -\textgreater{} Multiple Imputation -\textgreater{} Impute
-Missing Data Values.
-\end{quote}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig4.6} 
-
-}
-
-\caption{The variables Tab}\label{fig:fig4-6}
-\end{figure}
-
-In the Variables tab the variables that are part of the imputation model
-have to be transported to the window ``Variables in Model''. The
-variables are imputed sequentially in the order in which they are listed
-in the variables list. These variables are in our example the Pain,
-Tampascale, Disability and Radiation variables. Further, the number of
-imputed datasets can be defined as well as the dataset to which the
-imputed data values are saved. We choose for 5 imputations and call the
-dataset in which the imputed values will be stored ``LBP\_Imp''. In the
-Methods Tab the imputation method is defined.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig4.7} 
-
-}
-
-\caption{The Methods Tab}\label{fig:fig4-7}
-\end{figure}
-
-In the Method tab we choose for a ``Custom'' under Imputation Method and
-for Fully conditional specification. The Fully Conditional Specification
-(FCS) procedure is the Bayesian sequential regression imputation method
-as explained in \emph{section 4.3 and 4.4}. Under Model type for scale
-(continuous) variables we choose for Predictive Mean Matching. This
-procedure was explained in \emph{section 3.7}. In the MICE package PMM
-is the default procedure for continuous variables with missing data. In
-SPSS the default is the linear regression procedure. In the Constraints
-Tab the options per variable are defined.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig4.8} 
-
-}
-
-\caption{The Constraints Tab}\label{fig:fig4-8}
-\end{figure}
-
-In the Constraints tab the role of a variable during the imputation
-process is defined and it is possible to restrict the range of imputed
-values of a scale variable. In addition, you can restrict the analysis
-to variables with less than a maximum percentage of missing values. When
-the PMM method is selected in the Method Tab, the Constraints tab can be
-skipped. The Constraints tab can be useful when the Linear Regression
-method is selected in the Method Tab \emph{(see Appendix XX)}. Finally,
-in the Output Tab the generated output can be defined.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig4.9} 
-
-}
-
-\caption{The Output Tab}\label{fig:fig4-9}
-\end{figure}
-
-Display the Imputation model and the Descriptive statistics for
-variables with imputed values options can be selected for information
-about the imputation. When the FCS imputation method is used, you can
-request a dataset that contains iteration history data for FCS
-imputation. In our example this iteration history information is stored
-in the dataset ``Iter\_Backpain''. The dataset contains means and
-standard deviations by iteration for each scale variable for which
-values are imputed. You can plot the data to help assess model
-convergence \emph{paragraph 4.9}.
-
-\subsection{The output for Multiple imputation in
-SPSS}\label{the-output-for-multiple-imputation-in-spss}
-
-After the multiple imputation procedure is done, a new data window opens
-that contains the imputed datasets. These multiple imputed datasets are
-stacked on top of each other. In this file the imputed values are marked
-yellow. There is also an extra variable added to the file which is
-called \texttt{Imputation\_} (Figure \ref{fig:fig4-10}). The imputed
-values can be marked and unmarked via \textgreater{} View
--\textgreater{} Mark Imputed data
-
-If you switch this possibility on, SPSS automatically recognizes the
-dataset as a multiple imputed dataset. If you switch this possibility
-off, SPSS treats the dataset as one dataset. This marking and unmarking
-can also be done in the Data view window via the button with yellow and
-white squares on the right site above (Figure \ref{fig:fig4-11}). If you
-click the button, a selection box appears with ``Original data''
-selected,where you can easily move to the different imputed datasets.
-The variable \texttt{Imputation\_} is a variable with a nominal measure.
-You can compare the use of this variable with the Split File option in
-SPSS where all analyses are done separately for the categories of the
-variable use to split the analyses. The difference is that with the
-\texttt{Imputation\_} variable you also obtain pooled estimates for the
-statistical analyses.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig4.10} 
-
-}
-
-\caption{Example of Multiple Imputed dataset}\label{fig:fig4-10}
-\end{figure}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig4.11} 
-
-}
-
-\caption{Button and selection box to mark imputed values}\label{fig:fig4-11}
-\end{figure}
-
-The iteration history is stored in the Iter\_Backpain dataset as we
-defined in the Output window. In this dataset the means and standard
-deviations of the imputed values at each iteration are stored. These
-values can be used to construct Convergence plots. More about making
-convergence plots will be discussed in the next paragraph.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig4.12} 
-
-}
-
-\caption{The iteration history data}\label{fig:fig4-12}
-\end{figure}
-
-Based on our settings, SPSS produces the following results in the output
-window. In the Imputation Specifications table, information is provided
-on the imputation method used, the number of imputations, the model used
-for the scale variables, if interactions were included in the imputation
-models, the setting for the maximum percentage of missing values and the
-setting for the maximum number of parameters in the imputation model
-(Figure \ref{fig:tab4-4}).
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/tab4.4} 
-
-}
-
-\caption{Imputation Specifications table}\label{fig:tab4-4}
-\end{figure}
-
-A second table, called Imputation Results, is presented with information
-about the imputation method, the number of fully conditional
-specification methods, the variables that are imputed and not imputed
-and the imputation sequence(Figure \ref{fig:tab4-5}).
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/tab4.5} 
-
-}
-
-\caption{Imputation Results}\label{fig:tab4-5}
-\end{figure}
-
-The Imputation Models table presents information about the imputation
-models used for the variables with missing data (Figure
-\ref{fig:tab4-6}). Information is provided about the method of
-imputation, under the type column, the effect estimates used to impute
-the missing values, the number of missing and imputed values. For
-example for the Tampascale variable 13 values were missing and m=5 times
-13 is 65 values were imputed.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/tab4.6} 
-
-}
-
-\caption{Imputation Models}\label{fig:tab4-6}
-\end{figure}
-
-The Descriptive statistics displaye the descriptive information of the
-original, imputed and completed data of the Tampascale and the
-Disability variable. In this way you can compare the completed data
-after MI with the original data.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/tab4.7} 
-
-}
-
-\caption{Descriptive statistics}\label{fig:tab4-7}
-\end{figure}\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/tab4.8} 
-
-}
-
-\caption{Descriptive statistics}\label{fig:tab4-7}
-\end{figure}
-
-\subsection{Checking Convergence after Multiple imputation in
-SPSS}\label{checking-convergence-after-multiple-imputation-in-spss}
-
-The dataset Iter\_Backpain in the previous paragraph contains the means
-and standard deviations of the imputed values at each iteration and
-imputation round. This information is similar as the information in
-\texttt{imp\$chainMean} in R. This dataset can be used to generate
-convergence plots, to check if the imputed values have the expected
-variation between the iterations.The iteration can be checked for the
-means and standard deviations seperately. In order to obtain seperate
-plots for htese summary statistics, the split file option in SPSS can be
-activated.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig4.17} 
-
-}
-
-\caption{Split file}\label{fig:fig4-17}
-\end{figure}
-
-After activation of the split file option, the Graph menu in SPSS can be
-used to make the plots.
-
-\begin{quote}
-Graph -\textgreater{} Char Builder.
-\end{quote}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig4.13} 
-
-}
-
-\caption{Graph menu}\label{fig:fig4-13}
-\end{figure}
-
-Two windows will open that can be used to build a chart:
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig4.14} 
-
-}
-
-\caption{Chart Builder}\label{fig:fig4-14}
-\end{figure}
-
-On the x-axis the put the \texttt{iteration\ number} variable and on the
-y-axis the variable for which we want to display the iteration history.
-The \texttt{Imputation\ Number} variable is dragged to the
-\texttt{set\ color} top-right.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig4.15} 
-
-}
-
-\caption{Chart Builder}\label{fig:fig4-15}
-\end{figure}
-
-As a result two plots appear with the iteation history for each
-imputation run.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig4.18} 
-
-}
-
-\caption{Convergence plots}\label{fig:fig4-18}
-\end{figure}\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig4.19} 
-
-}
-
-\caption{Convergence plots}\label{fig:fig4-18}
-\end{figure}
-
-\section{Number of Imputed datasets and
-iterations}\label{number-of-imputed-datasets-and-iterations}
-
-Researchers assume that the number of imputations needed to generate
-valid imputations has to be set at 3-5 imputations. This idea was based
-on the work of Rubin (1987). He showed that the precision of a pooled
-parameter becomes lower when a finite number of multiply imputed
-datasets is used compared to an infinite number (finite means a limited
-number of imputed datasets, like 5 imputed datasets and infinite means
-unlimited and can be recognized by the mathematical symbol ∞). The
-precision of a parameter is often represented by the sampling variance
-(or standard error (SE) estimate; the sampling variance is equal to SE2)
-of for example a regression coefficient. In case of multiple imputed
-datasets precision is determined by the pooled sampling variance or
-pooled SE. A measure to value the amount of precision (i.e.~between the
-pooled sampling variance estimated in a finite compared to an infinite
-number of imputed datasets) is the relative efficiency (RE). The RE will
-be low when the number of imputations is high (and the precision becomes
-larger) and is defined as:
-
-Formula 4.1
-
-RE= 1/(1+ FMI/m)
-
-FMI is the fraction of missing information and m is the number of
-imputed datasets. Where FMI is roughly equal to the percentage of
-missing data in the simplest case of one variable with missing data.
-When there are more variables in the imputation model, and these
-variables are correlated with the variables with missing data the FMI
-becomes lower (see paragraph 5.2 for more information about the FMI).
-
-The relationship between the RE and the pooled sampling variance TPooled
-(or 〖SE〗\_Pooled\^{}2) can also be written as (van Buuren 2012):
-
-Formula 4.2:
-
-T\_(Pooled,finite)=RE×T\_(Pooled,infinite)
-
-which is equal to,
-
-Formula 4.3:
-
-〖SE〗\emph{(Pooled,finite)\^{}2=RE×〖SE〗}(Pooled,infinite)\^{}2
-
-Formula's 4.2 and 4.3 can be interpreted as follows: if the RE is 0.93
-or 93\% (when for example FMI=0.4 and m=5), formula 4.2 becomes:
-
-T\_(Pooled,finite)=0.93×T\_(Pooled,infinite),
-
-This is the same as saying that the SE when 5 imputed datasets are used
-is √0.93=0.96 times as large as the SE when an infinite number of
-imputed datasets will be used (the SE is the squared sampling variance,
-taking the square root of the sampling variance gives the SE). Because
-the RE is divided by 1, this is the same as saying that the SE when 5
-imputed datasets are used is 1/√0.93=1.04 times larger (or 4\%) as the
-SE when an infinite number of imputed datasets will be used. Graham
-(2007) also studied the loss in power when infinite numbers of imputed
-datasets are used. They recommended that at least 20 imputed datasets
-are needed to restrict the loss of power when testing a relationship
-between variables. Bodner (2008) proposed the following guidelines after
-a simulation study using different values for the FMI to determine the
-number of imputed datasets. For FMI´s of 0.05, 0.1, 0.2, 0.3, 0.5 the
-following number of imputed dataets are needed: ≥3, 6, 12, 24, 59
-respectively. Following the study of Bodner (2008), White et al. (2010),
-proposed a rule of thumb, based on the idea that the FMI is frequently
-lower than the percentage of missing cases. Their rule of thumb states
-that the number of imputed datasets should be at least equal to the
-percentage of missing cases. This means that when 10\% is missing, 10
-datasets should be generated, with 20\% missing cases, 20 datasets, etc.
-
-Iterations Van Buuren (2012) states that the number of iterations may
-depend on among others the correlation between variables and the
-percentage of missing data in variables. He proposed that a number of
-5-20 iterations is enough to reach convergence. This number may be
-adjusted when the percentage of missing data is high. Nowadays computers
-are fast so that a higher number of iterations can easily be used.
 
 \chapter{Data analysis after Multiple
 Imputation}\label{data-analysis-after-multiple-imputation}
@@ -4908,13 +2271,14 @@ Wald_{Pooled} =\frac{(\overline{\theta} - {\theta_0})^2}{V_T}
 
 where \(\overline{\theta}\) and \(V_T\) is the total variance and is
 equal to the \(SE_P\) or the pooled standard error that was derived in
-the previous paragraph), and θ\_0 is the parameter value under the null
-hypothesis (which is mostly 0). The univariate Wald test can be used to
-test all kind of univariate parameters of interest, mean differences and
-univariate regression coefficients in linear and logistic regression
-models. In our example, we use the univariate Wald test to test the
-pooled mean difference for significance. The univariate Wald test in our
-example is calculated using the values from (Figure \ref{fig:tab5-1a}):
+the previous paragraph), and \(\theta_0\) is the parameter value under
+the null hypothesis (which is mostly 0). The univariate Wald test can be
+used to test all kind of univariate parameters of interest, mean
+differences and univariate regression coefficients in linear and
+logistic regression models. In our example, we use the univariate Wald
+test to test the pooled mean difference for significance. The univariate
+Wald test in our example is calculated using the values from (Figure
+\ref{fig:tab5-1a}):
 
 \[Wald_{Pooled} =\frac{(\overline{\theta} - {\theta_0})^2}{V_T}=\frac{1.971}{\sqrt{0.849084}}=2.139\]
 The univariate pooled Wald value follows a t-distribution. This
@@ -6284,599 +3648,6 @@ The value of 0.3319019 in the column named fmi for the Pain variable is
 calculated according to the Formula 5.17 for FMI. The value 0.2811114
 under the column named lambda is calculated according to Formula 5.13.
 
-\chapter{Multiple Imputation and Regression
-Modelling}\label{multiple-imputation-and-regression-modelling}
-
-This Chapter is a follow-up on the previous Chapters 4 and 5 about data
-analysis with Multiple Imputation. In this Chapter, we will deal with
-some specific topics when you perform regression modeling in multiple
-imputed datasets.
-
-\section{Imputing the Outcome
-variable}\label{imputing-the-outcome-variable}
-
-In previous literature that has been discussion about how to deal with
-the outcome variable (i.e.~dependent variable) as part of the imputation
-procedure. For a full overview of the arguments you can review the
-original literature. There are roughly two situations when the outcome
-can be considered. Below we will briefly summarize the situations and
-provide the concluding advice from literature. 1. The outcome is
-completely observed and independent variables in your analysis model
-have missing values.
-
-Advice: include the outcome variable in the imputation model to impute
-the missing values in the independent variables (Moons, 2006).
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
-\tightlist
-\item
-  Both the outcome and independent variables in your analysis model have
-  missing values.
-\end{enumerate}
-
-Advice: include the outcome variable in the imputation model. I In other
-words, impute the missing values in the outcome and independent
-variables (White, 2017).
-
-\section{Logistic regression with a categorical covariate in
-SPSS}\label{logistic-regression-with-a-categorical-covariate-in-spss}
-
-For categorical covariates, SPSS does not generate a pooled p-value for
-the overall Wald test. This is equal to not presenting a pooled
-Chi-square value in SPSS because the overall Wald value is a Chi-square
-value that represents the relationship between variables with
-\textgreater{} 2 categories and the outcome. An example is shown in
-Table 6.1a and 6.1b to show that the pooled Chi-square value for the
-Wald test is presented for the logistic and Cox regression models in
-SPSS respectively. As an example, we use a categorical version of the
-Tampascale variable with the categories 0 = low fear of movement, 1 =
-middle fear of movement and 2 is a high fear of movement. This variable
-contains missing data and was imputed with MI. We used 5 imputed
-datasets. The output Tables for the analyses can be found in Figure
-\ref{fig:tab6-1a}.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/tab6.1a} 
-
-}
-
-\caption{Logistic and Cox Regresion with an independent categorical variable.}\label{fig:tab6-1a}
-\end{figure}\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/tab6.1b} 
-
-}
-
-\caption{Logistic and Cox Regresion with an independent categorical variable.}\label{fig:tab6-1a}
-\end{figure}
-
-The information of the overall Wald test can normally be found in the
-output table in the row above the regression coefficient estimates of
-the separate categories of the categorical variable. In SPSS, this row
-only provides information of the overall Wald value, the degrees of
-freedom and the level of significance (abbreviated as Sig. which is the
-p-value). In the output tables you see that besides the regression
-estimates for each different category, no pooled estimates are provided
-for the overall Wald test (this whole row is missing).
-
-There are several complex and more simple procedures to derive a p-value
-for the overall Wald test. The simplest procedure is just taking the
-median of the p-values from the overall Wald test of all imputed
-datasets, this rule is called the Median P Rule (MPR) (Eekhout 2017).
-This rule will be discussed more thoroughly below. Other more complex
-procedures are the multiple parameter Wald test or D2 method, the pooled
-sampling variance or D1 method and the Meng and Rubin pooling procedure.
-These methods can only be performed in R; the codes are presented in the
-following paragraph.
-
-\section{Logistic regression with a categorical variable in
-R}\label{logistic-regression-with-a-categorical-variable-in-r}
-
-\subsection{Multiple parameter Wald test or D2
-method}\label{multiple-parameter-wald-test-or-d2-method}
-
-One possibility is to pool the Chi-square values from the multiple
-parameter Wald or likelihood ratio tests with multiple degrees of
-freedom. This procedure is also called the D2 procedure (Enders 2012).
-We used this procedure also in the previous Chapter to obtain the pooled
-Chi-square values.
-
-The following formula is used to obtain the Chi-square values from a
-multiple parameter Wald test (Marshall, 2009): Formula 6.1
-W\_chi=(1+r)\^{}(-1) (ω ̅/k-(m+1)/(m-1) r) ,
-
-where ω ̅ is the mean of the Chi-square values over the imputed datasets,
-k is the degrees of freedom of the Chi-square test statistic, m is the
-number of imputed datasets and r reflects the relative increase in
-variance due to nonresponse, which is obtained by the following formula:
-
-\begin{verbatim}
-                                        Formula 6.2
-\end{verbatim}
-
-r= (m+1)/(m(m-1)) ∑\_(j=1)\^{}m▒( 〖√(ω\_j )-√(ω ̅ ))〗\^{}2 ,
-
-with m and ω ̅ as above, j = 1 \ldots{}, m the index of each separate
-imputed dataset and ω\_j is the Chi-square value in each imputed
-dataset. The p-value is calculated by comparing the W\_chi statistic to
-an F distribution with k and v degrees of freedom as follows:
-
-\begin{verbatim}
-                                        Formula 6.3
-\end{verbatim}
-
-P=Pra{[}F\_(k,v)\textgreater{}W\_chi{]}
-
-The application of the function to pool Chi-square values can be found
-in the R code below where the function \texttt{micombine.chisquare} is
-applied. Input values in the function are the Chi-square values of each
-imputed dataset that are shown in Table 6.1 and the degrees of freedom
-of the Chi-square test, which is 2 here.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(miceadds)}
-\KeywordTok{micombine.chisquare}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\FloatTok{1.815}\NormalTok{,}
-            \FloatTok{1.303}\NormalTok{,}
-            \FloatTok{2.826}\NormalTok{,}
-            \FloatTok{1.759}\NormalTok{,}
-            \FloatTok{3.634}\NormalTok{),}\DecValTok{2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Combination of Chi Square Statistics for Multiply Imputed Data
-## Using 5 Imputed Data Sets
-## F(2, 254.38)=0.865     p=0.4221
-\end{verbatim}
-
-As we already showed in the previous Chapter this pooling function is
-also available in the \texttt{miceadds} and \texttt{semtools} packages,
-which will of course provide the same results.
-
-\subsection{The pooled sampling variance or D1
-method}\label{the-pooled-sampling-variance-or-d1-method}
-
-Alternatively, a combination of the pooled parameter estimates and the
-pooled sampling variances can be used to construct a test that resembles
-a multivariate Wald test (Marshall, 2009). This test pools within and
-between covariance matrices of each imputed dataset and finally corrects
-the total parameter covariance matrix of the multivariate Wald test by
-including the average relative increase in variance to account for the
-missing data.
-
-The multivariate Wald statistic is calculated as (Enders, 2010; Marshall
-et al., 2009):
-
-\begin{verbatim}
-                                        Formula 6.4
-\end{verbatim}
-
-W\_mvar=((1+r\_1 )\^{}(-1) (θ\_0-θ ̅)U ̅\^{}(-1) 〖(θ\_0-θ ̅)〗\^{}t)/k ,
-
-where θ ̅ and θ\_0are the pooled coefficient and the value under the null
-hypothesis, U ̅ is the within imputation variance (Var(θ ̅)within), t is
-the total variance for the pooled estimate (Var(θ ̅ )), and k is the
-number of parameters. The r\_1is the relative increase in variance due
-to nonresponse (fraction of missing information), which is in this case
-obtained by:
-
-\begin{verbatim}
-                                        Formula 6.5
-\end{verbatim}
-
-r\_1=((1+m\^{}(-1) )Tr(〖BU ̅〗\^{}(-1)))/k,
-
-where B is the between imputation variance (Var(θ ̅)between) and m is the
-number of imputed datasets. The p-value is calculated by comparing the
-W\_mvar statistic to an F distribution with k and v\_1 degrees of
-freedom. Formula 6.6 P=Pra{[}F\_(k,v\_1 )\textgreater{}W\_mvar{]}
-
-With the degrees of freedom defined as: Formula 6.7 v\_1=4+(km-k-4)
-〖{[}1+(1-2/(km-k)) 1/r\_1 {]}〗\^{}2,
-
-If km-k\textless{}4, the formula above applies, otherwise: Formula 6.8
-v\_1=((km-k)(1+1/k)〖(1+1/r\_2 )〗\^{}2)/2.
-
-The D1 function for logistic regression is available from the psfmi
-package. The psfmi package is a package that contains predictor
-selection functions for multiple imputation. The package can be
-downloaded from Github. An example of the application of this procedure:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{##example from psfmi package - wel wat minder uitgewerkt. Ook technische kant moet eruit. Daarovor verwijzen naar paper. }
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Meng and Rubin pooling}\label{meng-and-rubin-pooling}
-
-Meng and Rubin proposed a method to test overall categorical variables
-indirectly based on the likelihood ratio test statistic (MR pooling)
-(Meng \& Rubin, 1992, Mistler, 2013). For each regression parameter, two
-nested models are fitted in each imputed dataset: one restricted model
-where the parameter is not included in the model and one full model
-where the parameter is included. The pooled likelihood ratio tests are
-then compared to obtain pooled p-values for each parameter. The MR
-pooling method requires fitting multiple models for each variable in the
-data, hence it is an indirect approach. This can be a very
-time-consuming process.
-
-Meng and Rubin pooling (MR pooling) The Meng and Rubin pooling method
-works according to the following steps (Meng \& Rubin, 1992): for each
-regression parameter θ two nested models are fitted in each imputed
-dataset: one where θ is included (full model) and one where θ is not
-included in the model (restricted model). Subsequently, these models are
-pooled to obtain θ ̅\_full and θ ̅\_restricted. The average likelihood
-ratio test statistic d ̅L over the imputed datasets as a result of
-comparing the log likelihood values between these models is calculated
-as:
-
-Formula 6.9 d ̅\_L=1/m ∑\_(j=1)\^{}m▒2 (L\_restricted-L\_full ),
-
-where Lrestricted and Lfull represent the maximum log likelihood values
-with respect to θ.\\
-The log likelihood values from the two models of step 2 are then
-re-calculated and averaged using the model parameters θ ̅\_full and θ
-̅\_restricted of step 1 (which were constrained to the values from the
-models in the imputed data):
-
-Formula 6.10
-
-d ̅\_constrained=1/m ∑\_(j=1)\^{}m▒2 (L(θ ̅\_full )-L(θ ̅\_restricted )),
-
-\begin{verbatim}
-The resulting test statistic DL , required to obtain the pooled p-value, is calculated by incorporating the average increase in variance due to nonresponse r ̅L as follows:
-\end{verbatim}
-
-Formula 6.11 D\_L= d ̅\_constrained/(k(1+(r\_L ) ̅)),
-
-\begin{verbatim}
-                    Formula 6.12
-\end{verbatim}
-
-(r\_L ) ̅=(m+1)/k(m-1) (d ̅\_L-d ̅\_constrained),
-
-where k is the number of degrees of freedom in the complete data
-likelihood ratio test (Mistler, 2013; van Buuren, 2012). The p-value is
-calculated by comparing the D\_L statistic with an F distribution with k
-and vL (i.e., degrees of freedom of the denominator) according to:
-Formula 6.13
-
-P\_L=Pra{[}F\_(k,v\_L )\textgreater{}D\_L{]}
-
-\begin{verbatim}
-                            Formula 6.14
-\end{verbatim}
-
-v\_L=4+(km-k-4){[}1+(1-2/(km-k) 1/r\_L {]}\^{}2
-
-To calculate the pooled p-value by using the Meng and Rubin procedure we
-use R code 6.3.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{###r code met vb uit psfmi package, simpele code = dus aanpassen en niet zo uitgebreid. Gewoon alleen toepassing laten zien. }
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{The Median P Rule}\label{the-median-p-rule}
-
-For the Median P Rule (MPR) one simply uses the median p-value of the
-significance tests conducted in each imputed dataset (MPR pooling).
-Hence, it depends on p-values only and not on the parameter estimates.
-The MPR can be calculated by using the p-values from the likelihood
-ratio test for multiple parameters for the categorical variables in the
-multivariable model (Eekhout, 2017). The Median P Rule is therefore very
-simple to apply, you just take the median of the p-values. For the
-median p-value to be valid you have to run the MI procedure without the
-outcome in the imputation model (R code 6.4).
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{##Example code of MPR}
-\end{Highlighting}
-\end{Shaded}
-
-\section{Cox Regression with a categorical variable in
-R}\label{cox-regression-with-a-categorical-variable-in-r}
-
-As with logistic regression models, pooling categorical variables in Cox
-regression models is also not possible in SPSS, which was shown in Table
-6.1b. In this output table the pooled overall Wald statistics are also
-lacking. As a solution we can also use the pooling statistics that were
-shown in the previous paragraph. All procedures can be applied for
-overall Wald tests that are obtained by using Cox regression models,
-except for the Meng and Rubin procedure. The Meng and Rubin procedure is
-not recommended to use for Cox regression models (Marshall, 2009). The
-other three pooling procedures are available for Cox regression models,
-which are the Multiple parameter Wald test pooling or D2 method, the
-pooled sampling variance (VAR pooling) or D1 method and the MPR pooling
-procedure. The MPR pooling procedure is only extensively tested for the
-logistic regression model, but not yet for the Cox regression model and
-should therefore only be used in combination with the other pooling
-procedures.
-
-\subsection{Multiple parameter Wald test or D2
-method}\label{multiple-parameter-wald-test-or-d2-method-1}
-
-{[}Alleen verschillen met Logistic regression utileggen. zo mogelijk
-samen nemen. nu is het een beteje dubbel allemaal. {]}
-
-\subsection{The pooled sampling variance or D1
-method}\label{the-pooled-sampling-variance-or-d1-method-1}
-
-The pooled sampling variance procedure can also be applied to Cox
-regression models. This procedure makes use of the within and between
-covariance matrices that are obtained in each imputed dataset. Here the
-function D1.Cox that can be obtained via the psfmi package, does the
-job. An example of the application of this procedure can be found in R
-code 6.7.
-
-\subsection{The Median P Rule}\label{the-median-p-rule-1}
-
-The Median P Rule just uses the median of the p-values. For the median
-p-value to be valid you have to run the MI procedure without the outcome
-in the imputation model (R code 6.8).
-
-\section{Predictor selection}\label{predictor-selection}
-
-Prediction models are frequently developed by using selection procedures
-in logistic and Cox regression models. As a selection procedure,
-backward selection is recommended (Moons et al 2015). Predictor
-selection in multiple imputed datasets may be challenging. Predictor
-selection in each imputed dataset separately, may result in a different
-set of selected variables. Royston (2008) showed that the best choice to
-select predictors from multiply imputed datasets is to select from the
-pooled model, i.e.~the model that is estimated in each imputed dataset
-and subsequently regression coefficients are pooled. From these pooled
-estimates the backward selection procedure can start. This is possible
-in SPSS when the model includes continuous and dichotomous variables.
-This is however not possible in SPSS when the model contains categorical
-variables. Because categorical variables are estimated and selected by
-using an overall Wald Chi-square value and as we have seen in paragraph
-6.2, these Chi-square tests cannot be pooled in SPSS. This makes
-variable selection when categorical variables are included, not possible
-in SPSS. We have therefore developed an R package, that contains
-functions to select predictors multiple imputed datasets and we have
-integrated the pooling procedures that were discussed in the previous
-paragraphs within these predictor selection functions. We will discuss
-these functions in the next paragraphs by running the code and we will
-discuss the output. The package can be installed via the Github website
-(code to install the packages will be provided below). As an example, we
-will use a dataset of 426 patients who received a new hip after a hip
-fracture. The outcome is recovery at 6 months which was defined as 1=no
-recovery and 0 = recovery. All functions work more or less in the same
-way and comparable function parameter settings are used. We start by
-showing the parameters settings that are used in these functions.
-
-\subsection{Predictor Selection functions in
-R}\label{predictor-selection-functions-in-r}
-
-The functions are developed for Logistic and Cox regression models. They
-are called: psfmi.log psfmi.log.MR psfmi.cox
-
-To activate these functions, you have to install the psfmi package from
-the Github website. Before that you have to install and activate the
-devtools package. The following code in the Console window can be used:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{## voorbeeld laten zien voor predictor selectio met psfmi package - verder niet uitwijden over inhoud. Alleen voorbeeld laten zien!}
-\end{Highlighting}
-\end{Shaded}
-
-\section{Interaction terms in model}\label{interaction-terms-in-model}
-
-When the analysis model contains an interaction term, and one of the
-variables that is part of the interaction term contain missing data, it
-is important to pay extra attention to the imputation procedure. The
-challenge in this situation is that the imputation model should also
-include the interaction term, otherwise the imputation model is not
-compatible with the analysis model and this results in incorrect imputed
-values. For example, the relationship between (body)weight and blood
-pressure, with gender as effect modifier. The main aim of this model is
-to study the relationship between (body)weight and blood pressure. The
-interaction term between (body)weight and gender investigates whether
-this relationship depends on gender, i.e.~is stronger or less strong for
-males compared to females. The analysis model is:
-
-SBP=β\_0+β\_1×BodyWeight+β\_2×Gender+β\_3×BodyWeight×Gender
-
-Assume now that there is missing data in the weight variable. As a
-result, there will also be missing data in the interaction term between
-weight and gender.
-
-When an imputation model only includes the following formula:
-
-〖BodyWeight〗\_mis=β\_0+β\_1×SBP+β\_2×Gender
-
-The imputation model is not consistent (not compatible) with the
-analysis model and would therefore not be able to generate valid
-imputations. We have to use an imputation model that includes the
-interaction term, such as:
-
-〖BodyWeight〗\_mis=β\_0+β\_1×SBP+β\_2×Gender+
-β\_3×〖BodyWeight〗\_mis×Gender
-
-The imputation of weight should take the interaction between weight and
-gender in relation to blood pressure into account. A method that we can
-apply is that we impute the relationship between blood pressure and
-weight separately for males and females. That way, we account for the
-possibility that the relationship between weight and blood pressure
-differs between males and females and the imputed values can then differ
-too. Not taking into account this interaction during the imputation
-process will result in biased coefficients and standard error estimates
-(Bartlett et al. 2015). The steps that we have to follow to impute the
-missing data in the weight variable in SPSS, taking into account the
-interaction between weight and gender is illustrated in the next
-paragraph.
-
-\subsection{Imputation of interaction terms in
-SPSS}\label{imputation-of-interaction-terms-in-spss}
-
-To impute the missing data in the Bodyweight variable in the example,
-the fact that the relation between bodyweight and blood pressure depends
-on gender needs to be taken into account in the imputation. This can be
-done by using the Split file procedure in SPSS. The example dataset
-contains information about the variables that are presented in
-\ref{fig:fig6-1}.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig6.1} 
-
-}
-
-\caption{Bodyweight dataset with missing values in the Bodyweight variable.}\label{fig:fig6-1}
-\end{figure}
-
-Compare Groups and move the Gender variable to the window: Group based
-on, then click OK. In the right corner below it you see the information
-``Split by Gender'', which means that for the next analyses procedures
-the procedures will be done separately for males and females.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig6.2} 
-
-}
-
-\caption{The Split File procedure in SPSS.}\label{fig:fig6-2}
-\end{figure}
-
-Perform MI and use all variables in the imputation model, except for the
-Gender variable. Because the Gender variable was used as a split
-variable it cannot be included in the imputation model. MI will now be
-separately performed for Males and Females. Set M=20, use Predictive
-Mean Matching and 50 iterations and store the imputed datasets in the
-file Imp\_Bodyweight. In the SPSS output file, in the Imputation Results
-and the Imputation Models tables you can check that the imputation
-process was performed for males and females separately.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig6.3} 
-
-}
-
-\caption{Imputation models, splitted for males and Females}\label{fig:fig6-3}
-\end{figure}\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig6.4} 
-
-}
-
-\caption{Imputation models, splitted for males and Females}\label{fig:fig6-3}
-\end{figure}
-
-Compute the Interaction term of Bodyweight times Gender in the dataset
-that contains the imputed values.Now turn on the split on the variable
-Imputation\_. That will automatically turn off the split on the Gender
-variable in the imputed datasets (in the Data View window of the imputed
-datasets in the corner on the right below you see the statement ``Split
-by Imputation\_ Gender''. To include the variable Gender in the model we
-first have to unsplit the data by Gender).
-
-Then the analysis can be performed as planned with th interaction term
-as one of the predictors.
-
-\subsection{Imputation of interaction terms in
-R}\label{imputation-of-interaction-terms-in-r}
-
-The split file procedure that we used in SPSS in the previous paragraph
-to impute missing data and to take interaction terms into account can
-also be applied in R. First you have to split the data, impute the
-missing values, merge the data again and generate the interaction term
-in the dataset . Then results of the analysis model can be pooled. There
-is also another procedure in R that can be used. This procedure is
-called Substantive Model Compatible Fully Conditional Specification
-(SMC-FCS). This is a fairly complex procedure that can generate valid
-imputations by taking into account interaction terms. More about this
-procedure can be found in the technical paper of Bartlett et al.( 2015).
-To apply the procedure we need the smcfcs function which is available in
-the smcfs package (Bartlett, 2015). To get pooled analysis results we
-also have to install the mitoolspackage. An example of using the SMC-FCS
-is presented below.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Read in SPSS File "BodyWeight" and assign to object set}
-\CommentTok{#set <- read.spss(file = "BodyWeight.sav", to.data.frame = T) ##IE: change to haven package}
-
-\CommentTok{#set <- set[, -1]## do this in prediction model - otherwise ID variable is lost! }
-\CommentTok{#et$Int <- set$Bodyweight*set$Gender}
- 
-\CommentTok{# Perform SMCFCS, set seed to reproduce results}
-\CommentTok{# impute missing values, taking account of the interaction term }
- 
-\CommentTok{#imp.smcfcs <- smcfcs(set, smtype="lm", m=5, numit=10, rjlimit=2000,}
-\CommentTok{#                smformula="SBP ~ Bodyweight + Gender + Int",}
-\CommentTok{#                method=c("","","","","", "norm","Bodyweight*Gender"))}
-
-\CommentTok{# fit analysis model and get pooled results}
-\CommentTok{#smcfcs.model <- imputationList(imp.smcfcs$impDatasets)}
-\CommentTok{# model.res <- with(smcfcs.model, lm(SBP~ Bodyweight + Gender + Int))}
-\CommentTok{# summary(MIcombine(model.res))}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Comparing methods}\label{comparing-methods}
-
-In table 6.6 the procedures to impute missing data and taking into
-account interaction terms in the model that can be applied in SPSS and R
-are compared.
-
-Table 6.6. Overview of similarities and dissimilarities between the
-SMC-FCS and Split group imputation methods.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/tab6.6} 
-
-}
-
-\caption{Overview of similarities and dissimilarities between the SMC-FCS and Split group imputation methods.}\label{fig:tab6-6}
-\end{figure}
-
-SMC-FCS Split group Imputation
-
-Available for linear, logistic and Cox models\\
-Available for linear, logistic and Cox models
-
-Possible Interaction combinations:  2 categorical variables 
-Continuous and categorical variables  2 continuous variables
-
-Possible Interaction combinations:  2 categorical variables 
-Continuous and categorical variables
-
-Possible to customize imputation model\\
-Possible to customize imputation model
-
-Unknown for interactions \textgreater{} 2 variables\\
-Unknown for interactions \textgreater{} 2 variables
-
-Available for R and Stata software\\
-Available in any software program
-
-It can be summarized that the split file procedure in SPSS is a strong
-alternative for the smcfcs function in R. Only the data situation of an
-interaction term between 2 continuous variables can only be applied in
-R. In that case the smcfcs function has to be used.
-
-{[}Ik denk dat er nog wel een nadeel is aan die SPSS functie (ik weet
-niet zeker of dat ook in de smcfcs is) Maar in de split file manier,
-impliceer je niet alleen een interactie tussen gender en weight, maar
-ook tussen gender en alle andere variabelen. Met andere woorden, voor de
-andere variabelen heb je een kleinere sample waarop je de imputaties
-baseert, omdat je split file doet, terwijl dit misschien niet terecht is
-omdat daar geen interactie met gender is. Misschien goed om even in een
-simulatie te checken? \textgreater{}\textgreater{} evne opschrijven in
-de dingen die we nog moeten doen voor we de eindversie maken. {]}
-
 \chapter{Advanced Multiple Imputation models for Multilevel
 data}\label{advanced-multiple-imputation-models-for-multilevel-data}
 
@@ -8064,6 +4835,1476 @@ following output will be generated (Figure \ref{fig:fig91}).
 
 \caption{Parameter estimates as a result of applying a GEE model in multiple imputed datasets.}\label{fig:fig91}
 \end{figure}
+
+\chapter*{Appendix}\label{appendix}
+\addcontentsline{toc}{chapter}{Appendix}
+
+Statistical software programs can help us to analyze our data. SPSS and
+R are such programs. Although SPSS and R are among the most popular
+programs to do statistical data analyses nowadays, they do not have much
+in common. One of the greatest differences is that SPSS works with menu
+options that make windows appear and you can click buttons to select
+options, whereas R works with lines of code that you have to type in to
+run analyses. This makes SPSS more user-friendly than R for applied
+researchers. In SPSS you are overloaded with output tables, and in R you
+only get output on demand. In this Chapter we will explore the different
+possibilities of the SPSS (IBM 2016) and the R software language
+(Matloff, 2011, Dalgaard, 2008). We will run R via RStudio, the
+integrated development environment (IDE) for R. RStudio includes a wide
+range of productivity enhancing features, which makes it easier to work
+with than with the R console on its own.
+
+\section{SPSS, Data and Variable View
+windows}\label{spss-data-and-variable-view-windows}
+
+In this manual we work with SPSS version 24 (IBM, 2016). When you start
+SPSS Version 24 a start-up window appears. In this window, you can
+directly open the files that were active during your previous use of
+SPSS. These files can be found and easily opened in the ``Recent files''
+window (Figure \ref{fig:fig1}). If you do not want to see this window
+the next time that you open SPSS, select ``Don't show this dialog in the
+future''.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.1} 
+
+}
+
+\caption{First window after you have started SPSS}\label{fig:fig1}
+\end{figure}
+
+When you click on Close on the right side below, the window will close
+and you will see an empty Data View window. Now you are in the SPSS Data
+Editor window. This window is always open when you start SPSS. The name
+``SPSS Data Editor'' is also visible at the top of the screen and is
+called ``IBM SPSS Statistics Data Editor'' (Figure \ref{fig:fig2}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.2} 
+
+}
+
+\caption{Data View window in SPSS}\label{fig:fig2}
+\end{figure}
+
+In the SPSS Data Editor, you have the possibility to go to the Data View
+and Variable View windows. In the Data View window, you can enter data
+yourself or read in data by using the options in the file menu. In
+Figure 1.2 you see an example of a dataset in the Data View window. Each
+row in the Data View window represents a case and in the columns you
+will find the variable names. In the Data View window, you can do all
+kind of data manipulations by using the different menu's above in the
+window. From here you can click on the tab Variable View, in the lower
+left corner of the window. Than the Variable view window will appear
+(Figure \ref{fig:fig3}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.3} 
+
+}
+
+\caption{Variable View window in SPSS}\label{fig:fig3}
+\end{figure}
+
+In the Variable View window, you can add new variables, by entering the
+name in the name column. Further, you can change the columns by using
+the following options: Type: Here you can change the type of variables
+in your dataset. Mostly you work with numeric variables, i.e.~a variable
+whose values are numbers. Other possibilities are Date variables which
+is a numeric variable whose values are displayed in one of several
+calendar-date or clock-time formats or String variables, a character
+(text) variable that can contain any characters up to the defined
+length. String values are not numeric and therefore are not used in
+calculations. Width: By default SPSS defines a numeric variable with 8
+digits for each new variable.
+
+Decimals: the number of decimal places displayed.
+
+Label: The variable name.
+
+Values: To assign numbers to the categories of a variable. To define
+Variable values do the following: 1. Click the button in the Values cell
+for the variable that you want to define. 2. For each value, enter the
+value and a label. 3. Click Add to enter the value label. 4. Click OK.
+
+Missing: Here you can define specified data values as user-missing. You
+can enter up to three discrete (individual) missing values, a range of
+missing values, or a range plus one discrete value.
+
+Columns: To change the number of characters displayed in the Data View
+window.
+
+Align: Here you can specify the alignment of your data.
+
+Measure: Here you can specify the level of each variable, scale
+(continuous), ordinal or nominal.
+
+Role: Here you can define the role of the variable during your analysis.
+Examples are, Input for independent variable, Target for dependent or
+outcome variable, Both, independent and dependent variable. There are
+more possibilities, but most of the times you use the default Input
+setting.
+
+\section{Analyzing data in SPSS}\label{analyzing-data-in-spss}
+
+All statistical procedures in SPSS can be found under the Analyze button
+(Figure \ref{fig:fig4}). Here you also will find the option ``Multiple
+Imputation'' which plays an important role in this manual. We will use
+this menu later on in Chapter 4.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.4} 
+
+}
+
+\caption{Statistical procedures that can be found under the Analyze menu in SPSS}\label{fig:fig4}
+\end{figure}
+
+\section{Data Transformations in
+SPSS}\label{data-transformations-in-spss}
+
+Two other interesting buttons are Data and Transform. The Data menu
+allows you to make changes to the data editor. Here you can add new
+variables or cases. You can also use the Split File option, to get
+analyses results separately for categories of a variable. The Transform
+menu allows you to manipulate your variables by for example
+dichotomizing a numeric variable.
+
+\section{The Output window in SPSS}\label{the-output-window-in-spss}
+
+If you have run your analyses in SPSS, an SPSS Output (or viewer) Window
+will pop-up. The main body of the Output Window consists of two panes
+(left and right panes). In the left pane you will find an outline of the
+output. In the right pane you will find the actual output of your
+statistical procedure (Figure \ref{fig:fig5}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.5} 
+
+}
+
+\caption{Part of the Output or Viewer window in SPSS after making use of Descriptive Statistics under the Analyze menu}\label{fig:fig5}
+\end{figure}
+
+\section{The Syntax Editor in SPSS}\label{the-syntax-editor-in-spss}
+
+In the syntax editor of SPSS, you use the SPSS syntax programming
+language. You can run all SPSS procedures by typing in commands in this
+syntax editor window, instead of using the graphical user interface,
+i.e.~by using your mouse and clicking on the menu´s. You can get access
+to the syntax window in two ways. The first is just by opening a new
+syntax file by navigating to File -\textgreater{} New -\textgreater{}
+Syntax. This will open a new syntax window (Figure \ref{fig:fig6}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.6} 
+
+}
+
+\caption{Screenshot of new syntax file}\label{fig:fig6}
+\end{figure}
+
+Now you can start writing your syntax directly in this window. You can
+also generate syntax by accessing statistical procedures through the
+dropdown menus and clicking the Paste button instead of clicking the OK
+button after you have specified the options. When you have clicked the
+Paste button, a new Syntax Editor window will pop up or the new syntax
+will automatically be added to the open Syntax Editor window. This is a
+very useful way to keep track of the analysis that you have performed.
+An example can be found in Figure \ref{fig:fig7}, where the syntax is
+shown for the Descriptive Statistics procedure of Figure \ref{fig:fig5}.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.7} 
+
+}
+
+\caption{Screenshot of Syntax editor of SPSS including the Syntax code for descriptive statisitcs}\label{fig:fig7}
+\end{figure}
+
+By using the SPSS Syntax it is possible for users to perform the same
+analyses over and over again or to adapt the analysis via the syntax
+code for complex calculations in the data. In this manual we will not
+use SPSS syntax code to access statistical procedures, however we
+recommend to use the SPSS syntax to keep track of the analysis that you
+have performed. SPSS is most frequently used via the graphical user
+interface, and we will use that method also in this manual.
+
+\section{Reading and saving data in
+SPSS}\label{reading-and-saving-data-in-spss}
+
+Reading in data in SPSS is very easy; via the menu File choose for File
+-\textgreater{} Open -\textgreater{} Data. All kind of file types can be
+selected. Of course the SPSS .sav files, but also .por, .xlsx, .cvs,
+SAS, Stata, etc. (Figure 1.8). After you have selected a specific file
+type you may have to go through several steps before you see the data in
+the Data View window. These steps are not necessary for SPSS files, they
+open directly in the data editor.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.8} 
+
+}
+
+\caption{Window to read in different file types in SPSS}\label{fig:fig8}
+\end{figure}
+
+Saving files in SPSS is possible via the Save Data As option under the
+menu File. You can choose the same kind of file types (Figure
+\ref{fig:fig9}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.9} 
+
+}
+
+\caption{Option Save Data As under the menu File}\label{fig:fig9}
+\end{figure}
+
+\section{R and RStudio}\label{r-and-rstudio}
+
+RStudio is an integrated environment to work with the software program
+R. Consequently, to work with RStudio, R has to be installed. RStudio
+uses the R language and is also freely available. In this manual we will
+only show some possibilities and options in RStudio that are needed to
+run the R code and the programs that are discussed in this manual. For
+more information about RStudio and its possibilities visit the RStudio
+website at www.rstudio.com. When you open RStudio the following screen
+will appear.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.10} 
+
+}
+
+\caption{First screen that appears after you have started RStudio}\label{fig:fig10}
+\end{figure}
+
+There are three windows opened:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  On the left is the Console window
+\end{enumerate}
+
+This is the main window to run R code (see below for more information
+about the Console window).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Right above is the window where you can choose between the Environment
+  and History tabs (e.g.~history tracks the code you typed in the
+  Console window).
+\item
+  At the right site below is the window where you can choose between
+  Files, Plots, Packages, Help and Viewer tabs.
+\end{enumerate}
+
+\subsection{The role of the Console
+Window}\label{the-role-of-the-console-window}
+
+When you enter code in the Console window you will directly receive a
+result. For example, you can type the following code and the result will
+appear directly in the Console window.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{3} \OperatorTok{+}\StringTok{ }\DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6
+\end{verbatim}
+
+As you can see, you can use R as a large calculator. Other
+multiplication procedures as divide, square, etc. can also be executed.
+However, the main use for R is its functions. For example, when you
+generate 20 random numbers you can use the following function code (we
+will discuss more about functions in R later):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rnorm}\NormalTok{(}\DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  1.68566085 -0.00613295 -1.05700650 -0.86827170 -0.62178503
+##  [6] -2.55726597  0.60778085 -0.66228410  0.62166923 -1.11099132
+## [11]  1.09517820 -0.13372857  1.19279799  0.88968335  0.13880181
+## [16]  1.72875603  0.28553862 -0.86464507  0.90441598  1.06602866
+\end{verbatim}
+
+The number {[}1{]} between brackets is the index of the first number or
+item in the vector. That can be useful when you have many numbers
+printed in the Console window.
+
+\subsection{R assignments and objects}\label{r-assignments-and-objects}
+
+In R it is possible to create objects and to assign values to these
+objects. In this way it is for example possible to store some
+intermediate results and recall or use them later on. Assigning values
+to objects is done by using the assignment operator \textless{}- (R code
+below). You can also use the = sign as an assignment operator. This is
+not recommended because this is also a symbol used for some mathematical
+operations. For example, when we want to assign the value 3 to the
+object x, we use the following code.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x <-}\StringTok{ }\DecValTok{3} 
+\end{Highlighting}
+\end{Shaded}
+
+When we subsequently type in the letter x we get the following result:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+
+As result we see the value 3 again. Now the value 3 is assigned to the
+object x. In R all kind of information can be assigned to an object,
+i.e.~one number, a vector of numbers, results from analysis or other R
+objects such as data frames, matrices or lists. Objects can have all
+kinds of different names, composed of different letters and numbers.
+Here are some examples where number 3 is assigned to different objects
+with different names:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{test <-}\StringTok{ }\DecValTok{3}
+\NormalTok{test.}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\DecValTok{3}
+\NormalTok{test.manual <-}\StringTok{ }\DecValTok{3}
+\NormalTok{test}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{test.}\DecValTok{1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{test.manual }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+
+Note that some letters and words are used by R itself. It is not
+recommended to use these leters as names for objects in R that you
+create yourself. For example, the letter T and F are used as TRUE and
+FALSE by R. Other letters that are already in use are c, q, t, C, D, I
+and diff, df, and pt.
+
+\subsection{Vectors, matrices, lists and data
+frames}\label{vectors-matrices-lists-and-data-frames}
+
+\emph{Vectors} In the previous paragraph we created the one-vector x,
+i.e.~a vector that contained only one number, the number 3. Mostly you
+do your analysis on more numbers than just one. R has several
+possibilities to create objects with more data. We start with a simple
+dataset, called a data vector, which is an array of numbers (such as
+created in R code 1.2. A vector can be created by the following code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 2 3 4 5
+\end{verbatim}
+
+Now the numbers 1, 2, 3, 4 and 5 are assigned to the data vector y. The
+``c'' in the above code stand for concatenate which makes that all
+separate (one-vector) numbers are merged into one vector. It is also
+possible to create character vectors, which are vectors that contain
+strings (text). An example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"test"}\NormalTok{)}
+\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "a"    "b"    "test"
+\end{verbatim}
+
+Vectors can also be made by using the ``:'' symbol. With that symbol it
+is easy to generate a sequence of numbers. An example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\DecValTok{10}
+\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  1  2  3  4  5  6  7  8  9 10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y <-}\StringTok{ }\DecValTok{2}\OperatorTok{:}\DecValTok{6}
+\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2 3 4 5 6
+\end{verbatim}
+
+Both lines of code produce a vector containing a sequence of numbers.
+The first example produces the numbers 1 to 10 and the second example
+the numbers 2 to 6.
+
+\emph{Matrix} A matrix in R contains rows and columns and can be created
+by using the matrix function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{), }\DataTypeTok{nrow=}\DecValTok{2}\NormalTok{, }\DataTypeTok{ncol=}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6
+\end{verbatim}
+
+Now we have created a matrix with 2 rows and 3 columns. In essence we
+converted the vector c(1, 2, 3, 4, 5, 6) into a matrix.
+
+\emph{List} Another popular R object class is a list. The advantage of a
+list is that it can contain components of different formats. Let's look
+at an example using the following code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\DecValTok{5}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 2 3 4 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"test"}\NormalTok{)}
+\NormalTok{z <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{x=}\NormalTok{x, }\DataTypeTok{y=}\NormalTok{y)}
+\NormalTok{z}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $x
+## [1] 1 2 3 4 5
+## 
+## $y
+## [1] "a"    "b"    "test"
+\end{verbatim}
+
+The code created the list object z consisting of the two components x
+and y which are the vectors that were created above. You can see that in
+a list two components of different data type can be combined, a numeric
+and a character factor. The names of the list components are indicated
+by the dollar sign,
+\(. The list component can be obtained separately by typing z\)x for
+component x or x\$y for component y.
+
+\emph{Dataframe} Mostly we work with datasets that contain information
+of different variables and persons. In R such a dataset is called a
+dataframe. In essence, a dataframe in R is a list, where each component
+of the list is a vector of equal length. This example code first creates
+a list, consisting of 3 vectors of the same length. Than this list is
+converted into a dataframe, using the data.frame function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{k <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{a=}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{, }\DataTypeTok{b=}\DecValTok{11}\OperatorTok{:}\DecValTok{20}\NormalTok{, }\DataTypeTok{c=}\DecValTok{21}\OperatorTok{:}\DecValTok{30}\NormalTok{)}
+\NormalTok{k}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $a
+##  [1]  1  2  3  4  5  6  7  8  9 10
+## 
+## $b
+##  [1] 11 12 13 14 15 16 17 18 19 20
+## 
+## $c
+##  [1] 21 22 23 24 25 26 27 28 29 30
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(k)}
+\NormalTok{z}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     a  b  c
+## 1   1 11 21
+## 2   2 12 22
+## 3   3 13 23
+## 4   4 14 24
+## 5   5 15 25
+## 6   6 16 26
+## 7   7 17 27
+## 8   8 18 28
+## 9   9 19 29
+## 10 10 20 30
+\end{verbatim}
+
+Typically, a dataframe is created by reading in an existing dataset. How
+to create a dataframe by reading in a dataset will be further discussed
+in the paragraph ``Reading in and saving data''.
+
+\subsection{Indexing Vectors, Matrices, Lists and Data
+frames}\label{indexing-vectors-matrices-lists-and-data-frames}
+
+\emph{Vectors} An important operation in R is to select a subset of a
+given vector. This is called indexing vectors. This subset of the vector
+elements can be assigned to another vector. An example how to do this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{6}\NormalTok{)}
+\NormalTok{y[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3 8
+\end{verbatim}
+
+The R code y{[}c(1, 4){]}, extracts the first and fourth element of the
+vector. Another example is by using the ``:'' symbol, to extract several
+subsequent elements:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y[}\DecValTok{2}\OperatorTok{:}\DecValTok{5}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5 2 8 5
+\end{verbatim}
+
+The R code y{[}2:5{]}, extracts the second to the fifth element of the
+vector.
+
+A minus sign excludes the specific element from the vector, like:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y[}\OperatorTok{-}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3 5 8 5 4 8 1 3 6
+\end{verbatim}
+
+The R code y{[}-3{]}, excludes the third element of the vector (i.e.~2).
+A new vector z can be created where the third and fourth element of the
+y vector are excluded, by using the following code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z <-}\StringTok{ }\NormalTok{y[}\OperatorTok{-}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{)]}
+\NormalTok{z}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3 5 5 4 8 1 3 6
+\end{verbatim}
+
+\emph{Matrices} When we index matrices we can choose to index rows,
+columns or both. Here are some examples:
+
+First we construct the matrix
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{9}\NormalTok{, }\DataTypeTok{nrow=}\DecValTok{3}\NormalTok{)}
+\NormalTok{z}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9
+\end{verbatim}
+
+We extract from the first row the number in the second column
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+
+We extract all numbers in each column in the first row
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z[}\DecValTok{1}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 4 7
+\end{verbatim}
+
+We extract all numbers in each row of the first column
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z[, }\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 2 3
+\end{verbatim}
+
+A minus sign can also be used to delete specific elements or complete
+rows or columns.
+
+Omit the first row from the matrix
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z[}\OperatorTok{-}\DecValTok{1}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    2    5    8
+## [2,]    3    6    9
+\end{verbatim}
+
+\emph{Lists} We first create a list with 3 components, each component
+consists of a vector of the same length and with 10 elements each.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{k <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{a=}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{, }\DataTypeTok{b=}\DecValTok{11}\OperatorTok{:}\DecValTok{20}\NormalTok{, }\DataTypeTok{c=}\DecValTok{21}\OperatorTok{:}\DecValTok{30}\NormalTok{)}
+\NormalTok{k}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $a
+##  [1]  1  2  3  4  5  6  7  8  9 10
+## 
+## $b
+##  [1] 11 12 13 14 15 16 17 18 19 20
+## 
+## $c
+##  [1] 21 22 23 24 25 26 27 28 29 30
+\end{verbatim}
+
+There are several options to index list components and elements of the
+components. If we want to index the individual component b we can use
+the following code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{k}\OperatorTok{$}\NormalTok{b}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 11 12 13 14 15 16 17 18 19 20
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{k[[}\StringTok{"b"}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 11 12 13 14 15 16 17 18 19 20
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{k[[}\DecValTok{2}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 11 12 13 14 15 16 17 18 19 20
+\end{verbatim}
+
+As you have may noticed, to extract individual list components double
+square brackets are used, compared to single brackets for indexing
+vectors and matrices.
+
+When we use single brackets, we get the following results:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{k[}\StringTok{"b"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $b
+##  [1] 11 12 13 14 15 16 17 18 19 20
+\end{verbatim}
+
+The difference between using single and double brackets is that single
+brackets return the component data type, which is in this case a vector
+(but could be any kind of data type) and single brackets always return a
+list.
+
+\emph{Data frames} Indexing data frames follows the same method as
+indexing matrices, but we can also use the method that is used to index
+lists, since data frames are essentially lists of vectors of the same
+length. Data frames consist of rows and columns which can be accessed
+separately or both to extract specific elements. We use the data frame
+that was constructed in R code 1.11.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9
+\end{verbatim}
+
+Examples of indexing the first column are:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z[, }\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 2 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{k}\OperatorTok{$}\NormalTok{a}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  1  2  3  4  5  6  7  8  9 10
+\end{verbatim}
+
+The second row can be accessed by using:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z[}\DecValTok{2}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2 5 8
+\end{verbatim}
+
+\subsection{Vectorized Calculation}\label{vectorized-calculation}
+
+An advantage of working with R is that it is possible to perform
+vectorized calculations. This means that you can do calculations
+elementwise, i.e.~the same calculation is done on each element of an
+object. Let's look at an example.
+
+We first create a vector z with numerical variables.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{)}
+\NormalTok{z}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 2 3 4 5 6 7 8
+\end{verbatim}
+
+Now it is fairly easy to square each element of the vector by typing:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z}\OperatorTok{^}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  1  4  9 16 25 36 49 64
+\end{verbatim}
+
+The \^{}2 means take the power of 2. We see that each element is
+squared. These vectorized calculations can be done by using all kinds of
+mathematical functions, e.g.~taking the square root, logarithms, adding
+constant values to each element, etc.
+
+\subsection{R Functions}\label{r-functions}
+
+Functions play an important role in R. Functions can be seen as lines of
+R code to run all kind of data procedures and to return a result. Let's
+write a small function that we name ``sum.test'' that generates a
+sequence of numbers from 1 to 5 and sums all values from 1 to the value
+we define beforehand, which is in our example the value 3. This means
+that the function will sum all values from 1 to 3, i.e.~1 + 2 + 3 when
+it is at the value of 3 and all values from 1 to 4 when we use as input
+value the value 4. The function can be found in R code 1.26.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{print.sum.test <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) }
+\NormalTok{\{}
+ \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{) }
+\NormalTok{ \{}
+   \ControlFlowTok{if}\NormalTok{ (i}\OperatorTok{==}\NormalTok{x) y <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{i)  }
+\NormalTok{ \}}
+\KeywordTok{return}\NormalTok{(y)}
+\NormalTok{\}}
+\KeywordTok{print.sum.test}\NormalTok{(}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6
+\end{verbatim}
+
+At the first line we define the function print.sum.test that includes
+one argument x. Than in de body of the function (in italic) which starts
+with a left brace and ends with another brace, the actual calculations
+take place. The return statement gives back the result. At the end we
+call the function with the statement print.sum.test(3), where the value
+3 is actually used in the function.
+
+Once the function is defined, we can call the function and plug in other
+values. For example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print.sum.test}\NormalTok{(}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10
+\end{verbatim}
+
+That will directly lead to the result 10 when the value 4 is used.
+
+You can write functions yourself but in R many functions are available
+which means that many calculations are done by using function calls. A
+function name is followed by a set of parentheses which contain some
+arguments. In the above self-written function, we already made use of a
+function, which is the sum function. We can use it separately as
+follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 7
+\end{verbatim}
+
+The arguments in this function are the numbers 3 and 4 and the result is
+their sum. This function uses as arguments numbers or complete vectors.
+If you want to see the formal arguments of each function you can use the
+args function. You have to type the name of the function as the argument
+in the args function. For example, we can use it for the matrix
+function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{args}\NormalTok{(matrix)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## function (data = NA, nrow = 1, ncol = 1, byrow = FALSE, dimnames = NULL) 
+## NULL
+\end{verbatim}
+
+As a result the arguments of the functions are listed with their default
+settings. In this case the arguments are:
+
+data: an optional data vector (including a list or expression vector).
+
+nrow: the desired number of rows.
+
+ncol: the desired number of columns.
+
+byrow: logical. If FALSE (the default) the matrix is filled by columns,
+otherwise the matrix is filled by rows.
+
+dimnames: A dimnames attribute for the matrix: NULL or a list of length
+2 giving the row and column names respectively. An empty list is treated
+as NULL, and a list of length one as row names. The list can be named,
+and the list names will be used as names for the dimensions.
+
+\subsection{The Help function}\label{the-help-function}
+
+There are several possibilities to start the help facilities in R and to
+get more information about functions and their arguments in R.
+
+You can just type help or use the question mark as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{help}\NormalTok{(matrix)}
+\NormalTok{?matrix}
+\end{Highlighting}
+\end{Shaded}
+
+In both ways the help tutorial for the matrix function will be activated
+and appear in your web browser or in help tab in the right corner below
+when you use R studio.
+
+\subsection{Working with script files}\label{working-with-script-files}
+
+If you want to use R code and functions more than once it is useful to
+work with scripts files. In this way you can type and save R code and
+reuse it. To create a script file in R is easy.
+
+After you have started RStudio you go to File -\textgreater{} New File
+-\textgreater{} R Scripts. Now a new window will open on the left side
+above. In that file you can type for example the self-written function
+print.sum.test. (Figure \ref{fig:fig11}). Now you can save the script
+file by using the Save option under the File menu, open it again and use
+it whenever you want.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.11} 
+
+}
+
+\caption{Script file example in RStudio}\label{fig:fig11}
+\end{figure}
+
+\subsection{Creating a working
+directory}\label{creating-a-working-directory}
+
+It is a good idea to keep your R files at the same place when you are
+doing data analysis for some kind of project. If you do not use a
+separate directory, R will use a default directory, that will mostly be
+in Windows in the documents folder. All files that you have to use
+during your R session are assumed to be in that directory. Further, all
+files that you save during your session will be in that directory. To
+locate your working directory, you can type in the Console window:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{getwd}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+In Rstudio there is another way to get information about the current
+working directory and another way to change the working directory. Go in
+RStudio to the window on the right site below and go to the Files tab
+and click on the right site of the screen on the three dots. Than a
+window will open and you can browse to your preferred folder. Then
+choose for More in the Files tab and then select ``Set As Working
+Directory'' (Figure \ref{fig:fig12}). Now you have set your preferred
+working directory. You can check if your directory is set correctly by
+choosing ``Go To Working Directory''.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.12} 
+
+}
+
+\caption{Working directory selection in RStudio}\label{fig:fig12}
+\end{figure}
+
+\subsection{Reading in SPSS data in
+RStudio}\label{reading-in-spss-data-in-rstudio}
+
+There are several procedures in RStudio to read in datasets.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Import datasets via ``Import Dataset'' An easy way to do that is via
+  the window at the right site above. There you will find the button
+  which is called ``Import Dataset''. When you click on it you can
+  choose between different kind of file types, i.e.~CVS, Excel, SPSS,
+  SAS and Stata files (Figure 1.13).
+\end{enumerate}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.13} 
+
+}
+
+\caption{Screen to import datasets in RStudio}\label{fig:fig13}
+\end{figure}
+
+In this example we choose for SPSS. When you approach this procedure for
+the first time it could be that RStudio asks for your permission to
+download a package called ``haven''. This package is built to import and
+export data from several types. The following window will then appear
+(Figure 1.14).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.14} 
+
+}
+
+\caption{Window to install the haven package}\label{fig:fig14}
+\end{figure}
+
+Click Yes and the download will start from the CRAN website. After the
+package is installed a new window will open which is called ``Import
+Statistical Data'' (Figure 1.15).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.15} 
+
+}
+
+\caption{The Import Statistical Data window in RStudio}\label{fig:fig15}
+\end{figure}
+
+At the top right site of the window you find the button which is called
+``Browse''. That button allows you to browse to your dataset on your
+computer. After you have opened your dataset you see a preview of your
+dataset in RStudio (Figure 1.16).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.16} 
+
+}
+
+\caption{A preview of the dataset in RStudio}\label{fig:fig16}
+\end{figure}
+
+Under Code Preview, under in the window, you see the code that was used
+by RStudio to read in the dataset:
+
+The dataset is automatically assigned to the object: Backpain50, which
+is the original name of the dataset. When you click on Import, the
+dataset is imported in the RStudio environment (Figure 1.17).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.17} 
+
+}
+
+\caption{Imported dataset in RStudio}\label{fig:fig17}
+\end{figure}
+
+Another way to import an SPSS dataset is by making use of the foreign
+package. You can find this package under the Packages Tab in the window
+at the right site below under the heading ``System Library''. Install
+that package first. The foreign package includes the function
+``read.spss''. Let's first explore the function arguments of this
+function by using:
+
+Now the following information can be found in the right window below,
+under the Help tab:
+
+read.spss(file, use.value.labels = TRUE, to.data.frame = FALSE,
+max.value.labels = Inf, trim.factor.names = FALSE, trim\_values = TRUE,
+reencode = NA, use.missings = to.data.frame)
+
+The most important arguments to change for us are the file and
+to.data.frame arguments. When you are in the correct working directory,
+i.e.~the working directory where the file that you want to import is
+stored, you use the following code to import the dataset:
+
+\subsection{Saving and Reading R data in
+RStudio}\label{saving-and-reading-r-data-in-rstudio}
+
+Datasets can be saved and read in R using different commands.
+
+\emph{Write.table} and \emph{Read.table}
+
+\emph{Write.table} The write.table function can be used to write
+matrices and data frames (datasets) to the working directory. The R code
+is:
+
+Files that have been written with write.table can be easily read in, in
+SPSS by using the steps that will be discussed in the next paragraph.
+
+\emph{Read.table} The read.table function can be used to read in
+matrices and data frames by using:
+
+\emph{Save and Load}
+
+\emph{Save} You can also use the command save to save datasets,
+according to (notice the .RData extension):
+
+\emph{Load} Loading the dataset again in the workspace can be done by
+using:
+
+You can also use save by using the default options in the following way
+to save your datasets:
+
+To get direct access to the data that you have saved, you can use the
+get function in combination with the load function like this:
+
+With save, you can save any R object, also lists such as:
+
+Subsequently, after you have removed object x from the workspace, you
+can load it again by using:
+
+\subsection{Reading in (R)Studio data into
+SPSS}\label{reading-in-rstudio-data-into-spss}
+
+When you have used the write.table function to save data in R you can
+easily read them in into SPSS. First you have to use write.table in the
+following way:
+
+The extra parameter settings, mean: sep=``;'', separate each variable by
+an ``;'' indicator. dec=``,'', use for decimals a ``,'' instead of an
+``.''. row.names=F , Do not add an extra column with row.names.
+
+Follow the next steps to read in the data into SPSS: choose File
+-\textgreater{} Open data -\textgreater{} ``All files (\emph{.})'', than
+you will see the file you want to read in into SPSS. In this example we
+will use the file ``Backpain50 R file'' from R code 1.41 (Figure 1.18).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.18} 
+
+}
+
+\caption{Choosing the dataset to import in SPSS}\label{fig:fig18}
+\end{figure}
+
+Then click Open (wait a couple of seconds) and click on next. You will
+see the following window that is part of the Text Import Wizard
+procedure in SPSS (Figure 1.19):
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.19} 
+
+}
+
+\caption{Step 1 of the Text Import Wizard}\label{fig:fig19}
+\end{figure}
+
+Then click the ``Next \textgreater{}'' button 5 times, passing by the
+following windows:
+
+Step 2 of 6 (Figure 1.20): To change how variables are arranged: here
+delimited To include variable names included at the top of the file:
+here Yes. To set the decimal symbol: here a comma.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.20} 
+
+}
+
+\caption{Step 2 of the Text Import Wizard}\label{fig:fig20}
+\end{figure}
+
+Step 3 of 6 (Figure 1.21):
+
+On which line number begins the first case: here 2 How cases are
+represented: Each line is a case. How many cases you want to import:
+here all cases.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.21} 
+
+}
+
+\caption{Step 3 of the Text Import Wizard}\label{fig:fig21}
+\end{figure}
+
+Step 4 of 6 (Figure 1.22): The delimiters that appear between variables;
+here the Semicolon. The text qualifier: here Double quote. Remove
+trailing spaces from string values: skip.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.22} 
+
+}
+
+\caption{Step 4 of the Text Import Wizard}\label{fig:fig22}
+\end{figure}
+
+Step 5 of 6 (Figure 1.23): Here you can overwrite the Data format of the
+variable (you can also change that in the Variable View window, when the
+data has been read in).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.23} 
+
+}
+
+\caption{Step 5 of the Text Import Wizard}\label{fig:fig23}
+\end{figure}
+
+Step 6 of 6: This step allows you to save your specifications of the
+previous steps into a separate file (Figure 1.24).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.24} 
+
+}
+
+\caption{Step 6 of the Text Import Wizard}\label{fig:fig24}
+\end{figure}
+
+Then click finish and the data will be read in, into a new SPSS file. In
+that file you can of course change all kind of variable and data
+settings in the Variable View Window.
+
+You can also skip step 2 to 5 by clicking the Finish button twice when
+you are at step 1. Than you use all default settings, which is most of
+the times a good option.
+
+\subsection{Installing R Packages}\label{installing-r-packages}
+
+When R is installed on your computer also a folder called library is
+created. This folder contains packages that are part of the basic
+installation. A package is a collection of different functions written
+in the R language. Besides packages that are part of the basic
+installation of R there are also packages that are not part of the basic
+installation but are written by others, i.e.~the add-on packages.
+Packages can be downloaded from the CRAN website
+(\url{https://cran.r-project.org/}). Currently, there are thousands of
+user-written packages available on the CRAN website.
+
+Before you can use a specific package that is not part of the basic
+installation, you have to install it in your R library. In this manual
+we will use the mice package to do all kind of imputation procedures,
+such as multiple imputation. mice is not part of the basic installation
+so we have to install it first. There are several procedures in RStudio
+to install a package. One way is to use the install.packages function in
+the Console window as follows:
+
+The mice package will be automatically downloaded from the CRAN website.
+
+Another way is to use the window on the right site below and go to the
+Packages tab. When you click ``Install'' a new window is opened. Than
+you can type ``mice'' on the blank line under ``Packages (separate
+multiple with space or comma):'' (Figure 1.25a and b).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.25a} 
+
+}
+
+\caption{Install packages Window in RStudio to install packages from the CRAN website}\label{fig:fig25}
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.25b} 
+
+}
+
+\caption{Enlarged Install packages Window in RStudio to install packages from the CRAN website}\label{fig:fig26}
+\end{figure}
+
+After you have clicked on ``Install'' the package will be downloaded
+from the CRAN website automatically and will be listed in the Package
+list named ``User Library''.
+
+Another way is to go to the CRAN website and download the package as a
+zip file in a directory on your computer, for example your working
+directory or in your library. Again use the window on the right site
+below and go to the Packages tab. When you choose Install a new window
+is opened. Now under ``Install from:'' choose for ``Package Archive File
+(.zip; .tar.gz)'' (Figure 1.26a and 1.26b). Than you can browse to the
+zip file and install the package.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.26a} 
+
+}
+
+\caption{Install packages Window in RStudio to install packages from zip files}\label{fig:fig27}
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig1.26b} 
+
+}
+
+\caption{Enlarged Install packages Window in RStudio to install packages from zip files}\label{fig:fig28}
+\end{figure}
+
+\subsection{Loading R Packages}\label{loading-r-packages}
+
+Once an add-on (user written) R package has been installed it has to be
+loaded to get access to all functions that are part of that package. To
+load a library, you can use the function library() or require(). R code
+1.43 shows an example of loading the mice package.
+
+The require() function is used in the same way. You have to load add-on
+packages each time you start a new R session.
+
+\subsection{Updating R Packages}\label{updating-r-packages}
+
+To keep the add-on packages up to date you can use the update.packages()
+function in R. R code 1.44 presents an example.
+
+R will ask you if you want to update each package. If you type ``y'' in
+the Console window, R will update the package.
+
+In RStudio updating packages can be done in the Package tab as well. You
+can click on the Update button. A new window will open that contains a
+list of all packages that need to be updated. Subsequently you can
+select the packages you want to update.
+
+\subsection{Useful Missing data Packages and
+links}\label{useful-missing-data-packages-and-links}
+
+The main package that we will use in this manual is mice which stand for
+Multivariate Imputation by Chained Equations (MICE) (Van Buuren, 2009).
+
+Other packages that are related to MICE are miceadds and micemd:
+miceadds: this package contains some additional multiple imputation
+functions (Robitzsch et al., 2017). See for more information:
+\href{https://cran.r-project.org/web/packages/miceadds/index.html}{linked
+phrase}
+
+micemd: this package contains additional functions for the mice package
+to perform multiple imputation in two-level (Multilevel) data (Audigier
+\& Resche-Rigon, 2017). See for more information:
+\href{https://cran.r-project.org/web/packages/micemd/index.html}{linked
+phrase}
+
+mi: provides functions for data manipulation, imputing missing values in
+an approximate Bayesian framework, diagnostics of the models used to
+generate the imputations, confidence-building mechanisms to validate
+some of the assumptions of the imputation algorithm, and functions to
+analyze multiply imputed data sets (Gelman et al., 2015). See for more
+information:
+\href{https://cran.r-project.org/web/packages/mi/index.html}{linked
+phrase}
+
+MItools: small package to perform analyses and combine results from
+multiple-imputation datasets (Lumley, 2015). See for more information:
+\href{https://cran.r-project.org/web/packages/mitools/index.html}{linked
+phrase}
+
+norm: this package is for the Analysis of multivariate normal datasets
+with missing values. It contains the mi.inference function. This
+function combines estimates and standard errors to produce a single
+inference. Uses the technique described by Rubin (1987), which are
+called the Rubin's Rules (RR) (Novo, 2015). See for more information:
+\href{https://cran.r-project.org/web/packages/norm/index.html}{linked
+phrase}
+
+vim (visualization and imputation of missing values): This package
+includes tools for the visualization of missing and/or imputed values.
+In addition, the quality of imputation can be visually explored using
+various univariate, bivariate, multiple and multivariate plot methods
+(Templ et al., 2017). See for more information:
+\href{https://cran.r-project.org/web/packages/mi/index.html}{linked
+phrase}
+
+BaylorEdPsych: R Package for Baylor University Educational Psychology
+Quantitative Courses. This package included Little's MCAR test
+(Beaujean, 2015). See for more information:
+\href{https://cran.r-project.org/web/packages/BaylorEdPsych/index.html}{linked
+phrase}
+
+MKmisc: Contains several functions for statistical data analysis;
+e.g.~for sample size and power calculations, computation of confidence
+intervals, and generation of similarity matrices. This package contains
+the mi.t.test function for pooling t-tests after multiple imputation
+(Kohl, 2016). See for more information:
+\href{https://cran.r-project.org/web/packages/MKmisc/index.html}{linked
+phrase}
+
+mvnmle: This package estimates the maximum likelihood estimate of the
+mean vector and variance-covariance matrix for multivariate normal data
+with missing values. This package is needed for the mlest function this
+is used for Little's MCAR test in Cahpter 2. See for more information:
+\href{https://cran.r-project.org/web/packages/mvnmle/index.html}{linked
+phrase}
 
 \bibliography{book.bib,packages.bib}
 
