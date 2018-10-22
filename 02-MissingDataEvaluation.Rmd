@@ -125,12 +125,10 @@ Summary of missing values (displays missing data information in pie charts, Patt
 
 To generate the missing data patterns in R we can make use of the mice and `VIM` packages. We start with the `mice` package. That package contains the `md.pattern` function that can generate the missing data pattern.
 
-
 ```{r}
 library(mice)
 md.pattern(dataset)
 ```
-
 
 The first row contains the variable names. Each other row represents a missing data pattern. The 1’s in each row indicate that the variable is complete and the 0’s indicate that the variable in that pattern contains missing values. The first column on the left (without a column name) shows the number of cases with a specific pattern and the column on the right shows the number of variables that is incomplete in that pattern. The last row shows the total number of missing values for each variable.
 
