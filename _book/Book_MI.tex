@@ -112,7 +112,7 @@
 
 \title{Applied Missing data analysis with SPSS and R(Studio)}
 \author{Martijn Heymans and Iris Eekhout}
-\date{2018-10-21}
+\date{2018-10-29}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -471,8 +471,8 @@ about the Console window).
 Window}\label{the-role-of-the-console-window}
 
 When you enter code in the Console window you will directly receive a
-result. For example, when you type \texttt{3\ +\ 3} the result will
-appear directly.
+result. For example, when you type 3 + 3 the result will appear
+directly.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -496,10 +496,10 @@ more about functions in R later):
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -1.7837970  1.8680008  0.4986246 -2.8537612  2.5696148 -0.4905977
-##  [7] -1.3530066  0.2784674  3.4362621  0.9665584  0.1917680  0.2153195
-## [13] -0.4293876  0.2079086 -1.8858143 -0.1891847  2.7196848  0.4403796
-## [19] -1.6495320 -0.3074956
+##  [1]  0.3542920 -1.6501012  0.7832232 -0.4658032  0.3199945 -0.7713515
+##  [7]  0.8455048  0.2667180  0.9606889 -0.7603088 -0.1380478  0.2014359
+## [13] -1.0336031  0.2930091 -0.2622540  1.1926976 -0.6383100  0.6729096
+## [19] -0.7239192  0.3007599
 \end{verbatim}
 
 The number {[}1{]} between brackets is the index of the first number or
@@ -510,11 +510,10 @@ item in the vector.
 In R it is possible to create objects and to assign values to these
 objects. In this way it is possible to store some intermediate results
 and recall or use them later on. Assigning values to objects is done by
-using the assignment operator \texttt{\textless{}-} . You can also use
-the = sign as an assignment operator. This is not recommended because
-this is also a symbol used for some mathematical operations. For
-example, when we want to assign the value 3 to the object x, we use the
-following code.
+using the assignment operator \textless{}- . You can also use the = sign
+as an assignment operator. This is not recommended because this is also
+a symbol used for mathematical operations. For example, when we want to
+assign the value 3 to the object x, we use:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -534,13 +533,12 @@ When we subsequently type in the letter x we get the following result:
 ## [1] 3
 \end{verbatim}
 
-As result we see the value 3 again. Now the value 3 is assigned to the
-object x. In R all kind of information can be assigned to an object,
-i.e.~one number, a vector of numbers, results from analysis or other R
-objects such as data frames, matrices or lists. Objects can have all
-kinds of different names, composed of different letters and numbers.
-Here are some examples where number 3 is assigned to different objects
-with different names:
+Now the value 3 is assigned to the object x. In R all kind of
+information can be assigned to an object, i.e.~one number, a vector of
+numbers, results from analysis or other R objects such as data frames,
+matrices or lists. Objects can have all kinds of different names,
+composed of different letters and numbers. Here are some examples where
+number 3 is assigned to different objects with different names:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -584,12 +582,7 @@ and diff, df, and pt.
 \subsection{Vectors, matrices, lists and data
 frames}\label{vectors-matrices-lists-and-data-frames}
 
-\emph{Vectors} In the previous paragraph we created the one-vector x,
-i.e.~a vector that contained only one number, the number 3. Mostly you
-do your analysis on more numbers than just one. R has several
-possibilities to create objects with more data. We start with a simple
-dataset, called a data vector, which is an array of numbers (such as
-created in R code 1.2. A vector can be created by the following code:
+\textbf{Vectors} A vector can be created by the following code:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -602,7 +595,7 @@ created in R code 1.2. A vector can be created by the following code:
 ## [1] 1 2 3 4 5
 \end{verbatim}
 
-Now the numbers 1, 2, 3, 4 and 5 are assigned to the data vector y. The
+The numbers 1, 2, 3, 4 and 5 are assigned to the data vector y. The
 ``c'' in the above code stand for concatenate which makes that all
 separate (one-vector) numbers are merged into one vector. It is also
 possible to create character vectors, which are vectors that contain
@@ -633,23 +626,7 @@ is easy to generate a sequence of numbers. An example:
 ##  [1]  1  2  3  4  5  6  7  8  9 10
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{y <-}\StringTok{ }\DecValTok{2}\OperatorTok{:}\DecValTok{6}
-\NormalTok{y}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 2 3 4 5 6
-\end{verbatim}
-
-Both lines of code produce a vector containing a sequence of numbers.
-The first example produces the numbers 1 to 10 and the second example
-the numbers 2 to 6.
-
-\emph{Matrix} A matrix in R contains rows and columns and can be created
-by using the matrix function.
+\textbf{Matrix} You can create a matrix by using the matrix function.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -666,9 +643,9 @@ by using the matrix function.
 Now we have created a matrix with 2 rows and 3 columns. In essence we
 converted the vector c(1, 2, 3, 4, 5, 6) into a matrix.
 
-\emph{List} Another popular R object class is a list. The advantage of a
-list is that it can contain components of different formats. Let's look
-at an example using the following code:
+\emph{List} Another object is called a list. A list can contain
+components of different formats. Let's look at an example using the
+following code:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -697,70 +674,26 @@ at an example using the following code:
 ## [1] "a"    "b"    "test"
 \end{verbatim}
 
-The code created the list object z consisting of the two components x
-and y which are the vectors that were created above. You can see that in
-a list two components of different data type can be combined, a numeric
-and a character factor. The names of the list components are indicated
-by the dollar sign,
-\(. The list component can be obtained separately by typing z\)x for
-component x or x\$y for component y.
+With this code you created the list object z consisting of the two
+components x and y which are the vectors that were created above. You
+see that in a list two components of different data type can be
+combined, a numeric and a character factor. The names of the list
+components are indicated by the dollar sign, \texttt{\$}. The list
+component can be obtained separately by typing \texttt{z\$x} for
+component x or \texttt{x\$y} for component y.
 
 \emph{Dataframe} Mostly we work with datasets that contain information
 of different variables and persons. In R such a dataset is called a
-dataframe. In essence, a dataframe in R is a list, where each component
-of the list is a vector of equal length. This example code first creates
-a list, consisting of 3 vectors of the same length. Than this list is
-converted into a dataframe, using the data.frame function.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{k <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{a=}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{, }\DataTypeTok{b=}\DecValTok{11}\OperatorTok{:}\DecValTok{20}\NormalTok{, }\DataTypeTok{c=}\DecValTok{21}\OperatorTok{:}\DecValTok{30}\NormalTok{)}
-\NormalTok{k}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## $a
-##  [1]  1  2  3  4  5  6  7  8  9 10
-## 
-## $b
-##  [1] 11 12 13 14 15 16 17 18 19 20
-## 
-## $c
-##  [1] 21 22 23 24 25 26 27 28 29 30
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{z <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(k)}
-\NormalTok{z}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##     a  b  c
-## 1   1 11 21
-## 2   2 12 22
-## 3   3 13 23
-## 4   4 14 24
-## 5   5 15 25
-## 6   6 16 26
-## 7   7 17 27
-## 8   8 18 28
-## 9   9 19 29
-## 10 10 20 30
-\end{verbatim}
-
-Typically, a dataframe is created by reading in an existing dataset. How
-to create a dataframe by reading in a dataset will be further discussed
-in the paragraph ``Reading in and saving data''.
+dataframe. Typically, a dataframe is created by reading in an existing
+dataset. How to create a dataframe by reading in a dataset will be
+further discussed in the paragraph ``Reading in and saving data''.
 
 \subsection{Indexing Vectors, Matrices, Lists and Data
 frames}\label{indexing-vectors-matrices-lists-and-data-frames}
 
-\emph{Vectors} An important operation in R is to select a subset of a
-given vector. This is called indexing vectors. This subset of the vector
-elements can be assigned to another vector. An example how to do this:
+\emph{Vectors} An important operation in R is to select a subset of
+elements of a given vector. This is called indexing vectors. This subset
+can be assigned to another vector. For example:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -804,7 +737,7 @@ A minus sign excludes the specific element from the vector, like:
 
 The R code y{[}-3{]}, excludes the third element of the vector (i.e.~2).
 A new vector z can be created where the third and fourth element of the
-y vector are excluded, by using the following code:
+y vector are excluded:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -820,7 +753,7 @@ y vector are excluded, by using the following code:
 \emph{Matrices} When we index matrices we can choose to index rows,
 columns or both. Here are some examples:
 
-First we construct the matrix
+First construct the matrix z:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -836,7 +769,7 @@ First we construct the matrix
 ## [3,]    3    6    9
 \end{verbatim}
 
-We extract from the first row the number in the second column
+Extract from the first row the number in the second column
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -848,7 +781,7 @@ We extract from the first row the number in the second column
 ## [1] 4
 \end{verbatim}
 
-We extract all numbers in each column in the first row
+Extract all numbers in each column in the first row
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -860,7 +793,7 @@ We extract all numbers in each column in the first row
 ## [1] 1 4 7
 \end{verbatim}
 
-We extract all numbers in each row of the first column
+Extract all numbers in each row of the first column
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -875,7 +808,7 @@ We extract all numbers in each row of the first column
 A minus sign can also be used to delete specific elements or complete
 rows or columns.
 
-Omit the first row from the matrix
+You can omit the first row from the matrix z
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -889,7 +822,7 @@ Omit the first row from the matrix
 ## [2,]    3    6    9
 \end{verbatim}
 
-\emph{Lists} We first create a list with 3 components, each component
+\emph{Lists} First create a list with 3 components, each component
 consists of a vector of the same length and with 10 elements each.
 
 \begin{Shaded}
@@ -910,9 +843,7 @@ consists of a vector of the same length and with 10 elements each.
 ##  [1] 21 22 23 24 25 26 27 28 29 30
 \end{verbatim}
 
-There are several options to index list components and elements of the
-components. If we want to index the individual component b we can use
-the following code:
+Index the individual component b by using the following code:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -944,11 +875,10 @@ the following code:
 ##  [1] 11 12 13 14 15 16 17 18 19 20
 \end{verbatim}
 
-As you have may noticed, to extract individual list components double
-square brackets are used, compared to single brackets for indexing
-vectors and matrices.
+To extract individual list components double square brackets are used,
+compared to single brackets for indexing vectors and matrices.
 
-When we use single brackets, we get the following results:
+When you use single brackets, you get the following results:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -986,7 +916,7 @@ that was constructed in R code 1.11.
 ## [3,]    3    6    9
 \end{verbatim}
 
-Examples of indexing the first column are:
+To index the first column you use:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1022,12 +952,11 @@ The second row can be accessed by using:
 
 \subsection{Vectorized Calculation}\label{vectorized-calculation}
 
-An advantage of working with R is that it is possible to perform
-vectorized calculations. This means that you can do calculations
-elementwise, i.e.~the same calculation is done on each element of an
-object. Let's look at an example.
+With R it is possible to perform vectorized calculations. This means
+that you can do calculations elementwise, i.e.~the same calculation is
+done on each element of an object. Let's look at an example.
 
-We first create a vector z with numerical variables.
+First create a vector z with numerical variables.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1040,7 +969,7 @@ We first create a vector z with numerical variables.
 ## [1] 1 2 3 4 5 6 7 8
 \end{verbatim}
 
-Now it is fairly easy to square each element of the vector by typing:
+Now you can fairly easy square each element of the vector by typing:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1052,21 +981,21 @@ Now it is fairly easy to square each element of the vector by typing:
 ## [1]  1  4  9 16 25 36 49 64
 \end{verbatim}
 
-The \^{}2 means take the power of 2. We see that each element is
-squared. These vectorized calculations can be done by using all kinds of
-mathematical functions, e.g.~taking the square root, logarithms, adding
-constant values to each element, etc.
+We see that each element is squared. You can do these vectorized
+calculations by using all kinds of mathematical functions, e.g.~taking
+the square root, logarithms, adding constant values to each element,
+etc.
 
 \subsection{R Functions}\label{r-functions}
 
 Functions play an important role in R. Functions can be seen as lines of
-R code to run all kind of data procedures and to return a result. Let's
-write a small function that we name ``sum.test'' that generates a
+R code to run all kind of data procedures and to return a result. Take
+for example the small function ``print.sum.test'' that generates a
 sequence of numbers from 1 to 5 and sums all values from 1 to the value
-we define beforehand, which is in our example the value 3. This means
-that the function will sum all values from 1 to 3, i.e.~1 + 2 + 3 when
-it is at the value of 3 and all values from 1 to 4 when we use as input
-value the value 4. The function can be found in R code 1.26.
+we define beforehand, which is here the value 3. This means that the
+function will sum all values from 1 to 3, i.e.~1 + 2 + 3 when it is at
+the value of 3 and all values from 1 to 4 when we use as input value the
+value 4.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1087,14 +1016,14 @@ value the value 4. The function can be found in R code 1.26.
 \end{verbatim}
 
 At the first line we define the function print.sum.test that includes
-one argument x. Than in de body of the function (in italic) which starts
-with a left brace and ends with another brace, the actual calculations
-take place. The return statement gives back the result. At the end we
-call the function with the statement print.sum.test(3), where the value
-3 is actually used in the function.
+one argument x. Than in de body of the function which starts with a left
+brace and ends with another brace, the actual calculations take place.
+The return statement gives back the result. At the end we call the
+function with the statement print.sum.test(3), where the value 3 is
+actually used in the function.
 
-Once the function is defined, we can call the function and plug in other
-values. For example:
+Once the function is defined, you can call the function and plug in
+other values. For example:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1105,8 +1034,6 @@ values. For example:
 \begin{verbatim}
 ## [1] 10
 \end{verbatim}
-
-That will directly lead to the result 10 when the value 4 is used.
 
 You can write functions yourself but in R many functions are available
 which means that many calculations are done by using function calls. A
@@ -1127,10 +1054,9 @@ follows:
 
 The arguments in this function are the numbers 3 and 4 and the result is
 their sum. This function uses as arguments numbers or complete vectors.
+
 If you want to see the formal arguments of each function you can use the
-args function. You have to type the name of the function as the argument
-in the args function. For example, we can use it for the matrix
-function:
+args function. For example, you can use it for the matrix function:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1184,12 +1110,16 @@ If you want to use R code and functions more than once it is useful to
 work with scripts files. In this way you can type and save R code and
 reuse it. To create a script file in R is easy.
 
-After you have started RStudio you go to File -\textgreater{} New File
--\textgreater{} R Scripts. Now a new window will open on the left side
-above. In that file you can type for example the self-written function
-print.sum.test. (Figure \ref{fig:fig11}). Now you can save the script
-file by using the Save option under the File menu, open it again and use
-it whenever you want.
+After you have started RStudio you go to
+
+\begin{quote}
+File -\textgreater{} New File -\textgreater{} R Scripts
+\end{quote}
+
+A new window will open on the left side above. In that file you can type
+for example the self-written function print.sum.test. (Figure
+\ref{fig:fig11}). You can save the script file by using the Save option
+under the File menu, open it again and use it whenever you want.
 
 \begin{figure}
 
@@ -1206,10 +1136,9 @@ directory}\label{creating-a-working-directory}
 It is a good idea to keep your R files at the same place when you are
 doing data analysis for some kind of project. If you do not use a
 separate directory, R will use a default directory, that will mostly be
-in Windows in the documents folder. All files that you have to use
-during your R session are assumed to be in that directory. Further, all
-files that you save during your session will be in that directory. To
-locate your working directory, you can type in the Console window:
+in Windows in the documents folder. All files that you have to use or
+save during your R session are in that directory. To locate your working
+directory, you can type in the Console window:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1217,15 +1146,14 @@ locate your working directory, you can type in the Console window:
 \end{Highlighting}
 \end{Shaded}
 
-In Rstudio there is another way to get information about the current
-working directory and another way to change the working directory. Go in
-RStudio to the window on the right site below and go to the Files tab
-and click on the right site of the screen on the three dots. Than a
-window will open and you can browse to your preferred folder. Then
-choose for More in the Files tab and then select ``Set As Working
-Directory'' (Figure \ref{fig:fig12}). Now you have set your preferred
-working directory. You can check if your directory is set correctly by
-choosing ``Go To Working Directory''.
+In Rstudio you can get information about the current working directory
+or change it in another way. Go in RStudio to the window on the right
+site below and go to the Files tab and click on the right site of the
+screen on the three dots. Than a window will open and you can browse to
+your preferred folder. Then choose for More in the Files tab and then
+select ``Set As Working Directory'' (Figure \ref{fig:fig12}). Now you
+have set your preferred working directory. You can check if your
+directory is set correctly by choosing ``Go To Working Directory''.
 
 \begin{figure}
 
@@ -1245,11 +1173,11 @@ There are several procedures in RStudio to read in datasets.
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Import datasets via ``Import Dataset'' An easy way to do that is via
-  the window at the right site above. There you will find the button
-  which is called ``Import Dataset''. When you click on it you can
-  choose between different kind of file types, i.e.~CVS, Excel, SPSS,
-  SAS and Stata files (Figure 1.13).
+  Import datasets via ``Import Dataset'' An easy is via the window at
+  the right site above. There you will find the button ``Import
+  Dataset''. When you click on it you can choose between different kind
+  of file types, i.e.~CVS, Excel, SPSS, SAS and Stata files (Figure
+  1.13).
 \end{enumerate}
 
 \begin{figure}
@@ -1264,79 +1192,17 @@ There are several procedures in RStudio to read in datasets.
 In this example we choose for SPSS. When you approach this procedure for
 the first time it could be that RStudio asks for your permission to
 download a package called ``haven''. This package is built to import and
-export data from several types. The following window will then appear
-(Figure 1.14).
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.14} 
-
-}
-
-\caption{Window to install the haven package}\label{fig:fig14}
-\end{figure}
-
-Click Yes and the download will start from the CRAN website. After the
-package is installed a new window will open which is called ``Import
-Statistical Data'' (Figure 1.15).
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.15} 
-
-}
-
-\caption{The Import Statistical Data window in RStudio}\label{fig:fig15}
-\end{figure}
-
-At the top right site of the window you find the button which is called
-``Browse''. That button allows you to browse to your dataset on your
-computer. After you have opened your dataset you see a preview of your
-dataset in RStudio (Figure 1.16).
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.16} 
-
-}
-
-\caption{A preview of the dataset in RStudio}\label{fig:fig16}
-\end{figure}
-
-Under Code Preview, under in the window, you see the code that was used
-by RStudio to read in the dataset:
-
-The dataset is automatically assigned to the object: Backpain50, which
-is the original name of the dataset. When you click on Import, the
-dataset is imported in the RStudio environment (Figure 1.17).
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig1.17} 
-
-}
-
-\caption{Imported dataset in RStudio}\label{fig:fig17}
-\end{figure}
+export data from several types.
 
 Another way to import an SPSS dataset is by making use of the foreign
 package. You can find this package under the Packages Tab in the window
 at the right site below under the heading ``System Library''. Install
 that package first. The foreign package includes the function
-``read.spss''. Let's first explore the function arguments of this
-function by using:
+``read.spss''.
 
-Now the following information can be found in the right window below,
-under the Help tab:
-
-read.spss(file, use.value.labels = TRUE, to.data.frame = FALSE,
-max.value.labels = Inf, trim.factor.names = FALSE, trim\_values = TRUE,
-reencode = NA, use.missings = to.data.frame)
-
-The most important arguments to change for us are the file and
-to.data.frame arguments. When you are in the correct working directory,
-i.e.~the working directory where the file that you want to import is
-stored, you use the following code to import the dataset:
+When you are in the correct working directory, i.e.~the working
+directory where the file that you want to import is stored, you use the
+following code to import the dataset:
 
 \subsection{Saving and Reading R data in
 RStudio}\label{saving-and-reading-r-data-in-rstudio}
@@ -1345,14 +1211,13 @@ Datasets can be saved and read in R using different commands.
 
 \emph{Write.table} and \emph{Read.table}
 
-\emph{Write.table} The write.table function can be used to write
-matrices and data frames (datasets) to the working directory. The R code
-is:
+\emph{Write.table} You can use the write.table function to write
+matrices and data frames (datasets):
 
-Files that have been written with write.table can be easily read in, in
-SPSS by using the steps that will be discussed in the next paragraph.
+Files are written with write.table can be easily imported in SPSS by
+using the steps that will be discussed in the next paragraph.
 
-\emph{Read.table} The read.table function can be used to read in
+\emph{Read.table} You can use the read.table function to read in
 matrices and data frames by using:
 
 \emph{Save and Load}
@@ -1360,8 +1225,7 @@ matrices and data frames by using:
 \emph{Save} You can also use the command save to save datasets,
 according to (notice the .RData extension):
 
-\emph{Load} Loading the dataset again in the workspace can be done by
-using:
+\emph{Load} You can Load the dataset again in the workspace by using:
 
 You can also use save by using the default options in the following way
 to save your datasets:
@@ -1385,10 +1249,14 @@ The extra parameter settings, mean: sep=``;'', separate each variable by
 an ``;'' indicator. dec=``,'', use for decimals a ``,'' instead of an
 ``.''. row.names=F , Do not add an extra column with row.names.
 
-Follow the next steps to read in the data into SPSS: choose File
--\textgreater{} Open data -\textgreater{} ``All files (\emph{.})'', than
-you will see the file you want to read in into SPSS. In this example we
-will use the file ``Backpain50 R file'' from R code 1.41 (Figure 1.18).
+Follow the next steps to read in the data into SPSS:
+
+\begin{quote}
+File -\textgreater{} Open data -\textgreater{} ``All files (\emph{.})''
+\end{quote}
+
+than you will see the file you want to import in SPSS, here the
+``Backpain50 R file''.
 
 \begin{figure}
 
@@ -1456,7 +1324,7 @@ trailing spaces from string values: skip.
 \caption{Step 4 of the Text Import Wizard}\label{fig:fig22}
 \end{figure}
 
-Step 5 of 6 (Figure 1.23): Here you can overwrite the Data format of the
+Step 5 of 6 (Figure 1.23): Here you overwrite the Data format of the
 variable (you can also change that in the Variable View window, when the
 data has been read in).
 
@@ -1469,8 +1337,8 @@ data has been read in).
 \caption{Step 5 of the Text Import Wizard}\label{fig:fig23}
 \end{figure}
 
-Step 6 of 6: This step allows you to save your specifications of the
-previous steps into a separate file (Figure 1.24).
+Step 6 of 6: To save your specifications of the previous steps into a
+separate file (Figure 1.24).
 
 \begin{figure}
 
@@ -1481,7 +1349,7 @@ previous steps into a separate file (Figure 1.24).
 \caption{Step 6 of the Text Import Wizard}\label{fig:fig24}
 \end{figure}
 
-Then click finish and the data will be read in, into a new SPSS file. In
+Then click finish and the data will be imported in a new SPSS file. In
 that file you can of course change all kind of variable and data
 settings in the Variable View Window.
 
@@ -1504,10 +1372,10 @@ user-written packages available on the CRAN website.
 Before you can use a specific package that is not part of the basic
 installation, you have to install it in your R library. In this manual
 we will use the mice package to do all kind of imputation procedures,
-such as multiple imputation. mice is not part of the basic installation
-so we have to install it first. There are several procedures in RStudio
-to install a package. One way is to use the install.packages function in
-the Console window as follows:
+such as multiple imputation. mice is not part of the R basic
+installation and you have to install it first. There are several
+procedures in RStudio to install a package. One way is to use the
+install.packages function in the Console window:
 
 The mice package will be automatically downloaded from the CRAN website.
 
@@ -1566,10 +1434,9 @@ zip file and install the package.
 
 \subsection{Loading R Packages}\label{loading-r-packages}
 
-Once an add-on (user written) R package has been installed it has to be
-loaded to get access to all functions that are part of that package. To
-load a library, you can use the function library() or require(). R code
-1.43 shows an example of loading the mice package.
+Once an add-on (user written) R package has been installed you have to
+load it to get access to all functions that are part of that package. To
+load a library, you can use the function library() or require().
 
 The require() function is used in the same way. You have to load add-on
 packages each time you start a new R session.
@@ -1577,7 +1444,7 @@ packages each time you start a new R session.
 \subsection{Updating R Packages}\label{updating-r-packages}
 
 To keep the add-on packages up to date you can use the update.packages()
-function in R. R code 1.44 presents an example.
+function.
 
 R will ask you if you want to update each package. If you type ``y'' in
 the Console window, R will update the package.
@@ -2034,7 +1901,7 @@ missing data pattern.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Book_MI_files/figure-latex/unnamed-chunk-55-1.pdf}
+\includegraphics{Book_MI_files/figure-latex/unnamed-chunk-52-1.pdf}
 
 \begin{verbatim}
 ##    ID Pain Tampascale Disability Radiation Gender GA   
@@ -2103,7 +1970,7 @@ two graphs.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Book_MI_files/figure-latex/unnamed-chunk-56-1.pdf}
+\includegraphics{Book_MI_files/figure-latex/unnamed-chunk-53-1.pdf}
 
 \begin{verbatim}
 ## 
@@ -3451,19 +3318,19 @@ variable as the only predictor variable for these missing values.
 
 \begin{verbatim}
 ##           1
-## 2  39.56653
-## 6  40.26110
-## 9  36.92183
-## 14 38.45535
-## 21 45.59280
-## 25 42.32326
-## 27 42.29989
-## 31 47.33560
-## 35 39.33439
-## 37 43.95467
-## 44 34.28893
-## 49 38.02693
-## 50 46.41343
+## 2  37.84582
+## 6  42.46594
+## 9  34.22344
+## 14 38.23955
+## 21 38.02387
+## 25 35.55548
+## 27 42.37313
+## 31 45.00938
+## 35 36.42840
+## 37 42.67796
+## 44 28.46257
+## 49 35.48742
+## 50 43.39218
 \end{verbatim}
 
 The completed dataset can be extracted by using the complete function in
@@ -3481,51 +3348,298 @@ weight values).
 \chapter{Data analysis after Multiple
 Imputation}\label{data-analysis-after-multiple-imputation}
 
-In the previous Chapter we discussed multiple imputation (MI) and how
-imputations in multiple datasets are generated. After the imputations
-have been generated, the data analysis and pooling steps follow. This
-chapter explains these steps. In the data analysis step, the statistical
-model is applied in the imputed datasets. In the pooling step, the
-analysis results from the analysis step, are summarized into one final
-result. The biggest challenge is to summarize the statistical results
-into one estimate with the related pooled standard errors, confidence
-intervals and a pooled p-value. Rubin (1987) provided rules which can be
-applied to many different statistical tests. Rubin's rules are not
-available for all statistical procedures in SPSS. Many test procedures
-that do not have pooling results not available in SPSS are available in
-R. We will start this Chapter with an example of applying t-tests in
-multiple imputed datasets. With this procedure we can explain the use of
-Rubin's Rules (RR), and the derivation of the degrees of freedom for
-hypothesis testing, which can become complex. We will further discuss
-missing data measures that are derived from RR, such as the fraction of
-missing information (FMI), the relative increase in variance due to
-missing data (Relative Increase Variance) and Relative Efficiency. We
-will further show other pooling procedures for frequently used
-statistical techniques and how to apply them in multiply imputed
-datasets. The availability of each method in SPSS and R, are discussed
-and their application is presented. Specific pooling methods that are
-not available in SPSS are discussed by using examples in R.
+\section{Pooling results after MI in
+SPSS}\label{pooling-results-after-mi-in-spss}
 
-\section{Rubin's Rules - A first
-example}\label{rubins-rules---a-first-example}
+\subsection{Imputed values are yellow}\label{imputed-values-are-yellow}
 
-Rubin proposed methods to combine statistical test results into one
-(pooled) summary estimate. These so-called Rubin´s Rules (RR) are
-designed to pool parameter estimates, such as means differences and
-regression coefficients, standard errors and to derive confidence
-intervals and p-values. T-tests are frequently used and suitable to
-discuss all aspects of using RR, from pooling parameter estimates to
-deriving degrees of freedom and p-values. We will first illustrate the
-use of RR with a t-test example in 3 generated multiple imputed datasets
-in SPSS. In this example we will pool the mean differences and standard
-errors. The derivation of the test statistic t for hypothesis testing,
-degrees of freedom and p-value may differ between the statistical method
-used. These derivations are explained but also discussed in more detail.
-As an illustration, we use de LBP study again, and test the Tampascale
-mean difference (dependent variable) between backpain patients with and
-without radiation in the leg (dependent variable). The output of the
-t-test in the multiple imputed data can be found in (Figure
-\ref{fig:tab5-1a}).
+After multiple imputation, the multiple imputed datasets are stored in a
+new SPSS file. In order to obtain pooled analysis results, the imputed
+values must be marked yellow. Than SPSS recognizes the dataset is a
+``imputed'' dataset and is able to generate pooled analyses results.
+Figure \ref{fig:fig5-1}) shows an example of a multiple imputed dataset
+with imputed values marked yellow. If SPSS does not recognize the
+dataset as a multiple imputed dataset, the data will be treated as one
+large dataset.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig5.1} 
+
+}
+
+\caption{Example of SPSS dataset after MI has been applied.}\label{fig:fig5-1}
+\end{figure}
+
+You can mark the imputed values by using the option ``Mark Imputed
+Data'' under the View menu in the Data View window ((Figure
+\ref{fig:fig5-1})).
+
+\subsection{The Imputation\_ variable}\label{the-imputation_-variable}
+
+The Imputation\_ variable is a nominal variable that separates the
+original from the imputed datasets. It is used as a variable that splits
+the file into separate groups for analysis based on the different
+categories. This is also indicated in the corner on the right side below
+in the Data View and Variable View windows by the note ``Split by
+imputation\_''.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig5.2} 
+
+}
+
+\caption{Procedure to mark imputed values in SPSS.}\label{fig:fig5-2}
+\end{figure}
+
+When missing values are imputed with any another software program, you
+can include an Imputation\_ variable in SPSS. It is than recognized as
+an imputed dataset in SPSS.
+
+\subsection{Special pooling icon}\label{special-pooling-icon}
+
+When imputation markings are turned on, a special icon is displayed next
+to the statistical procedures in the analyze menu. This icon shows you
+if a pooled result is generated after multiple imputation is used
+((Figure \ref{fig:fig5-3})).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.05\linewidth]{images/fig5.3} 
+
+}
+
+\caption{Multiple Imputation icon.}\label{fig:fig5-3}
+\end{figure}
+
+This icon is shown in the analyze menu in SPSS (Figure
+\ref{fig:fig5-4b})).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/fig5.4b} 
+
+}
+
+\caption{The dataset is recognized as an imputed dataset (special icon visible).}\label{fig:fig5-4b}
+\end{figure}
+
+SPSS provides two levels of pooling, which are called the Naïve and
+Univariate combination. The Naïve combination only shows the pooled
+parameter (if available). The Univariate combination shows the pooled
+parameter, its standard error, test statistic, effective degrees of
+freedom, p-value, confidence interval, and pooling diagnostics (fraction
+of missing information, relative efficiency, relative increase in
+variance), when available. Although the special icon in SPSS to indicate
+that the dataset is recognized as a multiple imputed dataset appears for
+many analysis procedures, it is not always clear what procedures really
+provide the Univariate combination output. It is therefore recommended
+to explore what kind of pooled information is provided by SPSS before MI
+is applied.
+
+\section{Pooling results after MI in
+R}\label{pooling-results-after-mi-in-r}
+
+Many pooling procedures are available as part of the mice package.
+However, for some specific statistical procedures, other packages are
+required to obtain pooled estimates. For example, pooling ANOVA results
+is not available in the mice package itself. For this, the miceadds
+package has to be used.
+
+For the examples in this Chapter We will use three imputed datasets, to
+keep the output Tables readable, although the examples easily generalize
+to a larger number of imputed datasets.
+
+\subsection{Pooling Means and Standard deviations in
+SPSS}\label{pooling-means-and-standard-deviations-in-spss}
+
+To get pooled means you just use
+
+\begin{quote}
+Analyze \textgreater{} Descriptive Statistics.
+\end{quote}
+
+Figure \ref{fig:tab5-3} shows that in the ``Pooled'' row the mean values
+of the Tampascale variable are pooled. The standard deviations are not
+automatically pooled in SPSS. The mean value of the standard deviations
+can be calculated by computing the average over the standard deviations.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/table5.3} 
+
+}
+
+\caption{Pooling results of descriptive statistics.}\label{fig:tab5-3}
+\end{figure}
+
+\subsection{Pooling Means and Standard Deviations in
+R}\label{pooling-means-and-standard-deviations-in-r}
+
+To pool the means and standard deviations you use the with function in
+mice.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Read in the SPSS dataset}
+\KeywordTok{library}\NormalTok{(foreign)}
+\NormalTok{dataset <-}\StringTok{ }\KeywordTok{read.spss}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Backpain 150 Missing MI datasets.sav"}\NormalTok{, }\DataTypeTok{to.data.frame=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## re-encoding from UTF-8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(mice)}
+\CommentTok{# Apply multiple imputation}
+\NormalTok{imp <-}\StringTok{ }\KeywordTok{mice}\NormalTok{(dataset, }\DataTypeTok{m=}\DecValTok{3}\NormalTok{, }\DataTypeTok{maxit=}\DecValTok{50}\NormalTok{, }\DataTypeTok{seed=}\DecValTok{2375}\NormalTok{, }\DataTypeTok{printFlag =}\NormalTok{ F)}
+ 
+\CommentTok{# Stack imputed datasets in long format, exclude the original data}
+\NormalTok{impdat <-}\StringTok{ }\KeywordTok{complete}\NormalTok{(imp,}\DataTypeTok{action=}\StringTok{"long"}\NormalTok{,}\DataTypeTok{include =} \OtherTok{FALSE}\NormalTok{)}
+
+\CommentTok{# compute mean and standard deviation in each imputed dataset}
+\NormalTok{desc <-}\StringTok{ }\KeywordTok{with}\NormalTok{(impdat, }\KeywordTok{by}\NormalTok{(impdat, .imp, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{c}\NormalTok{(}\KeywordTok{mean}\NormalTok{(x}\OperatorTok{$}\NormalTok{Tampascale),}\KeywordTok{sd}\NormalTok{(x}\OperatorTok{$}\NormalTok{Tampascale))))}
+\NormalTok{desc}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## .imp: 1
+## [1] 38.935000  5.330867
+## -------------------------------------------------------- 
+## .imp: 2
+## [1] 38.988333  5.400321
+## -------------------------------------------------------- 
+## .imp: 3
+## [1] 38.998333  5.391361
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{Reduce}\NormalTok{(}\StringTok{"+"}\NormalTok{,desc)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(desc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 38.973889  5.374183
+\end{verbatim}
+
+\section{Pooling Correlation
+coefficients}\label{pooling-correlation-coefficients}
+
+When a normal distribution of the parameter estimates cannot be assumed,
+like for the correlation coefficients, a Fishers Z transformation has to
+be performed before pooling (see the appendix for the formula's). This
+is automatically done in SPSS and R.
+
+\subsubsection{Pooling Correlation coefficients in
+SPSS}\label{pooling-correlation-coefficients-in-spss}
+
+A pooled Pearsons correlation coefficient between for example, the
+Tampascale and Age variables can be extracted using
+
+\begin{quote}
+Analyse -\textgreater{} Correlate -\textgreater{} Bivariate.
+\end{quote}
+
+Than transfer the variable Tampa scale and Age to the variables window
+and click on OK. The pooled results are shown in (Figure
+\ref{fig:tab5-4}), in the row called Pooled. The pooled correlation is
+0.255, and the significance level is 0.002. These correlations are
+calculated using Fishers Z transformation before pooling and after
+pooling they are back-transformed.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/table5.4} 
+
+}
+
+\caption{Pearson correlation between the Tampascale variable and Age.}\label{fig:tab5-4}
+\end{figure}
+
+\subsubsection{Pooling Correlation Coefficients in
+R}\label{pooling-correlation-coefficients-in-r}
+
+You can use the micombine.cor function in the miceadds package to obtain
+pooled correlation coefficients.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Read in the dataset }
+\NormalTok{dataset <-}\StringTok{ }\KeywordTok{read.spss}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Backpain 150 missing.sav"}\NormalTok{, }\DataTypeTok{to.data.frame=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## re-encoding from UTF-8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Impute missing data using the mice function, with printFlag is F(alse), }
+\CommentTok{# which means that the imp and iter information is hided (called silent }
+\CommentTok{# computation)}
+\NormalTok{imp <-}\StringTok{ }\KeywordTok{mice}\NormalTok{(dataset, }\DataTypeTok{m=}\DecValTok{3}\NormalTok{, }\DataTypeTok{maxit=}\DecValTok{50}\NormalTok{, }\DataTypeTok{seed=}\DecValTok{2375}\NormalTok{, }\DataTypeTok{printFlag=}\NormalTok{F)}
+
+\CommentTok{# Run the micombine.cor function for the variables in column 2 }
+\CommentTok{# and 5, i.e. variables Tampascale and Age}
+\NormalTok{res.mi.cor <-}\StringTok{ }\KeywordTok{micombine.cor}\NormalTok{(}\DataTypeTok{mi.res=}\NormalTok{imp, }\DataTypeTok{variables =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{) )}
+\NormalTok{res.mi.cor}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    variable1  variable2        r        rse  fisher_r fisher_rse
+## 1 Tampascale        Age 0.252762 0.07748072 0.2583611 0.08278965
+## 2        Age Tampascale 0.252762 0.07748072 0.2583611 0.08278965
+##           fmi        t           p    lower95   upper95
+## 1 0.007555655 3.120693 0.001804258 0.09580167 0.3974575
+## 2 0.007555655 3.120693 0.001804258 0.09580167 0.3974575
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Ouput of the micombine.cor function, with in the columns:}
+\CommentTok{#   r: Pooled Pearsons correlation coefficient.}
+\CommentTok{#     rse: Standard error of pooled correlation.}
+\CommentTok{#     fisher_r: Transformed pooled r}
+\CommentTok{#     fisher_rse: Standard error of transformed pooled r}
+\CommentTok{#     fmi: Fraction of missing information.}
+\CommentTok{#     t: T-value.}
+\CommentTok{#     p: P-value.}
+\CommentTok{#     lower95 and upper95: 95% lower and upper confidence intervals.}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{The Pooled Independent
+T-test}\label{the-pooled-independent-t-test}
+
+To pool the independent t-test, Rubin´s Rules can be used. These steps
+are discussed in detail, including the formula's to get the results, in
+Chapter 9.
+
+\subsubsection{Pooling Independent T-tests in
+SPSS}\label{pooling-independent-t-tests-in-spss}
+
+To get a pooled t-test result to estimate the difference in mean
+Tampascale values between patients with and without Radiation in the leg
+you go to:
+
+\begin{quote}
+Analyze -\textgreater{} Compare Means -\textgreater{}
+Independent-Samples T Test
+\end{quote}
+
+Transport the Tampa Scale variable to the Test Variable(s) window and
+the Radiation variable to the Grouping Variable window. Than Click on
+Define Groups and Define Group 1 as ``1'' and Group 2 as ``0''. Than
+Click on Continue and OK. The following output table will show up,
+Figure \ref{fig:tab5-1a}.
 
 \begin{figure}
 
@@ -3545,749 +3659,22 @@ t-test in the multiple imputed data can be found in (Figure
 \caption{b.T-test for difference in mean Tampascale values between patients with and without Radiation in the leg applied in multiple imputed datasets.}\label{fig:tab5-1b}
 \end{figure}
 
-In (Figure \ref{fig:tab5-1a}) the relationship in the original dataset
-is presented in the row that is indicated by Imputation\_ number 0 as
-well as in each imputed dataset which are indicated by Imputation\_
-number 1 to 3. In the last row which is indicated as ``Pooled'', the
-summary estimates of the parameters are presented. With parameters we
-mean the parameters of interest which are here the mean differences and
-standard errors. We will explain now by using RR how these pooled mean
-differences and standard errors are estimated.
-
-\subsection{Pooling Parameters}\label{pooling-parameters}
-
-When RR are used, it is assumed that the repeated parameter estimates in
-each imputed dataset (e.g.~mean differences), are normally distributed.
-This cannot be assumed for all statistical test statistics,
-e.g.~correlation coefficients. For these test statistics,
-transformations have to be performed before RR can be applied to assume
-normality (will be discussed below). To illustrate the use of RR, we
-start with the T-test example of (Figure \ref{fig:tab5-1a})
-
-To calculate the pooled parameter estimate the following formula is used
-\eqref{eq:p-param}:
-
-\begin{equation}
-  \bar{\theta} = \frac{1}{m}\left (\sum_{i=1}^m{\theta_i}\right )
-  \label{eq:p-param}
-\end{equation}
-
-In this formula, \(\bar{\theta}\) is the pooled parameter estimate, m is
-the number of imputed datasets, \(\theta_i\) means taking the sum of the
-parameter estimate (i.e.~mean difference) in each imputed dataset i.
-This formula is equal to the basic formula of taking the mean value of a
-sequence of numbers.
-
-When we use the values in (Figure \ref{fig:tab5-1a}), \(\theta_i\) is
-the mean difference of the Tampascale variable between patients with and
-without radiation in the leg in each imputed dataset, we get the
-following result:
-
-\[\bar{\theta} = \frac{1}{3}(2.174 + 1.965+1.774)=1.971\]
-
-This value of 1.971 is the pooled value for the Tampascale variable in
-(Figure \ref{fig:tab5-1a}).
-
-\section{Pooling Standard errors}\label{pooling-standard-errors}
-
-The pooled standard error is derived from different components that
-reflect the within and between sampling variance of the parameter of
-interest. To calculate the within and between sampling variance in the
-t-test example, the mean difference and the related standard errors are
-needed. The calculation of these components is discussed below.
-
-\emph{Within imputation variance} The within imputation variance is the
-average of the variance of the estimates in each imputed dataset. This
-reflects the sampling variance, i.e.~the precision of the parameter of
-interest in each completed dataset. This value will be large in small
-samples and small in large samples. The within imputation variance is
-computed by taking the mean of the within variance estimate,
-i.e.~squared standard error, in each imputed dataset:
-
-\begin{equation}
-V_W = \frac{1}{m}\left (\sum_{i=1}^m{SE_i^2}\right )
-  \label{eq:var-w}
-\end{equation}
-
-In this formula \(V_W\) is the within imputation variance, m is the
-number of imputed datasets, \(SE_i^2\) means taking the sum of the
-squared Standard Error (SE), estimated in each imputed dataset i. Using
-the data in (Figure \ref{fig:tab5-1a}), we get the following result:
-
-\[V_W = \frac{1}{3}(0.896^2 + 0.882^2 + 0.898^2)=0.7957147\]
-
-\emph{Between imputation variance} The between imputation variance
-reflects the extra variance due to the missing data. This is estimated
-by taking the variance of the parameter of interest estimated over
-imputed datasets. This value is large when the level of missing data is
-high and smaller when the level of missing data is small.
-
-\begin{equation}
-V_B\sqrt{\frac{\sum_{i=1}^m (\theta_i - \overline{\theta})^2}{N-1} }
-  \label{eq:var-b}
-\end{equation}
-
-In this formula, \(V_B\) is the between imputation variance, m is the
-number of imputed datasets, \(\overline{\theta}\) is the pooled
-estimate, \(\theta_i\) is the parameter estimate in each imputed dataset
-i. Accordingly, \({\sum_{i=1}^m(\theta_i - \overline{\theta})^2}\) ,
-indicates taking the sum of the squared differences, between the
-individual and pooled parameter estimates in each imputed dataset. This
-formula is equal to the formula for the (sample) variance which is
-commonly used in statistics. Using the data in (Figure
-\ref{fig:tab5-1a}), we get the following result for the between
-imputation variance:
-
-\[V_W = \frac{1}{3-1}((2.174-1.971)^2+ (1.965-1.971)^2+(1.774-1.971)^2)=0.7957147\]
-
-\[V_B = \frac{V_B}{m}\]
-
-\begin{equation}
-V_{Total} = V_W + V_B + \frac{V_B}{m}
-  \label{eq:var-t}
-\end{equation}
-
-\[V_{Total} = 0.7957147+0.040027 + \frac{0.040027}{3}\]
-
-\[SE_{Pooled} = \sqrt{V_{Total}} = \sqrt{0.849084} = 0.9214575\]
-
-This value is equal to the (rounded) pooled standard error value of
-0.921 in (Figure \ref{fig:tab5-1a}).
-
-\section{Significance testing}\label{significance-testing}
-
-For significance testing of the pooled parameter, i.e.~the mean
-difference in (Figure \ref{fig:tab5-1a}), Formula 5.6 is used. This is
-the univariate Wald test (Rubin 1987, van Buuren 2013, Marshall, 2009).
-This test is defined as:
-
-\begin{equation}
-Wald_{Pooled} =\frac{(\overline{\theta} - {\theta_0})^2}{V_T}
-  \label{eq:wald-pooled}
-\end{equation}
-
-where \(\overline{\theta}\) and \(V_T\) is the total variance and is
-equal to the \(SE_P\) or the pooled standard error that was derived in
-the previous paragraph), and \(\theta_0\) is the parameter value under
-the null hypothesis (which is mostly 0). The univariate Wald test can be
-used to test all kind of univariate parameters of interest, mean
-differences and univariate regression coefficients in linear and
-logistic regression models. In our example, we use the univariate Wald
-test to test the pooled mean difference for significance. The univariate
-Wald test in our example is calculated using the values from (Figure
-\ref{fig:tab5-1a}):
-
-\[Wald_{Pooled} =\frac{(\overline{\theta} - {\theta_0})^2}{V_T}=\frac{1.971}{\sqrt{0.849084}}=2.139\]
-The univariate pooled Wald value follows a t-distribution. This
-distribution is used to derive the p-value. The value for t depends on
-the degrees of freedom, according to:
-
-\begin{equation}
-t_{df,1-\alpha/2}
-  \label{eq:t-distr}
-\end{equation}
-
-Where df is degrees of freedom and \(\alpha\) is the reference level of
-significance, which is usually set at 5\%. The derivation of the degrees
-of freedom for the t-test is complex because there exist different
-formula´s to calculate the degrees of freedom. This is explained in the
-next paragraph.
-
-Because \(t^2\) is equal to F at the same number of degrees of freedom,
-we can also test for significance using a F-distribution, according to:
-
-\begin{equation}
-F_{1, df}=t^2_{df,1-\alpha/2}
-  \label{eq:f-distr}
-\end{equation}
-
-The degrees of freedom are equal to the degrees of freedom for the
-t-test above.
-
-\section{Degrees of Freedom and
-P-values}\label{degrees-of-freedom-and-p-values}
-
-The derivation of the degrees of freedom (df) and the resulting p-value
-for the pooled T-test is not straightforward, because there are
-different formulas to calculate the df. There exists an older version of
-the formula to calculate the degrees of freedom (df) and an adjusted
-version (Van Buuren 2012). The older method to calculate the dfs results
-in a higher df than those in each imputed dataset. An example of this is
-shown in (Figure \ref{fig:tab5-2}). It can be seen that the degrees of
-freedoms is 148 in each imputed dataset (in the row for equal variances
-assumed) and 507 for the pooled result. Although this difference in df
-may seem small, using different values for the degrees of freedom leads
-to different p-values. In SPSS the old way to calculate the dfs is used.
-Adjusted versions are used in the mice package for R. The differences
-between the older and adjusted method to calculate the dfs is
-illustrated below.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/table5.2} 
-
-}
-
-\caption{Part of Output of Figure 5.1. The value for the dfs are presented in the df column.}\label{fig:tab5-2}
-\end{figure}
-
-The (older method) to calculate df for the t-distribution is described
-in Rubin (1987) and Van Buuren (2012) and is defined as:
-
-\begin{equation}
-df_{Old} = \frac{m-1}{lambda^2} = (m-1) * (1 + \frac{1}{r^2})
-  \label{eq:df-old}
-\end{equation}
-
-Where m is the number of imputed datasets and lambda can be interpreted
-as the Fraction of Missing information (FMI), calculated by Formula 5.13
-(Raghunathan, 2016), and r is the relative increase in variance due to
-nonresponse, calculated by Formula 5.14. The calculation of lambda and r
-values are discussed in more detail below. The lambda value that is used
-in Formula 5.9 (and often used as alternative for the FMI) is not the
-same FMI value of 0.067 that SPSS presents in (Figure
-\ref{fig:tab5-1a}). The FMI value of 0.067 is calculated by Formula 5.16
-and is called FMI in this manual.
-
-When \(df_{old}\) is calculated with the information in (Figure
-\ref{fig:tab5-1a}), we get:
-
-\[df_{Old} = \frac{3-1}{0.06283485^2} = 506.5576\]
-
-This (rounded) value is equal to the df value in the row Pooled of 507
-in (Figure \ref{fig:tab5-1a}). Formula 5.9 leads to a larger df for the
-pooled result, compared to the dfs in each imputed dataset, which is
-inappropriate. Therefore, Barnard and Rubin (1999) adjusted this df by
-using Formula 5.10:
-
-\begin{equation}
-df_{Adjusted} = \frac{df_{Old}*{df_{Observed}}}{df_{Old}+{df_{Observed}}}
-  \label{eq:df-adj}
-\end{equation}
-
-Where \(df_{Old}\) is defined as in Formula 5.9 and \(df_{Observed}\) is
-defined as:
-
-\begin{equation}
-df_{Observed} = \frac{(n-k)+1}{(n-k)+3}*(n-k)(1-lambda)
-  \label{eq:df-obs}
-\end{equation}
-
-Where n is the sample size in the imputed dataset, k the number of
-parameters to fit and lambda is obtained by Formula 5.13.
-
-By filling in the formulas 5.11 and 5.10 we get for \(df_{observed}\)
-and \(df_{adjusted}\) respectively:
-
-\[df_{Observed} = \frac{(150-2)+1}{(150-2)+3}*(150-2)(1- 0.06283485)=136.8633\]
-
-\[df_{Adjusted} = \frac{(506.5576* 136.8633)}{(506.5576+ 136.8633)}=107.7509\]
-
-This number of 107.7509 is equal to the df used by mice.
-
-We can now derive the p-value for the mean difference in the Tampascale
-between patients with and without Radiation in the leg. This two-sided
-p-value is:
-
-In SPSS:
-
-\[t_{df,1-\alpha/2}=2.139_{df{Old}}=0.03289185\]
-
-\[t_{df,1-\alpha/2}=2.139_{df{Adjusted}}=0.03467225\] \#\# Confidence
-Intervals
-
-For the 95\% confidence interval (CI), the general formula can be used:
-
-\begin{equation}
-\bar{\theta} ± t_{df,1-\alpha/2} * SE_{Pooled}
-  \label{eq:conf}
-\end{equation}
-
-In this formula, \(\bar{\theta}\) is the pooled estimate, t is the
-t-statistic, df is degrees of freedom and \(SE_{Pooled}\) is the pooled
-standard error (Formula 5.5).
-
-\section{Measures of Missing data
-information}\label{measures-of-missing-data-information}
-
-In this paragraph we will discuss measures that can be derived from
-values of the between, and within imputation variance and the total
-variance. These measures are the Fraction of Missing information (FMI),
-the relative increase in variance due to nonresponse and the Relative
-Efficiency. There exist two versions of the FMI, which are referred to
-as lambda and FMI.
-
-\subsection{Fraction of Missing
-Information}\label{fraction-of-missing-information}
-
-The Fraction of Missing information, lambda, (van Buuren, 2012;
-Raghunathan, 2016) can be derived from the between and total missing
-data variance as:
-
-\begin{equation}
-Lambda = \frac{V_B + \frac{V_B}{m}}{V_T}
-  \label{eq:lambda}
-\end{equation}
-
-Where m is the number of imputed datasets and \({V_B}\) and \({V_T}\)
-are the between and total variance respectively. This value can be
-interpreted as the proportion of variation in the parameter of interest
-due to the missing data.
-
-When we use the \({V_B}\) and \({V_T}\) values that were calculated in
-paragraph 5.1.2, this value will be:
-
-\[Lambda = \frac{0.040027 + \frac{0.040027}{3}}{0.849084}=0.06283485\]
-
-This specific value for the FMI, lambda, is not reported by SPSS, but is
-reported by the mice package in R. Confusingly, van Buuren (2012) and
-Enders (2010) use the same formula to calculate this type of missing
-data information, but van Buuren calls it lambda and Enders FMI.
-
-\subsection{Relative increase in
-variance}\label{relative-increase-in-variance}
-
-Another related measure is the relative increase in variance (RIV) due
-to nonresponse. This value is calculated as:
-
-\begin{equation}
-Lambda = \frac{V_B + \frac{V_B}{m}}{V_W}
-  \label{eq:riv}
-\end{equation}
-
-Where \({V_B}\) and \({V_W}\) are the between and within variance
-respectively. This value can be interpreted as the proportional increase
-in the sampling variance of the parameter of interest that is due to the
-missing data.
-
-Filling in this formula with the example from paragraph 5.1.2 will
-result in:
-
-\[Lambda = \frac{V_B + \frac{V_B}{m}}{V_W}=\frac{0.040027 + \frac{0.040027}{3}}{0.7957147}=0.06704779\]
-
-This value is also presented in (Figure \ref{fig:tab5-1a}) in the column
-Relative Increase Variance.
-
-\subsection{Fraction of Missing Information -
-FMI}\label{fraction-of-missing-information---fmi}
-
-\begin{equation}
-FMI = \frac{RIV + \frac{2}{df+3}}{1+RIV}
-  \label{eq:riv}
-\end{equation}
-
-Where RIV is the relative increase in variance due to missing data (see
-Formula 5.14) and df is the degrees of freedom for the pooled result.
-The degrees of freedom for the pooled result can be obtained in two
-ways: df\_Old or df\_Adjusted.
-
-In SPSS, FMI is calculated using df\_Old, which results in:
-
-\[FMI = \frac{RIV + \frac{2}{df+3}}{1+RIV}=\frac{0.06704779 + \frac{2}{506.5576+3}}{1+0.06704779}=0.0665132\]
-
-In R package mice, FMI is calculated using the formula for df\_Adjusted,
-that results in:
-
-\[FMI = \frac{RIV + \frac{2}{df_{Adjusted}+3}}{1+RIV}=\frac{0.06704779 + \frac{2}{107.7509+3}}{1+0.06704779}=0.0797587\]
-
-The difference between lambda and FMI is that FMI is adjusted for the
-fact that the number of imputed datasets that are generated is not
-unlimitedly large. These measures differ for a small value of the df.
-
-\subsection{Relative Efficiency}\label{relative-efficiency}
-
-The Relative Efficiency (RE) is defined as:
-
-\begin{equation}
-RE = \frac{1}{1+\frac{FMI}{m}}
-  \label{eq:re}
-\end{equation}
-
-FMI is the fraction of missing information and m is the number of
-imputed datasets.
-
-The RE value is only provided by SPSS and is calculated by filling in
-the values of (Figure \ref{fig:tab5-1a}) as follows:
-
-\[RE = \frac{1}{1+\frac{FMI}{m}}=\frac{1}{1+\frac{0.0665132}{3}}=0.9783098\]
-
-The RE gives information about the precision of the parameter estimate
-as the standard error of a regression coefficient.
-
-\section{Pooling Data Analytic results after MI in SPSS and
-R}\label{pooling-data-analytic-results-after-mi-in-spss-and-r}
-
-In Chapter 4 we discuss that when multiple imputation is applied, the
-multiple imputed datasets can be stored in a separate SPSS file. In
-order to obtain pooled analysis results in SPSS, the imputed values must
-be marked yellow (i.e.~the file should be split by the Imputation\_
-variable). See (Figure \ref{fig:tab5-1a}) for an example of a multiple
-imputed dataset with imputed values marked yellow.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig5.1} 
-
-}
-
-\caption{Example of SPSS dataset after MI has been applied.}\label{fig:fig5-1}
-\end{figure}
-
-If SPSS does not recognize the dataset as a multiple imputed dataset,
-the data will be treated as one large dataset, which is wrong. Marking
-the values can be done by using the option ``Mark Imputed Data'' under
-the View menu in the Data View window ((Figure \ref{fig:fig5-1})). The
-Imputation\_ variable is a nominal variable that separates the original
-from the imputed datasets. It is used as a variable that splits the file
-into separate groups for analysis based on the different categories.
-This is also indicated in the corner on the right side below in the Data
-View and Variable View windows by the remark ``Split by imputation\_''.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig5.2} 
-
-}
-
-\caption{Procedure to mark imputed values in SPSS.}\label{fig:fig5-2}
-\end{figure}
-
-When imputation markings are turned on, a special icon is displayed next
-to procedures that support pooling after multiple imputation ((Figure
-\ref{fig:fig5-3})).
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.05\linewidth]{images/fig5.3} 
-
-}
-
-\caption{Multiple Imputation icon.}\label{fig:fig5-3}
-\end{figure}
-
-This icon is shown in the analyze menu in SPSS ((Figure
-\ref{fig:fig5-4a}) and (Figure \ref{fig:fig5-4b})). In (Figure
-\ref{fig:fig5-4b}) the imputed values are not marked. SPSS assumes that
-the dataset is just a normal dataset and the special icon is not visible
-when you use Analyze \textgreater{} Regression. When the imputed values
-are marked as in (Figure \ref{fig:fig5-4b}), the special icon appears
-again.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig5.4a} 
-
-}
-
-\caption{The dataset is not recognized as an imputed dataset (no special icon visible).}\label{fig:fig5-4a}
-\end{figure}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig5.4b} 
-
-}
-
-\caption{The dataset is recognized as an imputed dataset (special icon visible).}\label{fig:fig5-4b}
-\end{figure}
-
-In Appendix C a list of SPSS procedures is presented that support
-multiple imputed datasets. SPSS provides two levels of pooling, which
-are called the Naïve and Univariate combination. The Naïve combination
-only shows the pooled parameter (if available). The Univariate
-combination shows the pooled parameter, its standard error, test
-statistic, effective degrees of freedom, p-value, confidence interval,
-and pooling diagnostics (fraction of missing information, relative
-efficiency, relative increase in variance), when available. Although the
-special icon in SPSS to indicate that the dataset is recognized as a
-multiple imputed dataset appears for many analysis procedures, it is not
-always clear what procedures also provide the Univariate combination
-output. It is therefore recommended to explore what kind of pooled
-information is provided by SPSS before MI is applied. The mice package
-is considered the main package in this manual to APPLY multiple
-imputation in R. Many pooling procedures are available in the mice
-package. However, for some specific statistical procedures, other
-packages are required to obtain pooled estimates. For example, pooling
-ANOVA results is not available in the mice package itself, the miceadds
-package has to be used for that by using the function mi.anova. The
-consequence is that if you are planning to do an ANOVA analysis in
-multiply imputed datasets you may have to use the mice and the miceadds
-packages. For a complete list of available procedures in different R
-packages see Appendix D. In this chapter we will provide pooled results
-in SPSS and R. In other words, we will show results of statistical
-procedures for which pooled information is available. As an example we
-use a dataset for 150 patients with Back pain. The variables that
-contain missing data are the Tampascale and the Function variable. We
-will generate three imputed datasets, so that output Tables remain
-readable, although the examples easily generalize to a larger number of
-imputed datasets.
-
-\subsection{Pooling Means and Standard deviations in
-SPSS}\label{pooling-means-and-standard-deviations-in-spss}
-
-The pooled means are automatically presented in SPSS output when you
-obtain descriptive statistics via Analyze \textgreater{} Descriptive
-Statistics. In (Figure \ref{fig:tab5-3}) you see in the ``Pooled'' row
-that the mean values of the Tampascale variable are pooled. This is done
-by just taking the average of the mean values of each imputed dataset.
-The standard deviations are not automatically pooled in SPSS. The mean
-value of the standard deviations can be calculated by computing the
-average over the standard deviations.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/table5.3} 
-
-}
-
-\caption{Pooling results of descriptive statistics.}\label{fig:tab5-3}
-\end{figure}
-
-\subsection{Pooling Means and Standard Deviations in
-R}\label{pooling-means-and-standard-deviations-in-r}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(foreign)}
-\NormalTok{dataset <-}\StringTok{ }\KeywordTok{read.spss}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Backpain 150 Missing MI datasets.sav"}\NormalTok{, }\DataTypeTok{to.data.frame=}\NormalTok{T)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## re-encoding from UTF-8
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(mice)}
-\NormalTok{imp <-}\StringTok{ }\KeywordTok{mice}\NormalTok{(dataset, }\DataTypeTok{m=}\DecValTok{3}\NormalTok{, }\DataTypeTok{maxit=}\DecValTok{50}\NormalTok{, }\DataTypeTok{seed=}\DecValTok{2375}\NormalTok{, }\DataTypeTok{printFlag =}\NormalTok{ F) }\CommentTok{# generate 3 imputed datasets}
-
-\CommentTok{# Extract each imputed dataset and call it dataset1-dataset3}
-\NormalTok{dataset1 <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(dataset, Imputation_}\OperatorTok{==}\DecValTok{1}\NormalTok{)}
-\NormalTok{dataset2 <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(dataset, Imputation_}\OperatorTok{==}\DecValTok{2}\NormalTok{)}
-\NormalTok{dataset3 <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(dataset, Imputation_}\OperatorTok{==}\DecValTok{3}\NormalTok{)}
-
-\CommentTok{# Calculate the mean of the Tampascale variable and assign to m1-m3}
-\NormalTok{m1 <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(dataset1}\OperatorTok{$}\NormalTok{Tampascale)}
-\NormalTok{m2 <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(dataset2}\OperatorTok{$}\NormalTok{Tampascale)}
-\NormalTok{m3 <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(dataset3}\OperatorTok{$}\NormalTok{Tampascale)}
-
-\CommentTok{# Calculate the standard deviation of the Tampascale variable and assign to sd1-sd3.}
-\NormalTok{sd1 <-}\StringTok{ }\KeywordTok{sd}\NormalTok{(dataset1}\OperatorTok{$}\NormalTok{Tampascale)}
-\NormalTok{sd2 <-}\StringTok{ }\KeywordTok{sd}\NormalTok{(dataset2}\OperatorTok{$}\NormalTok{Tampascale)}
-\NormalTok{sd3 <-}\StringTok{ }\KeywordTok{sd}\NormalTok{(dataset3}\OperatorTok{$}\NormalTok{Tampascale)}
- 
-\CommentTok{# Calculate the mean of the means m1-m3 and assign to object pool.m}
-\CommentTok{# Calculate the mean of the sds sd1-sd3 and assign to object pool.sd}
-\NormalTok{pool.m <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(}\KeywordTok{c}\NormalTok{(m1, m2, m3))}
-\NormalTok{pool.sd <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(}\KeywordTok{c}\NormalTok{(sd1, sd2, sd3))}
-
-\CommentTok{# Show value of the mean}
-\NormalTok{pool.m}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 38.95111
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Show value of the sd}
-\NormalTok{pool.sd}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 5.405899
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# The same results are obtained by the following (shorter) lines of code}
-\NormalTok{imp <-}\StringTok{ }\KeywordTok{mice}\NormalTok{(dataset, }\DataTypeTok{m=}\DecValTok{3}\NormalTok{, }\DataTypeTok{maxit=}\DecValTok{50}\NormalTok{, }\DataTypeTok{seed=}\DecValTok{2375}\NormalTok{, }\DataTypeTok{printFlag =}\NormalTok{ F)}
- 
-\CommentTok{# stack imputed datasets in long format, exclude the original data}
-\NormalTok{impdat <-}\StringTok{ }\KeywordTok{complete}\NormalTok{(imp,}\DataTypeTok{action=}\StringTok{"long"}\NormalTok{,}\DataTypeTok{include =} \OtherTok{FALSE}\NormalTok{)}
-\CommentTok{# compute mean and standard deviation in each imputed dataset}
-\NormalTok{desc <-}\StringTok{ }\KeywordTok{with}\NormalTok{(impdat, }\KeywordTok{by}\NormalTok{(impdat, .imp, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{c}\NormalTok{(}\KeywordTok{mean}\NormalTok{(x}\OperatorTok{$}\NormalTok{Tampascale),}\KeywordTok{sd}\NormalTok{(x}\OperatorTok{$}\NormalTok{Tampascale))))}
-\NormalTok{desc}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## .imp: 1
-## [1] 38.95000  5.36272
-## -------------------------------------------------------- 
-## .imp: 2
-## [1] 38.961667  5.396796
-## -------------------------------------------------------- 
-## .imp: 3
-## [1] 38.945000  5.375264
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{Reduce}\NormalTok{(}\StringTok{"+"}\NormalTok{,desc)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(desc)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 38.95222  5.37826
-\end{verbatim}
-
-\subsection{5.3.3 The Pooled Correlation
-coefficient}\label{the-pooled-correlation-coefficient}
-
-Some statistical estimates need to be transformed before pooling, when a
-normal distribution of the estimate cannot be assumed. This is the case
-with Pearsons correlation coefficient. To get a pooled version of the
-correlation coefficient, we first have to apply Fishers Z transformation
-of the correlation coefficient. For this transformation, we use the
-following formulas (Raghunathan 2016, van Buuren 2012 and Enders 2010):
-
-\begin{equation}
-Z_i = \frac{1}{2}ln\frac{1+r_i}{1-r_i}
-  \label{eq:cor}
-\end{equation}
-
-The \({Z_i}\) means the calculation of Fisher's Z-value in each imputed
-dataset.
-
-Also, the variance of the correlation can be calculated using:
-
-\begin{equation}
-Var_Z=\frac{1}{n-3}
-  \label{eq:var-cor}
-\end{equation}
-
-n is the sample size in the imputed dataset. Now we can use Rubin's
-Rules to calculate the Pooled correlation and variance. These values
-will be calculated with the transformed Z values.
-
-To obtain the pooled p-value for the correlation coefficient we use the
-formula:
-
-\begin{equation}
-Z=\frac{Z_{Pooled}}{\sqrt{Var_Z}} = \frac{Z_{Pooled}}{\frac{1}{\sqrt{n-3}}}=Z_{Pooled}\times\sqrt{n_i-3}
-  \label{eq:z-cor}
-\end{equation}
-
-In this formula z is the z-score and follows a standard normal
-distribution, \(Z_{Pooled}\) is the pooled Z transformation and
-\(Var_Z\) is the pooled variance.
-
-Finally, back transformation to the original scale of r is done by:
-
-\begin{equation}
-r_{Pooled} = \frac{e^{2\times\\Z_{Pooled}}-1}{e^{2\times\\Z_{Pooled}}+1}
-  \label{eq:exp-cor}
-\end{equation}
-
-\subsubsection{Pooling Correlation coefficients in
-SPSS}\label{pooling-correlation-coefficients-in-spss}
-
-A pooled Pearsons correlation coefficient can be extracted in SPSS by
-using Analyse -\textgreater{} Correlate -\textgreater{} Bivariate. As an
-example, we are interested in the Pearson correlation between the
-Tampascale and Age. These pooled results are calculated by using
-Formulas 5.19 - 5.22 and can be found in (Figure \ref{fig:tab5-4}).
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/table5.4} 
-
-}
-
-\caption{Pearson correlation between the Tampascale variable and Age.}\label{fig:tab5-4}
-\end{figure}
-
-The pooled results are shown in (Figure \ref{fig:tab5-4}), in the row
-called Pooled. The pooled correlation is 0.255, and the significance
-level is 0.002. These correlations are calculated using Fishers Z
-transformation before pooling. After pooling they are back-transformed.
-
-\subsubsection{Pooling Correlation Coefficients in
-R}\label{pooling-correlation-coefficients-in-r}
-
-We illustrate the procedure of pooling the Pearsons correlation
-coefficients in R, using the same imputed datasets as used for the
-example in SPSS in the previous paragraph.
-
-In R the function micombine.cor in the miceadds package can be used to
-obtain pooled correlation coefficients. This function is compatible with
-the mice function.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Read in the dataset }
-
-\NormalTok{dataset <-}\StringTok{ }\KeywordTok{read.spss}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Backpain 150 missing.sav"}\NormalTok{, }\DataTypeTok{to.data.frame=}\NormalTok{T)[, }\OperatorTok{-}\DecValTok{1}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## re-encoding from UTF-8
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Impute missing data using the mice function, with printFlag is F(alse), }
-\CommentTok{# which means that the imp and iter information is hided (called silent }
-\CommentTok{# computation)}
-
-\NormalTok{imp <-}\StringTok{ }\KeywordTok{mice}\NormalTok{(dataset, }\DataTypeTok{m=}\DecValTok{3}\NormalTok{, }\DataTypeTok{maxit=}\DecValTok{50}\NormalTok{, }\DataTypeTok{seed=}\DecValTok{2375}\NormalTok{, }\DataTypeTok{printFlag=}\NormalTok{F)}
-
-\CommentTok{# Run the micombine.cor function for the variables in column 2 }
-\CommentTok{# and 5, i.e. variables Tampascale and Age}
-
-\NormalTok{res.mi.cor <-}\StringTok{ }\KeywordTok{micombine.cor}\NormalTok{(}\DataTypeTok{mi.res=}\NormalTok{imp, }\DataTypeTok{variables =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{) )}
-\NormalTok{res.mi.cor}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##    variable1  variable2        r        rse  fisher_r fisher_rse
-## 1 Tampascale        Age 0.252762 0.07748072 0.2583611 0.08278965
-## 2        Age Tampascale 0.252762 0.07748072 0.2583611 0.08278965
-##           fmi        t           p    lower95   upper95
-## 1 0.007555655 3.120693 0.001804258 0.09580167 0.3974575
-## 2 0.007555655 3.120693 0.001804258 0.09580167 0.3974575
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#   Ouput of the micombine.cor function, with in the columns:}
-\CommentTok{#   r: Pooled Pearsons correlation coefficient.}
-\CommentTok{#   rse: Standard error of pooled correlation.}
-\CommentTok{#   fisher_r: Transformed pooled r}
-\CommentTok{#   fisher_rse: Standard error of transformed pooled r}
-\CommentTok{#   fmi: Fraction of missing information.}
-\CommentTok{#   t: T-value.}
-\CommentTok{#   p: P-value.}
-\CommentTok{#   lower95 and upper95: 95% lower and upper confidence intervals.}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{The Pooled Independent
-T-test}\label{the-pooled-independent-t-test}
-
-For the independent t-test, Rubin´s Rules can be used to calculate the
-pooled mean differences and standard errors. Subsequently degrees of
-freedom and p-values can be derived. These steps were discussed in
-detail using SPSS output in paragraph 5.1.
+The result in the original dataset (including missing values) is
+presented in the row that is indicated by Imputation\_ number 0. Results
+in each imputed dataset are shown in the rows starting with number 1 to
+3. In the last row which is indicated as ``Pooled'', the summary
+estimates of the mean differences, standard errors, p-values and 95\%
+Confidence Interval are presented.
 
 \subsubsection{Pooling Independent T-tests in R with
 mice}\label{pooling-independent-t-tests-in-r-with-mice}
 
-We will now discuss the pooled independent t-test procedure in R, using
-the pool function in the mice package. Although, the mice package itself
-does not have a pooled t-test option, it is possible to conduct a pooled
-linear regression analysis. A linear regression analysis with a
-continuous outcome variable and an independent dichotomous variable is
-the same procedure as an independent t-test. We will use the lm
-procedure in mice with as independent variable Radiation and dependent
-variable Tampascale.
+The mice package itself does not have a pooled t-test option. Instead a
+linear regression analysis has to be conducted. A linear regression
+analysis with a continuous outcome variable and an independent
+dichotomous variable is the same procedure as an independent t-test. Use
+for this the lm procedure in mice with as independent variable Radiation
+and dependent variable Tampascale.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4295,7 +3682,7 @@ variable Tampascale.
 \KeywordTok{library}\NormalTok{(foreign)}
 \KeywordTok{library}\NormalTok{(mice)}
 
-\NormalTok{dataset <-}\StringTok{ }\KeywordTok{read.spss}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Backpain 150 missing.sav"}\NormalTok{, }\DataTypeTok{to.data.frame=}\NormalTok{T)[, }\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+\NormalTok{dataset <-}\StringTok{ }\KeywordTok{read.spss}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Backpain 150 missing.sav"}\NormalTok{, }\DataTypeTok{to.data.frame=}\NormalTok{T)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4308,7 +3695,7 @@ variable Tampascale.
 \CommentTok{# Impute the missing values using the mice function }
 \NormalTok{imp <-}\StringTok{ }\KeywordTok{mice}\NormalTok{(dataset, }\DataTypeTok{m=}\DecValTok{3}\NormalTok{, }\DataTypeTok{maxit=}\DecValTok{50}\NormalTok{, }\DataTypeTok{seed=}\DecValTok{2375}\NormalTok{, }\DataTypeTok{printFlag=}\NormalTok{F)}
  
-\CommentTok{# Conduct an independent t-test in each imputed dataset}
+\CommentTok{# Conduct an independent t-test via lm in each imputed dataset}
 \NormalTok{fit.t.test <-}\StringTok{ }\KeywordTok{with}\NormalTok{(}\DataTypeTok{data=}\NormalTok{imp, }\DataTypeTok{exp=}\KeywordTok{lm}\NormalTok{(Tampascale }\OperatorTok{~}\StringTok{ }\NormalTok{Radiation))}
 \NormalTok{t.test.estimates <-}\StringTok{ }\KeywordTok{pool}\NormalTok{(fit.t.test)}
 \KeywordTok{summary}\NormalTok{(t.test.estimates)}
@@ -4323,36 +3710,27 @@ variable Tampascale.
 
 We see in the output, under est and se the same values as in SPSS
 (Figure \ref{fig:tab5-4}), the pooled value of 1.97 and 0.92 for the
-mean difference and standard error respectively. Under the column df in
-R output 5.3 you see that the dfs for the mean differences in the
-Tampascale variable are much smaller than those in (Figure
-\ref{fig:tab5-4}) above. This is due to the different formulas used to
-calculate the df. SPSS uses the older version and mice the adjusted one.
-This latter adjustment is the Barnard-Rubin adjustment for small samples
-(Barnard and Rubin, 1999). The mice package uses another procedure to
-calculate the df, which is called the adjusted df, according to Formula
-5.10.
+mean difference and standard error respectively.
 
-A measure that is also shown in (Figure \ref{fig:tab5-4}) is the
-relative increase in variance due to missing data. This measure is
-calculated with Formula 5.14.
+Under the column df in R you see that the dfs for the mean differences
+in the Tampascale variable are much smaller than those in (Figure
+\ref{fig:tab5-4}) above. This is due to the different formulas used to
+calculate the df. SPSS uses an older version and mice an adjusted one
+(see Chapter 9 for more information about different ways to calculate
+the df between SPSS and R)
 
 \subsubsection{Pooling Independent T-tests in R with
 mi.t.test}\label{pooling-independent-t-tests-in-r-with-mi.t.test}
 
-To apply an independent t-test you can also use the mi.t.test function
-in the MKmisc package. Before you can use this function to compare the
-means between two groups, the grouping variable has to be converted into
-a factor variable and the imputed datasets have to be assigned to a list
-object. Note that the mi.t.test function uses the parameter setting
-var.equal is True when equal variances are assumed and var.equal is
-False when equal variances are not assumed (the default setting is
-var.equal is False).
+you can also use the mi.t.test function in the MKmisc package. Note that
+the mi.t.test function uses the parameter setting var.equal is True when
+equal variances are assumed and var.equal is False when equal variances
+are not assumed (the default setting is var.equal is False).
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Read in the dataset}
-\NormalTok{dataset <-}\StringTok{ }\KeywordTok{read.spss}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Backpain 150 missing.sav"}\NormalTok{, }\DataTypeTok{to.data.frame=}\NormalTok{T)[, }\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+\NormalTok{dataset <-}\StringTok{ }\KeywordTok{read.spss}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Backpain 150 missing.sav"}\NormalTok{, }\DataTypeTok{to.data.frame=}\NormalTok{T)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4365,8 +3743,8 @@ var.equal is False).
 \CommentTok{# Use the mice function to impute the missing data}
 \NormalTok{imp <-}\StringTok{ }\KeywordTok{mice}\NormalTok{(dataset, }\DataTypeTok{m=}\DecValTok{3}\NormalTok{, }\DataTypeTok{maxit=}\DecValTok{50}\NormalTok{, }\DataTypeTok{seed=}\DecValTok{2375}\NormalTok{, }\DataTypeTok{printFlag=}\NormalTok{F)}
  
-\CommentTok{# Extract the imputed datasets and define the Radiation variable as a }
-\CommentTok{# factor variable}
+\CommentTok{# Extract the imputed datasets and define the Radiation variable  }
+\CommentTok{# as a factor variable}
 \NormalTok{dataset1 <-}\StringTok{ }\KeywordTok{complete}\NormalTok{(imp,}\DecValTok{1}\NormalTok{)}
 \NormalTok{dataset1}\OperatorTok{$}\NormalTok{Radiation <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(dataset1}\OperatorTok{$}\NormalTok{Radiation)}
 \NormalTok{dataset2 <-}\StringTok{ }\KeywordTok{complete}\NormalTok{(imp,}\DecValTok{2}\NormalTok{)}
@@ -4375,13 +3753,12 @@ var.equal is False).
 \NormalTok{dataset3}\OperatorTok{$}\NormalTok{Radiation <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(dataset3}\OperatorTok{$}\NormalTok{Radiation)}
  
 \CommentTok{# Assign the imputed datasets to the list object dataset.imp}
-
 \NormalTok{dataset.imp <-}\StringTok{ }\KeywordTok{list}\NormalTok{(dataset1, dataset2, dataset3)}
  
 \CommentTok{# Start the MKmisc library and run the mi.t.test function to get pooled }
 \CommentTok{# results  of the t-test}
-
 \KeywordTok{library}\NormalTok{(MKmisc)}
+
 \CommentTok{# Result of the pooled t-test}
 \KeywordTok{mi.t.test}\NormalTok{(dataset.imp, }\DataTypeTok{x =} \StringTok{"Tampascale"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Radiation"}\NormalTok{, }\DataTypeTok{var.equal =}\NormalTok{ T)}
 \end{Highlighting}
@@ -4401,29 +3778,26 @@ var.equal is False).
 ## 38.153846  5.597451 40.146893  5.198414
 \end{verbatim}
 
-With the mi.t.test function also a one sample and a paired t-tests can
-be conducted.
+With the mi.t.test function also a one sample and a paired t-test can be
+conducted.
 
 \section{Pooling Chi-square tests}\label{pooling-chi-square-tests}
 
+\subsection{Pooling Chi-square tests in
+SPSS}\label{pooling-chi-square-tests-in-spss}
+
 The pooling of Chi-square values as a result of the Chi-square test is
 not available in SPSS. This lack of reporting of the Chi-Square test is
-shown in (Figure \ref{fig:tab5-6}). The Chi-square test is presented in
-the original dataset and in each imputed dataset, but a pooled
-Chi-square value and pooled p-value is missing. Procedures to pool
-Chi-square values are available in the miceadds and semtools packages.
-The pooling functions are based on formulas that are found in the paper
-of Marshall (2009) and the book of Enders (2012) and are referred to as
-the D2 statistic. The Examples of using these packages to pool
-Chi-square values will be provided below in Rcode 5.7 to 5.9. More
-procedures to pool Chi-square like tests and examples to pool overall
-Wald Chi-square values to obtain a p-value for a categorical variable in
-a logistic regression model will be discussed in the next Chapter. In
-the example below we use a categorical version of the Tampascale
-variable with the categories 0 = low fear of movement, 1 = middle fear
-of movement and 2 is a high fear of movement. This variable contains
-missing data and we impute the missing data with MI. We will use 5
-imputed datasets, to generate the Chi-square values.
+shown in (Figure \ref{fig:tab5-6}) where the association between the
+Tampa scale variable as a categorical variable (with the categories 0 =
+low fear of movement, 1 = middle fear of movement and 2 is a high fear
+of movement) and Radiation in the leg is studied. The Chi-square test is
+presented in the original dataset and in each imputed dataset, but a
+pooled Chi-square value and pooled p-value is missing. This is
+remarkable because when you choose for Descriptive Statistics
+-\textgreater{} Crosstabs to conduct the Chi-square test the special
+Multiple Imputation icon is shown. This is an indication that you get
+pooled results, however in this case it is not.
 
 \begin{figure}
 
@@ -4434,13 +3808,13 @@ imputed datasets, to generate the Chi-square values.
 \caption{Chi-square test in 5 imputed dataset to test the relationship between the Tampascale variable and Radiation, where a pooled estimate is missing.}\label{fig:tab5-6}
 \end{figure}
 
-In R there are several options to get a pooled Chi-square test and
-related p-values. They use themiPoolChi function. This procedure is also
-called the D2 statistic and is presented in the paper of Marshall et al.
-(2009) in Figure 2, row C.
+\subsection{Pooling Chi-square tests in
+R}\label{pooling-chi-square-tests-in-r}
 
-The function micombine.chisquare that is used by the miceadds package
-gives the same result.
+Procedures to pool Chi-square values are available in the miceadds
+package. The pooling functions are based on formulas that can be found
+in Marshall (2009) and Enders (2012) and are referred to as the D2
+statistic. To pool the Chi-square values of the SPSS example you use:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4463,16 +3837,13 @@ printed in Allison (2001).
 \section{Analysis of Variance (ANOVA)
 pooling}\label{analysis-of-variance-anova-pooling}
 
-The pooling of Analysis of Variance (ANOVA) statistics is not available
-in SPSS, but available in R. As an example, we will compare the Function
-means between three Tampascale variable groups. There is missing data in
-the categorical Tampascale and in the Function variable. After the
-dataset has been imputed we can apply an ANOVA procedure to compare the
-three Tampascale groups on their Function scores. (Figure
-\ref{fig:tab5-7}) presents the results after the application in SPSS. It
-is clear from the Figure that the pooled results are lacking.
+\subsection{Analysis of Variance (ANOVA) pooling in
+SPSS}\label{analysis-of-variance-anova-pooling-in-spss}
 
-(Figure \ref{fig:tab5-7}). ANOVA in SPSS without a pooled result.
+The pooling of Analysis of Variance (ANOVA) statistics is not available
+in SPSS. In Figure \ref{fig:tab5-7} the table is shown as a result of
+ANOVA after multiple imputation. It is clear from the Figure that the
+pooled results are lacking.
 
 \begin{figure}
 
@@ -4483,18 +3854,23 @@ is clear from the Figure that the pooled results are lacking.
 \caption{ANOVA in SPSS without a pooled result.}\label{fig:tab5-7}
 \end{figure}
 
-We will show below how we can derive a pooled analysis result in R. The
-pooled ANOVA procedure uses the same function as was used in the
+\subsection{Analysis of Variance (ANOVA) pooling in
+R}\label{analysis-of-variance-anova-pooling-in-r}
+
+The pooled ANOVA procedure uses the same function as was used in the
 previous paragraph to derive the pooled Chi-square value, because the
 Chi and the F-value are related. The easiest way to obtain a p-value for
 the ANOVA is by using the mi.anova function in the miceadds package. In
 this function a regression based formula can be defined to get a
 p-value.
 
+To compare the Function means between three Tampascale variable groups,
+you use:
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Read in the dataset}
-\NormalTok{dataset <-}\StringTok{ }\KeywordTok{read.spss}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Backpain 150 Missing_Tampa_Cat.sav"}\NormalTok{, }\DataTypeTok{to.data.frame=}\NormalTok{T)[, }\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+\NormalTok{dataset <-}\StringTok{ }\KeywordTok{read.spss}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Backpain 150 Missing_Tampa_Cat.sav"}\NormalTok{, }\DataTypeTok{to.data.frame=}\NormalTok{T)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4504,21 +3880,10 @@ p-value.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{names}\NormalTok{(dataset)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] "Pain"      "Tampa_Cat" "Function"  "Radiation" "Age"       "Smoking"  
-## [7] "Gender"
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{# Generate 5 impued datasets }
 \CommentTok{# and set printFlag = F for a silent imputation}
 \NormalTok{imp.Tampa.cat <-}\StringTok{ }\KeywordTok{mice}\NormalTok{(dataset, }\DataTypeTok{m=}\DecValTok{5}\NormalTok{, }\DataTypeTok{maxit=}\DecValTok{50}\NormalTok{, }\DataTypeTok{seed=}\DecValTok{2345}\NormalTok{, }\DataTypeTok{printFlag =}\NormalTok{ F)}
- 
+
 \CommentTok{# Apply the mi.anova function}
 \KeywordTok{library}\NormalTok{(miceadds)}
 \KeywordTok{mi.anova}\NormalTok{(}\DataTypeTok{mi.res=}\NormalTok{imp.Tampa.cat, }\DataTypeTok{formula=}\StringTok{"Function ~ Tampa_Cat"}\NormalTok{ )}
@@ -4538,29 +3903,25 @@ p-value.
 \end{verbatim}
 
 The pooled F and p-values are reported under the columns F value and
-Pr(\textgreater{}F) respectively. The mi.anova function makes use of the
-micombine.F function, that can also be found in the miceadds package.
+Pr(\textgreater{}F) respectively.
 
 \section{Pooling Regression models}\label{pooling-regression-models}
 
-\subsection{The Pooled Linear Regression
-Model}\label{the-pooled-linear-regression-model}
+\subsection{Pooling Linear Regression Models in
+SPSS}\label{pooling-linear-regression-models-in-spss}
 
-To pool the results from a linear regression analysis Rubin´s Rules can
-be used to calculate the pooled regression coefficients and standard
-errors. Subsequently degrees of freedom and p-values can be derived.
-This will be illustrated by studying the relationship between the
-Tampascale (independent) and Function (dependent) variables.
+To pool the results from a linear regression analysis Rubin´s Rules are
+used. To study the relationship between the Tampascale (independent) and
+Function (dependent) variables go to:
 
-The relationship between the Tampascale (independent variable) and the
-Function (dependent variable) variables is presented in (Figure
-\ref{fig:tab5-8}). This linear regression procedure can be done in SPSS
-by Analyze -\textgreater{} Regression -\textgreater{} Linear.
-Information is provided in the row called Pooled about the parameter
-estimates, i.e.~regression coefficients, standard errors, t-values,
-p-values and confidence interval. Further, information is provided about
-the Fraction of Missing Information, Relative Increase Variance and
-Relative Efficiency.
+\begin{quote}
+Analyze -\textgreater{} Regression -\textgreater{} Linear.
+\end{quote}
+
+Transport the variable Function to the Dependent window and the Tampa
+scale variable to the Independent(s) window. To get pooled 95\%
+Confidence Intervals, go to Statistics and select the Confidence
+Intervals option. Than click on Continue and OK.
 
 \begin{figure}
 
@@ -4571,27 +3932,21 @@ Relative Efficiency.
 \caption{Relationship between Tampascale and Function estimated with linear regression in SPSS.}\label{fig:tab5-8}
 \end{figure}
 
-We have seen in paragraph 5.1.1 how pooled estimates are calculated
-using RR and in paragraph 5.1.4 which formulas are used to calculate the
-degrees of freedom (df) to derive the p-value using the pooled
-t-statistic.
+Information is provided in the row called Pooled about the parameter
+estimates, i.e.~regression coefficients, standard errors, t-values,
+p-values and confidence interval. Further, information is provided about
+the Fraction of Missing Information, Relative Increase Variance and
+Relative Efficiency.
 
-\subsubsection{Pooling Linear regression models in
+\subsection{Pooling Linear regression models in
 R}\label{pooling-linear-regression-models-in-r}
 
 A pooled linear regression analyses can be produced by using the with
-and pool functions in the mice package. The object fit contains the
-results of fitting the linear regressions over the imputed datasets.
-After that, we use the pool function to pool the parameters,
-i.e.~regression coefficients and standard errors using Rubin´s Rules.
-When we use the summary function we get more information of the pooled
-analysis. We get information about the fmi, which contains the fraction
-of missing information. The lambda is the proportion of total variance
-that is attributable to the missing data.
+and pool functions in the mice package.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dataset <-}\StringTok{ }\KeywordTok{read.spss}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Backpain 150 missing.sav"}\NormalTok{, }\DataTypeTok{to.data.frame=}\NormalTok{T)[, }\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+\NormalTok{dataset <-}\StringTok{ }\KeywordTok{read.spss}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Backpain 150 missing.sav"}\NormalTok{, }\DataTypeTok{to.data.frame=}\NormalTok{T)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4617,7 +3972,7 @@ that is attributable to the missing data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{#   Results of the pooled procedure, with:}
+\CommentTok{# Results of the pooled procedure, with:}
 \CommentTok{#   est: Pooled regression coefficient.}
 \CommentTok{#   se: Standard error of pooled regression coefficient.}
 \CommentTok{#   t: T-value.}
@@ -4630,33 +3985,21 @@ that is attributable to the missing data.
 \end{Highlighting}
 \end{Shaded}
 
-The value 0.6710426 in the column named fmi for the Tampascale is
-calculated according to the Formula 5.17. The value 0.5711275 under the
-column named lambda is calculated according to Formula 5.13.
-
-\subsection{Pooling Logistic Regression
-models}\label{pooling-logistic-regression-models}
-
-Pooling logistic regression models is possible by using Rubin´s Rules
-(RR). With these rules the regression coefficients and standard errors
-can be pooled. The pooled p-values can be derived from the pooled
-univariate Wald test (Formula 5.6). The univariate Wald test can be used
-to test for significance of univariate regression coefficients. For
-categorical variables in logistic regression models, different methods
-are available to test the variable as a whole for significance. These so
-called Multiparameter tests are not available in SPSS, but they are
-available in R. These tests will be discussed in the next Chapter. We
-will start with an example of univariate pooling in SPSS.
-
-\subsubsection{Pooling Logistic regression models in
+\subsection{Pooling Logistic Regression models in
 SPSS}\label{pooling-logistic-regression-models-in-spss}
 
-We will now discuss an example with a dichotomous outcome variable to
-study the relationship between the Tampascale variable (independent
-variable) and Radiation in the leg with the variable Radiation
-(dependent variable). This procedure can be done in SPSS by Analyze
--\textgreater{} Regression -\textgreater{} Binary Logistic. The output
-is presented in (Figure \ref{fig:tab5-9}).
+To study the relationship between the variables Function (independent
+variable) and Radiation in the Leg (dependent variable we need Logistic
+regression. This procedure can be done in SPSS via
+
+\begin{quote}
+Analyze -\textgreater{} Regression -\textgreater{} Binary Logistic.
+\end{quote}
+
+Transport the variable Radiation in the Leg to the Dependent window and
+the Function variable to the Covariates window. To get pooled 95\%
+Confidence Intervals, go to Options and select the CI for exp(B) option.
+Than click on Continue and OK.
 
 \begin{figure}
 
@@ -4667,57 +4010,15 @@ is presented in (Figure \ref{fig:tab5-9}).
 \caption{Logistic Regression in SPSS.}\label{fig:tab5-9}
 \end{figure}
 
-In the output (Figure \ref{fig:tab5-9}), information is provided in the
-row called Pooled about the parameter estimates, i.e.~regression
-coefficients (B), standard errors (S.E.), p-values (Sig.), odds ratio´s
-(Exp(B) and 95\% confidence intervals around the OR (95\% C.I. for
-EXP(B). Further, information is provided about the Fraction of Missing
-Information, Relative Increase Variance and Relative Efficiency. For the
-pooled coefficient and standard error Rubin´s Rules (RR) are used. The
-significance level for the pooled OR is derived by using the pooled Wald
-test. The pooled Wald test is calculated as:
+information is provided in the row called Pooled about the parameter
+estimates, i.e.~regression coefficients (B), standard errors (S.E.),
+p-values (Sig.), odds ratio´s (Exp(B) and 95\% confidence intervals
+around the OR (95\% C.I. for EXP(B). Further, information is provided
+about the Fraction of Missing Information, Relative Increase Variance
+and Relative Efficiency. For the pooled coefficient and standard error
+Rubin´s Rules (RR) are used.
 
-\[Wald_{Pooled} =\frac{-0.067}{0.046}=\]
-
-This Wald pooled value follows a t-distribution with degrees of freedom
-(df) according to Formula 5.9.
-
-\[df_{Old} = \frac{m-1}{lamda^2}\]
-
-For this Formula we need information of lambda, which is calculated as:
-
-\[lambda = \frac{V_B + \frac{V_B}{m}}{lamda^2}\]
-
-Using the values of the regression coefficients and standard errors,
-estimated in each imputed dataset of (Figure \ref{fig:tab5-9}) we can
-calculate the following values for the between imputation and the total
-variance.
-
-\[V_B= \frac{(-0.090+0.067)^2 + (-0.061+0.067)^2 +(-0.051+0.067)^2}{2}=\frac{0.000821}{2}=0.0004105\]
-
-To calculate the total variance also the within imputation variance is
-needed. The within imputation variance can be calculated using Formula
-5.2:
-
-\[V_W= \frac{0.039^2 + 0.040^2 + 0.039^2}{3}=0.001547333\]
-
-The total variance becomes:
-
-\[V_{Total} = 0.001547333+0.0004105+ \frac{0.0004105}{3}=0.002094666\]
-
-Now we can calculate lambda using:
-
-\[lambda = \frac{0.0004105 + \frac{0.0004105}{m}}{0.002094666}=0.2612986\]
-
-The lambda value is not presented by SPSS, but only in R using mice. Now
-we know the value for lambda, we can calculate the degrees of freedom to
-derive the p-value:
-
-\[df_{Old} = \frac{m-1}{lamda^2}=\frac{2}{0.2612986^2}=29.29246\]
-
-Which results in a p-value of: 0.1502045.
-
-\subsubsection{Pooling Logistic Regression models in
+\subsection{Pooling Logistic Regression models in
 R}\label{pooling-logistic-regression-models-in-r}
 
 You can use mice to get pooled results after logistic regression. In
@@ -4725,7 +4026,7 @@ combination with the pool function you have to use the following R code.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dataset <-}\StringTok{ }\KeywordTok{read.spss}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Backpain 150 missing.sav"}\NormalTok{, }\DataTypeTok{to.data.frame=}\NormalTok{T)[, }\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+\NormalTok{dataset <-}\StringTok{ }\KeywordTok{read.spss}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Backpain 150 missing.sav"}\NormalTok{, }\DataTypeTok{to.data.frame=}\NormalTok{T)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4737,7 +4038,6 @@ combination with the pool function you have to use the following R code.
 \begin{Highlighting}[]
 \NormalTok{imp.LR <-}\StringTok{ }\KeywordTok{mice}\NormalTok{(dataset, }\DataTypeTok{m=}\DecValTok{3}\NormalTok{, }\DataTypeTok{maxit=}\DecValTok{50}\NormalTok{, }\DataTypeTok{seed=}\DecValTok{2268}\NormalTok{, }\DataTypeTok{printFlag =} \OtherTok{FALSE}\NormalTok{)}
 \NormalTok{fit <-}\StringTok{ }\KeywordTok{with}\NormalTok{(}\DataTypeTok{data=}\NormalTok{imp.LR, }\DataTypeTok{exp=}\KeywordTok{glm}\NormalTok{(Radiation }\OperatorTok{~}\StringTok{ }\NormalTok{Function, }\DataTypeTok{family =}\NormalTok{ binomial))}
-
 \KeywordTok{summary}\NormalTok{(}\KeywordTok{pool}\NormalTok{(fit))}
 \end{Highlighting}
 \end{Shaded}
@@ -4764,17 +4064,25 @@ combination with the pool function you have to use the following R code.
 \end{Shaded}
 
 Under the Line with the R code summary(pool(fit)), the pooled estimates
-are provided. The fmi and lambda values are calculated using Formulas
-5.13 and 5.17 respectively. To extract the ORs and the corresponding
-95\% Confidence intervals you have to apply the following code:
+are provided. To extract the ORs and the corresponding 95\% Confidence
+intervals you have to apply the following code:
 
-Another procedure to get the pooled estimates fror a logistic regression
-model is by using the micombine function in the MITOOLS package.
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#summary.fit <- summary(pool(fit))}
+\CommentTok{#pool.OR <- exp(cbind(summary.fit[,1],summary.fit[,6],summary.fit[,7]))}
+\CommentTok{#colnames(pool.OR) <- (c("OR", "95% LO", "95% UP"))}
+\CommentTok{#pool.OR}
+\end{Highlighting}
+\end{Shaded}
+
+Another procedure to get the pooled estimates from a logistic regression
+model is by using the micombine function in the mitools package.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(mitools)}
-\NormalTok{dataset <-}\StringTok{ }\KeywordTok{read.spss}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Backpain 150 missing.sav"}\NormalTok{, }\DataTypeTok{to.data.frame=}\NormalTok{T)[, }\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+\NormalTok{dataset <-}\StringTok{ }\KeywordTok{read.spss}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Backpain 150 missing.sav"}\NormalTok{, }\DataTypeTok{to.data.frame=}\NormalTok{T)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4823,8 +4131,8 @@ model is by using the micombine function in the MITOOLS package.
 ## Function    0.9354811 0.8538552 1.02491
 \end{verbatim}
 
-However, the pooled p-value is still missing. These pooled p-values can
-be extracted from the mi.inference function in the NORM package.
+However, the pooled p-value is still missing. You can get the pooled
+p-values from the mi.inference function in the NORM package.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4866,6 +4174,16 @@ The p-value in the NORM package is equal to the p-value in SPSS. This
 means that the NORM package also uses the older method to calculate the
 degrees of freedom.
 
+\section{Pooling logistic regression models including categorical
+independent
+variables}\label{pooling-logistic-regression-models-including-categorical-independent-variables}
+
+For categorical variables in logistic regression models, different
+methods are available to test the variable as a whole for significance.
+These so called Multiparameter tests are not available in SPSS, but they
+are available in R. These tests will be discussed in the next Chapter.
+We will start with an example of univariate pooling in SPSS.
+
 \subsection{Pooling Cox regression
 models}\label{pooling-cox-regression-models}
 
@@ -4879,12 +4197,15 @@ itself, but by using the cumulative hazard to the survival time. This
 value has to be included in the imputation model together with the
 status variable and the auxiliary variables.
 
-\subsubsection{Pooling Cox regression models in
+\subsection{Pooling Cox regression models in
 SPSS}\label{pooling-cox-regression-models-in-spss}
 
 The cumulative hazard value can easily be calculated in SPSS by using
-the Survival menu and then choose for -\textgreater{} Cox Regression
-((Figure \ref{fig:fig5-5})).
+the Survival menu and then choose for
+
+\begin{quote}
+Analyze -\textgreater{} Cox Regression
+\end{quote}
 
 \begin{figure}
 
@@ -4895,8 +4216,7 @@ the Survival menu and then choose for -\textgreater{} Cox Regression
 \caption{The survival options in SPSS.}\label{fig:fig5-5}
 \end{figure}
 
-In the Cox Regression menu, choose for -\textgreater{} Save and the
-following window will open ((Figure \ref{fig:fig5-6})):
+Than choose for Save and the following window will open.
 
 \begin{figure}
 
@@ -4908,25 +4228,24 @@ following window will open ((Figure \ref{fig:fig5-6})):
 \end{figure}
 
 Here you can choose for Hazard function. Then click on Continue and OK.
-A new variable will we added to the dataset, which is called HZA\_1
-((Figure \ref{fig:fig5-7}), first 15 cases shown).
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig5.7} 
-
-}
-
-\caption{The data view window including the values for the Hazard.}\label{fig:fig5-7}
-\end{figure}
-
-The cumulative hazard variable can be included in the imputation model
+A new variable will we added to the dataset, which is called HZA\_1.
+This cumulative hazard variable can be included in the imputation model
 to impute missing data in the Pain variable.
 
 The pooling of the Cox regression model will be done in the datasets
 that are imputed in R. Than we can compare the output from the pooled
-model in SPSS and in R. The pooled model in SPSS can be found in (Figure
-\ref{fig:tab5-10}).
+model in SPSS and in R.
+
+To get pooled results of Cox regression models you use:
+
+\begin{quote}
+Analyze -\textgreater{} Survival -\textgreater{} Cox Regression
+\end{quote}
+
+Transport the survival time variable to Time window, the event variable
+to the Status window and the independent variable Pain to the Covariates
+window. To get pooled 95\% Confidence Intervals, go to Options and
+select the CI for exp(B) option. Than click on Continue and OK.
 
 \begin{figure}
 
@@ -4946,16 +4265,16 @@ efficiency.
 \subsubsection{Pooling Cox regression models in
 R}\label{pooling-cox-regression-models-in-r}
 
-Now we will show how to pool Cox regression models in R. For this
-procedure we can make use of the pool function that is available in the
-mice package. We start by using the mice function to impute missing data
-in the Pain variable by first calculating the cumulative hazard values.
-After that we customize the predictorMatrix so that the Time variable is
-not used to predict the missing values (we use the cumulative hazard
-function instead) in the Pain variable and subsequently the imputed
-datasets will be pooled to get a summary estimate. Note that you also
-have to activate the package SURVIVAL before you can run the coxph
-function in R.
+For this procedure we can make use of the pool function that is
+available in the mice package.
+
+We start by using the mice function to impute missing data in the Pain
+variable by first calculating the cumulative hazard values. After that
+we customize the predictorMatrix so that the Time variable is not used
+to predict the missing values (we use the cumulative hazard function
+instead) in the Pain variable and subsequently the imputed datasets will
+be pooled to get a summary estimate. Note that you also have to activate
+the package survival before you can run the coxph function in R.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4974,13 +4293,13 @@ function in R.
 \CommentTok{# Compute the cumulative hazard, attach it to the dataset}
 \CommentTok{# and omit the ID variable (first column)}
 \NormalTok{Hazard <-}\StringTok{ }\KeywordTok{nelsonaalen}\NormalTok{(dataset, Time, Status)}
-\NormalTok{dataset <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(dataset[, }\OperatorTok{-}\DecValTok{1}\NormalTok{], Hazard)}
+\NormalTok{dataset <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(dataset, Hazard)}
 
 \CommentTok{# Adapt the PredictorMatrix so that the}
 \CommentTok{# Time variable is not included in the imputation model}
 \NormalTok{Cox.imp <-}\StringTok{ }\KeywordTok{mice}\NormalTok{(dataset, }\DataTypeTok{m=}\DecValTok{1}\NormalTok{, }\DataTypeTok{maxit=}\DecValTok{0}\NormalTok{, }\DataTypeTok{seed=}\DecValTok{2795}\NormalTok{, }\DataTypeTok{printFlag=}\NormalTok{F)}
 \NormalTok{Pred <-}\StringTok{ }\NormalTok{Cox.imp}\OperatorTok{$}\NormalTok{predictorMatrix}
-\NormalTok{Pred[}\DecValTok{3}\NormalTok{, }\StringTok{"Time"}\NormalTok{] <-}\StringTok{ }\DecValTok{0}
+\NormalTok{Pred[}\DecValTok{2}\NormalTok{, }\StringTok{"Time"}\NormalTok{] <-}\StringTok{ }\DecValTok{0}
 \NormalTok{Pred}
 \end{Highlighting}
 \end{Shaded}
@@ -4988,8 +4307,8 @@ function in R.
 \begin{verbatim}
 ##            Time Status Pain Tampascale Function Radiation Hazard
 ## Time          0      1    1          1        1         1      1
-## Status        1      0    1          1        1         1      1
-## Pain          0      1    0          1        1         1      1
+## Status        0      0    1          1        1         1      1
+## Pain          1      1    0          1        1         1      1
 ## Tampascale    1      1    1          0        1         1      1
 ## Function      1      1    1          1        0         1      1
 ## Radiation     1      1    1          1        1         0      1
@@ -5022,8 +4341,8 @@ function in R.
 \end{Shaded}
 
 \begin{verbatim}
-##        estimate  std.error statistic       df     p.value
-## Pain -0.2247682 0.06008921 -3.740574 15.18445 0.001931638
+##        estimate  std.error statistic       df      p.value
+## Pain -0.2021694 0.04789423 -4.221165 36823.71 2.436252e-05
 \end{verbatim}
 
 \begin{Shaded}
@@ -6232,6 +5551,489 @@ following output will be generated (Figure \ref{fig:fig91}).
 
 \caption{Parameter estimates as a result of applying a GEE model in multiple imputed datasets.}\label{fig:fig91}
 \end{figure}
+
+\chapter{Background information to Statistical
+Methods}\label{background-information-to-statistical-methods}
+
+\chapter{Rubin's Rules}\label{rubins-rules}
+
+Rubin´s Rules (RR) are designed to pool parameter estimates, such as
+means differences and regression coefficients, standard errors and to
+derive confidence intervals and p-values. Rubin's rules are not
+available for all statistical procedures in SPSS. Many test procedures
+that do not provide pooling results in SPSS are available in R.
+
+We illustrate the use of RR with a t-test example in 3 generated
+multiple imputed datasets in SPSS. The t-test is used to estimate the
+difference in mean Tampascale values between patients with and without
+Radiation in the leg. The output of the t-test in the multiple imputed
+data is presented in Figure \ref{fig:tab9-1}.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/table5.1} 
+
+}
+
+\caption{T-test for difference in mean Tampascale values between patients with and without Radiation in the leg applied in multiple imputed datasets.}\label{fig:tab9-1}
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/table5.1b} 
+
+}
+
+\caption{b.T-test for difference in mean Tampascale values between patients with and without Radiation in the leg applied in multiple imputed datasets.}\label{fig:tab9-2}
+\end{figure}
+
+The result in the original dataset (including missing values) is
+presented in the row that is indicated by Imputation\_ number 0. Results
+in each imputed dataset are shown in the rows starting with number 1 to
+3. In the last row which is indicated as ``Pooled'', the summary
+estimates of the mean differences and standard errors are presented. We
+now explain how these pooled mean differences and standard errors are
+estimated using RR.
+
+\section{Pooling Effect estimates}\label{pooling-effect-estimates}
+
+When RR are used, it is assumed that the repeated parameter estimates
+(e.g.~mean differences) are normally distributed. This cannot be assumed
+for all statistical test statistics, e.g.~correlation coefficients. For
+these test statistics, transformations are performed before RR can be
+applied to assume normality (will be discussed below).
+
+To calculate the pooled mean differences of (Figure \ref{fig:tab5-1a})
+the following formula is used \eqref{eq:p-param}:
+
+\begin{equation}
+  \bar{\theta} = \frac{1}{m}\left (\sum_{i=1}^m{\theta_i}\right )
+  \label{eq:p-param}
+\end{equation}
+
+In this formula, \(\bar{\theta}\) is the pooled parameter estimate, m is
+the number of imputed datasets, \(\theta_i\) means taking the sum of the
+parameter estimate (i.e.~mean difference) in each imputed dataset i.
+This formula is equal to the basic formula of taking the mean value of a
+sequence of numbers.
+
+When we use the values of (Figure \ref{fig:tab5-1a}), we get the
+following result:
+
+\[\bar{\theta} = \frac{1}{3}(2.174 + 1.965+1.774)=1.971\]
+
+This value of 1.971 is the pooled value for the Tampascale variable in
+(Figure \ref{fig:tab5-1a}).
+
+\section{Pooling Standard errors}\label{pooling-standard-errors}
+
+The pooled standard error is derived from different components that
+reflect the within and between sampling variance of the mean difference.
+The calculation of these components is discussed below.
+
+\emph{Within imputation variance} The within imputation variance is the
+average of the variance of the estimates in each imputed dataset. This
+reflects the sampling variance, i.e.~the precision of the parameter of
+interest in each completed dataset. This value will be large in small
+samples and small in large samples. The within imputation variance is
+computed by taking the mean of the within variance estimate,
+i.e.~squared standard error, in each imputed dataset:
+
+\begin{equation}
+V_W = \frac{1}{m}\left (\sum_{i=1}^m{SE_i^2}\right )
+  \label{eq:var-w}
+\end{equation}
+
+In this formula \(V_W\) is the within imputation variance, m is the
+number of imputed datasets, \(SE_i^2\) means taking the sum of the
+squared Standard Error (SE), estimated in each imputed dataset i. Using
+the data of (Figure \ref{fig:tab5-1a}), we get the following result:
+
+\[V_W = \frac{1}{3}(0.896^2 + 0.882^2 + 0.898^2)=0.7957147\]
+
+\emph{Between imputation variance} The between imputation variance
+reflects the extra variance due to the missing data. This is estimated
+by taking the variance of the parameter of interest estimated over
+imputed datasets. This value is large when the level of missing data is
+high and smaller when the level of missing data is small.
+
+\begin{equation}
+V_B\sqrt{\frac{\sum_{i=1}^m (\theta_i - \overline{\theta})^2}{N-1} }
+  \label{eq:var-b}
+\end{equation}
+
+In this formula, \(V_B\) is the between imputation variance, m is the
+number of imputed datasets, \(\overline{\theta}\) is the pooled
+estimate, \(\theta_i\) is the parameter estimate in each imputed dataset
+i. This formula is equal to the formula for the (sample) variance which
+is commonly used in statistics. Using the data of
+(Figure\ref{fig:tab5-1a}), we get the following result:
+
+\[V_W = \frac{1}{3-1}((2.174-1.971)^2+ (1.965-1.971)^2+(1.774-1.971)^2)=0.7957147\]
+
+\[V_B = \frac{V_B}{m}\]
+
+\begin{equation}
+V_{Total} = V_W + V_B + \frac{V_B}{m}
+  \label{eq:var-t}
+\end{equation}
+
+\[V_{Total} = 0.7957147+0.040027 + \frac{0.040027}{3}\]
+
+\[SE_{Pooled} = \sqrt{V_{Total}} = \sqrt{0.849084} = 0.9214575\]
+
+This value is equal to the (rounded) pooled standard error value of
+0.921 in (Figure \ref{fig:tab5-1a}).
+
+\section{Significance testing}\label{significance-testing}
+
+For significance testing of the pooled parameter, i.e.~the mean
+difference in (Figure \ref{fig:tab5-1a}), Formula 5.6 is used. This is
+the univariate Wald test (Rubin 1987, van Buuren 2013, Marshall, 2009).
+This test is defined as:
+
+\begin{equation}
+Wald_{Pooled} =\frac{(\overline{\theta} - {\theta_0})^2}{V_T}
+  \label{eq:wald-pooled}
+\end{equation}
+
+where \(\overline{\theta}\) and \(V_T\) is the total variance and is
+equal to the \(SE_P\) or the pooled standard error that was derived in
+the previous paragraph), and \(\theta_0\) is the parameter value under
+the null hypothesis (which is mostly 0). The univariate Wald test can be
+used to test all kind of univariate parameters of interest, mean
+differences and univariate regression coefficients in linear and
+logistic regression models. The univariate Wald test in our example is
+calculated using the values from (Figure \ref{fig:tab5-1a}):
+
+\[Wald_{Pooled} =\frac{(\overline{\theta} - {\theta_0})^2}{V_T}=\frac{1.971}{\sqrt{0.849084}}=2.139\]
+
+The univariate pooled Wald value follows a t-distribution. This
+distribution is used to derive the p-value. The value for t depends on
+the degrees of freedom, according to:
+
+\begin{equation}
+t_{df,1-\alpha/2}
+  \label{eq:t-distr}
+\end{equation}
+
+Where df is degrees of freedom and \(\alpha\) is the reference level of
+significance, which is usually set at 5\%. The derivation of the degrees
+of freedom for the t-test is complex. There exist different formula´s to
+calculate the degrees of freedom and these are explained in the next
+paragraph.
+
+Because \(t^2\) is equal to F at the same number of degrees of freedom,
+we can also test for significance using a F-distribution, according to:
+
+\begin{equation}
+F_{1, df}=t^2_{df,1-\alpha/2}
+  \label{eq:f-distr}
+\end{equation}
+
+The degrees of freedom are equal to the degrees of freedom for the
+t-test above.
+
+\section{Degrees of Freedom and
+P-values}\label{degrees-of-freedom-and-p-values}
+
+The derivation of the degrees of freedom (df) and the resulting p-value
+for the pooled T-test is not straightforward, because there are
+different formulas to calculate the df. There exists an older version of
+the formula to calculate the degrees of freedom (df) and an adjusted
+version (Van Buuren 2012). The older method to calculate the dfs results
+in a higher df than those in each imputed dataset. An example of this is
+shown in (Figure \ref{fig:tab9-3}). It can be seen that the degrees of
+freedoms is 148 in each imputed dataset (in the row for equal variances
+assumed) and 507 for the pooled result. This is important to relize
+because different values for the degrees of freedom leads to different
+p-values. In SPSS the old way to calculate the dfs is used. Adjusted
+versions are used in the mice package for R. The differences between the
+older and adjusted method to calculate the dfs is illustrated now.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{images/table5.2} 
+
+}
+
+\caption{Part of Output of Figure 5.1. The value for the dfs are presented in the df column.}\label{fig:tab9-3}
+\end{figure}
+
+The (older method) to calculate df for the t-distribution is described
+in Rubin (1987) and Van Buuren (2012) and is defined as:
+
+\begin{equation}
+df_{Old} = \frac{m-1}{lambda^2} = (m-1) * (1 + \frac{1}{r^2})
+  \label{eq:df-old}
+\end{equation}
+
+Where m is the number of imputed datasets and lambda can be interpreted
+as the Fraction of Missing information (FMI), calculated by Formula 5.13
+(Raghunathan, 2016), and r is the relative increase in variance due to
+nonresponse, calculated by Formula 5.14. The calculation of lambda and r
+values are discussed in more detail later. The lambda value that is used
+in Formula 5.9 (and often used as alternative for the FMI) is not the
+same FMI value of 0.067 that SPSS presents in (Figure \ref{fig:tab9-1}).
+The FMI value of 0.067 is calculated by Formula 5.16 and is called FMI
+in this manual.
+
+When \(df_{old}\) is calculated with the information in (Figure
+\ref{fig:tab5-1a}), we get:
+
+\[df_{Old} = \frac{3-1}{0.06283485^2} = 506.5576\]
+
+This (rounded) value is equal to the df value in the row Pooled of 507
+in (Figure \ref{fig:tab9-1a}). Formula 5.9 leads to a larger df for the
+pooled result, compared to the dfs in each imputed dataset, which is
+inappropriate. Therefore, Barnard and Rubin (1999) adjusted this df by
+using Formula 5.10:
+
+\begin{equation}
+df_{Adjusted} = \frac{df_{Old}*{df_{Observed}}}{df_{Old}+{df_{Observed}}}
+  \label{eq:df-adj}
+\end{equation}
+
+Where \(df_{Old}\) is defined as in Formula 5.9 and \(df_{Observed}\) is
+defined as:
+
+\begin{equation}
+df_{Observed} = \frac{(n-k)+1}{(n-k)+3}*(n-k)(1-lambda)
+  \label{eq:df-obs}
+\end{equation}
+
+Where n is the sample size in the imputed dataset, k the number of
+parameters to fit and lambda is obtained by Formula 5.13.
+
+By filling in the formulas 5.11 and 5.10 we get for \(df_{observed}\)
+and \(df_{adjusted}\) respectively:
+
+\[df_{Observed} = \frac{(150-2)+1}{(150-2)+3}*(150-2)(1- 0.06283485)=136.8633\]
+
+\[df_{Adjusted} = \frac{(506.5576* 136.8633)}{(506.5576+ 136.8633)}=107.7509\]
+
+This number of 107.7509 is equal to the df used by mice.
+
+We can now derive the p-value for the mean difference in the Tampascale
+between patients with and without Radiation in the leg. This two-sided
+p-value is:
+
+In SPSS:
+
+\[t_{df,1-\alpha/2}=2.139_{df{Old}}=0.03289185\]
+
+In R:
+
+\[t_{df,1-\alpha/2}=2.139_{df{Adjusted}}=0.03467225\]
+
+\section{Confidence Intervals}\label{confidence-intervals}
+
+For the 95\% confidence interval (CI), the general formula can be used:
+
+\begin{equation}
+\bar{\theta} ± t_{df,1-\alpha/2} * SE_{Pooled}
+  \label{eq:conf}
+\end{equation}
+
+In this formula, \(\bar{\theta}\) is the pooled estimate, t is the
+t-statistic, df is degrees of freedom and \(SE_{Pooled}\) is the pooled
+standard error (Formula 5.5).
+
+\chapter{Measures of Missing data
+information}\label{measures-of-missing-data-information}
+
+These measures are the Fraction of Missing information (FMI), the
+relative increase in variance due to nonresponse and the Relative
+Efficiency. They are derived from values of the between, and within
+imputation variance and the total variance. There exist two versions of
+the FMI, which are referred to as lambda and FMI.
+
+\subsection{Fraction of Missing
+Information}\label{fraction-of-missing-information}
+
+The Fraction of Missing information, lambda, (van Buuren, 2012;
+Raghunathan, 2016) can be derived from the between and total missing
+data variance as:
+
+\begin{equation}
+Lambda = \frac{V_B + \frac{V_B}{m}}{V_T}
+  \label{eq:lambda}
+\end{equation}
+
+Where m is the number of imputed datasets and \({V_B}\) and \({V_T}\)
+are the between and total variance respectively. This value can be
+interpreted as the proportion of variation in the parameter of interest
+due to the missing data.
+
+When we use the \({V_B}\) and \({V_T}\) values that were calculated in
+paragraph 5.1.2, this value will be:
+
+\[Lambda = \frac{0.040027 + \frac{0.040027}{3}}{0.849084}=0.06283485\]
+
+This specific value for the FMI, lambda, is not reported by SPSS, but is
+reported by the mice package in R. Confusingly, van Buuren (2012) and
+Enders (2010) use the same formula to calculate this type of missing
+data information, but van Buuren calls it lambda and Enders FMI.
+
+\subsection{Relative increase in
+variance}\label{relative-increase-in-variance}
+
+Another related measure is the relative increase in variance (RIV) due
+to nonresponse. This value is calculated as:
+
+\begin{equation}
+Lambda = \frac{V_B + \frac{V_B}{m}}{V_W}
+  \label{eq:riv}
+\end{equation}
+
+Where \({V_B}\) and \({V_W}\) are the between and within variance
+respectively. This value can be interpreted as the proportional increase
+in the sampling variance of the parameter of interest that is due to the
+missing data.
+
+Filling in this formula with the example from paragraph 5.1.2 will
+result in:
+
+\[Lambda = \frac{V_B + \frac{V_B}{m}}{V_W}=\frac{0.040027 + \frac{0.040027}{3}}{0.7957147}=0.06704779\]
+
+This value is also presented in (Figure \ref{fig:tab5-1a}) in the column
+Relative Increase Variance.
+
+\subsection{Fraction of Missing Information -
+FMI}\label{fraction-of-missing-information---fmi}
+
+\begin{equation}
+FMI = \frac{RIV + \frac{2}{df+3}}{1+RIV}
+  \label{eq:riv}
+\end{equation}
+
+Where RIV is the relative increase in variance due to missing data and
+df is the degrees of freedom for the pooled result. The degrees of
+freedom for the pooled result can be obtained in two ways: df\_Old or
+df\_Adjusted.
+
+In SPSS, FMI is calculated using df\_Old, which results in:
+
+\[FMI = \frac{RIV + \frac{2}{df+3}}{1+RIV}=\frac{0.06704779 + \frac{2}{506.5576+3}}{1+0.06704779}=0.0665132\]
+
+In R package mice, FMI is calculated using the formula for df\_Adjusted,
+that results in:
+
+\[FMI = \frac{RIV + \frac{2}{df_{Adjusted}+3}}{1+RIV}=\frac{0.06704779 + \frac{2}{107.7509+3}}{1+0.06704779}=0.0797587\]
+
+The difference between lambda and FMI is that FMI is adjusted for the
+fact that the number of imputed datasets that are generated is not
+unlimitedly large. These measures differ for a small value of the df.
+
+\subsection{Relative Efficiency}\label{relative-efficiency}
+
+The Relative Efficiency (RE) is defined as:
+
+\begin{equation}
+RE = \frac{1}{1+\frac{FMI}{m}}
+  \label{eq:re}
+\end{equation}
+
+FMI is the fraction of missing information and m is the number of
+imputed datasets.
+
+The RE value is only provided by SPSS and is calculated by filling in
+the values of (Figure \ref{fig:tab5-1a}) as follows:
+
+\[RE = \frac{1}{1+\frac{FMI}{m}}=\frac{1}{1+\frac{0.0665132}{3}}=0.9783098\]
+
+The RE gives information about the precision of the parameter estimate
+as the standard error of a regression coefficient.
+
+\chapter{Pooling correlation
+coefficients}\label{pooling-correlation-coefficients-1}
+
+To pool correlation coefficients after multiple imputation Fishers Z
+transformation is used. The following formulas are used for this
+(Raghunathan 2016, van Buuren 2012 and Enders 2010):
+
+\begin{equation}
+Z_i = \frac{1}{2}ln\frac{1+r_i}{1-r_i}
+  \label{eq:cor}
+\end{equation}
+
+The \({Z_i}\) means the calculation of Fisher's Z-value in each imputed
+dataset.
+
+Also, the variance of the correlation can be calculated using:
+
+\begin{equation}
+Var_Z=\frac{1}{n-3}
+  \label{eq:var-cor}
+\end{equation}
+
+n is the sample size in the imputed dataset. Now we can use Rubin's
+Rules to calculate the Pooled correlation and variance. These values
+will be calculated with the transformed Z values.
+
+To obtain the pooled p-value for the correlation coefficient we use the
+formula:
+
+\begin{equation}
+Z=\frac{Z_{Pooled}}{\sqrt{Var_Z}} = \frac{Z_{Pooled}}{\frac{1}{\sqrt{n-3}}}=Z_{Pooled}\times\sqrt{n_i-3}
+  \label{eq:z-cor}
+\end{equation}
+
+In this formula z is the z-score and follows a standard normal
+distribution, \(Z_{Pooled}\) is the pooled Z transformation and
+\(Var_Z\) is the pooled variance.
+
+Finally, back transformation to the original scale of r is done by:
+
+\begin{equation}
+r_{Pooled} = \frac{e^{2\times\\Z_{Pooled}}-1}{e^{2\times\\Z_{Pooled}}+1}
+  \label{eq:exp-cor}
+\end{equation}
+
+\section{Pooled Wald test}\label{pooled-wald-test}
+
+The significance level for the pooled OR is derived by using the pooled
+Wald test. The pooled Wald test is calculated as:
+
+\[Wald_{Pooled} =\frac{-0.067}{0.046}=\]
+
+This Wald pooled value follows a t-distribution with degrees of freedom
+(df) according to Formula 5.9.
+
+\[df_{Old} = \frac{m-1}{lamda^2}\]
+
+For this Formula we need information of lambda, which is calculated as:
+
+\[lambda = \frac{V_B + \frac{V_B}{m}}{lamda^2}\]
+
+Using the values of the regression coefficients and standard errors,
+estimated in each imputed dataset of (Figure \ref{fig:tab5-9}) we can
+calculate the following values for the between imputation and the total
+variance.
+
+\[V_B= \frac{(-0.090+0.067)^2 + (-0.061+0.067)^2 +(-0.051+0.067)^2}{2}=\frac{0.000821}{2}=0.0004105\]
+
+To calculate the total variance also the within imputation variance is
+needed. The within imputation variance can be calculated using Formula
+5.2:
+
+\[V_W= \frac{0.039^2 + 0.040^2 + 0.039^2}{3}=0.001547333\]
+
+The total variance becomes:
+
+\[V_{Total} = 0.001547333+0.0004105+ \frac{0.0004105}{3}=0.002094666\]
+
+Now we can calculate lambda using:
+
+\[lambda = \frac{0.0004105 + \frac{0.0004105}{m}}{0.002094666}=0.2612986\]
+
+The lambda value is not presented by SPSS, but only in R using mice. Now
+we know the value for lambda, we can calculate the degrees of freedom to
+derive the p-value:
+
+\[df_{Old} = \frac{m-1}{lamda^2}=\frac{2}{0.2612986^2}=29.29246\]
+
+Which results in a p-value of: 0.1502045.
 
 \bibliography{book.bib,packages.bib}
 
