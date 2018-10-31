@@ -73,7 +73,7 @@ All kind of file types can be selected. Of course the SPSS .sav files, but also 
 knitr::include_graphics("images/fig1.8.png")
 ```
 
-Saving files in SPSS is possible via the Save Data As option under the menu File. You can choose the same kind of file types (Figure \@ref(fig:fig9)).
+Saving files in SPSS is possible via the Save Data As option under the menu File. You can choose the same kind of file types.
 
 ## R and RStudio
 

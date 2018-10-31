@@ -136,7 +136,7 @@ When $df_{old}$ is calculated with the information in (Figure \@ref(fig:tab5-1a)
 
 $$df_{Old} = \frac{3-1}{0.06283485^2} = 506.5576$$
 
-This (rounded) value is equal to the df value in the row Pooled of 507 in (Figure \@ref(fig:tab9-1a)). Formula 5.9 leads to a larger df for the pooled result, compared to the dfs in each imputed dataset, which is inappropriate. Therefore, Barnard and Rubin (1999) adjusted this df by using Formula 5.10:
+This (rounded) value is equal to the df value in the row Pooled of 507 in (Figure \@ref(fig:tab9-1)). Formula 5.9 leads to a larger df for the pooled result, compared to the dfs in each imputed dataset, which is inappropriate. Therefore, Barnard and Rubin (1999) adjusted this df by using Formula 5.10:
 
 \begin{equation}
 df_{Adjusted} = \frac{df_{Old}*{df_{Observed}}}{df_{Old}+{df_{Observed}}}

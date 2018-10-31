@@ -18,12 +18,12 @@
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 % use microtype if available
 \IfFileExists{microtype.sty}{%
-\usepackage[]{microtype}
+\usepackage{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
-\usepackage[unicode=true]{hyperref}
-\hypersetup{
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
             pdftitle={Applied Missing data analysis with SPSS and R(Studio)},
             pdfauthor={Martijn Heymans and Iris Eekhout},
             pdfborder={0 0 0},
@@ -72,8 +72,6 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\NormalTok}[1]{#1}
 \usepackage{longtable,booktabs}
-% Fix footnotes in tables (requires footnote package)
-\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{long table}}{}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -103,16 +101,33 @@
 \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 
-% set default figure placement to htbp
-\makeatletter
-\def\fps@figure{htbp}
-\makeatother
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Applied Missing data analysis with SPSS and R(Studio)}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Martijn Heymans and Iris Eekhout}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{2018-10-31}
 
 \usepackage{booktabs}
-
-\title{Applied Missing data analysis with SPSS and R(Studio)}
-\author{Martijn Heymans and Iris Eekhout}
-\date{2018-10-29}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -420,8 +435,7 @@ data editor.
 \end{figure}
 
 Saving files in SPSS is possible via the Save Data As option under the
-menu File. You can choose the same kind of file types (Figure
-\ref{fig:fig9}).
+menu File. You can choose the same kind of file types.
 
 \section{R and RStudio}\label{r-and-rstudio}
 
@@ -496,10 +510,10 @@ more about functions in R later):
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  0.3542920 -1.6501012  0.7832232 -0.4658032  0.3199945 -0.7713515
-##  [7]  0.8455048  0.2667180  0.9606889 -0.7603088 -0.1380478  0.2014359
-## [13] -1.0336031  0.2930091 -0.2622540  1.1926976 -0.6383100  0.6729096
-## [19] -0.7239192  0.3007599
+##  [1] -0.95847731 -0.17356074 -0.12484300  0.02401969 -0.13135366
+##  [6]  1.83389436  0.32743919 -0.57013965 -0.69174803 -0.27788227
+## [11]  0.15714686 -1.31862784  1.03404659 -0.35383865  0.75897016
+## [16] -0.12228334  1.57351315 -0.38836910 -0.80311968 -1.14752171
 \end{verbatim}
 
 The number {[}1{]} between brackets is the index of the first number or
@@ -1877,26 +1891,6 @@ missing data pattern.
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(mice)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Loading required package: lattice
-\end{verbatim}
-
-\begin{verbatim}
-## 
-## Attaching package: 'mice'
-\end{verbatim}
-
-\begin{verbatim}
-## The following objects are masked from 'package:base':
-## 
-##     cbind, rbind
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \KeywordTok{md.pattern}\NormalTok{(dataset)}
 \end{Highlighting}
 \end{Shaded}
@@ -1927,45 +1921,6 @@ two graphs.
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(VIM)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Loading required package: colorspace
-\end{verbatim}
-
-\begin{verbatim}
-## Loading required package: grid
-\end{verbatim}
-
-\begin{verbatim}
-## Loading required package: data.table
-\end{verbatim}
-
-\begin{verbatim}
-## VIM is ready to use. 
-##  Since version 4.0.0 the GUI is in its own package VIMGUI.
-## 
-##           Please use the package to use the new (and old) GUI.
-\end{verbatim}
-
-\begin{verbatim}
-## Suggestions and bug-reports can be submitted at: https://github.com/alexkowa/VIM/issues
-\end{verbatim}
-
-\begin{verbatim}
-## 
-## Attaching package: 'VIM'
-\end{verbatim}
-
-\begin{verbatim}
-## The following object is masked from 'package:datasets':
-## 
-##     sleep
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \KeywordTok{aggr}\NormalTok{(dataset, }\DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\StringTok{'white'}\NormalTok{,}\StringTok{'red'}\NormalTok{), }\DataTypeTok{numbers=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{sortVars=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{cex.axis=}\NormalTok{.}\DecValTok{7}\NormalTok{, }\DataTypeTok{gap=}\DecValTok{3}\NormalTok{, }\DataTypeTok{ylab=}\KeywordTok{c}\NormalTok{(}\StringTok{"Percentage of missing data"}\NormalTok{,}\StringTok{"Missing Data Pattern"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -2616,10 +2571,6 @@ seem to be compeletely at random.
 \end{Shaded}
 
 \begin{verbatim}
-## Loading required package: mvnmle
-\end{verbatim}
-
-\begin{verbatim}
 ## this could take a while
 \end{verbatim}
 
@@ -2704,26 +2655,27 @@ imputations}\label{single-missing-data-imputations}
 
 \section{Complete cases analysis}\label{complete-cases-analysis}
 
-Complete case analysis (CCA) means that persons with a missing data
-point in a variable are excluded from the analysis. This procedure is
-still used a lot (Eekhout et al. 2012) but can have a large negative
-impact on the precision of the statistical test results. It also leads
-to an incorrect estimation of standard errors when the data is MCAR, MAR
-and MNAR (Eekhout et al. 2014). It is for that reason generally not
-recommended. It is however, the default procedure in a lot of
-statistical software packages as in SPSS.
+Complete case analysis (CCA) means that the statistical analyses is done
+in the dataset afetr every persons with a missing data point in a
+variable is excluded from the analysis. This procedure is still used a
+lot (\citet{eekhout1}) but can have a large negative impact on the
+precision of the statistical test results. It also leads to an incorrect
+estimation of standard errors when the data is MCAR, MAR and MNAR
+(\citet{eekhout2}). It is for that reason not recommended. It is
+however, the default procedure in a lot of statistical software packages
+as in SPSS.
 
 \section{Mean Imputation}\label{mean-imputation}
 
 Assume that we are interested in the relationship between Pain and the
 Tampa scale variable. To get a first impression about this relationship
 we make a scatterplot. The scatterplots of the complete and incomplete
-datasets are displayed in (Figure \ref{fig:fig3-1} and
-\ref{fig:fig3-2}):
+datasets are displayed in Figure \ref{fig:fig3-1} and Figure
+\ref{fig:fig3-2}.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{images/fig3.2a} 
+{\centering \includegraphics[width=0.7\linewidth]{images/fig3.2a} 
 
 }
 
@@ -2732,7 +2684,7 @@ datasets are displayed in (Figure \ref{fig:fig3-1} and
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{images/fig3.2b} 
+{\centering \includegraphics[width=0.7\linewidth]{images/fig3.2b} 
 
 }
 
@@ -2763,7 +2715,7 @@ procedure is Mean imputation or called ``Series mean''.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{images/fig3.6} 
+{\centering \includegraphics[width=0.7\linewidth]{images/fig3.6} 
 
 }
 
@@ -2776,7 +2728,7 @@ number. The result is shown in Figure \ref{fig:fig3-7}.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{images/fig3.7} 
+{\centering \includegraphics[width=0.7\linewidth]{images/fig3.7} 
 
 }
 
@@ -2789,7 +2741,7 @@ are located at the mean value (Figure \ref{fig:fig3-4}).
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{images/fig3.4} 
+{\centering \includegraphics[width=0.7\linewidth]{images/fig3.4} 
 
 }
 
@@ -2811,7 +2763,7 @@ In the Missing Values group you choose for Replace with mean (Figure
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{images/fig3.8} 
+{\centering \includegraphics[width=0.7\linewidth]{images/fig3.8} 
 
 }
 
@@ -2868,12 +2820,12 @@ You can extract the mean imputed dataset by using the complete function.
 \subsection{Regression imputation in
 SPSS}\label{regression-imputation-in-spss}
 
-Yoy do regression imputation in SPSS via the Missing Value Analysis
-procedures. There are two options for regression imputation, the
-Regression option and the EM (Expectation Maximization) option. The
+You can apply regression imputation in SPSS via the Missing Value
+Analysis procedures. There are two options for regression imputation,
+the Regression option and the Expectation Maximization (EM) option. The
 Regression option in SPSS has some flaws in the estimation of the
-regression parameters (see paper von Hippel 2004). Therefore, we use the
-EM algorithm. This algorithm is a likelihood-based procedure. This means
+regression parameters (\citet{hippel1}). Therefore, we use the EM
+algorithm. This algorithm is a likelihood-based procedure. This means
 that the most likely values of the regression coefficients are estimated
 given the data and subsequently used to impute the missing value. This
 EM procedure gives the same results as first performing a normal
@@ -2895,7 +2847,7 @@ Estimation group (Figure \ref{fig:fig3-10}).
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{images/fig3.10} 
+{\centering \includegraphics[width=0.7\linewidth]{images/fig3.10} 
 
 }
 
@@ -2909,7 +2861,7 @@ and the Pain variable in the Predictor Variables window (Figure
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{images/fig3.11} 
+{\centering \includegraphics[width=0.7\linewidth]{images/fig3.11} 
 
 }
 
@@ -2922,7 +2874,7 @@ a name, for example ``ImpTampa\_EM'' (Figure \ref{fig:fig3-12}).
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{images/fig3.12} 
+{\centering \includegraphics[width=0.7\linewidth]{images/fig3.12} 
 
 }
 
@@ -2939,7 +2891,7 @@ in Figure 3.13.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{images/fig3.13} 
+{\centering \includegraphics[width=0.7\linewidth]{images/fig3.13} 
 
 }
 
@@ -2975,7 +2927,7 @@ OK.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{images/fig3.14} 
+{\centering \includegraphics[width=0.7\linewidth]{images/fig3.14} 
 
 }
 
@@ -2986,7 +2938,7 @@ The following coefficients will be estimated (Figure \ref{fig:tab3-3}).
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{images/table3.3} 
+{\centering \includegraphics[width=0.7\linewidth]{images/table3.3} 
 
 }
 
@@ -2995,14 +2947,14 @@ The following coefficients will be estimated (Figure \ref{fig:tab3-3}).
 
 The linear regression model can be described as:
 
-Tampascale=32.005+1.410 ×Pain
+\[Tampascale = 32.005 + 1.410 × Pain\]
 
 Now impute the missing values in the Tampa scale variable and compare
 them with the EM estimates. You see that the results are the same.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{images/fig3.15} 
+{\centering \includegraphics[width=0.7\linewidth]{images/fig3.15} 
 
 }
 
@@ -3015,7 +2967,7 @@ regression line (Figure \ref{fig:fig3-16}).
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{images/fig3.16} 
+{\centering \includegraphics[width=0.7\linewidth]{images/fig3.16} 
 
 }
 
@@ -3088,8 +3040,9 @@ linear regression model in the dataset after the missing data is
 excluded and generates the imputed values for the Tampa scale variable
 by using the regression coefficients of the linear regression model. The
 same regression coefficients are used to predict the missing values in
-the Tampa scale variable as shown in Table 3.3. The completed dataset
-can be extracted by using the complete function in the mice package.
+the Tampa scale variable as shown in Figure \ref{fig:tab3-3}. The
+completed dataset can be extracted by using the complete function in the
+mice package.
 
 \subsection{Stochastic regression
 imputation}\label{stochastic-regression-imputation}
@@ -3099,7 +3052,7 @@ for by adding extra error variance to the predicted values that are
 generated by the linear regression model. Stochastic regression can be
 activated in SPSS via the Missing Value Analysis and the Regression
 Estimation option. However, the Regression Estimation option generates
-incorrect regression coefficient estimates (von Hippel, 2004) and will
+incorrect regression coefficient estimates (\citet{hippel1}) and will
 therefore not further discussed.
 
 \subsection{Stochastic regression imputation in
@@ -3148,8 +3101,9 @@ frequentist idea, which assume that there is one true population
 parameter. In this case the regression coefficient (is reflected by the
 confidence interval). In this book (and most statistial books) the
 freuentist approach is used For more information about the theory of
-Bayesian statistics we refer to the books of Box and Tiao (1992), Enders
-(2012) and Gelman et al. (2004).
+Bayesian statistics we refer to the books of
+\citet{box2007bayesianinferencein}, \citet{enders2010applied} and
+\citet{gelman2014bayesian}.
 
 \subsection{Bayesian Stochastic regression imputation in
 SPSS}\label{bayesian-stochastic-regression-imputation-in-spss}
@@ -3158,7 +3112,7 @@ In SPSS Bayesian Stochastic regression imputation can be performed via
 the multiple imputation menu. To generate imputations for the Tampa
 scale variable, we use the Pain variable as the only predictor.
 
-Step 1
+\textbf{Step 1}
 
 To start the imputation procedure, Go to
 
@@ -3176,14 +3130,14 @@ stored under ``Create a new dataset'' a name. Here we give it the name
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{images/fig3.18} 
+{\centering \includegraphics[width=0.7\linewidth]{images/fig3.18} 
 
 }
 
 \caption{The Variables window.}\label{fig:fig3-18}
 \end{figure}
 
-Step 2
+\textbf{Step 2}
 
 In the Methods window, choose under Imputation Method for customand then
 Fully conditional specification (MCMC). Set the Maximum iterations
@@ -3192,41 +3146,41 @@ method (Figure \ref{fig:fig3-19}). We further use the default settings.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{images/fig3.19} 
+{\centering \includegraphics[width=0.7\linewidth]{images/fig3.19} 
 
 }
 
 \caption{The Methods window.}\label{fig:fig3-19}
 \end{figure}
 
-Step 3
+\textbf{Step 3}
 
 In the constraints window (Figure \ref{fig:fig3-20}) click on the Scan
 Data button and further use the default settings.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{images/fig3.20} 
+{\centering \includegraphics[width=0.7\linewidth]{images/fig3.20} 
 
 }
 
 \caption{Stochastic regression imputation}\label{fig:fig3-20}
 \end{figure}
 
-Step 4
+\textbf{Step 4}
 
 In the Output window we only use the default settings.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{images/fig3.21} 
+{\centering \includegraphics[width=0.7\linewidth]{images/fig3.21} 
 
 }
 
 \caption{The Output window.}\label{fig:fig3-21}
 \end{figure}
 
-Step 5
+\textbf{Step 5}
 
 Now click on OK button to start the imputation procedure
 
@@ -3240,7 +3194,7 @@ are marked yellow.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.8\linewidth]{images/fig3.22} 
+{\centering \includegraphics[width=0.7\linewidth]{images/fig3.22} 
 
 }
 
@@ -3249,7 +3203,7 @@ are marked yellow.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.8\linewidth]{images/fig3.23} 
+{\centering \includegraphics[width=0.7\linewidth]{images/fig3.23} 
 
 }
 
@@ -3263,7 +3217,7 @@ Tampascale variable is ``repaired''.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{images/fig3.24} 
+{\centering \includegraphics[width=0.7\linewidth]{images/fig3.24} 
 
 }
 
@@ -3318,19 +3272,19 @@ variable as the only predictor variable for these missing values.
 
 \begin{verbatim}
 ##           1
-## 2  37.84582
-## 6  42.46594
-## 9  34.22344
-## 14 38.23955
-## 21 38.02387
-## 25 35.55548
-## 27 42.37313
-## 31 45.00938
-## 35 36.42840
-## 37 42.67796
-## 44 28.46257
-## 49 35.48742
-## 50 43.39218
+## 2  41.91989
+## 6  41.98752
+## 9  34.06800
+## 14 40.85804
+## 21 40.27196
+## 25 41.79062
+## 27 41.19897
+## 31 48.10044
+## 35 39.94881
+## 37 42.22647
+## 44 32.41241
+## 49 34.08780
+## 50 42.96785
 \end{verbatim}
 
 The completed dataset can be extracted by using the complete function in
@@ -3340,10 +3294,9 @@ Predictive Mean Matching: Predictive mean matching (PMM) is an
 imputation method that predicts values and subsequently selects observed
 values to be used to replace the missing values. It is the default
 imputation procedure in the mice package to impute missing data in
-continuous variables (Rubin, 1987, p.~168). The strength of this
-procedure is that missing data is replaced by data that is observed in
-the dataset and not replaced by unrealistic values (as negative body
-weight values).
+continuous variables (\citet{rubin1987}). The strength of this procedure
+is that missing data is replaced by data that is observed in the dataset
+and not replaced by unrealistic values (as negative body weight values).
 
 \chapter{Data analysis after Multiple
 Imputation}\label{data-analysis-after-multiple-imputation}
@@ -5784,7 +5737,7 @@ When \(df_{old}\) is calculated with the information in (Figure
 \[df_{Old} = \frac{3-1}{0.06283485^2} = 506.5576\]
 
 This (rounded) value is equal to the df value in the row Pooled of 507
-in (Figure \ref{fig:tab9-1a}). Formula 5.9 leads to a larger df for the
+in (Figure \ref{fig:tab9-1}). Formula 5.9 leads to a larger df for the
 pooled result, compared to the dfs in each imputed dataset, which is
 inappropriate. Therefore, Barnard and Rubin (1999) adjusted this df by
 using Formula 5.10:
@@ -6035,6 +5988,7 @@ derive the p-value:
 
 Which results in a p-value of: 0.1502045.
 
-\bibliography{book.bib,packages.bib}
+\bibliography{chapter3.bib}
+
 
 \end{document}

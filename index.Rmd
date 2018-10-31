@@ -4,10 +4,9 @@ author: "Martijn Heymans and Iris Eekhout"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
-bibliography: [book.bib, packages.bib]
+bibliography: [chapter3.bib]
 biblio-style: apalike
 link-citations: yes
-
 ---
 
 # Preface {-}
