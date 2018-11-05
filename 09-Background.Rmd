@@ -3,9 +3,9 @@ output:
   pdf_document: default
   html_document: default
 ---
-# Background information to Statistical Methods
+# Background information to Statistical Methods {-}
 
-# Rubin's Rules
+# Rubin's Rules {-}
 
 Rubin´s Rules (RR) are designed to pool parameter estimates, such as means differences and regression coefficients, standard errors and to derive confidence intervals and p-values. Rubin's rules are not available for all statistical procedures in SPSS. Many test procedures that do not provide pooling results in SPSS are available in R. 
 

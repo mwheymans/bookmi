@@ -1,7 +1,7 @@
 ---
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 # Single Missing data imputations
@@ -64,9 +64,7 @@ In the Missing Values group you choose for Replace with mean (Figure \@ref(fig:f
 knitr::include_graphics("images/fig3.8.png")
 ```
 
-You can also obtain the mean values by using *Descriptive Statistics*, and than replace the missing values by using the recode procedures:
-
-> Transform -> Recode into Same Variables.
+You can also obtain the mean values by using *Descriptive Statistics*, and than replace the missing values by using the "Recode into Same Variables"under the Transform menu.
 
 ### Mean imputation in R
 
@@ -75,7 +73,8 @@ suppressWarnings(suppressMessages(library(foreign)))
 suppressWarnings(suppressMessages(library(mice)))
 ```
 
-You can do mean imputation by using the mice function in the mice package.
+You can do mean imputation by using the mice function in the mice package and choose as method "mean".
+
 ```{r }
 
 library(foreign) # activate the foreign package to use the read.spss function
@@ -87,6 +86,7 @@ imp_mean <- mice(dataset, method="mean", m=1, maxit=1)
 ```
 
 You can extract the mean imputed dataset by using the complete function.
+
 ```{r eval=FALSE}
 
 complete(imp_mean)
@@ -142,7 +142,7 @@ To estimate the linear regression model, choose:
 
 > Analyze -> Regression -> Linear
 
-Transfer the Tampa scale variable to the Dependent variable window and the Pain variable to the window of the Block 1 of 1 group. Then click OK. 
+Transfer the Tampa scale variable to the Dependent variable window and the Pain variable to the "Independent(s) in the Block 1 of 1 group. Then click OK. 
 
 ```{r fig3-14, echo = FALSE, fig.cap="Linear regression analysis with the Tampa scale as the outcome and Pain as the independent variable.", out.width='70%', fig.align='center'}
 knitr::include_graphics("images/fig3.14.png")
@@ -276,7 +276,7 @@ The full Multiple Imputation procedure will be discussed in more detail in the n
 
 ### Bayesian Stochastic regression imputation in R
 
-The package mice also include a Bayesian stochastic regression imputation procedure. This method also accounts for imputation uncertainty, not only via the residuals (error variance), but also via the regression coefficients, which means that extra noise (or random error) is added to the regression coefficients. This imputation procedure is done by using the mice.impute.norm function. For the example to apply this method in R code 3.8 we use the same dataset as above with missing values in the Tampa scale variable and the pain variable as the only predictor variable for these missing values.
+The package mice also include a Bayesian stochastic regression imputation procedure. You can apply this imputation procedure with the mice function and use as method "norm". The pain variable is the only predictor variable for the missing values in the Tampa scale variable.
 
 ```{r }
 
@@ -284,11 +284,155 @@ dataset <- read.spss(file="Backpain 50 missing.sav", to.data.frame=T)
 dataset <- dataset[, c("Pain", "Tampascale")]
 
 imp_b <- mice(dataset, method="norm", m=1, maxit=1)
-imp_b$imp$Tampascale # Extract the imputed values
 
 ```
 
 The completed dataset can be extracted by using the complete function in the mice package.
 
-Predictive Mean Matching: Predictive mean matching (PMM) is an imputation method that predicts values and subsequently selects observed values to be used to replace the missing values. It is the default imputation procedure in the mice package to impute missing data in continuous variables (@rubin1987). The strength of this procedure is that missing data is replaced by data that is observed in the dataset and not replaced by unrealistic values (as negative body weight values).  
+## Predictive Mean Matching or Regression imputation
+
+To impute continuous variables two methods can be used. Linear regression imputation or Predictive Mean Matching (PMM).PMM is an imputation method that predicts values and subsequently selects observed values to be used to replace the missing values. It is the default imputation procedure in the mice package (@rubin1987). Linear regression imputation was explained in (paragraph (3.3.1.2)). 
+
+### Predictive Mean Matching, how does it work?
+
+Predictive Mean Matching takes place in several steps:
+
+We take as an example the missing values in the Tampa scale variable. They are defined as NA in the dataset. The Pain variable is used to predict the missing Tampa scale values.
+
+```{r echo=FALSE}
+
+library(foreign)
+dataset <- suppressWarnings(suppressMessages(read.spss(file="PMM 10 missing.sav", to.data.frame = T)))
+dataset
+
+```
+
+**Step 1**: Estimate linear regression model 
+
+A linear regression model is estimated with the Tampa scale variable as the outcome and the Pain variable as the predictor variable for the missing values. We define this regression coefficient as $\hat{\beta_{Pain}}$.
+
+**Step 2**: Determine Bayesion version of regression coefficient 
+
+A Bayesian regression coefficient for the Pain variable is determined (paragraph (XX)). We define this regression coefficient as $\beta_{Pain}^*$.
+
+**Step 3**: Predict Missing values
+
+- _Observed_ Tampa scale valueas are predicted by the Pain regression coefficient $\hat{\beta_{Pain}}$ from step 1 and the Pain data, we call these values $Tampa_{Obs}$.
+
+```{r , echo=FALSE, eval=FALSE}
+suppressWarnings(suppressMessages(library(knitr)))
+suppressWarnings(suppressMessages(library(kableExtra)))
+suppressWarnings(suppressMessages(library(mice)))
+suppressWarnings(suppressMessages(library(float)))
+```
+
+```{r , echo=FALSE}
+library(float)
+library(foreign)
+library(mice)
+library(knitr)
+library(kableExtra)
+dataset <- suppressWarnings(suppressMessages(read.spss(file="PMM 10 missing.sav", to.data.frame = T)))
+
+y <- dataset$Tampascale
+ry <- !is.na(y)
+
+x <- as.matrix(dataset[, 1])
+dimnames(x) <- list(NULL, "Pain")
+
+donors = 3
+type = 1
+ridge = 1e-05
+
+  x <- cbind(1, as.matrix(x))
+  ynum <- y
+
+  set.seed(3281)
+  parm <- .norm.draw(ynum, ry, x, ridge = ridge)
+  
+  yhatobs <- x[ry, ] %*% parm$coef
+  yhatmis <- x[!ry, ] %*% parm$beta
+  
+y[is.na(y)] <- yhatmis  
+x[ry, ] <- yhatobs
+x[!ry, ] <- yhatmis
+dataset <- data.frame(dataset, x[, 1], ry, y)
+
+# predicted missing value = 1, predicted observed value =0
+# Prepare dataset to make plot
+dataset$ry <- ifelse(dataset$ry, 0, 1)
+
+names(dataset) <- c("ID", "Pain", "Tampascale", "Tampa_Obs", "Group", "Tampascale_Complete")
+
+dataset <- dataset[, -c(5, 6)]
+dataset <- round(dataset, 3)
+dataset$Tampa_Obs[which(is.na(dataset$Tampascale))] <- NA
+
+kable(dataset, "latex", booktabs = T)
+```
+
+- _Missing_ Tampa scale valueas are predicted by the regression coefficient $\beta_{Pain}^*$ from step 2 and the Pain data, we call these $Tampa_{Pred}$.
+
+These values are: 43.594, 41.456 and 39.852.
+
+**Step 4**: Find closest donor
+
+Find the closest donor for the first missing value by subtracting the first $Tampa_{Pred}$ value of 43.594 from all predicted observed values in the $Tampa_{Obs}$ column. These differences are shown in the column Difference. 
+
+```{r , echo=FALSE}
+library(foreign)
+library(mice)
+dataset <- suppressWarnings(suppressMessages(read.spss(file="PMM 10 missing.sav", to.data.frame = T)))
+
+y <- dataset$Tampascale
+
+ry <- !is.na(y)
+
+x <- as.matrix(dataset[, 1])
+dimnames(x) <- list(NULL, "Pain")
+
+donors = 3
+type = 1
+ridge = 1e-05
+
+  x <- cbind(1, as.matrix(x))
+  ynum <- y
+
+  set.seed(3281)
+  parm <- .norm.draw(ynum, ry, x, ridge = ridge)
+  
+  yhatobs <- x[ry, ] %*% parm$coef
+  yhatmis <- x[!ry, ] %*% parm$beta
+  
+y[is.na(y)] <- yhatmis  
+x[ry, ] <- yhatobs
+x[!ry, ] <- yhatmis
+dataset <- data.frame(dataset, x[, 1], ry, y)
+
+# predicted missing value = 1, predicted observed value =0
+# Prepare dataset to make plot
+dataset$ry <- ifelse(dataset$ry, 0, 1)
+
+names(dataset) <- c("ID", "Pain", "Tampascale", "Tampa_Obs", "Group", "Tampascale_Complete")
+
+dataset <- dataset[, -c(5, 6)]
+#dataset$Col <- ry
+dataset <- round(dataset, 3)
+dataset$Tampa_Obs[which(is.na(dataset$Tampascale))] <- NA
+
+z <- as.array(yhatmis)
+yhat = yhatobs
+y = y[ry]
+donors = donors
+
+# subtract first missing value from all predicted values of observed data
+dataset$Difference <- abs(round(dataset$Tampa_Obs, 3)-43.594)
+dataset <- round(dataset, 3)
+
+kable(dataset, "latex", booktabs = T)
+```
+
+The smallest differences are 1.574, 1.970 and 2.168 and these belong to the cases with observed Tampa scale values of 40, 41 and 42 respectively. Subsequently, a value is randomly drawn from these observed values and used to impute the first missing Tampa scale value. Other missing values are imputed by following the same procedure. 
+
+The strength of PMM is that missing data is replaced by data that is observed in the dataset and not replaced by unrealistic values (as negative Tampa scale scores).  
 
