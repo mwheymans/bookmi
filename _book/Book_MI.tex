@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-11-05}
+    \date{2018-11-07}
 
 \usepackage{booktabs}
 
@@ -421,11 +421,11 @@ File -\textgreater{} Open -\textgreater{} Data.
 \end{quote}
 
 All kind of file types can be selected. Of course the SPSS .sav files,
-but also .por, .xlsx, .cvs, SAS, Stata, etc. (Figure 1.8). After you
-have selected a specific file type other than SPSS you may have to go
-through several steps before you see the data in the Data View window.
-These steps are not necessary for SPSS files, they open directly in the
-data editor.
+but also .por, .xlsx, .cvs, SAS, Stata, etc. (Figure \ref{fig:fig8})).
+After you have selected a specific file type other than SPSS you may
+have to go through several steps before you see the data in the Data
+View window. These steps are not necessary for SPSS files, they open
+directly in the data editor.
 
 \begin{figure}
 
@@ -512,10 +512,10 @@ more about functions in R later):
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  0.6651323 -1.6103509 -0.4650694 -0.1497100 -0.8520440 -0.7900540
-##  [7] -0.6327125  0.7754538 -0.2316743  0.3434609 -0.8505407 -1.2762395
-## [13]  1.0991890 -0.5104263  1.8458130  0.3967955 -1.4509446 -0.3667529
-## [19] -1.5949846  0.8817085
+##  [1]  0.20930333 -0.58279011  1.53168629  0.08180721 -1.86703343
+##  [6]  2.13117273  1.79413808 -0.57403941 -1.05132540 -0.62054765
+## [11] -0.91072312  1.24872957  2.29198609 -0.46840427 -1.01897577
+## [16] -0.24030084 -1.30891617  1.22231704  0.28656361  0.71826216
 \end{verbatim}
 
 The number {[}1{]} between brackets is the index of the first number or
@@ -1194,7 +1194,7 @@ There are several procedures in RStudio to read in datasets.
   at the right site above. There you will find the button ``Import
   Dataset''. When you click on it you can choose between different kind
   of file types, i.e.~CVS, Excel, SPSS, SAS and Stata files (Figure
-  1.13).
+  \ref{fig:fig13})).
 \end{enumerate}
 
 \begin{figure}
@@ -1285,7 +1285,7 @@ than you will see the file you want to import in SPSS, here the
 
 Then click Open (wait a couple of seconds) and click on next. You will
 see the following window that is part of the Text Import Wizard
-procedure in SPSS (Figure 1.19):
+procedure in SPSS (Figure \ref{fig:fig19}):
 
 \begin{figure}
 
@@ -1299,9 +1299,9 @@ procedure in SPSS (Figure 1.19):
 Then click the ``Next \textgreater{}'' button 5 times, passing by the
 following windows:
 
-Step 2 of 6 (Figure 1.20): To change how variables are arranged: here
-delimited To include variable names included at the top of the file:
-here Yes. To set the decimal symbol: here a comma.
+Step 2 of 6 (Figure \ref{fig:fig20}): To change how variables are
+arranged: here delimited To include variable names included at the top
+of the file: here Yes. To set the decimal symbol: here a comma.
 
 \begin{figure}
 
@@ -1312,7 +1312,7 @@ here Yes. To set the decimal symbol: here a comma.
 \caption{Step 2 of the Text Import Wizard}\label{fig:fig20}
 \end{figure}
 
-Step 3 of 6 (Figure 1.21):
+Step 3 of 6 (Figure \ref{fig:fig21}):
 
 On which line number begins the first case: here 2 How cases are
 represented: Each line is a case. How many cases you want to import:
@@ -1327,9 +1327,9 @@ here all cases.
 \caption{Step 3 of the Text Import Wizard}\label{fig:fig21}
 \end{figure}
 
-Step 4 of 6 (Figure 1.22): The delimiters that appear between variables;
-here the Semicolon. The text qualifier: here Double quote. Remove
-trailing spaces from string values: skip.
+Step 4 of 6 (Figure \ref{fig:fig22}): The delimiters that appear between
+variables; here the Semicolon. The text qualifier: here Double quote.
+Remove trailing spaces from string values: skip.
 
 \begin{figure}
 
@@ -1340,9 +1340,9 @@ trailing spaces from string values: skip.
 \caption{Step 4 of the Text Import Wizard}\label{fig:fig22}
 \end{figure}
 
-Step 5 of 6 (Figure 1.23): Here you overwrite the Data format of the
-variable (you can also change that in the Variable View window, when the
-data has been read in).
+Step 5 of 6 (Figure \ref{fig:fig23}): Here you overwrite the Data format
+of the variable (you can also change that in the Variable View window,
+when the data has been read in).
 
 \begin{figure}
 
@@ -1354,7 +1354,7 @@ data has been read in).
 \end{figure}
 
 Step 6 of 6: To save your specifications of the previous steps into a
-separate file (Figure 1.24).
+separate file (Figure \ref{fig:fig24}).
 
 \begin{figure}
 
@@ -1398,7 +1398,8 @@ The mice package will be automatically downloaded from the CRAN website.
 Another way is to use the window on the right site below and go to the
 Packages tab. When you click ``Install'' a new window is opened. Than
 you can type ``mice'' on the blank line under ``Packages (separate
-multiple with space or comma):'' (Figure 1.25a and b).
+multiple with space or comma):'' (Figure \ref{fig:fig25} and Figure
+\ref{fig:fig26}).
 
 \begin{figure}
 
@@ -1427,8 +1428,8 @@ zip file in a directory on your computer, for example your working
 directory or in your library. Again use the window on the right site
 below and go to the Packages tab. When you choose Install a new window
 is opened. Now under ``Install from:'' choose for ``Package Archive File
-(.zip; .tar.gz)'' (Figure 1.26a and 1.26b). Than you can browse to the
-zip file and install the package.
+(.zip; .tar.gz)'' (Figure \ref{fig:fig27} and Figure \ref{fig:fig28}).
+Than you can browse to the zip file and install the package.
 
 \begin{figure}
 
@@ -3390,7 +3391,7 @@ SPSS}\label{pooling-results-after-mi-in-spss}
 
 After multiple imputation, the multiple imputed datasets are stored in a
 new SPSS file. In order to obtain pooled analysis results, the imputed
-values must be marked yellow. Than SPSS recognizes the dataset is a
+values must be marked yellow. Than SPSS recognizes the dataset is an
 ``imputed'' dataset and is able to generate pooled analyses results.
 Figure \ref{fig:fig5-1}) shows an example of a multiple imputed dataset
 with imputed values marked yellow. If SPSS does not recognize the
@@ -5587,27 +5588,22 @@ following output will be generated (Figure \ref{fig:fig91}).
 \caption{Parameter estimates as a result of applying a GEE model in multiple imputed datasets.}\label{fig:fig91}
 \end{figure}
 
-\chapter*{Background information to Statistical
-Methods}\label{background-information-to-statistical-methods}
-\addcontentsline{toc}{chapter}{Background information to Statistical
-Methods}
-
-\chapter*{Appendix A}\label{appendix-a}
-\addcontentsline{toc}{chapter}{Appendix A}
+\chapter*{Background information to Pooled Statistical
+Methods}\label{background-information-to-pooled-statistical-methods}
+\addcontentsline{toc}{chapter}{Background information to Pooled
+Statistical Methods}
 
 \chapter{Rubin's Rules}\label{rubins-rules}
 
 Rubin´s Rules (RR) are designed to pool parameter estimates, such as
-means differences and regression coefficients, standard errors and to
-derive confidence intervals and p-values. Rubin's rules are not
-available for all statistical procedures in SPSS. Many test procedures
-that do not provide pooling results in SPSS are available in R.
+mean differences, regression coefficients, standard errors and to derive
+confidence intervals and p-values.
 
-We illustrate the use of RR with a t-test example in 3 generated
-multiple imputed datasets in SPSS. The t-test is used to estimate the
-difference in mean Tampascale values between patients with and without
-Radiation in the leg. The output of the t-test in the multiple imputed
-data is presented in Figure \ref{fig:tab9-1}.
+We illustrate RR with a t-test example in 3 generated multiple imputed
+datasets in SPSS. The t-test is used to estimate the difference in mean
+Tampascale values between patients with and without Radiation in the
+leg. The output of the t-test in the multiple imputed data is presented
+in Figure \ref{fig:tab9-1} and Figure \ref{fig:tab9-2}.
 
 \begin{figure}
 
@@ -5624,7 +5620,7 @@ data is presented in Figure \ref{fig:tab9-1}.
 
 }
 
-\caption{b.T-test for difference in mean Tampascale values between patients with and without Radiation in the leg applied in multiple imputed datasets.}\label{fig:tab9-2}
+\caption{T-test for difference in mean Tampascale values between patients with and without Radiation in the leg applied in multiple imputed datasets.}\label{fig:tab9-2}
 \end{figure}
 
 The result in the original dataset (including missing values) is
@@ -5638,13 +5634,13 @@ estimated using RR.
 \section{Pooling Effect estimates}\label{pooling-effect-estimates}
 
 When RR are used, it is assumed that the repeated parameter estimates
-(e.g.~mean differences) are normally distributed. This cannot be assumed
-for all statistical test statistics, e.g.~correlation coefficients. For
-these test statistics, transformations are performed before RR can be
-applied to assume normality (will be discussed below).
+are normally distributed. This cannot be assumed for all statistical
+test statistics, e.g.~correlation coefficients. For these test
+statistics, transformations are first performed before RR can be
+applied.
 
-To calculate the pooled mean differences of (Figure \ref{fig:tab5-1a})
-the following formula is used \eqref{eq:p-param}:
+To calculate the pooled mean differences of Figure \ref{fig:tab9-1} the
+following formula is used \eqref{eq:p-param}:
 
 \begin{equation}
   \bar{\theta} = \frac{1}{m}\left (\sum_{i=1}^m{\theta_i}\right )
@@ -5657,27 +5653,24 @@ parameter estimate (i.e.~mean difference) in each imputed dataset i.
 This formula is equal to the basic formula of taking the mean value of a
 sequence of numbers.
 
-When we use the values of (Figure \ref{fig:tab5-1a}), we get the
-following result:
+When we use the values for the mean differences in Figure
+\ref{fig:tab9-1}, we get the following result for the pooled mean
+difference:
 
 \[\bar{\theta} = \frac{1}{3}(2.174 + 1.965+1.774)=1.971\]
-
-This value of 1.971 is the pooled value for the Tampascale variable in
-(Figure \ref{fig:tab5-1a}).
 
 \section{Pooling Standard errors}\label{pooling-standard-errors}
 
 The pooled standard error is derived from different components that
-reflect the within and between sampling variance of the mean difference.
-The calculation of these components is discussed below.
+reflect the within and between sampling variance of the mean difference
+in the multiple imputed datasets. The calculation of these components is
+discussed below.
 
-\emph{Within imputation variance} The within imputation variance is the
-average of the variance of the estimates in each imputed dataset. This
-reflects the sampling variance, i.e.~the precision of the parameter of
-interest in each completed dataset. This value will be large in small
-samples and small in large samples. The within imputation variance is
-computed by taking the mean of the within variance estimate,
-i.e.~squared standard error, in each imputed dataset:
+\emph{Within imputation variance} This is the average of the mean of the
+within variance estimate, i.e.~squared standard error, in each imputed
+dataset. This reflects the sampling variance, i.e.~the precision of the
+parameter of interest in each completed dataset. This value will be
+large in small samples and small in large samples.
 
 \begin{equation}
 V_W = \frac{1}{m}\left (\sum_{i=1}^m{SE_i^2}\right )
@@ -5687,15 +5680,17 @@ V_W = \frac{1}{m}\left (\sum_{i=1}^m{SE_i^2}\right )
 In this formula \(V_W\) is the within imputation variance, m is the
 number of imputed datasets, \(SE_i^2\) means taking the sum of the
 squared Standard Error (SE), estimated in each imputed dataset i. Using
-the data of (Figure \ref{fig:tab5-1a}), we get the following result:
+the standard error estimates in Figure \ref{fig:tab9-1}, we get the
+following result:
 
 \[V_W = \frac{1}{3}(0.896^2 + 0.882^2 + 0.898^2)=0.7957147\]
 
-\emph{Between imputation variance} The between imputation variance
-reflects the extra variance due to the missing data. This is estimated
-by taking the variance of the parameter of interest estimated over
-imputed datasets. This value is large when the level of missing data is
-high and smaller when the level of missing data is small.
+\emph{Between imputation variance} This reflects the extra variance due
+to the missing data. This is estimated by taking the variance of the
+parameter of interest estimated over imputed datasets. This formula is
+equal to the formula for the (sample) variance which is commonly used in
+statistics. This value is large when the level of missing data is high
+and smaller when the level of missing data is small.
 
 \begin{equation}
 V_B\sqrt{\frac{\sum_{i=1}^m (\theta_i - \overline{\theta})^2}{N-1} }
@@ -5705,9 +5700,10 @@ V_B\sqrt{\frac{\sum_{i=1}^m (\theta_i - \overline{\theta})^2}{N-1} }
 In this formula, \(V_B\) is the between imputation variance, m is the
 number of imputed datasets, \(\overline{\theta}\) is the pooled
 estimate, \(\theta_i\) is the parameter estimate in each imputed dataset
-i. This formula is equal to the formula for the (sample) variance which
-is commonly used in statistics. Using the data of
-(Figure\ref{fig:tab5-1a}), we get the following result:
+i.
+
+Using the mean differences in Figure\ref{fig:tab9-1}, we get the
+following result:
 
 \[V_W = \frac{1}{3-1}((2.174-1.971)^2+ (1.965-1.971)^2+(1.774-1.971)^2)=0.7957147\]
 
@@ -5723,30 +5719,32 @@ V_{Total} = V_W + V_B + \frac{V_B}{m}
 \[SE_{Pooled} = \sqrt{V_{Total}} = \sqrt{0.849084} = 0.9214575\]
 
 This value is equal to the (rounded) pooled standard error value of
-0.921 in (Figure \ref{fig:tab5-1a}).
+0.921 in Figure \ref{fig:tab9-1}.
 
 \section{Significance testing}\label{significance-testing}
 
 For significance testing of the pooled parameter, i.e.~the mean
-difference in (Figure \ref{fig:tab5-1a}), Formula 5.6 is used. This is
-the univariate Wald test (Rubin 1987, van Buuren 2013, Marshall, 2009).
-This test is defined as:
+difference in Figure \ref{fig:tab9-1}, Formula \eqref{eq:wald-pooled} is
+used. This is the univariate Wald test (\citet{rubin1987},
+\citet{VanBuuren2018}, \citet{Marshall2009MedResMeth}). This test is
+defined as:
 
 \begin{equation}
 Wald_{Pooled} =\frac{(\overline{\theta} - {\theta_0})^2}{V_T}
   \label{eq:wald-pooled}
 \end{equation}
 
-where \(\overline{\theta}\) and \(V_T\) is the total variance and is
-equal to the \(SE_P\) or the pooled standard error that was derived in
-the previous paragraph), and \(\theta_0\) is the parameter value under
-the null hypothesis (which is mostly 0). The univariate Wald test can be
-used to test all kind of univariate parameters of interest, mean
-differences and univariate regression coefficients in linear and
-logistic regression models. The univariate Wald test in our example is
-calculated using the values from (Figure \ref{fig:tab5-1a}):
+where \(\overline{\theta}\) is the pooled mean difference and \(V_T\) is
+the total variance and is equal to the \(SE_{Pooled}\) (pooled standard
+error) that was derived in the previous paragraph, and \(\theta_0\) is
+the parameter value under the null hypothesis (which is mostly 0). The
+univariate Wald test can be used to test all kind of univariate
+parameters of interest, such as mean differences and univariate
+regression coefficients from different tpe of regression models. The
+univariate Wald test in our example is calculated using the pooled
+regression coefficient and standard error from Figure \ref{fig:tab9-1}:
 
-\[Wald_{Pooled} =\frac{(\overline{\theta} - {\theta_0})^2}{V_T}=\frac{1.971}{\sqrt{0.849084}}=2.139\]
+\[Wald_{Pooled} = \frac{1.971}{\sqrt{0.849084}}=2.139\]
 
 The univariate pooled Wald value follows a t-distribution. This
 distribution is used to derive the p-value. The value for t depends on
@@ -5757,11 +5755,11 @@ t_{df,1-\alpha/2}
   \label{eq:t-distr}
 \end{equation}
 
-Where df is degrees of freedom and \(\alpha\) is the reference level of
-significance, which is usually set at 5\%. The derivation of the degrees
-of freedom for the t-test is complex. There exist different formula´s to
-calculate the degrees of freedom and these are explained in the next
-paragraph.
+Where df are the degrees of freedom and \(\alpha\) is the reference
+level of significance, which is usually set at 5\%. The derivation of
+the degrees of freedom for the t-test is complex. There exist different
+formula´s to calculate the degrees of freedom and these are explained in
+the next paragraph.
 
 Because \(t^2\) is equal to F at the same number of degrees of freedom,
 we can also test for significance using a F-distribution, according to:
@@ -5777,19 +5775,19 @@ t-test above.
 \section{Degrees of Freedom and
 P-values}\label{degrees-of-freedom-and-p-values}
 
-The derivation of the degrees of freedom (df) and the resulting p-value
-for the pooled T-test is not straightforward, because there are
-different formulas to calculate the df. There exists an older version of
-the formula to calculate the degrees of freedom (df) and an adjusted
-version (Van Buuren 2012). The older method to calculate the dfs results
-in a higher df than those in each imputed dataset. An example of this is
-shown in (Figure \ref{fig:tab9-3}). It can be seen that the degrees of
-freedoms is 148 in each imputed dataset (in the row for equal variances
-assumed) and 507 for the pooled result. This is important to relize
-because different values for the degrees of freedom leads to different
-p-values. In SPSS the old way to calculate the dfs is used. Adjusted
-versions are used in the mice package for R. The differences between the
-older and adjusted method to calculate the dfs is illustrated now.
+The derivation of the degrees of freedom (df) and the p-value for the
+pooled t-test is not straightforward, because there are different
+formulas to calculate the df, an older and an adjusted version
+(\citet{VanBuuren2018}). The older method to calculate the dfs results
+in a higher value for the df's for the pooled result than the one in
+each imputed dataset. An example can be found in Figure
+\ref{fig:tab9-3}. The degrees of freedoms are 148 in each imputed
+dataset (in the row for equal variances assumed, under the column df)
+and 507 for the pooled result. This is important to relize because
+different values for the df's lead to different p-values. In SPSS the
+old way to calculate the dfs is used. Adjusted versions are used in the
+mice package for R. The differences between the older and adjusted
+methods to calculate the df's is illustrated in more detail below.
 
 \begin{figure}
 
@@ -5800,42 +5798,44 @@ older and adjusted method to calculate the dfs is illustrated now.
 \caption{Part of Output of Figure 5.1. The value for the dfs are presented in the df column.}\label{fig:tab9-3}
 \end{figure}
 
-The (older method) to calculate df for the t-distribution is described
-in Rubin (1987) and Van Buuren (2012) and is defined as:
+The (older method) to calculate the df for the t-distribution is defined
+as (\citet{rubin1987}, \citet{VanBuuren2018}):
 
 \begin{equation}
 df_{Old} = \frac{m-1}{lambda^2} = (m-1) * (1 + \frac{1}{r^2})
   \label{eq:df-old}
 \end{equation}
 
-Where m is the number of imputed datasets and lambda can be interpreted
-as the Fraction of Missing information (FMI), calculated by Formula 5.13
-(Raghunathan, 2016), and r is the relative increase in variance due to
-nonresponse, calculated by Formula 5.14. The calculation of lambda and r
-values are discussed in more detail later. The lambda value that is used
-in Formula 5.9 (and often used as alternative for the FMI) is not the
-same FMI value of 0.067 that SPSS presents in (Figure \ref{fig:tab9-1}).
-The FMI value of 0.067 is calculated by Formula 5.16 and is called FMI
-in this manual.
+Where m is the number of imputed datasets and lambda is equal to the
+Fraction of Missing information (FMI), calculated by Formula
+\eqref{eq:lambda} (\citet{raghunathan2016}), and r is the relative
+increase in variance due to nonresponse (RIV), calculated by Formula
+\eqref{eq:riv}.
 
-When \(df_{old}\) is calculated with the information in (Figure
-\ref{fig:tab5-1a}), we get:
+The lambda value that is used in Formula \eqref{eq:df-old} (and often used
+as alternative for the FMI) is not the same value for the fraction of
+missing information of 0.067 that SPSS presents in Figure
+\ref{fig:tab9-1}. The FMI value of 0.067 is calculated by Formula
+\eqref{eq:fmi} and is called FMI.
+
+When \(df_{old}\) is calculated with the information in Figure
+\ref{fig:tab9-3}, we get:
 
 \[df_{Old} = \frac{3-1}{0.06283485^2} = 506.5576\]
 
 This (rounded) value is equal to the df value in the row Pooled of 507
-in (Figure \ref{fig:tab9-1}). Formula 5.9 leads to a larger df for the
-pooled result, compared to the dfs in each imputed dataset, which is
-inappropriate. Therefore, Barnard and Rubin (1999) adjusted this df by
-using Formula 5.10:
+in (Figure \ref{fig:tab9-1}). Formula \eqref{eq:df-old} leads to a larger
+df for the pooled result, compared to the dfs in each imputed dataset,
+which is inappropriate. Therefore, \citet{BARNARD1999} adjusted this df
+by using Formula \eqref{eq:df-adj}:
 
 \begin{equation}
 df_{Adjusted} = \frac{df_{Old}*{df_{Observed}}}{df_{Old}+{df_{Observed}}}
   \label{eq:df-adj}
 \end{equation}
 
-Where \(df_{Old}\) is defined as in Formula 5.9 and \(df_{Observed}\) is
-defined as:
+Where \(df_{Old}\) is defined as in Formula \eqref{eq:df-old} and
+\(df_{Observed}\) is defined as:
 
 \begin{equation}
 df_{Observed} = \frac{(n-k)+1}{(n-k)+3}*(n-k)(1-lambda)
@@ -5843,20 +5843,21 @@ df_{Observed} = \frac{(n-k)+1}{(n-k)+3}*(n-k)(1-lambda)
 \end{equation}
 
 Where n is the sample size in the imputed dataset, k the number of
-parameters to fit and lambda is obtained by Formula 5.13.
+parameters to fit and lambda is obtained by Formula Formula
+\eqref{eq:lambda}.
 
-By filling in the formulas 5.11 and 5.10 we get for \(df_{observed}\)
-and \(df_{adjusted}\) respectively:
+By filling in the formulas \eqref{eq:df-obs} and \eqref{eq:df-adj} we get
+for \(df_{observed}\) and \(df_{adjusted}\) respectively:
 
 \[df_{Observed} = \frac{(150-2)+1}{(150-2)+3}*(150-2)(1- 0.06283485)=136.8633\]
 
 \[df_{Adjusted} = \frac{(506.5576* 136.8633)}{(506.5576+ 136.8633)}=107.7509\]
 
-This number of 107.7509 is equal to the df used by mice.
+The number of 107.7509 is equal to the df used by mice.
 
-We can now derive the p-value for the mean difference in the Tampascale
-between patients with and without Radiation in the leg. This two-sided
-p-value is:
+We can now derive the p-value for the pooled mean difference in the
+Tampascale between patients with and without Radiation in the leg. This
+two-sided p-value is:
 
 In SPSS:
 
@@ -5877,7 +5878,7 @@ For the 95\% confidence interval (CI), the general formula can be used:
 
 In this formula, \(\bar{\theta}\) is the pooled estimate, t is the
 t-statistic, df is degrees of freedom and \(SE_{Pooled}\) is the pooled
-standard error (Formula 5.5).
+standard error (Formula \eqref{eq:var-t}).
 
 \chapter{Measures of Missing data
 information}\label{measures-of-missing-data-information}
@@ -5888,12 +5889,12 @@ Efficiency. They are derived from values of the between, and within
 imputation variance and the total variance. There exist two versions of
 the FMI, which are referred to as lambda and FMI.
 
-\subsection{Fraction of Missing
-Information}\label{fraction-of-missing-information}
+\section{Fraction of Missing Information -
+Lambda}\label{fraction-of-missing-information---lambda}
 
-The Fraction of Missing information, lambda, (van Buuren, 2012;
-Raghunathan, 2016) can be derived from the between and total missing
-data variance as:
+The Fraction of Missing information, lambda, (\citet{VanBuuren2018};
+\citet{raghunathan2016}) can be derived from the between and total
+missing data variance as:
 
 \begin{equation}
 Lambda = \frac{V_B + \frac{V_B}{m}}{V_T}
@@ -5906,23 +5907,24 @@ interpreted as the proportion of variation in the parameter of interest
 due to the missing data.
 
 When we use the \({V_B}\) and \({V_T}\) values that were calculated in
-paragraph 5.1.2, this value will be:
+paragraph 5.1.2, lambda will be:
 
 \[Lambda = \frac{0.040027 + \frac{0.040027}{3}}{0.849084}=0.06283485\]
 
 This specific value for the FMI, lambda, is not reported by SPSS, but is
-reported by the mice package in R. Confusingly, van Buuren (2012) and
-Enders (2010) use the same formula to calculate this type of missing
-data information, but van Buuren calls it lambda and Enders FMI.
+reported by the mice package in R. Confusingly, \citet{VanBuuren2018}
+and \citet{enders2010applied} use the same formula to calculate this
+type of missing data information, but van Buuren calls it lambda and
+Enders FMI.
 
-\subsection{Relative increase in
+\section{Relative increase in
 variance}\label{relative-increase-in-variance}
 
 Another related measure is the relative increase in variance (RIV) due
 to nonresponse. This value is calculated as:
 
 \begin{equation}
-Lambda = \frac{V_B + \frac{V_B}{m}}{V_W}
+RIV = \frac{V_B + \frac{V_B}{m}}{V_W}
   \label{eq:riv}
 \end{equation}
 
@@ -5931,33 +5933,33 @@ respectively. This value can be interpreted as the proportional increase
 in the sampling variance of the parameter of interest that is due to the
 missing data.
 
-Filling in this formula with the example from paragraph 5.1.2 will
-result in:
+Filling in this formula with the values for \({V_B}\) and \({V_W}\) from
+paragraph 5.1.2 results in:
 
-\[Lambda = \frac{V_B + \frac{V_B}{m}}{V_W}=\frac{0.040027 + \frac{0.040027}{3}}{0.7957147}=0.06704779\]
+\[Lambda = \frac{0.040027 + \frac{0.040027}{3}}{0.7957147}=0.06704779\]
 
-This value is also presented in (Figure \ref{fig:tab5-1a}) in the column
+This value is also presented in (Figure \ref{fig:tab9-1}) in the column
 Relative Increase Variance.
 
-\subsection{Fraction of Missing Information -
+\section{Fraction of Missing Information -
 FMI}\label{fraction-of-missing-information---fmi}
 
 \begin{equation}
 FMI = \frac{RIV + \frac{2}{df+3}}{1+RIV}
-  \label{eq:riv}
+  \label{eq:fmi}
 \end{equation}
 
 Where RIV is the relative increase in variance due to missing data and
 df is the degrees of freedom for the pooled result. The degrees of
-freedom for the pooled result can be obtained in two ways: df\_Old or
-df\_Adjusted.
+freedom for the pooled result can be obtained in two ways:
+\({df_{Old}}\) or \({df_{Adjusted}}\).
 
-In SPSS, FMI is calculated using df\_Old, which results in:
+In SPSS, FMI is calculated using \({df_{Old}}\), which results in:
 
 \[FMI = \frac{RIV + \frac{2}{df+3}}{1+RIV}=\frac{0.06704779 + \frac{2}{506.5576+3}}{1+0.06704779}=0.0665132\]
 
-In R package mice, FMI is calculated using the formula for df\_Adjusted,
-that results in:
+In R package mice, FMI is calculated using the formula for
+\({df_{Adjusted}}\), that results in:
 
 \[FMI = \frac{RIV + \frac{2}{df_{Adjusted}+3}}{1+RIV}=\frac{0.06704779 + \frac{2}{107.7509+3}}{1+0.06704779}=0.0797587\]
 
@@ -5965,7 +5967,7 @@ The difference between lambda and FMI is that FMI is adjusted for the
 fact that the number of imputed datasets that are generated is not
 unlimitedly large. These measures differ for a small value of the df.
 
-\subsection{Relative Efficiency}\label{relative-efficiency}
+\section{Relative Efficiency}\label{relative-efficiency}
 
 The Relative Efficiency (RE) is defined as:
 
@@ -5978,9 +5980,9 @@ FMI is the fraction of missing information and m is the number of
 imputed datasets.
 
 The RE value is only provided by SPSS and is calculated by filling in
-the values of (Figure \ref{fig:tab5-1a}) as follows:
+the values of (Figure \ref{fig:tab9-1}) as follows:
 
-\[RE = \frac{1}{1+\frac{FMI}{m}}=\frac{1}{1+\frac{0.0665132}{3}}=0.9783098\]
+\[RE = \frac{1}{1+\frac{0.0665132}{3}}=0.9783098\]
 
 The RE gives information about the precision of the parameter estimate
 as the standard error of a regression coefficient.
@@ -5988,9 +5990,9 @@ as the standard error of a regression coefficient.
 \chapter{Pooling correlation
 coefficients}\label{pooling-correlation-coefficients-1}
 
-To pool correlation coefficients after multiple imputation Fishers Z
-transformation is used. The following formulas are used for this
-(Raghunathan 2016, van Buuren 2012 and Enders 2010):
+To pool correlation coefficients Fishers Z transformation is used. The
+following formulas are used (\citet{raghunathan2016},
+\citet{VanBuuren2018} and \citet{enders2010applied}):
 
 \begin{equation}
 Z_i = \frac{1}{2}ln\frac{1+r_i}{1-r_i}
@@ -6075,7 +6077,7 @@ derive the p-value:
 
 Which results in a p-value of: 0.1502045.
 
-\bibliography{chapter3.bib}
+\bibliography{amda2018.bib}
 
 
 \end{document}

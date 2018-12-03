@@ -69,7 +69,7 @@ You can Read data in, in SPSS via the menu File:
 
 > File -> Open -> Data. 
 
-All kind of file types can be selected. Of course the SPSS .sav files, but also .por, .xlsx, .cvs, SAS, Stata, etc. (Figure 1.8). After you have selected a specific file type other than SPSS you may have to go through several steps before you see the data in the Data View window. These steps are not necessary for SPSS files, they open directly in the data editor.
+All kind of file types can be selected. Of course the SPSS .sav files, but also .por, .xlsx, .cvs, SAS, Stata, etc. (Figure \@ref(fig:fig8))). After you have selected a specific file type other than SPSS you may have to go through several steps before you see the data in the Data View window. These steps are not necessary for SPSS files, they open directly in the data editor.
 
 ```{r fig8, echo = FALSE, fig.cap="Window to read in different file types in SPSS", out.width='80%', fig.align='center'}
 knitr::include_graphics("images/fig1.8.png")
@@ -413,7 +413,7 @@ knitr::include_graphics("images/fig1.12.png")
 There are several procedures in RStudio to read in datasets. 
 
 1.	Import datasets via “Import Dataset”
-An easy way is via the window at the right site above. There you will find the button “Import Dataset”. When you click on it you can choose between different kind of file types, i.e. CVS, Excel, SPSS, SAS and Stata files (Figure 1.13). 
+An easy way is via the window at the right site above. There you will find the button “Import Dataset”. When you click on it you can choose between different kind of file types, i.e. CVS, Excel, SPSS, SAS and Stata files (Figure \@ref(fig:fig13))). 
 
 ```{r fig13, echo = FALSE, fig.cap="Screen to import datasets in RStudio", out.width='80%', fig.align='center'}
 knitr::include_graphics("images/fig1.13.png")
@@ -517,7 +517,7 @@ than you will see the file you want to import in SPSS, here the “Backpain50 R 
 knitr::include_graphics("images/fig1.18.png")
 ```
 
-Then click Open (wait a couple of seconds) and click on next. You will see the following window that is part of the Text Import Wizard procedure in SPSS (Figure 1.19):
+Then click Open (wait a couple of seconds) and click on next. You will see the following window that is part of the Text Import Wizard procedure in SPSS (Figure \@ref(fig:fig19)):
 
 ```{r fig19, echo = FALSE, fig.cap="Step 1 of the Text Import Wizard", out.width='80%', fig.align='center'}
 knitr::include_graphics("images/fig1.19.png")
@@ -525,7 +525,7 @@ knitr::include_graphics("images/fig1.19.png")
 
 Then click the “Next >” button 5 times, passing by the following windows:
 
-Step 2 of 6 (Figure 1.20):
+Step 2 of 6 (Figure \@ref(fig:fig20)):
 To change how variables are arranged: here delimited
 To include variable names included at the top of the file: here Yes.
 To set the decimal symbol: here a comma.
@@ -534,7 +534,7 @@ To set the decimal symbol: here a comma.
 knitr::include_graphics("images/fig1.20.png")
 ```
 
-Step 3 of 6 (Figure 1.21):
+Step 3 of 6 (Figure \@ref(fig:fig21)):
 
 On which line number begins the first case: here 2
 How cases are represented: Each line is a case.
@@ -544,7 +544,7 @@ How many cases you want to import: here all cases.
 knitr::include_graphics("images/fig1.21.png")
 ```
 
-Step 4 of 6 (Figure 1.22):
+Step 4 of 6 (Figure \@ref(fig:fig22)):
 The delimiters that appear between variables; here the Semicolon.
 The text qualifier: here Double quote.
 Remove trailing spaces from string values: skip.
@@ -553,7 +553,7 @@ Remove trailing spaces from string values: skip.
 knitr::include_graphics("images/fig1.22.png")
 ```
 
-Step 5 of 6 (Figure 1.23):
+Step 5 of 6 (Figure \@ref(fig:fig23)):
 Here you overwrite the Data format of the variable (you can also change that in the Variable View window, when the data has been read in).
 
 ```{r fig23, echo = FALSE, fig.cap="Step 5 of the Text Import Wizard", out.width='80%', fig.align='center'}
@@ -561,7 +561,7 @@ knitr::include_graphics("images/fig1.23.png")
 ```
 
 Step 6 of 6:
-To save your specifications of the previous steps into a separate file (Figure 1.24).
+To save your specifications of the previous steps into a separate file (Figure \@ref(fig:fig24)).
 
 ```{r fig24, echo = FALSE, fig.cap="Step 6 of the Text Import Wizard", out.width='80%', fig.align='center'}
 knitr::include_graphics("images/fig1.24.png")
@@ -583,7 +583,7 @@ install.packages("mice")
 
 The mice package will be automatically downloaded from the CRAN website.
 
-Another way is to use the window on the right site below and go to the Packages tab. When you click “Install” a new window is opened. Than you can type “mice” on the blank line under “Packages (separate multiple with space or comma):” (Figure 1.25a and b).   
+Another way is to use the window on the right site below and go to the Packages tab. When you click “Install” a new window is opened. Than you can type “mice” on the blank line under “Packages (separate multiple with space or comma):” (Figure \@ref(fig:fig25) and Figure \@ref(fig:fig26)).   
 
 ```{r fig25, echo = FALSE, fig.cap="Install packages Window in RStudio to install packages from the CRAN website", out.width='80%', fig.align='center'}
 knitr::include_graphics("images/fig1.25a.png")
@@ -595,7 +595,7 @@ knitr::include_graphics("images/fig1.25b.png")
 
 After you have clicked on “Install” the package will be downloaded from the CRAN website automatically and will be listed in the Package list named “User Library”.
 
-Another way is to go to the CRAN website and download the package as a zip file in a directory on your computer, for example your working directory or in your library. Again use the window on the right site below and go to the Packages tab. When you choose Install a new window is opened. Now under “Install from:” choose for “Package Archive File (.zip; .tar.gz)”  (Figure 1.26a and 1.26b).  Than you can browse to the zip file and install the package.
+Another way is to go to the CRAN website and download the package as a zip file in a directory on your computer, for example your working directory or in your library. Again use the window on the right site below and go to the Packages tab. When you choose Install a new window is opened. Now under “Install from:” choose for “Package Archive File (.zip; .tar.gz)”  (Figure \@ref(fig:fig27) and Figure \@ref(fig:fig28)).  Than you can browse to the zip file and install the package.
 
 ```{r fig27, echo = FALSE, fig.cap="Install packages Window in RStudio to install packages from zip files", out.width='80%', fig.align='center'}
 knitr::include_graphics("images/fig1.26a.png")

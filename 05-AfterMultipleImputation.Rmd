@@ -10,7 +10,7 @@ output:
 
 ### Imputed values are yellow
 
-After multiple imputation, the multiple imputed datasets are stored in a new SPSS file. In order to obtain pooled analysis results, the imputed values must be marked yellow. Than SPSS recognizes the dataset is a "imputed" dataset and is able to generate pooled analyses results. Figure \@ref(fig:fig5-1)) shows an example of a multiple imputed dataset with imputed values marked yellow. If SPSS does not recognize the dataset as a multiple imputed dataset, the data will be treated as one large dataset.
+After multiple imputation, the multiple imputed datasets are stored in a new SPSS file. In order to obtain pooled analysis results, the imputed values must be marked yellow. Than SPSS recognizes the dataset is an "imputed" dataset and is able to generate pooled analyses results. Figure \@ref(fig:fig5-1)) shows an example of a multiple imputed dataset with imputed values marked yellow. If SPSS does not recognize the dataset as a multiple imputed dataset, the data will be treated as one large dataset.
 
 ```{r fig5-1, echo = FALSE, fig.cap="Example of SPSS dataset after MI has been applied.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig5.1.png")
