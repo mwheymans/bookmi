@@ -3,7 +3,7 @@ output:
   pdf_document: default
   html_document: default
 ---
-# Background information to Pooled Statistical Methods {-}
+# Background information to Multiple Imputation Methods {-}
 
 # Rubin's Rules 
 

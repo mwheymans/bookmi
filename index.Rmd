@@ -9,6 +9,11 @@ biblio-style: apalike
 link-citations: yes
 ---
 
+Copyright ©2018 by Heymans and Eekhout
+
+All rights reserved. No part of this book may be reproduced or utilized in any form or by any means, electronic or mechanical, including photocopying, recording, or by any information storage and retrieval system, without permission in writing from the authors.
+
+
 # Foreword {-}
 
 In the past decades, the attention for missing data has grown and so has the need for researchers to apply suitable methods to deal with their missing data. Leading methodologists and statisticians have published papers in leading journals about the problems of missing data and recommended researchers to take missing data seriously ((@sterne2009multiple, @little2012prevention, @Li2015)). From our experience, researchers still find it difficult to reserve time to evaluate the missing data in their study and to find a suitable solution to handle their missing data for their main data analysis.
