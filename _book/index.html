@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Applied Missing data analysis with SPSS and R(Studio)</title>
   <meta name="description" content="Applied Missing data analysis with SPSS and R(Studio)">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Applied Missing data analysis with SPSS and R(Studio)" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Martijn Heymans and Iris Eekhout">
 
 
-<meta name="date" content="2018-12-03">
+<meta name="date" content="2018-12-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="software-applications.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -103,10 +104,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">Applied Missing Data Analysis</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#the-goal-of-this-manual"><i class="fa fa-check"></i><b>0.1</b> The goal of this Manual</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#multiple-imputation-in-spss-and-r"><i class="fa fa-check"></i><b>0.2</b> Multiple Imputation in SPSS and R</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#notation-and-annotation-in-this-manual"><i class="fa fa-check"></i><b>0.3</b> Notation and annotation in this manual</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Foreword</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#software"><i class="fa fa-check"></i><b>0.1</b> Software</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#notation-in-this-book"><i class="fa fa-check"></i><b>0.2</b> Notation in this book</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#acknowledgement"><i class="fa fa-check"></i><b>0.3</b> Acknowledgement</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="software-applications.html"><a href="software-applications.html"><i class="fa fa-check"></i><b>1</b> Software applications</a><ul>
 <li class="chapter" data-level="1.1" data-path="software-applications.html"><a href="software-applications.html#spss"><i class="fa fa-check"></i><b>1.1</b> SPSS</a><ul>
@@ -119,6 +120,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.2" data-path="software-applications.html"><a href="software-applications.html#r-and-rstudio"><i class="fa fa-check"></i><b>1.2</b> R and RStudio</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="software-applications.html"><a href="software-applications.html#the-role-of-the-console-window"><i class="fa fa-check"></i><b>1.2.1</b> The role of the Console Window</a></li>
 <li class="chapter" data-level="1.2.2" data-path="software-applications.html"><a href="software-applications.html#r-assignments-and-objects"><i class="fa fa-check"></i><b>1.2.2</b> R assignments and objects</a></li>
+<li class="chapter" data-level="1.2.3" data-path="software-applications.html"><a href="software-applications.html#vectors-matrices-lists-and-data-frames"><i class="fa fa-check"></i><b>1.2.3</b> Vectors, matrices, lists and data frames</a></li>
+<li class="chapter" data-level="1.2.4" data-path="software-applications.html"><a href="software-applications.html#indexing-vectors-matrices-lists-and-data-frames"><i class="fa fa-check"></i><b>1.2.4</b> Indexing Vectors, Matrices, Lists and Data frames</a></li>
+<li class="chapter" data-level="1.2.5" data-path="software-applications.html"><a href="software-applications.html#vectorized-calculation"><i class="fa fa-check"></i><b>1.2.5</b> Vectorized Calculation</a></li>
+<li class="chapter" data-level="1.2.6" data-path="software-applications.html"><a href="software-applications.html#r-functions"><i class="fa fa-check"></i><b>1.2.6</b> R Functions</a></li>
+<li class="chapter" data-level="1.2.7" data-path="software-applications.html"><a href="software-applications.html#the-help-function"><i class="fa fa-check"></i><b>1.2.7</b> The Help function</a></li>
+<li class="chapter" data-level="1.2.8" data-path="software-applications.html"><a href="software-applications.html#working-with-script-files"><i class="fa fa-check"></i><b>1.2.8</b> Working with script files</a></li>
+<li class="chapter" data-level="1.2.9" data-path="software-applications.html"><a href="software-applications.html#creating-a-working-directory"><i class="fa fa-check"></i><b>1.2.9</b> Creating a working directory</a></li>
+<li class="chapter" data-level="1.2.10" data-path="software-applications.html"><a href="software-applications.html#reading-in-spss-data-in-rstudio"><i class="fa fa-check"></i><b>1.2.10</b> Reading in SPSS data in RStudio</a></li>
+<li class="chapter" data-level="1.2.11" data-path="software-applications.html"><a href="software-applications.html#saving-and-reading-r-data-in-rstudio"><i class="fa fa-check"></i><b>1.2.11</b> Saving and Reading R data in RStudio</a></li>
+<li class="chapter" data-level="1.2.12" data-path="software-applications.html"><a href="software-applications.html#reading-in-rstudio-data-into-spss"><i class="fa fa-check"></i><b>1.2.12</b> Reading in (R)Studio data into SPSS</a></li>
+<li class="chapter" data-level="1.2.13" data-path="software-applications.html"><a href="software-applications.html#installing-r-packages"><i class="fa fa-check"></i><b>1.2.13</b> Installing R Packages</a></li>
+<li class="chapter" data-level="1.2.14" data-path="software-applications.html"><a href="software-applications.html#loading-r-packages"><i class="fa fa-check"></i><b>1.2.14</b> Loading R Packages</a></li>
+<li class="chapter" data-level="1.2.15" data-path="software-applications.html"><a href="software-applications.html#updating-r-packages"><i class="fa fa-check"></i><b>1.2.15</b> Updating R Packages</a></li>
+<li class="chapter" data-level="1.2.16" data-path="software-applications.html"><a href="software-applications.html#useful-missing-data-packages-and-links"><i class="fa fa-check"></i><b>1.2.16</b> Useful Missing data Packages and links</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html"><i class="fa fa-check"></i><b>2</b> Missing Data Evaluation</a><ul>
@@ -266,31 +281,48 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="header">
 <h1 class="title">Applied Missing data analysis with SPSS and R(Studio)</h1>
-<h4 class="author"><em>Martijn Heymans and Iris Eekhout</em></h4>
-<h4 class="date"><em>2018-12-03</em></h4>
+<p class="author"><em>Martijn Heymans and Iris Eekhout</em></p>
+<p class="date"><em>2018-12-07</em></p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>The attention for missing data is growing and so will be the application of methods to solve the missing data problem. From our experience, researchers with missing data still find it difficult to reserve time to evaluate the missing data and from that to find a reasonable solution to handle their missing data for their main data analysis. This manual is developed for researchers that are looking for a solution of their missing data problem or want to learn more about missing data. The manual is developed as a result of a missing data course that we give. Further, we are also active in providing statistical advice in general and more specific about missing data. Because our time to give advice is mostly limited we wanted to give researchers a practical guide to help them get started with their missing data problem. Leading methodologists and statisticians and leading journals have published papers about the problems of missing data and warned researchers to take missing data seriously (Sterne et al., BMJ 2009, Little et al. NEJM 2012, Peng et al. 2015, JAMA). Hopefully this manual will help researchers to find the best solution for their missing data problem. We hope you will enjoy this manual and that you learn from it, at least to take missing data seriously and that you will use recommended methods to solve your missing data problem.</p>
-<div id="the-goal-of-this-manual" class="section level2">
-<h2><span class="header-section-number">0.1</span> The goal of this Manual</h2>
-<p>In this manual the software packages SPSS and R play a central role. The combination of these two software packages may seem a coincidence, but it is not. For a long time, SPSS was the most popular software package worldwide to do statistical data analysis. Currently, R is growing in popularity fast and will probably become one of the most popular Software packages to do data analysis. Also for applied researchers. Both SPSS and R have their advantages and disadvantages. An advantage of SPSS is that it is a user-friendly software package compared to R and works with windows where you can for example drag your variables to. Subsequently, you can click the OK button and the statistical analysis procedure you prespecified gives you the output results. A disadvantage of SPSS may be that you are overloaded with statistical output that may not all needed to answer your research question. Compared to SPSS you could say that R is a more user-unfriendly software package where you need to use R code to activate statistical procedures and to get statistical results. R output will show more specific results, without extra information. Furthermore, R works much faster when it comes to running statistical procedures by using 1 or 2 lines of R code, compared to visiting a couple of windows in SPSS to activate the same statistical test. There is one other advantage of R and that is, that it is open source. This makes it possible for applied researchers to follow the calculations of complex procedures as the estimation of missing values closely along the line. You could say that R brings you to the heart of the matter. With R it is possible to turn complex data analysis functions and formula´s into computer code that can be used by everybody and vice versa. Because it is open source, you are able to read the code that is used for the analysis and to relate that code or pieces of code to the statistical output. This makes it possible to evaluate step by step the code and thus the statistical procedures and relate them to the subsequent results. You can copy specific parts of code from functions that others have written and evaluate what happens. This is one of the major advantages of R if you compare it to the closed source statistical package SPSS. R brings you a big learning environment when it comes to the understanding of all kind of statistical procedures as missing data analysis.</p>
+<div id="foreword" class="section level1 unnumbered">
+<h1>Foreword</h1>
+<p>In the past decades, the attention for missing data has grown and so has the need for researchers to apply suitable methods to deal with their missing data. Leading methodologists and statisticians have published papers in leading journals about the problems of missing data and recommended researchers to take missing data seriously ((<span class="citation">Sterne et al. (<a href="#ref-sterne2009multiple">2009</a>)</span>, <span class="citation">Little et al. (<a href="#ref-little2012prevention">2012</a>)</span>, <span class="citation">Li P (<a href="#ref-Li2015">2015</a>)</span>)). From our experience, researchers still find it difficult to reserve time to evaluate the missing data in their study and to find a suitable solution to handle their missing data for their main data analysis. This book is developed for applied researchers who are looking for a solution for their missing data problem or who want to learn more about dealing with missing data. The book is initially developed for a missing data course for epidemiologist, but we feel that applied researchers from other disciplines may also find this book useful. Further, we are active in giving statistical advice in general and more specific about missing data. Because our time for consultations is mostly limited, this practical guide may be useful to help researchers get started with their missing data problem. With this book we provide an overview of the currently available methods to deal with missing data. The use of the methods are thoroughly explained and supported by practical examples. We hope you will enjoy this book and that you find it useful, at that as a result you will use the recommended methods to solve your missing data problem.</p>
+<div id="software" class="section level2">
+<h2><span class="header-section-number">0.1</span> Software</h2>
+<p>In this book the software packages SPSS and R play a central role. The combination of these two software packages may seem random, but it is not. SPSS is one of the most popular software package, worldwide, to do statistical data analyses. Currently, R is growing in popularity fast and will probably become one of the most popular software packages to do data analysis, also for applied researchers.</p>
+<p>Both SPSS and R have their own specific characteristics that may some find an advantage and some a disadvantage. One of the main differences between SPSS and R is that SPSS works with a click-menu that makes windows appear. In these windows you can drag variables into boxes. Subsequently, you can click the OK button and the statistical analysis procedure you specified will run and the output results are automatically presented in a new window. A limitation of working with SPSS may be that you are overloaded with statistical output that may not all be needed to answer your research question. Also, newly developed methods are not immediately available, but have to be included in a new version update by the developers.</p>
+<p>R is a software package that needs code to access statistical procedures. In R you need to be familiar with some R-language in order to use it. However, once you know the language, R can be used for any statistical procedure you can think of. R is a free open source program see anybody can download and use it and it enables users to get insight into the calculations that are programmed by applying procedures. Anyone can contribute by developing packages and functions for statistical procedures. Consequently, state-of-the-art statistical methods are very quickly available in R, and if they are not, you can develop them yourself.</p>
+<p>In this book the handling of missing data is the main topic. We will show how to apply methods in both software packages SPSS and R. The multiple imputation methods that are discussed run with random starting procedures. Both SPSS and R use their own internal random number generators. Because these are different, results might slightly differ between the software packages, even when exactly the same function is applied. Our intention is not to compare the software packages, both packages are reliable, but we aim to provide readers with an overview of all possible methods in different missing data situations. In this book we use SPSS version 24 and R software version 3.5.1. The R examples will be presented by using the output from RStudio version (Version 1.1.463 – © 2009-2018 RStudio, Inc). RStudio is an integrated development environment (IDE) for R. RStudio includes a wide range of productivity enhancing features and runs on all major platforms.</p>
 </div>
-<div id="multiple-imputation-in-spss-and-r" class="section level2">
-<h2><span class="header-section-number">0.2</span> Multiple Imputation in SPSS and R</h2>
-<p>Multiple Imputation (MI) is a procedure that is developed in the 1970’s by Donald Rubin. Later, around the 1990´s Multiple imputation was further developed and became more popular. For a long time, MI was only available for S-Plus and R software (S-plus is the commercial alternative of R), where it was further developed by Stef van Buuren, a statistician from TNO, Leiden, The Netherlands. For a long time, it was not possible to do MI analysis in SPSS because it was not available in SPSS. So, it was far out of reach for applied researchers for a long time. It became available from SPSS version 17. From that time MI is now used more by applied researchers. In this manual the handling of missing data is the main topic. We will also show how to apply these methods in both software packages SPSS and R. To apply the imputation methods that are discussed both software packages make use of random starting procedures. SPSS and R use for that intern random number generators. Because these are different, result might slightly differ. Our intention is not to compare the software packages SPSS and R and their output resultys. Both are trustful packages, it is more the estimation procedures that might lead to the differences. The imputation methods, will be applied in SPSS version 24 and with R software version 3.4.3. The R examples will be presented by using the output from RStudio version (version 1.1.383 – © 2009-2017 RStudio, Inc.). RStudio is an integrated development environment (IDE) for R. RStudio includes a wide range of productivity enhancing features and runs on all major platforms. As already stated, R allows you to program the statistical formula’s yourself. We have therefore chosen to explain the formula’s in more detail in combination with the application in R. The more applied researchers will be satisfied with the explanation and application of methods in SPSS.</p>
-</div>
-<div id="notation-and-annotation-in-this-manual" class="section level2">
-<h2><span class="header-section-number">0.3</span> Notation and annotation in this manual</h2>
-<p>The name of R packages, libraries and functions can be recognized by using Courier new lettertype, for example the package mice will be written as mice.</p>
-<p>R code of the procedures used in the manual is marked grey and the explanation in these grey parts can be found in the grey parts itself annotated by the # symbol. The lines that start with the symbol &gt; are R Code lines that have been running in the R Console in RStudio. Example:</p>
-<p><strong>R code XX</strong></p>
+<div id="notation-in-this-book" class="section level2">
+<h2><span class="header-section-number">0.2</span> Notation in this book</h2>
+<p>Annotation in this book</p>
+<p>The name of R packages and libraries are used as they are published under their original names. The name of R functions is in italic form, like the mice function.</p>
+<p>R code of the procedures used in the book is marked grey.</p>
+<p>Book examples in R code language can be found in grey text boxes, for example: to read in the dataset Backpain 50 missing.sav.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Activate the foreign package and read in the SPSS dataset</span>
 
 <span class="kw">library</span>(foreign)
 dataset &lt;-<span class="st"> </span><span class="kw">read.spss</span>(<span class="dt">file=</span><span class="st">&quot;data/Backpain 50 missing.sav&quot;</span>, <span class="dt">to.data.frame=</span>T)</code></pre></div>
 <pre><code>## re-encoding from UTF-8</code></pre>
+</div>
+<div id="acknowledgement" class="section level2">
+<h2><span class="header-section-number">0.3</span> Acknowledgement</h2>
+<p>We first want to thank our students and colleagues in the hospital for their interesting questions about missing data during lectures and statistical consultations.</p>
+<p>The book is written with the R Bookdown package and R Markdown. We thanks the developers for making these awsome packages freely available.</p>
 
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-sterne2009multiple">
+<p>Sterne, Jonathan AC, Ian R White, John B Carlin, Michael Spratt, Patrick Royston, Michael G Kenward, Angela M Wood, and James R Carpenter. 2009. “Multiple Imputation for Missing Data in Epidemiological and Clinical Research: Potential and Pitfalls.” <em>BMJ: British Medical Journal</em> 338.</p>
+</div>
+<div id="ref-little2012prevention">
+<p>Little, R.J., R. D’Agostino, M.L. Cohen, K. Dickersin, S.S. Emerson, J.T. Farrar, C. Frangakis, et al. 2012. “The Prevention and Treatment of Missing Data in Clinical Trials.” <em>New England Journal of Medicine</em> 367 (14): 1355–60.</p>
+</div>
+<div id="ref-Li2015">
+<p>Li P, Allison DB, Stuart EA. 2015. “Multiple Imputation: A Flexible Tool for Handling Missing Data.” <em>JAMA</em> 314 (18): 1966–7. doi:<a href="https://doi.org/10.1001/jama.2015.15281">10.1001/jama.2015.15281</a>.</p>
 </div>
 </div>
             </section>
@@ -319,7 +351,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -329,6 +361,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -346,7 +382,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;
