@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 6 Restructuring dataset from wide to long in SPSS | Applied Missing data analysis with SPSS and R(Studio)</title>
+  <meta name="description" content="Chapter 6 Restructuring dataset from wide to long in SPSS | Applied Missing data analysis with SPSS and R(Studio)>
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 6 Restructuring dataset from wide to long in SPSS | Applied Missing data analysis with SPSS and R(Studio) />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Restructuring dataset from wide to long in SPSS | Applied Missing data analysis with SPSS and R(Studio) />
+  
+  
+  
+
+<meta name="author" content="Martijn Heymans and Iris Eekhout">
+
+
+<meta name="date" content="2018-12-09">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="advanced-multiple-imputation-models-for-multilevel-data.html">
+<link rel="next" href="background-information-to-pooled-statistical-methods.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Applied Missing Data Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Foreword</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#software"><i class="fa fa-check"></i><b>0.1</b> Software</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#notation-in-this-book"><i class="fa fa-check"></i><b>0.2</b> Notation in this book</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#acknowledgement"><i class="fa fa-check"></i><b>0.3</b> Acknowledgement</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="software-applications.html"><a href="software-applications.html"><i class="fa fa-check"></i><b>1</b> Software applications</a><ul>
+<li class="chapter" data-level="1.1" data-path="software-applications.html"><a href="software-applications.html#spss"><i class="fa fa-check"></i><b>1.1</b> SPSS</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="software-applications.html"><a href="software-applications.html#data-and-variable-view-windows"><i class="fa fa-check"></i><b>1.1.1</b> Data and Variable View windows</a></li>
+<li class="chapter" data-level="1.1.2" data-path="software-applications.html"><a href="software-applications.html#analyzing-data-in-spss"><i class="fa fa-check"></i><b>1.1.2</b> Analyzing data in SPSS</a></li>
+<li class="chapter" data-level="1.1.3" data-path="software-applications.html"><a href="software-applications.html#the-output-window-in-spss"><i class="fa fa-check"></i><b>1.1.3</b> The Output window in SPSS</a></li>
+<li class="chapter" data-level="1.1.4" data-path="software-applications.html"><a href="software-applications.html#the-syntax-editor-in-spss"><i class="fa fa-check"></i><b>1.1.4</b> The Syntax Editor in SPSS</a></li>
+<li class="chapter" data-level="1.1.5" data-path="software-applications.html"><a href="software-applications.html#reading-and-saving-data-in-spss"><i class="fa fa-check"></i><b>1.1.5</b> Reading and saving data in SPSS</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="software-applications.html"><a href="software-applications.html#r-and-rstudio"><i class="fa fa-check"></i><b>1.2</b> R and RStudio</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="software-applications.html"><a href="software-applications.html#the-role-of-the-console-window"><i class="fa fa-check"></i><b>1.2.1</b> The role of the Console Window</a></li>
+<li class="chapter" data-level="1.2.2" data-path="software-applications.html"><a href="software-applications.html#r-assignments-and-objects"><i class="fa fa-check"></i><b>1.2.2</b> R assignments and objects</a></li>
+<li class="chapter" data-level="1.2.3" data-path="software-applications.html"><a href="software-applications.html#vectors-matrices-lists-and-data-frames"><i class="fa fa-check"></i><b>1.2.3</b> Vectors, matrices, lists and data frames</a></li>
+<li class="chapter" data-level="1.2.4" data-path="software-applications.html"><a href="software-applications.html#indexing-vectors-matrices-lists-and-data-frames"><i class="fa fa-check"></i><b>1.2.4</b> Indexing Vectors, Matrices, Lists and Data frames</a></li>
+<li class="chapter" data-level="1.2.5" data-path="software-applications.html"><a href="software-applications.html#vectorized-calculation"><i class="fa fa-check"></i><b>1.2.5</b> Vectorized Calculation</a></li>
+<li class="chapter" data-level="1.2.6" data-path="software-applications.html"><a href="software-applications.html#r-functions"><i class="fa fa-check"></i><b>1.2.6</b> R Functions</a></li>
+<li class="chapter" data-level="1.2.7" data-path="software-applications.html"><a href="software-applications.html#the-help-function"><i class="fa fa-check"></i><b>1.2.7</b> The Help function</a></li>
+<li class="chapter" data-level="1.2.8" data-path="software-applications.html"><a href="software-applications.html#working-with-script-files"><i class="fa fa-check"></i><b>1.2.8</b> Working with script files</a></li>
+<li class="chapter" data-level="1.2.9" data-path="software-applications.html"><a href="software-applications.html#creating-a-working-directory"><i class="fa fa-check"></i><b>1.2.9</b> Creating a working directory</a></li>
+<li class="chapter" data-level="1.2.10" data-path="software-applications.html"><a href="software-applications.html#reading-in-spss-data-in-rstudio"><i class="fa fa-check"></i><b>1.2.10</b> Reading in SPSS data in RStudio</a></li>
+<li class="chapter" data-level="1.2.11" data-path="software-applications.html"><a href="software-applications.html#saving-and-reading-r-data-in-rstudio"><i class="fa fa-check"></i><b>1.2.11</b> Saving and Reading R data in RStudio</a></li>
+<li class="chapter" data-level="1.2.12" data-path="software-applications.html"><a href="software-applications.html#reading-in-rstudio-data-into-spss"><i class="fa fa-check"></i><b>1.2.12</b> Reading in (R)Studio data into SPSS</a></li>
+<li class="chapter" data-level="1.2.13" data-path="software-applications.html"><a href="software-applications.html#installing-r-packages"><i class="fa fa-check"></i><b>1.2.13</b> Installing R Packages</a></li>
+<li class="chapter" data-level="1.2.14" data-path="software-applications.html"><a href="software-applications.html#loading-r-packages"><i class="fa fa-check"></i><b>1.2.14</b> Loading R Packages</a></li>
+<li class="chapter" data-level="1.2.15" data-path="software-applications.html"><a href="software-applications.html#updating-r-packages"><i class="fa fa-check"></i><b>1.2.15</b> Updating R Packages</a></li>
+<li class="chapter" data-level="1.2.16" data-path="software-applications.html"><a href="software-applications.html#useful-missing-data-packages-and-links"><i class="fa fa-check"></i><b>1.2.16</b> Useful Missing data Packages and links</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html"><i class="fa fa-check"></i><b>2</b> Missing Data Evaluation</a><ul>
+<li class="chapter" data-level="2.1" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#definition-of-missing-data"><i class="fa fa-check"></i><b>2.1</b> Definition of Missing Data</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#defining-missing-data-in-spss"><i class="fa fa-check"></i><b>2.1.1</b> Defining Missing Data in SPSS</a></li>
+<li class="chapter" data-level="2.1.2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-in-r"><i class="fa fa-check"></i><b>2.1.2</b> Missing data in R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-patterns"><i class="fa fa-check"></i><b>2.2</b> Missing data Patterns</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-patterns-in-spss"><i class="fa fa-check"></i><b>2.2.1</b> Missing data patterns in SPSS</a></li>
+<li class="chapter" data-level="2.2.2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-patterns-in-r"><i class="fa fa-check"></i><b>2.2.2</b> Missing data patterns in R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-mechanisms"><i class="fa fa-check"></i><b>2.3</b> 2.3 Missing data Mechanisms</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-completely-at-random"><i class="fa fa-check"></i><b>2.3.1</b> 2.3.1 Missing Completely At Random</a></li>
+<li class="chapter" data-level="2.3.2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-at-random"><i class="fa fa-check"></i><b>2.3.2</b> Missing At Random</a></li>
+<li class="chapter" data-level="2.3.3" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-not-at-random"><i class="fa fa-check"></i><b>2.3.3</b> Missing Not At Random</a></li>
+<li class="chapter" data-level="2.3.4" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#the-missing-data-indicator"><i class="fa fa-check"></i><b>2.3.4</b> The Missing Data Indicator</a></li>
+<li class="chapter" data-level="2.3.5" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#the-role-of-auxiliary-variables"><i class="fa fa-check"></i><b>2.3.5</b> The Role of Auxiliary Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-evaluation-1"><i class="fa fa-check"></i><b>2.4</b> Missing Data evaluation</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-evaluation-in-spss"><i class="fa fa-check"></i><b>2.4.1</b> Missing data Evaluation in SPSS</a></li>
+<li class="chapter" data-level="2.4.2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-evaluation-in-r"><i class="fa fa-check"></i><b>2.4.2</b> Missing data Evaluation in R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html"><i class="fa fa-check"></i><b>3</b> Single Missing data imputations</a><ul>
+<li class="chapter" data-level="3.1" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#complete-cases-analysis"><i class="fa fa-check"></i><b>3.1</b> Complete cases analysis</a></li>
+<li class="chapter" data-level="3.2" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#mean-imputation"><i class="fa fa-check"></i><b>3.2</b> Mean Imputation</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#mean-imputation-in-spss"><i class="fa fa-check"></i><b>3.2.1</b> Mean imputation in SPSS</a></li>
+<li class="chapter" data-level="3.2.2" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#mean-imputation-in-r"><i class="fa fa-check"></i><b>3.2.2</b> Mean imputation in R</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#regression-imputation"><i class="fa fa-check"></i><b>3.3</b> Regression imputation</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#regression-imputation-in-spss"><i class="fa fa-check"></i><b>3.3.1</b> Regression imputation in SPSS</a></li>
+<li class="chapter" data-level="3.3.2" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#regression-imputation-in-r"><i class="fa fa-check"></i><b>3.3.2</b> Regression imputation in R</a></li>
+<li class="chapter" data-level="3.3.3" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#stochastic-regression-imputation"><i class="fa fa-check"></i><b>3.3.3</b> Stochastic regression imputation</a></li>
+<li class="chapter" data-level="3.3.4" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#stochastic-regression-imputation-in-r"><i class="fa fa-check"></i><b>3.3.4</b> Stochastic regression imputation in R</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#bayesian-stochastic-regression-imputation"><i class="fa fa-check"></i><b>3.4</b> Bayesian Stochastic regression imputation</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#bayesian-stochastic-regression-imputation-in-spss"><i class="fa fa-check"></i><b>3.4.1</b> Bayesian Stochastic regression imputation in SPSS</a></li>
+<li class="chapter" data-level="3.4.2" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#bayesian-stochastic-regression-imputation-in-r"><i class="fa fa-check"></i><b>3.4.2</b> Bayesian Stochastic regression imputation in R</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#predictive-mean-matching-or-regression-imputation"><i class="fa fa-check"></i><b>3.5</b> Predictive Mean Matching or Regression imputation</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#predictive-mean-matching-how-does-it-work"><i class="fa fa-check"></i><b>3.5.1</b> Predictive Mean Matching, how does it work?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html"><i class="fa fa-check"></i><b>4</b> Data analysis after Multiple Imputation</a><ul>
+<li class="chapter" data-level="4.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-results-after-mi-in-spss"><i class="fa fa-check"></i><b>4.1</b> Pooling results after MI in SPSS</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#imputed-values-are-yellow"><i class="fa fa-check"></i><b>4.1.1</b> Imputed values are yellow</a></li>
+<li class="chapter" data-level="4.1.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#the-imputation_-variable"><i class="fa fa-check"></i><b>4.1.2</b> The Imputation_ variable</a></li>
+<li class="chapter" data-level="4.1.3" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#special-pooling-icon"><i class="fa fa-check"></i><b>4.1.3</b> Special pooling icon</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-results-after-mi-in-r"><i class="fa fa-check"></i><b>4.2</b> Pooling results after MI in R</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-means-and-standard-deviations-in-spss"><i class="fa fa-check"></i><b>4.2.1</b> Pooling Means and Standard deviations in SPSS</a></li>
+<li class="chapter" data-level="4.2.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-means-and-standard-deviations-in-r"><i class="fa fa-check"></i><b>4.2.2</b> Pooling Means and Standard Deviations in R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-correlation-coefficients"><i class="fa fa-check"></i><b>4.3</b> Pooling Correlation coefficients</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#the-pooled-independent-t-test"><i class="fa fa-check"></i><b>4.3.1</b> The Pooled Independent T-test</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-chi-square-tests"><i class="fa fa-check"></i><b>4.4</b> Pooling Chi-square tests</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-chi-square-tests-in-spss"><i class="fa fa-check"></i><b>4.4.1</b> Pooling Chi-square tests in SPSS</a></li>
+<li class="chapter" data-level="4.4.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-chi-square-tests-in-r"><i class="fa fa-check"></i><b>4.4.2</b> Pooling Chi-square tests in R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#analysis-of-variance-anova-pooling"><i class="fa fa-check"></i><b>4.5</b> Analysis of Variance (ANOVA) pooling</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#analysis-of-variance-anova-pooling-in-spss"><i class="fa fa-check"></i><b>4.5.1</b> Analysis of Variance (ANOVA) pooling in SPSS</a></li>
+<li class="chapter" data-level="4.5.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#analysis-of-variance-anova-pooling-in-r"><i class="fa fa-check"></i><b>4.5.2</b> Analysis of Variance (ANOVA) pooling in R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-regression-models"><i class="fa fa-check"></i><b>4.6</b> Pooling Regression models</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-linear-regression-models-in-spss"><i class="fa fa-check"></i><b>4.6.1</b> Pooling Linear Regression Models in SPSS</a></li>
+<li class="chapter" data-level="4.6.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-linear-regression-models-in-r"><i class="fa fa-check"></i><b>4.6.2</b> Pooling Linear regression models in R</a></li>
+<li class="chapter" data-level="4.6.3" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-logistic-regression-models-in-spss"><i class="fa fa-check"></i><b>4.6.3</b> Pooling Logistic Regression models in SPSS</a></li>
+<li class="chapter" data-level="4.6.4" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-logistic-regression-models-in-r"><i class="fa fa-check"></i><b>4.6.4</b> Pooling Logistic Regression models in R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-logistic-regression-models-including-categorical-independent-variables"><i class="fa fa-check"></i><b>4.7</b> Pooling logistic regression models including categorical independent variables</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-cox-regression-models"><i class="fa fa-check"></i><b>4.7.1</b> Pooling Cox regression models</a></li>
+<li class="chapter" data-level="4.7.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-cox-regression-models-in-spss"><i class="fa fa-check"></i><b>4.7.2</b> Pooling Cox regression models in SPSS</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html"><i class="fa fa-check"></i><b>5</b> Advanced Multiple Imputation models for Multilevel data</a><ul>
+<li class="chapter" data-level="5.1" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#characteristics-of-multilevel-data"><i class="fa fa-check"></i><b>5.1</b> Characteristics of Multilevel data</a></li>
+<li class="chapter" data-level="5.2" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#example-multilevel-dataset"><i class="fa fa-check"></i><b>5.2</b> Example Multilevel dataset</a></li>
+<li class="chapter" data-level="5.3" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#multilevel-data---from-wide-to-long"><i class="fa fa-check"></i><b>5.3</b> Multilevel data - from wide to long</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html"><i class="fa fa-check"></i><b>6</b> Restructuring dataset from wide to long in SPSS</a><ul>
+<li class="chapter" data-level="6.0.1" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html#restructuring-a-dataset-from-wide-to-long-in-r"><i class="fa fa-check"></i><b>6.0.1</b> Restructuring a dataset from wide to long in R</a></li>
+<li class="chapter" data-level="6.1" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html#multilevel-data---clusters-and-levels"><i class="fa fa-check"></i><b>6.1</b> Multilevel data - Clusters and Levels</a></li>
+<li class="chapter" data-level="6.2" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html#the-multilevel-model"><i class="fa fa-check"></i><b>6.2</b> The Multilevel model</a></li>
+<li class="chapter" data-level="6.3" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html#missing-data-at-different-levels"><i class="fa fa-check"></i><b>6.3</b> Missing data at different levels</a></li>
+<li class="chapter" data-level="6.4" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html#multilevel-imputation-models"><i class="fa fa-check"></i><b>6.4</b> Multilevel imputation models</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html#sporadically-and-systematically-missing-data"><i class="fa fa-check"></i><b>6.4.1</b> Sporadically and Systematically missing data</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html#one-stage-multilevel-imputation"><i class="fa fa-check"></i><b>6.5</b> One stage Multilevel Imputation</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html#one-stage-multilevel-imputation-in-r"><i class="fa fa-check"></i><b>6.5.1</b> One stage Multilevel Imputation in R</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html#missing-data-at-different-levels-1"><i class="fa fa-check"></i><b>6.6</b> Missing data at different levels</a></li>
+<li class="chapter" data-level="6.7" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html#multilevel-imputation-models-1"><i class="fa fa-check"></i><b>6.7</b> Multilevel imputation models</a><ul>
+<li class="chapter" data-level="6.7.1" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html#sporadically-and-systematically-missing-data-1"><i class="fa fa-check"></i><b>6.7.1</b> Sporadically and Systematically missing data</a></li>
+<li class="chapter" data-level="6.7.2" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html#one-stage-multilevel-imputation-1"><i class="fa fa-check"></i><b>6.7.2</b> One stage Multilevel Imputation</a></li>
+<li class="chapter" data-level="6.7.3" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html#one-stage-multilevel-imputation-in-r-1"><i class="fa fa-check"></i><b>6.7.3</b> One stage Multilevel Imputation in R</a></li>
+</ul></li>
+<li class="chapter" data-level="6.8" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html#two-stage-multilevel-imputation"><i class="fa fa-check"></i><b>6.8</b> Two stage Multilevel Imputation</a><ul>
+<li class="chapter" data-level="6.8.1" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html#two-stage-multilevel-imputation-in-r"><i class="fa fa-check"></i><b>6.8.1</b> Two stage Multilevel Imputation in R</a></li>
+</ul></li>
+<li class="chapter" data-level="6.9" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html#the-micemd-package"><i class="fa fa-check"></i><b>6.9</b> The micemd Package</a></li>
+<li class="chapter" data-level="6.10" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html#pooling-multilevel-models"><i class="fa fa-check"></i><b>6.10</b> Pooling Multilevel models</a><ul>
+<li class="chapter" data-level="6.10.1" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html#pooling-multilevel-models-in-r"><i class="fa fa-check"></i><b>6.10.1</b> Pooling Multilevel Models in R</a></li>
+<li class="chapter" data-level="6.10.2" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html#pooling-multilevel-models-in-spss"><i class="fa fa-check"></i><b>6.10.2</b> Pooling Multilevel Models in SPSS</a></li>
+</ul></li>
+<li class="chapter" data-level="6.11" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html#pooling-gee-models"><i class="fa fa-check"></i><b>6.11</b> Pooling GEE models</a><ul>
+<li class="chapter" data-level="6.11.1" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html#pooling-gee-models-in-r"><i class="fa fa-check"></i><b>6.11.1</b> Pooling GEE Models in R</a></li>
+<li class="chapter" data-level="6.11.2" data-path="restructuring-dataset-from-wide-to-long-in-spss.html"><a href="restructuring-dataset-from-wide-to-long-in-spss.html#pooling-gee-models-in-spss"><i class="fa fa-check"></i><b>6.11.2</b> Pooling GEE Models in SPSS</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="background-information-to-pooled-statistical-methods.html"><a href="background-information-to-pooled-statistical-methods.html"><i class="fa fa-check"></i>Background information to Pooled Statistical Methods</a></li>
+<li class="chapter" data-level="7" data-path="rubins-rules.html"><a href="rubins-rules.html"><i class="fa fa-check"></i><b>7</b> Rubin’s Rules</a><ul>
+<li class="chapter" data-level="7.1" data-path="rubins-rules.html"><a href="rubins-rules.html#pooling-effect-estimates"><i class="fa fa-check"></i><b>7.1</b> Pooling Effect estimates</a></li>
+<li class="chapter" data-level="7.2" data-path="rubins-rules.html"><a href="rubins-rules.html#pooling-standard-errors"><i class="fa fa-check"></i><b>7.2</b> Pooling Standard errors</a></li>
+<li class="chapter" data-level="7.3" data-path="rubins-rules.html"><a href="rubins-rules.html#significance-testing"><i class="fa fa-check"></i><b>7.3</b> Significance testing</a></li>
+<li class="chapter" data-level="7.4" data-path="rubins-rules.html"><a href="rubins-rules.html#degrees-of-freedom-and-p-values"><i class="fa fa-check"></i><b>7.4</b> Degrees of Freedom and P-values</a></li>
+<li class="chapter" data-level="7.5" data-path="rubins-rules.html"><a href="rubins-rules.html#confidence-intervals"><i class="fa fa-check"></i><b>7.5</b> Confidence Intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="measures-of-missing-data-information.html"><a href="measures-of-missing-data-information.html"><i class="fa fa-check"></i><b>8</b> Measures of Missing data information</a><ul>
+<li class="chapter" data-level="8.1" data-path="measures-of-missing-data-information.html"><a href="measures-of-missing-data-information.html#fraction-of-missing-information---lambda"><i class="fa fa-check"></i><b>8.1</b> Fraction of Missing Information - Lambda</a></li>
+<li class="chapter" data-level="8.2" data-path="measures-of-missing-data-information.html"><a href="measures-of-missing-data-information.html#relative-increase-in-variance"><i class="fa fa-check"></i><b>8.2</b> Relative increase in variance</a></li>
+<li class="chapter" data-level="8.3" data-path="measures-of-missing-data-information.html"><a href="measures-of-missing-data-information.html#fraction-of-missing-information---fmi"><i class="fa fa-check"></i><b>8.3</b> Fraction of Missing Information - FMI</a></li>
+<li class="chapter" data-level="8.4" data-path="measures-of-missing-data-information.html"><a href="measures-of-missing-data-information.html#relative-efficiency"><i class="fa fa-check"></i><b>8.4</b> Relative Efficiency</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="pooling-correlation-coefficients-1.html"><a href="pooling-correlation-coefficients-1.html"><i class="fa fa-check"></i><b>9</b> Pooling correlation coefficients</a><ul>
+<li class="chapter" data-level="9.1" data-path="pooling-correlation-coefficients-1.html"><a href="pooling-correlation-coefficients-1.html#pooled-wald-test"><i class="fa fa-check"></i><b>9.1</b> Pooled Wald test</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Applied Missing data analysis with SPSS and R(Studio)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="restructuring-dataset-from-wide-to-long-in-spss" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Restructuring dataset from wide to long in SPSS</h1>
+<p>Click on Data Restructure and follow the next steps:</p>
+<p>Step1 A new window opens with three options (Figure <a href="restructuring-dataset-from-wide-to-long-in-spss.html#fig:fig72">6.1</a>). We use the default setting to Restructure selected variables into cases.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig72"></span>
+<img src="images/fig7.7.png" alt="Step 1 of the Restructure Data Wizard." width="90%" />
+<p class="caption">
+Figure 6.1: Step 1 of the Restructure Data Wizard.
+</p>
+</div>
+<p>Step 2 Click Next and a new window opens (Figure <a href="restructuring-dataset-from-wide-to-long-in-spss.html#fig:fig73">6.2</a>). In this window, you choose how many (level 1) variables you wish to restructure. We have two such variables: Cholesterol and Sum of Skinfolds. Therefore, we click the option More than one and type 2.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig73"></span>
+<img src="images/fig7.8.png" alt="Step 2 of the Restructure Data Wizard." width="90%" />
+<p class="caption">
+Figure 6.2: Step 2 of the Restructure Data Wizard.
+</p>
+</div>
+<p>Step 3 We click Next and a new window opens (Figure <a href="restructuring-dataset-from-wide-to-long-in-spss.html#fig:fig73">6.2</a>). In this window, you define which variable is the case group identifier. SPSS by default makes a new variable for this, named Id. We use the ID variable in the dataset (you usually have such a variable): by clicking the arrow next to the Use case number option, you select Use selected variable and after that drag the ID variable in the dataset to this pane. Subsequently, you define the variables in the broad dataset are restructured to one new long variable under Variables to be transposed. This refers to two new variables. Rename trans1 into Cholesterol and select the 6 Cholesterol variables by holding down the Ctrl or Shift key. Next, move these variables to the pane on the right and continue with the second variable (Figure <a href="restructuring-dataset-from-wide-to-long-in-spss.html#fig:fig74">6.3</a>). Now change trans2 into SumSkinfolds and repeat the procedures for the Sum of Skinfolds variables.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig74"></span>
+<img src="images/fig7.9.png" alt="Step 3 of the Restructure Data Wizard." width="90%" />
+<p class="caption">
+Figure 6.3: Step 3 of the Restructure Data Wizard.
+</p>
+</div>
+<p>Step 4 Click Next and a new window opens (Figure <a href="restructuring-dataset-from-wide-to-long-in-spss.html#fig:fig75">6.4</a>). In this window, you can create an Index variables. The index variable refers to the time points. You need one index variable, which is the default setting in the window, so you can click Next again.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig75"></span>
+<img src="images/fig7.10.png" alt="Step 4 of the Restructure Data Wizard." width="90%" />
+<p class="caption">
+Figure 6.4: Step 4 of the Restructure Data Wizard.
+</p>
+</div>
+<p>Step 5 A new window opens again (Figure <a href="restructuring-dataset-from-wide-to-long-in-spss.html#fig:fig76">6.5</a>). This window allows us to create the index/time variable. The default is to use sequential numbers, which you choose. In case of unequal time points you can redefine these numbers later in the long data file with the Compute command in SPSS. Change the name index1, by double clicking on it. Rename it in “Time”. In addition we can define a label for this variable in the same way.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig76"></span>
+<img src="images/fig7.11.png" alt="Step 5 of the Restructure Data Wizard." width="90%" />
+<p class="caption">
+Figure 6.5: Step 5 of the Restructure Data Wizard.
+</p>
+</div>
+<p>Step 6 Click Next and a new window opens again (Figure <a href="restructuring-dataset-from-wide-to-long-in-spss.html#fig:fig77">6.6</a>). Here the only important thing is that we should choose what to do with the other variables in our dataset. We can either Drop them, meaning that we will not be able to use them in the subsequent analyses, or Keep them and treat them as fixed (time independent). In this case choose for this latter option.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig77"></span>
+<img src="images/fig7.12.png" alt="Step 6 of the Restructure Data Wizard." width="90%" />
+<p class="caption">
+Figure 6.6: Step 6 of the Restructure Data Wizard.
+</p>
+</div>
+<p>Click on Next and the last window will open (Figure <a href="restructuring-dataset-from-wide-to-long-in-spss.html#fig:fig78">6.7</a>).</p>
+<div class="figure" style="text-align: center"><span id="fig:fig78"></span>
+<img src="images/fig7.13.png" alt="Last step of the Restructure Data Wizard." width="90%" />
+<p class="caption">
+Figure 6.7: Last step of the Restructure Data Wizard.
+</p>
+</div>
+<p>This is the final step. Click on Finish (if we wish to paste the syntax we can choose for that here). Be aware that when you click on finish the converted dataset replaces the original dataset To keep both datasets, use Save as in the menu file and choose another file name for the converted file (Figure <a href="restructuring-dataset-from-wide-to-long-in-spss.html#fig:fig79">6.8</a>).</p>
+<div class="figure" style="text-align: center"><span id="fig:fig79"></span>
+<img src="images/fig7.14.png" alt="Example of the AGGO dataset in long format." width="90%" />
+<p class="caption">
+Figure 6.8: Example of the AGGO dataset in long format.
+</p>
+</div>
+<p>The variable that separates the clusters is the ID variable and the variable that distinguishes the measurements at different time points is the Time variable. This means that repeated assessment within a subject are stacked under each other. Each subject has multiple rows, one row for each repeated measurement.</p>
+<div id="restructuring-a-dataset-from-wide-to-long-in-r" class="section level3">
+<h3><span class="header-section-number">6.0.1</span> Restructuring a dataset from wide to long in R</h3>
+<p>To convert a dataset in R from wide to long, you can use the reshape function. Before you convert the dataset, it is a good idea to redesign the dataset a little bit and to place all variables in the order of their names. It is than easier to apply the reshape function. You see an example in the R code below, where all Cholesterol variables are nicely ordered.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(foreign)
+dataset &lt;-<span class="st"> </span><span class="kw">read.spss</span>(<span class="dt">file=</span><span class="st">&quot;AGGO_wide.sav&quot;</span>, <span class="dt">to.data.frame =</span> T)</code></pre></div>
+<pre><code>## re-encoding from UTF-8</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(dataset, <span class="dv">10</span>)</code></pre></div>
+<pre><code>##    ID Gender  Fitness Smoking Cholesterol1 Cholesterol2 Cholesterol3
+## 1   1      1 2.151339       0          4.2          3.9          3.9
+## 2   2      1 2.119814       0          4.4          4.2          4.6
+## 3   3      1 2.472159       0          3.7          4.0          3.3
+## 4   4      1 2.205836       0          4.3          4.1          3.8
+## 5   5      1 2.393320       0          4.2          4.1          4.1
+## 6   6      1 2.523713       0          4.1          3.8          3.6
+## 7   7      1 2.260524       0          4.2          3.9          3.7
+## 8   8      2 1.915354       0          3.2          3.7          3.6
+## 9   9      2 2.278520       0          5.1          4.6          3.9
+## 10 10      2 2.002636       1          5.7          5.4          5.3
+##    Cholesterol4 Cholesterol5 Cholesterol6 SumSkinfolds1 SumSkinfolds2
+## 1           3.6         3.92         4.13          2.51          2.10
+## 2           4.1         5.18         5.50          2.48          2.34
+## 3           3.6         3.48         3.85          2.17          2.39
+## 4           3.4         4.35         4.06          2.58          2.68
+## 5           4.5         3.81         4.52          2.33          2.02
+## 6           3.7         3.57         4.24          2.05          2.09
+## 7           3.6         4.32         5.08          2.42          2.93
+## 8           3.2         3.82         4.42          3.44          3.78
+## 9           4.5         4.22         5.27          2.43          2.72
+## 10          4.9         5.24         5.34          4.12          4.83
+##    SumSkinfolds3 SumSkinfolds4 SumSkinfolds5 SumSkinfolds6
+## 1           2.16          2.26          2.33          2.56
+## 2           2.45          2.57          3.97          5.08
+## 3           2.44          2.42          2.80          4.48
+## 4           2.84          3.00          2.85          2.77
+## 5           2.00          2.27          1.94          2.16
+## 6           2.25          2.24          2.66          2.73
+## 7           3.14          3.35          3.90          4.01
+## 8           4.78          4.86          5.49          6.25
+## 9           3.06          3.72          5.28          5.11
+## 10          6.21          6.35          5.99          3.70
+##    Hypercholestrolemia
+## 1                    0
+## 2                    0
+## 3                    0
+## 4                    0
+## 5                    0
+## 6                    0
+## 7                    0
+## 8                    0
+## 9                    1
+## 10                   1</code></pre>
+<p>Now it is easy to convert the dataset by using the following code. The object dataset_long shows the results (first 10 patients shown):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Reshape wide to long</span>
+dataset_long &lt;-<span class="st"> </span><span class="kw">reshape</span>(dataset, <span class="dt">idvar =</span> <span class="st">&quot;ID&quot;</span>, <span class="dt">varying =</span> <span class="kw">list</span>(<span class="dv">5</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">11</span><span class="op">:</span><span class="dv">16</span>), <span class="dt">timevar=</span><span class="st">&quot;Time&quot;</span>, 
+         <span class="dt">v.names =</span> <span class="kw">c</span>(<span class="st">&quot;Cholesterol&quot;</span>, <span class="st">&quot;SumSkinfolds&quot;</span>), <span class="dt">direction =</span> <span class="st">&quot;long&quot;</span>)
+<span class="co">#dataset_long</span></code></pre></div>
+<p>The long dataset is not ordered yet by ID and Time. This can be done by using the order function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataset_long &lt;-<span class="st"> </span>dataset_long[<span class="kw">order</span>(dataset_long<span class="op">$</span>ID, dataset_long<span class="op">$</span>Time), ]
+<span class="co">#dataset_long</span></code></pre></div>
+<p>Now that we have restructured the dataset we are going to discover how missing data in multilevel data can be imputed.</p>
+</div>
+<div id="multilevel-data---clusters-and-levels" class="section level2">
+<h2><span class="header-section-number">6.1</span> Multilevel data - Clusters and Levels</h2>
+<p>In the previous paragraph we have seen an example of a long dataset that is needed for multilevel analyses. We can organize this kind of multilevel information by level of assessment in the following way (Figure <a href="restructuring-dataset-from-wide-to-long-in-spss.html#fig:fig80">6.9</a>):</p>
+<div class="figure" style="text-align: center"><span id="fig:fig80"></span>
+<img src="images/fig7.4.png" alt="7.4. AGGO dataset with level 1 and 2 variables." width="90%" />
+<p class="caption">
+Figure 6.9: 7.4. AGGO dataset with level 1 and 2 variables.
+</p>
+</div>
+<ol style="list-style-type: decimal">
+<li><p>Level 1 outcome variable: This is for example the Cholesterol variable that is repeatedly assessed over time within persons. Other examples may be math test scores of individual students in a class or their Intelligent Quotient (IQ) scores. In other words, level one outcome information varies within a cluster or the value changes over time (i.e. does not have a fixed value).</p></li>
+<li><p>Level 1 independent variable: These are variables that vary within a cluster, but now are used as independent variables. Examples are the Time or Sum of Skinfold measurements that are repeatedly assessed within persons over time or hours that students in a class spent on their homework each week or the level of education of their parents.</p></li>
+<li><p>Level 2 independent variables. These variables do not vary within a cluster but vary only between clusters. An example is the Gender or Fitness variable which is only assessed at the start of the study, or in case of schools, if the school is a private or public school.</p></li>
+<li><p>Level 4 is the cluster variable itself. This is a special variable which distinguishes the clusters. This could be the school identification number which form the blocks of measurement or the identification number that distinguishes individuals with repeated information over time.</p></li>
+</ol>
+<p>In the next paragraph the type of statistical model is defined that is used to analyze multilevel data.</p>
+</div>
+<div id="the-multilevel-model" class="section level2">
+<h2><span class="header-section-number">6.2</span> The Multilevel model</h2>
+<p>In the analysis model of multilevel data, the clustered structure of the data has to be accounted for. In other words, the model corrects for the correlations within clusters. This is done by adding a random effect to the model, additional to the fixed effects. Fixed effects are the regression coefficients that are estimated as in normal regression models as fixed intercept or slope effects. They estimate the average effect of a whole group. The random effects are the cluster specific effects and can be embedded in the model as random intercept and random slope effects. Accordingly, multilevel models contain a “mix” of both random and fixed effects and are therefore often referred to as mixed effects models or random effects models. The multilevel model can be defined as depicted in (Figure <a href="restructuring-dataset-from-wide-to-long-in-spss.html#fig:fig81">6.10</a>):</p>
+<div class="figure" style="text-align: center"><span id="fig:fig81"></span>
+<img src="images/fig7.5.png" alt="Definition of Multilevel model." width="40%" />
+<p class="caption">
+Figure 6.10: Definition of Multilevel model.
+</p>
+</div>
+<p>The i indicates the different clusters and the j the repeated measurements within each cluster. Yij: is the level 1 outcome variable. Xij: is the level 1 or 2 independent variable. B: is the fixed effect regression coefficient (for the intercept and the slope). bi: is the random effect regression coefficient (for the intercept and the slope). eij: is the error variance.</p>
+<p>For example, if it would be of interest to examine the relationship between the Sum of Skinfolds and Cholesterol over time using the information in (Figure <a href="restructuring-dataset-from-wide-to-long-in-spss.html#fig:fig74">6.3</a>), the analysis model would be:</p>
+<p><span class="math display">\[Cholesterol_{ij} = \beta_0 1 + Time_{ij}\beta_1 + SumSkinfolds_{ij}\beta_2 + b_i + \varepsilon_i\]</span></p>
+<p>With the outcome and independent variables as level 1 variables in the model. In the next paragraph we explain how to restructure a dataset from wide to long in SPSS and R, needed to analyze multilevel data. We use the longitudinal AGGO data as an example.</p>
+</div>
+<div id="missing-data-at-different-levels" class="section level2">
+<h2><span class="header-section-number">6.3</span> Missing data at different levels</h2>
+<p>Missing data in multilevel studies can occur at the same levels as measurements as was discussed in paragraph 7.3. In other words, missing data can occur at the level of:</p>
+<ol style="list-style-type: decimal">
+<li><p>The Level 1 outcome variable: Missing data is present in the Cholesterol variable when this variable is repeatedly assessed over time or in math scores of pupils within a class. Note that when Mixed models are used and there is only missing data in the outcome variable, imputation of missing values is not necessary. Full information maximum likelihood procedures, that are used to estimate the parameters of a mixed model, can be used to get estimates of regression coeficients and standard errors.</p></li>
+<li><p>The Level 1 independent variable: Missing data occur at the level of the independent variables that vary within a cluster. Examples are missing data in the Sum of Skinfold variable or the age or IQ scores of students within a class.</p></li>
+<li><p>The Level 2 independent variables: Missing values are located in the variables that have a constant value within a cluster. For example, in the Fitness variable assessed at baseline or if data is missing for the variable if a school is a private or public school. Other examples are when data is missing for variables as gender or educational level of persons that were repeatedly assessed over time.</p></li>
+<li><p>The Cluster level variable: Missing data may be present in the cluster variable itself, for example if students did not fill in the name of the school or patients did not fill in the name of the hospital they were treated.</p></li>
+</ol>
+</div>
+<div id="multilevel-imputation-models" class="section level2">
+<h2><span class="header-section-number">6.4</span> Multilevel imputation models</h2>
+<p>In order to deal with missing values in multilevel data, the structure of the data needs to be accounted for. In Chapter 4 we have described that the imputation model for multiple imputation, needs to be compatible to the analysis model. Since the analysis model for multilevel data, uses random effects, the imputation model should ideally contain these random effects as well. Accordingly, multilevel imputation model need to be used, which are more complicated than non-multilevel imputation model.<br />
+Several procedures are available for multilevel imputation that are compatible with the mice package. In this Chapter, we will use two procedures. One procedure is the application of a one stage imputation method using fully conditional specification (FCS), also called the FCS-GLM approach. The other is a two-stage multilevel imputation procedure using fully conditional specification, which is called the FCS-2stage procedure. Both procedures are available in the micemd package (Audigier, 2017) and follow the MICE procedure to impute missing values. Accordingly, a chain of multilevel imputation models is used and a lot of parameter settings that are used in the mice function can also be used to impute multilevel data. The FCS-2stage procedure slightly differs from the FCS-GLM procedure, because imputations are generated in two steps. The procedures will be discussed in more detail with examples of how to apply them. As was discussed in Chapter 4, for missing data, Bayesian estimates are used in the imputation model to estimate the missing values. The imputed values are drawn from the posterior predictive distribution, conditional on the values of other variables. These procedures are also incorporated in the multilevel imputation procedures in the micemd package. The steps that are used to impute missing multilevel data are mathematically complex and we will therefore only explain these steps conceptually. Readers who are more interested in the mathematical details are referred to the papers of Jolani et al (2015), Resche-Rigon &amp; White (2016) and Audigier et al (to appear).</p>
+<div id="sporadically-and-systematically-missing-data" class="section level3">
+<h3><span class="header-section-number">6.4.1</span> Sporadically and Systematically missing data</h3>
+<p>In paragraph 7.5 it was discussed that missing data in multilevel datasets can occur at different levels. Another distinction can be made between sporadically and systematically missing values. Sporadically missing values are values that are sometimes missing within a cluster and systematic missing data is when all values within a cluster are missing. In (Figure <a href="restructuring-dataset-from-wide-to-long-in-spss.html#fig:fig85">6.11</a>). an example of sporadically and systematically missing data in the Sum of Skinfolds variable is presented. For patient number 1 and 2 the values are sporadically missing, i.e. some values are missing within the cluster of measurements of patients 1 and 2 and for patient number 3 the data is systematically missing, i.e. all Sum of Skinfold values are missing. In the next paragraph, solutions are presented of both types of missing data.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig85"></span>
+<img src="images/fig7.15.png" alt="Example of Sporadically and systematic missing data in the Sum of Skinfolds variable. For ID number 1 and 2 some values are (sporadically) missing and for ID number 3 all Sum of Skinfolds data is (systematically) missing." width="90%" />
+<p class="caption">
+Figure 6.11: Example of Sporadically and systematic missing data in the Sum of Skinfolds variable. For ID number 1 and 2 some values are (sporadically) missing and for ID number 3 all Sum of Skinfolds data is (systematically) missing.
+</p>
+</div>
+</div>
+</div>
+<div id="one-stage-multilevel-imputation" class="section level2">
+<h2><span class="header-section-number">6.5</span> One stage Multilevel Imputation</h2>
+<p>One stage Multilevel imputation can be performed in R by using the micemd package. This package is compatible with the MICE package and in this package several procedures are available for multilevel imputation. The one stage Fully Conditional Specification Generalized Linear Mixed (FCS-GLM) imputation procedure is one of these methods. The FCS-GLM procedure uses the function mice.impute.2l.glm.norm and works best when there are few clusters and not so many individuals per cluster (see Box 2 below). This procedure follows roughly the same route as for Bayesian stochastic regression imputation only now linear mixed models are used to generate the imputations. For more information about these procedures see the papers of Jolani et al (2015), Resche-Rigon &amp; White (2016) and Audigier (to appear).</p>
+<p>With the one stage imputation procedure missing values are imputed using basically the following steps: 1. A random effects multilevel model is estimated in the available data to determine the regression coefficients, between cluster variance-covariance matrix and the residual (within cluster) error variance. 2. (Bayesian) estimates of the parameters estimated at step 1 are obtained, drawn from their posterior distribution. This means that error variation is added to the regression coefficients, variance-covariance matrix and residual error variance. 3. Cluster specific regression coefficients are derived using the Bayesian estimates of step 2. 4. These cluster specific effects are used to generate the imputed values using cluster specific regression models. The FCS-GLM procedure assumes that the within cluster error variance is constant (i.e. has the same value) over all clusters. Systematic and sporadically missing values can be imputed by the one stage FCS-GLM procedure.</p>
+<div id="one-stage-multilevel-imputation-in-r" class="section level3">
+<h3><span class="header-section-number">6.5.1</span> One stage Multilevel Imputation in R</h3>
+<p>We will now show how to impute missing data by using the FCS-GLM procedure in the longitudinally measured AGGO dataset. In the dataset, missing values exist in the independent Sum of Skinfolds variable and the outcome variable is Cholesterol. Both these variables are repeatedly assessed. There are also other variables in the dataset, as Gender, and Fitness score which can be used as auxiliary variables to improve the imputations. ID is the cluster variable. For this example, there is sporadically missing data in de dataset within the clusters 1, 2, 4 and 5 and systematically missing data in cluster 3, which means that within clusters 1, 2, 4 and 5, for 1 or 2 some repeated measured values are missing and that within cluster 3 all values are missing. The longitudinal dataset is (the first 5 persons are shown):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataset &lt;-<span class="st"> </span><span class="kw">read.spss</span>(<span class="dt">file=</span><span class="st">&quot;Aggo_long_missing.sav&quot;</span>,<span class="dt">to.data.frame =</span> T)</code></pre></div>
+<pre><code>## re-encoding from UTF-8</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#dataset</span></code></pre></div>
+<p>The long dataset is not ordered yet by ID and Time. This can be done by using the order function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataset_long &lt;-<span class="st"> </span>dataset_long[<span class="kw">order</span>(dataset_long<span class="op">$</span>ID, dataset_long<span class="op">$</span>Time), ]
+<span class="co">#dataset_long</span></code></pre></div>
+<p>Now that we have restructured the dataset we are going to discover how missing data in multilevel data can be imputed.</p>
+</div>
+</div>
+<div id="missing-data-at-different-levels-1" class="section level2">
+<h2><span class="header-section-number">6.6</span> Missing data at different levels</h2>
+<p>Missing data in multilevel studies can occur at the same levels as measurements as was discussed in paragraph 7.3. In other words, missing data can occur at the level of:</p>
+<ol style="list-style-type: decimal">
+<li><p>The Level 1 outcome variable: Missing data is present in the Cholesterol variable when this variable is repeatedly assessed over time or in math scores of pupils within a class. Note that when Mixed models are used and there is only missing data in the outcome variable, imputation of missing values is not necessary. Full information maximum likelihood procedures, that are used to estimate the parameters of a mixed model, can be used to get estimates of regression coeficients and standard errors.</p></li>
+<li><p>The Level 1 independent variable: Missing data occur at the level of the independent variables that vary within a cluster. Examples are missing data in the Sum of Skinfold variable or the age or IQ scores of students within a class.</p></li>
+<li><p>The Level 2 independent variables: Missing values are located in the variables that have a constant value within a cluster. For example, in the Fitness variable assessed at baseline or if data is missing for the variable if a school is a private or public school. Other examples are when data is missing for variables as gender or educational level of persons that were repeatedly assessed over time.</p></li>
+<li><p>The Cluster level variable: Missing data may be present in the cluster variable itself, for example if students did not fill in the name of the school or patients did not fill in the name of the hospital they were treated.</p></li>
+</ol>
+</div>
+<div id="multilevel-imputation-models-1" class="section level2">
+<h2><span class="header-section-number">6.7</span> Multilevel imputation models</h2>
+<p>In order to deal with missing values in multilevel data, the structure of the data needs to be accounted for. In Chapter 4 we have described that the imputation model for multiple imputation, needs to be compatible to the analysis model. Since the analysis model for multilevel data, uses random effects, the imputation model should ideally contain these random effects as well. Accordingly, multilevel imputation model need to be used, which are more complicated than non-multilevel imputation model.<br />
+Several procedures are available for multilevel imputation that are compatible with the mice package. In this Chapter, we will use two procedures. One procedure is the application of a one stage imputation method using fully conditional specification (FCS), also called the FCS-GLM approach. The other is a two-stage multilevel imputation procedure using fully conditional specification, which is called the FCS-2stage procedure. Both procedures are available in the micemd package (Audigier, 2017) and follow the MICE procedure to impute missing values. Accordingly, a chain of multilevel imputation models is used and a lot of parameter settings that are used in the mice function can also be used to impute multilevel data. The FCS-2stage procedure slightly differs from the FCS-GLM procedure, because imputations are generated in two steps. The procedures will be discussed in more detail with examples of how to apply them. As was discussed in Chapter 4, for missing data, Bayesian estimates are used in the imputation model to estimate the missing values. The imputed values are drawn from the posterior predictive distribution, conditional on the values of other variables. These procedures are also incorporated in the multilevel imputation procedures in the micemd package. The steps that are used to impute missing multilevel data are mathematically complex and we will therefore only explain these steps conceptually. Readers who are more interested in the mathematical details are referred to the papers of Jolani et al (2015), Resche-Rigon &amp; White (2016) and Audigier et al (to appear).</p>
+<div id="sporadically-and-systematically-missing-data-1" class="section level3">
+<h3><span class="header-section-number">6.7.1</span> Sporadically and Systematically missing data</h3>
+<p>In paragraph 7.5 it was discussed that missing data in multilevel datasets can occur at different levels. Another distinction can be made between sporadically and systematically missing values. Sporadically missing values are values that are sometimes missing within a cluster and systematic missing data is when all values within a cluster are missing. In Figure 7.15. an example of sporadically and systematically missing data in the Sum of Skinfolds variable is presented. For patient number 1 and 2 the values are sporadically missing, i.e. some values are missing within the cluster of measurements of patients 1 and 2 and for patient number 3 the data is systematically missing, i.e. all Sum of Skinfold values are missing. In the next paragraph, solutions are presented of both types of missing data.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig86"></span>
+<img src="images/fig7.15.png" alt="Example of Sporadically and systematic missing data in the Sum of Skinfolds variable. For ID number 1 and 2 some values are (sporadically) missing and for ID number 3 all Sum of Skinfolds data is (systematically) missing." width="90%" />
+<p class="caption">
+Figure 6.12: Example of Sporadically and systematic missing data in the Sum of Skinfolds variable. For ID number 1 and 2 some values are (sporadically) missing and for ID number 3 all Sum of Skinfolds data is (systematically) missing.
+</p>
+</div>
+</div>
+<div id="one-stage-multilevel-imputation-1" class="section level3">
+<h3><span class="header-section-number">6.7.2</span> One stage Multilevel Imputation</h3>
+<p>One stage Multilevel imputation can be performed in R by using the micemd package. This package is compatible with the MICE package and in this package several procedures are available for multilevel imputation. The one stage Fully Conditional Specification Generalized Linear Mixed (FCS-GLM) imputation procedure is one of these methods. The FCS-GLM procedure uses the function mice.impute.2l.glm.norm and works best when there are few clusters and not so many individuals per cluster (see Box 2 below). This procedure follows roughly the same route as for Bayesian stochastic regression imputation only now linear mixed models are used to generate the imputations. For more information about these procedures see the papers of Jolani et al (2015), Resche-Rigon &amp; White (2016) and Audigier (to appear).</p>
+<p>With the one stage imputation procedure missing values are imputed using basically the following steps: 1. A random effects multilevel model is estimated in the available data to determine the regression coefficients, between cluster variance-covariance matrix and the residual (within cluster) error variance. 2. (Bayesian) estimates of the parameters estimated at step 1 are obtained, drawn from their posterior distribution. This means that error variation is added to the regression coefficients, variance-covariance matrix and residual error variance. 3. Cluster specific regression coefficients are derived using the Bayesian estimates of step 2. 4. These cluster specific effects are used to generate the imputed values using cluster specific regression models. The FCS-GLM procedure assumes that the within cluster error variance is constant (i.e. has the same value) over all clusters. Systematic and sporadically missing values can be imputed by the one stage FCS-GLM procedure.</p>
+</div>
+<div id="one-stage-multilevel-imputation-in-r-1" class="section level3">
+<h3><span class="header-section-number">6.7.3</span> One stage Multilevel Imputation in R</h3>
+<p>We will now show how to impute missing data by using the FCS-GLM procedure in the longitudinally measured AGGO dataset. In the dataset, missing values exist in the independent Sum of Skinfolds variable and the outcome variable is Cholesterol. Both these variables are repeatedly assessed. There are also other variables in the dataset, as Gender, and Fitness score which can be used as auxiliary variables to improve the imputations. ID is the cluster variable. For this example, there is sporadically missing data in de dataset within the clusters 1, 2, 4 and 5 and systemat ically missing data in cluster 3, which means that within clusters 1, 2, 4 and 5, for 1 or 2 some repeated measured values are missing and that within cluster 3 all values are missing.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataset &lt;-<span class="st"> </span><span class="kw">read.spss</span>(<span class="dt">file=</span><span class="st">&quot;Aggo_long_missing.sav&quot;</span>,<span class="dt">to.data.frame =</span> T)</code></pre></div>
+<pre><code>## re-encoding from UTF-8</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#dataset</span></code></pre></div>
+<p>The analysis model is:</p>
+<p><span class="math display">\[Cholesterol_{ij} = \beta_0 1 + Time_{ij}\beta_1 + SumSkinfolds_{ij}\beta_2\]</span></p>
+<p>For the imputation of the Sum of Skinfolds variable we will use all variables in the analysis model and two extra variables, Gender and Fitness. The Imputation model will be:</p>
+<p><span class="math display">\[SumSkinfolds_{ij} = \beta_0 1 + Time_{ij}\beta_1 + Cholesterol_{ij}\beta_2 + Gender_{ij}\beta_3 + Fitness_{ij}\beta_4 + b_i + \varepsilon_i\]</span></p>
+<p>To impute the missing data in the Sum of Skinfolds variable we first have to adjust the Predictormatrix that is used by mice to define which variable is the cluster variable.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The value 1 is used as column location for the cluster variable </span>
+ind.clust&lt;-<span class="st"> </span><span class="dv">1</span>
+ 
+<span class="co"># The following code is to adjust the predictorMatrix</span>
+<span class="co"># so that all variables are used in the imputation model</span>
+<span class="co"># to impute the Sum of Skinfolds variable </span>
+
+predmatrix.adj &lt;-<span class="kw">mice</span>(dataset,<span class="dt">m=</span><span class="dv">1</span>,<span class="dt">maxit=</span><span class="dv">0</span>)
+predmatrix.adj<span class="op">$</span>pred[ind.clust,ind.clust]&lt;-<span class="dv">0</span>
+predmatrix.adj<span class="op">$</span>pred[<span class="op">-</span>ind.clust,ind.clust]&lt;-<span class="st"> </span><span class="op">-</span><span class="dv">2</span>
+
+predmatrix.adj<span class="op">$</span>pred[predmatrix.adj<span class="op">$</span>pred<span class="op">==</span><span class="dv">1</span>]&lt;-<span class="dv">2</span>
+predictor.matrix&lt;-predmatrix.adj<span class="op">$</span>pred
+predictor.matrix</code></pre></div>
+<pre><code>##              ID Gender Fitness Time Cholesterol SumSkinfolds
+## ID            0      2       2    2           2            2
+## Gender       -2      0       2    2           2            2
+## Fitness      -2      2       0    2           2            2
+## Time         -2      2       2    0           2            2
+## Cholesterol  -2      2       2    2           0            2
+## SumSkinfolds -2      2       2    2           2            0</code></pre>
+<p>The predictormatrix contains the values 0, -2 and 2. As explained in paragraph 4.5 in the column are the names of the variables that are used in the imputation model to estimate the missing data in the row variable. In our example, all variables in the columns are used to impute the Sum of Skinfolds variable. The diagonal of the matrix is always zero. All complete variables do not have to be imputed so the rows of all complete variables are always zero. A -2 is an indication of the location of the cluster variable. The ID variable in the dataset is here defined as “ID”. The value 2 means the location of the random effects variables. In the imputation model, all variables will be defined as having a fixed and a random effect.</p>
+<p>To extract a completed dataset, for example completed dataset 1, we use the complete function that is available in the MICE package.</p>
+</div>
+</div>
+<div id="two-stage-multilevel-imputation" class="section level2">
+<h2><span class="header-section-number">6.8</span> Two stage Multilevel Imputation</h2>
+<p>Now, we will use as an example the two-stage multilevel imputation procedure that is available in the MICEMD package. This package is also compatible with the MICE package.</p>
+<p>For two stage multilevel imputation the mice.impute.2l.2stage.norm function is used. With this function multilevel imputation models are applied in two stages. At the first stage regression models are estimated within each cluster and at the second stage a meta-analysis is conducted to get a pooled estimate. This pooled estimate is used to generate cluster specific coefficients and variance estimates, but than for the (Bayesian) posterior distribution. For more information about these procedures see the papers of Jolani et al (2015), Resche-Rigon &amp; White (2016) and Audigier (to appear). Roughly, the following steps are taken for a continuous variable with missing data: 1. In each cluster a linear regression model is fitted in the complete cases (complete case analysis). This produces (cluster-specific) regression coefficients and (cluster-specific) variance estimates. 2. A meta-analysis is performed with as input the cluster specific regression coefficients and variance estimates from step 1. 3. From step 2 the pooled regression coefficient and the random-effects variance-covariance matrix are obtained. 4. MICE is a Bayesian imputation procedure. A pooled regression coefficient from the posterior distribution is drawn and the same is done for the random-effects variance-covariance matrix. 5. Cluster specific regression coefficients are drawn from the posterior distribution using the (Bayesian) estimates from step 4 (the regression coefficient and random-effects variance-covariance matrix). 6. The same 2 stage procedures are repeated for the residual variance estimates to take account of different error variance estimates in each cluster, i.e. heteroscedastic error variance. This is not possible with the FCS-GLM method. 7. Cluster specific effects are used to generate the imputed values using cluster specific regression models.</p>
+<p>The difference with the FCS-GLM method described above and the FCS-2stage procedure is that the FCS-2stage procedure allows for a different residual variance within each cluster of the cluster specific imputation model (heteroskedastic variance instead of homoscedastic variance). The advantage of this method is that imputations are more correct.</p>
+<div id="two-stage-multilevel-imputation-in-r" class="section level3">
+<h3><span class="header-section-number">6.8.1</span> Two stage Multilevel Imputation in R</h3>
+<p>To show how to impute the missing according to the two-stage procedure we use a dataset were persons are assessed in different training centers. The dataset contains 880 measurements, of 110 persons obtained in 8 different centers. Lifestyle factors were assessed in individuals (Level 1) at different centers (Level 2). The centers are the clusters of information. Missing values are present in the independent Sum of Skinfolds variable and the outcome variable is Cholesterol. The two-stage multilevel imputation method works best in datasets with a lot of values within each cluster (see Box 2). Again, we take as an example sporadically and systematically missing data, with sporadically missing data in cluster 1 and systematically missing data in cluster 2. This means that in cluster 2 for all 110 persons the Sum of Skinfold data is missing!</p>
+<p>Before we are going to impute the missing data we first have to adjust the Predictormatrix that is used by MICE to define which variable is the cluster variable. For this we have to run the same code as in the previous paragraph.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ind.clust&lt;-<span class="dv">1</span> <span class="co">#index for the cluster variable</span>
+<span class="co"># to obtain the predictorMatrix</span>
+predmatrix.adj &lt;-<span class="kw">mice</span>(dataset,<span class="dt">m=</span><span class="dv">1</span>,<span class="dt">maxit=</span><span class="dv">0</span>)
+predmatrix.adj<span class="op">$</span>pred[ind.clust,ind.clust]&lt;-<span class="dv">0</span>
+predmatrix.adj<span class="op">$</span>pred[<span class="op">-</span>ind.clust,ind.clust]&lt;-<span class="st"> </span><span class="op">-</span><span class="dv">2</span>
+ 
+predmatrix.adj<span class="op">$</span>pred[predmatrix.adj<span class="op">$</span>pred<span class="op">==</span><span class="dv">1</span>]&lt;-<span class="dv">2</span>
+predictor.matrix&lt;-predmatrix.adj<span class="op">$</span>pred
+predictor.matrix</code></pre></div>
+<pre><code>##              ID Gender Fitness Time Cholesterol SumSkinfolds
+## ID            0      2       2    2           2            2
+## Gender       -2      0       2    2           2            2
+## Fitness      -2      2       0    2           2            2
+## Time         -2      2       2    0           2            2
+## Cholesterol  -2      2       2    2           0            2
+## SumSkinfolds -2      2       2    2           2            0</code></pre>
+<p>Now we can start with imputing the missing data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#res.mice.md &lt;- mice(dataset,m=5,predictorMatrix = predictor.matrix,</span>
+<span class="co">#                     method=c(&quot;&quot;, &quot;&quot;,  &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;2l.2stage.norm&quot;), </span>
+<span class="co">#                     maxit=10, seed=23087)</span></code></pre></div>
+<p>The completed dataset can be extracted using the complete function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#complete(res.mice.md, 1)</span></code></pre></div>
+<p>Now the dataset can be used for further analyses.</p>
+</div>
+</div>
+<div id="the-micemd-package" class="section level2">
+<h2><span class="header-section-number">6.9</span> The micemd Package</h2>
+<p>In this paragraph a short description is given of some other imputation procedures that are available in the micemd package. For a full description of all procedures we refer to the reference manual of the micemd package, written by Vincent Audigier and Matthieu Resche-Rigon (2017).</p>
+<p>One stage imputation methods:</p>
+<p>mice.impute.2l.glm.bin Imputes univariate missing data using a Bayesian logistic mixed model based on non-informative prior distributions. The method is dedicated to a binary outcome stratified in severals clusters. Should be used with few clusters and few individuals per cluster. Can be very slow to perform otherwise.</p>
+<p>mice.impute.2l.glm.norm Imputes univariate missing data using a Bayesian linear mixed model based on non-informative prior distributions. The method is dedicated to a continuous outcome stratified in severals clusters. Should be used with few clusters and few individuals per cluster. Can be very slow to perform otherwise.</p>
+<p>mice.impute.2l.glm.pois Imputes univariate missing data using a Bayesian mixed model (Poisson regression) based on noninformative prior distributions. The method is dedicated to a count outcome stratified in severals clusters. Should be used with few clusters and few individuals per cluster. Can be very slow to perform otherwise.</p>
+<p>mice.impute.2l.jomo Univariate imputation by a Bayesian multivariate generalized model based on conjugate priors. Can be used for a continuous or binary incomplete variable. For continuous variables, the modelling assumes heteroscedasticity for errors. For a binary variable, a probit link and a latent variables framework are used.</p>
+<p>Two stage imputation methods:</p>
+<p>mice.impute.2l.2stage.bin Imputes univariate two-level binary variable from a logistic model. The imputation method is based on a two-stage estimator: at step 1, a logistic regression model is fitted to each observed cluster; at step 2, estimates obtained from each cluster are combined according to a linear random effect model.</p>
+<p>mice.impute.2l.2stage.norm Imputes univariate two-level continuous variable from a heteroscedastic normal model. The imputation method is based on a two-stage estimator: at step 1, a linear regression model is fitted to each observed cluster; at step 2, estimates obtained from each cluster are combined according to a linear random effect model.</p>
+<p>mice.impute.2l.2stage.pmm Similarly to mice.impute.2l.stage.norm, this function imputes univariate two-level continuous variable from a heteroscedastic normal model. The difference consists in replacing missing values by observed values instead of adding a parametric noise to the prediction of a linear model with random effects (as done in mice.impute.2l.stage.norm.mm and mice.impute.2l.stage.norm.reml).</p>
+<p>mice.impute.2l.2stage.pois Imputes univariate two-level count variable from a Poisson model. The imputation method is based on a two-stage estimator: at step 1, a Poisson regression model is fitted to each observed cluster; at step 2, estimates obtained from each cluster are combined according to a linear random effect model.</p>
+<p>The function find.defaultMethod The micemd package contains the function find.defaultMethod. With this function it is possible to get an advice about the imputation method on basis of the type of variables with missing data and the multilevel data structure. An example of how to apply this function is presented in Box 2 below.</p>
+<p>Insert Box 1 here.</p>
+</div>
+<div id="pooling-multilevel-models" class="section level2">
+<h2><span class="header-section-number">6.10</span> Pooling Multilevel models</h2>
+<div id="pooling-multilevel-models-in-r" class="section level3">
+<h3><span class="header-section-number">6.10.1</span> Pooling Multilevel Models in R</h3>
+<p>After multilevel data has been imputed, pooling the result of a multilevel analysis in R is easy because you can make use of the pool function in the mice package. The following R code does the job.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lme4)
+
+<span class="co"># lmer is used to specify the mixed model</span>
+<span class="co">#fit &lt;-with(res.mice.md, lmer(Cholesterol ~ Time + SumSkinfolds + ( 1 | ID)))</span>
+
+<span class="co"># summary shows the result in each imputed dataset</span>
+<span class="co">#summary(fit)</span>
+
+<span class="co"># pool gives the pooled result</span>
+<span class="co">#summary(pool(fit))</span></code></pre></div>
+</div>
+<div id="pooling-multilevel-models-in-spss" class="section level3">
+<h3><span class="header-section-number">6.10.2</span> Pooling Multilevel Models in SPSS</h3>
+<p>It is also possible to impute the missing data in R and then to transport the imputed datasets to SPSS. In SPSS you have to add a variable that distinguishes the imputed datasets and rename this variable into Imputation_. Than SPSS recognizes the dataset as a multiple imputed dataset. In SPSS there are two ways to run multilevel models. Both procedures can be found via Analyze -&gt; Mixed Models. One way is by using the Linear procedure for running Linear Mixed models when the outcome is continuous and the other is by using the Generalized Linear procedure for running Generalized Linear Mixed models when the outcome is continuous, dichotomous, etc. As is shown in (Figure <a href="restructuring-dataset-from-wide-to-long-in-spss.html#fig:fig87">6.13</a>), only for the Linear procedure the dataset is recognized as being a multiple imputed dataset because for that procedure the special mark before the word “Linear” is shown.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig87"></span>
+<img src="images/fig7.15.png" alt="The Mixed Linear menu." width="90%" />
+<p class="caption">
+Figure 6.13: The Mixed Linear menu.
+</p>
+</div>
+<p>In other words, only with the Linear procedure pooled estimates can be generated and not for the Generalized Linear Mixed Models. This means that for example Multilevel logistic regression models cannot be pooled. The Mixed procedure in the imputed datasets will provide the following results (Figure <a href="restructuring-dataset-from-wide-to-long-in-spss.html#fig:fig88">6.14</a>) and (Figure <a href="restructuring-dataset-from-wide-to-long-in-spss.html#fig:fig89">6.15</a>).</p>
+<div class="figure" style="text-align: center"><span id="fig:fig88"></span>
+<img src="images/table7.2.png" alt="Table 7.2. Fixed effect parameters as a result of applying a linear mixed effects model in imputed datasets." width="90%" />
+<p class="caption">
+Figure 6.14: Table 7.2. Fixed effect parameters as a result of applying a linear mixed effects model in imputed datasets.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:fig89"></span>
+<img src="images/table7.3.png" alt="Table 7.2. Fixed effect parameters as a result of applying a linear mixed effects model in imputed datasets." width="90%" />
+<p class="caption">
+Figure 6.15: Table 7.2. Fixed effect parameters as a result of applying a linear mixed effects model in imputed datasets.
+</p>
+</div>
+<p>As is shown in (Figure <a href="restructuring-dataset-from-wide-to-long-in-spss.html#fig:fig88">6.14</a>), SPSS also provides the pooled covariance parameter estimates (in this case the pooled residual and random intercept variances). These pooled values are estimated using Rubin´s Rules. This information is not provided by the mice package.</p>
+</div>
+</div>
+<div id="pooling-gee-models" class="section level2">
+<h2><span class="header-section-number">6.11</span> Pooling GEE models</h2>
+<div id="pooling-gee-models-in-r" class="section level3">
+<h3><span class="header-section-number">6.11.1</span> Pooling GEE Models in R</h3>
+<p>Pooling of Generalized Estimating Equation (GEE) models is not possible with the pool function in the mice package, because this function requires the variance-covariance matrix of the GEE model. Other pooling procedures can be applied to get pooled results in R after you have imputed the data. One possibility is by using the MIextract and MIcombine functions in the mitools package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Activate the geepack library to make use of the geeglm procedure</span>
+<span class="kw">library</span>(geepack)
+ 
+<span class="co"># Run the GEE model in each imputed dataset </span>
+<span class="co">#fit &lt;-with(res.mice.md, geeglm(Cholesterol ~ Time + SumSkinfolds, id=ID, </span>
+<span class="co">#       corstr = &quot;exchangeable&quot;))</span>
+
+<span class="co"># Activate the mitools package</span>
+<span class="co">#library(mitools)</span>
+ 
+<span class="co"># Extract the coefficients from the GEE model</span>
+<span class="co">#gee.coeff &lt;- MIextract(fit$analyses , fun = coef)</span>
+
+<span class="co"># Extract the sampling variances (standard errors squared)</span>
+<span class="co">#var.gee &lt;- lapply(fit$analyses , FUN = function(x){</span>
+<span class="co">#   gee.var &lt;- (summary(x)$coefficients[, &quot;Std.err&quot;])^2</span>
+<span class="co"># })</span>
+
+<span class="co">#summary(MIcombine(results=gee.coeff, variances=var.gee))</span></code></pre></div>
+<p>Another possibility is by using the pool_mi function that is available in the miceadds package. For this function the standard errors or the sampling variances can be used to get the pooled results. The results are comparable with the MIcombine function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Extract the standard errors</span>
+<span class="co">#se.gee &lt;- lapply(fit$analyses , FUN = function(x){</span>
+<span class="co">#   gee.se &lt;- summary(x)$coefficients[, &quot;Std.err&quot;]</span>
+<span class="co"># })</span>
+
+<span class="co"># Run the pool_mi function</span>
+<span class="co">#summary(pool_mi(qhat=gee.coeff, se=se.gee))</span></code></pre></div>
+</div>
+<div id="pooling-gee-models-in-spss" class="section level3">
+<h3><span class="header-section-number">6.11.2</span> Pooling GEE Models in SPSS</h3>
+<p>Generalized Estimating Equations (GEE) models can also be applied in SPSS over imputed datasets. The missing data can first be imputed in R and after that transported to SPSS. Then an imputation variable has to be added to the dataset and renamed into Imputation_ to separate the imputed datasets. Then, SPSS recognizes the dataset as a multiple imputed dataset. The GEE procedure in SPSS is accessible via Analyse -&gt; Generalized Linear Models -&gt; Generalized Estimating Equations ((Figure <a href="restructuring-dataset-from-wide-to-long-in-spss.html#fig:fig90">6.16</a>).</p>
+<div class="figure" style="text-align: center"><span id="fig:fig90"></span>
+<img src="images/fig7.16.png" alt="Access of the Generalized Estimating Equations procedure via the Analyze menu." width="90%" />
+<p class="caption">
+Figure 6.16: Access of the Generalized Estimating Equations procedure via the Analyze menu.
+</p>
+</div>
+<p>With this procedure also multilevel analyses can be conducted, although the number of levels is restricted if you compare this procedure with using Mixed models. When GEE is used in multiple imputed datasets, the following output will be generated (Figure <a href="restructuring-dataset-from-wide-to-long-in-spss.html#fig:fig91">6.17</a>).</p>
+<div class="figure" style="text-align: center"><span id="fig:fig91"></span>
+<img src="images/table7.4.png" alt="Parameter estimates as a result of applying a GEE model in multiple imputed datasets." width="90%" />
+<p class="caption">
+Figure 6.17: Parameter estimates as a result of applying a GEE model in multiple imputed datasets.
+</p>
+</div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="advanced-multiple-imputation-models-for-multilevel-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="background-information-to-pooled-statistical-methods.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["Book_MI.pdf", "Book_MI.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
