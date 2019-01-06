@@ -3,7 +3,7 @@
 In this Chapter we discuss an advanced missing data handling method, that is called Multiple Imputation (MI). With MI, each missing value is replaced by several different values and consequently several different completed datasets are generated. The concept of MI can be made clear by the following figure \@ref(fig:fig4-1).
 
 ```{r fig4-1, echo = FALSE, fig.cap="Graphical presentation of the MI procedure.", out.width='90%', fig.align='center'}
-knitr::include_graphics("images/fig4.1_update.png")
+knitr::include_graphics("images/fig4.1.png")
 ```
 
 In the first step, the dataset with missing values (i.e. the incomplete dataset) is copied several times. Then in the next step, the missing values are replaced with imputed values in each copy of the dataset. In each copy, slightly different values are imputed due to random variation. This results in mulitple imputed datasets. In the third step, the imputed datasets are each analyzed and the study results are then pooled into the final study result. In this Chapter, the first phase in multiple imputation, the imputation step, is the main topic. In the next Chapter, the analysis and pooling phases are discussed. 
