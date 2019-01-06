@@ -1,3 +1,80 @@
+--- 
+title: "Applied Missing data analysis with SPSS and R(Studio)"
+author: "Martijn Heymans and Iris Eekhout"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+
+---
+
+# Preface {-}
+
+Placeholder
+
+
+## The goal of this Manual 
+## Multiple Imputation in SPSS and R 
+## Notation and annotation in this manual 
+
+<!--chapter:end:index.Rmd-->
+
+
+# Software applications
+
+Placeholder
+
+
+## SPSS, Data and Variable View windows
+## Analyzing data in SPSS
+## Data Transformations in SPSS
+## The Output window in SPSS
+## The Syntax Editor in SPSS
+## Reading and saving data in SPSS
+## R and RStudio
+### The role of the Console Window
+### R assignments and objects
+### Vectors, matrices, lists and data frames
+### Indexing Vectors, Matrices, Lists and Data frames
+### Vectorized Calculation
+### R Functions
+### The Help function
+### Working with script files
+### Creating a working directory
+### Reading in SPSS data in RStudio
+### Saving and Reading R data in RStudio
+### Reading in (R)Studio data into SPSS
+### Installing R Packages
+### Loading R Packages
+### Updating R Packages
+### Useful Missing data Packages and links
+
+<!--chapter:end:01-software.Rmd-->
+
+
+# Missing Data Evaluation
+
+Placeholder
+
+
+
+<!--chapter:end:02-MissingDataEvaluation.Rmd-->
+
+
+# Single Missing data imputations
+
+Placeholder
+
+
+## Complete cases analysis
+## Missing data imputation
+## Mean Imputation
+### Mean imputation in SPSS
+
+<!--chapter:end:03-SingleMissingdataimputation.Rmd-->
+
 # Multiple Imputation
 
 In this Chapter we discuss an advanced missing data handling method, that is called Multiple Imputation (MI). With MI, each missing value is replaced by several different values and consequently several different completed datasets are generated. The concept of MI can be made clear by the following figure \@ref(fig:fig4-1).
@@ -40,8 +117,6 @@ In R multiple imputation can be performed with the `mice` function from the `mic
 
 ```{r}
 library(mice)
-library(foreign)
-data <- read.spss(file="Backpain50 MI missing.sav", to.data.frame=T)[, -1]
 imp <- mice(data, m=5, maxit=10, method="pmm")
 ```
 
@@ -322,4 +397,25 @@ Accordingly, when 5 imputed datasets are used, the standard error $SE$ is √0.9
 Iterations
 Van Buuren \@ref(VANBUUREN2012) states that the number of iterations may depend on the correlation between variables and the percentage of missing data in variables. He proposed that a number of 5-20 iterations is enough to reach convergence. This number may be adjusted when the percentage of missing data is high. Nowadays computers are fast so that a higher number of iterations can easily be used. 
 
+
+
+<!--chapter:end:04-MultipleImputation.Rmd-->
+
+
+# Multiple Imputation and Regression Modelling
+
+Placeholder
+
+
+
+<!--chapter:end:06-MIandRegression.Rmd-->
+
+
+# Missing data in questionnaires
+
+Placeholder
+
+
+
+<!--chapter:end:08-MissingsinQuestionnaires.Rmd-->
 
