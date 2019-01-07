@@ -8,7 +8,7 @@ output:
 
 ## Complete cases analysis
 
-Complete case analysis (CCA) means that the statistical analyses is done in the dataset afetr every persons with a missing data point in a variable is excluded from the analysis. This procedure is still used a lot (@eekhout1) but can have a large negative impact on the precision of the statistical test results. It also leads to an incorrect estimation of standard errors when the data is MCAR, MAR and MNAR (@eekhout2). It is for that reason not recommended. It is however, the default procedure in a lot of statistical software packages as in SPSS. 
+Complete case analysis (CCA) means that the statistical analyses is done in the dataset afetr every persons with a missing data point in a variable is excluded from the analysis. This procedure is still used a lot (@Eekhout2012) but can have a large negative impact on the precision of the statistical test results. It also leads to an incorrect estimation of standard errors when the data is MCAR, MAR and MNAR (@Eekhout2014). It is for that reason not recommended. It is however, the default procedure in a lot of statistical software packages as in SPSS. 
 
 ## Mean Imputation
 

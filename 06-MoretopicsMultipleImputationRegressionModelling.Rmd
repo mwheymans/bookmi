@@ -30,12 +30,11 @@ For categorical covariates, SPSS does not generate a pooled p-value for the over
 
 ```{r fig6-1, echo = FALSE, fig.cap="Logistic and Cox Regresion with an independent categorical variable.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig6.1.png")
-knitr::include_graphics("images/fig6.1b.png")
 ```
 
 The information of the overall Wald test can normally be found in the output table in the row above the regression coefficient estimates of the separate categories of the categorical variable. In SPSS, this row only provides information of the overall Wald value, the degrees of freedom and the level of significance (abbreviated as Sig. which is the p-value). In the output tables you see that besides the regression estimates for each different category, no pooled estimates are provided for the overall Wald test (this whole row is missing). 
 	
-There are several complex and more simple procedures to derive a p-value for the overall Wald test. The simplest procedure is just taking the median of the p-values from the overall Wald test of all imputed datasets, this rule is called the Median P Rule (MPR) (Eekhout 2017). This rule will be discussed more thoroughly below. Other more complex procedures  are the multiple parameter Wald test or D2 method, the pooled sampling variance or D1 method and the Meng and Rubin pooling procedure. These methods can only be performed in R; the codes are presented in the following paragraph.
+There are several complex and more simple procedures to derive a p-value for the overall Wald test. The simplest procedure is just taking the median of the p-values from the overall Wald test of all imputed datasets, this rule is called the Median P Rule (MPR) (@eekhout3). This rule will be discussed more thoroughly below. Other more complex procedures  are the multiple parameter Wald test or D2 method, the pooled sampling variance or D1 method and the Meng and Rubin pooling procedure. These methods can only be performed in R; the codes are presented in the following paragraph.
 
 ##Logistic regression with a categorical variable in R
 
@@ -60,7 +59,7 @@ P=Pra[F_(k,v)>W_chi]
 The application of the function to pool Chi-square values can be found in the R code below where the function `miPoolChi` is applied. Input values in the function are the Chi-square values of each imputed dataset that are shown in Table 6.1 and the degrees of freedom of the Chi-square test, which is 2 here.
 
 ```{r}
-miPoolChi(c(1.815,
+miceadds::micombine.chisquare(c(1.815,
             1.303,
             2.826,
             1.759,
@@ -106,10 +105,10 @@ The D1 function for logistic regression  is available from the psfmi  package. T
 
 ###Meng and Rubin pooling
 
-Meng and Rubin proposed a method to test overall categorical variables indirectly based on the likelihood ratio test statistic (MR pooling) (Meng & Rubin, 1992, Mistler, 2013). For each regression parameter, two nested models are fitted in each imputed dataset: one restricted model where the parameter is not included in the model and one full model where the parameter is included. The pooled likelihood ratio tests are then compared to obtain pooled p-values for each parameter. The MR pooling method requires fitting multiple models for each variable in the data, hence it is an indirect approach. This can be a very time-consuming process. 
+Meng and Rubin proposed a method to test overall categorical variables indirectly based on the likelihood ratio test statistic (MR pooling) (@Meng1992, @Mistler2013). For each regression parameter, two nested models are fitted in each imputed dataset: one restricted model where the parameter is not included in the model and one full model where the parameter is included. The pooled likelihood ratio tests are then compared to obtain pooled p-values for each parameter. The MR pooling method requires fitting multiple models for each variable in the data, hence it is an indirect approach. This can be a very time-consuming process. 
 
 Meng and Rubin pooling (MR pooling)
-The Meng and Rubin pooling method works according to the following steps (Meng & Rubin, 1992): 
+The Meng and Rubin pooling method works according to the following steps (@Meng1992): 
 	for each regression parameter θ  two nested models are fitted in each imputed dataset: one where θ  is included (full model) and one where θ  is not included in the model (restricted model). Subsequently, these models are pooled to obtain θ ̅_full and θ ̅_restricted.
 	The average likelihood ratio test statistic d ̅L over the imputed datasets as a result of comparing the log likelihood values between these models is calculated as:
 	
@@ -133,7 +132,7 @@ D_L=  d ̅_constrained/(k(1+(r_L ) ̅)),
 
 (r_L ) ̅=(m+1)/k(m-1) (d ̅_L-d ̅_constrained),
 
-where k  is the number of degrees of freedom in the complete data likelihood ratio test (Mistler, 2013; van Buuren, 2012). The p-value is calculated by comparing  the D_L statistic with an F distribution with k and vL  (i.e., degrees of freedom of the denominator) according to:
+where k  is the number of degrees of freedom in the complete data likelihood ratio test (@Mistler2013 and @VanBuuren2018). The p-value is calculated by comparing  the D_L statistic with an F distribution with k and vL  (i.e., degrees of freedom of the denominator) according to:
 											Formula 6.13
 
 P_L=Pra[F_(k,v_L )>D_L]
@@ -151,7 +150,7 @@ To calculate the pooled p-value by using the Meng and Rubin procedure we use R c
 
 ###The Median P Rule
 
-For the Median P Rule (MPR) one simply uses the median p-value of the significance tests conducted in each imputed dataset (MPR pooling). Hence, it depends on p-values only and not on the parameter estimates. The MPR can be calculated by using the p-values from the likelihood ratio test for multiple parameters for the categorical variables in the multivariable model (Eekhout, 2017). The Median P Rule is therefore very simple to apply, you just take the median of the p-values. For the median p-value to be valid you have to run the MI procedure without the outcome in the imputation model (R code 6.4).
+For the Median P Rule (MPR) one simply uses the median p-value of the significance tests conducted in each imputed dataset (MPR pooling). Hence, it depends on p-values only and not on the parameter estimates. The MPR can be calculated by using the p-values from the likelihood ratio test for multiple parameters for the categorical variables in the multivariable model (@Eekhout2017). The Median P Rule is therefore very simple to apply, you just take the median of the p-values. For the median p-value to be valid you have to run the MI procedure without the outcome in the imputation model (R code 6.4).
 
 
 ```{r}
@@ -162,7 +161,7 @@ For the Median P Rule (MPR) one simply uses the median p-value of the significan
 
 ##Cox Regression with a categorical variable in R
 
-As with logistic regression models, pooling categorical variables in Cox regression models is also not possible in SPSS, which was shown in Table 6.1b. In this output table the pooled overall Wald statistics are  also lacking. As a solution we can also use the pooling statistics that were shown in the previous paragraph. All procedures can be applied for overall Wald tests that are obtained by using Cox regression models, except for the Meng and Rubin procedure. The Meng and Rubin procedure is not recommended to use for Cox regression models (Marshall, 2009). The other three pooling procedures are available for Cox regression models, which are the Multiple parameter Wald test pooling or D2 method, the pooled sampling variance (VAR pooling) or D1 method and the MPR pooling procedure. The MPR pooling procedure is only extensively tested for the logistic regression model, but not yet for the Cox regression model and should therefore only be used in combination with the other pooling procedures.
+As with logistic regression models, pooling categorical variables in Cox regression models is also not possible in SPSS, which was shown in Table 6.1b. In this output table the pooled overall Wald statistics are  also lacking. As a solution we can also use the pooling statistics that were shown in the previous paragraph. All procedures can be applied for overall Wald tests that are obtained by using Cox regression models, except for the Meng and Rubin procedure. The Meng and Rubin procedure is not recommended to use for Cox regression models (@Marshall2009MedResMeth). The other three pooling procedures are available for Cox regression models, which are the Multiple parameter Wald test pooling or D2 method, the pooled sampling variance (VAR pooling) or D1 method and the MPR pooling procedure. The MPR pooling procedure is only extensively tested for the logistic regression model, but not yet for the Cox regression model and should therefore only be used in combination with the other pooling procedures.
 
 ###Multiple parameter Wald test or D2 method
 
@@ -236,15 +235,14 @@ Perform MI and use all variables in the imputation model, except for the Gender 
 
 ```{r fig6-4, echo = FALSE, fig.cap="Imputation models, splitted for males and Females", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig6.4.png")
-knitr::include_graphics("images/fig6.5.png")
 
 ```
 
 Compute the Interaction term of Bodyweight times Gender in the dataset that contains the imputed values.Now turn on the split on the variable Imputation_. That will automatically turn off the split on the Gender variable in the imputed datasets (in the Data View window of the imputed datasets in the corner on the right below you see the statement “Split by Imputation_ Gender”. To include the variable Gender in the model we first have to unsplit the data by Gender). 
 
-```{r fig6-5, echo = FALSE, fig.cap="The Split File procedure is used to split on the variable Imputation_.", out.width='90%', fig.align='center'}
-knitr::include_graphics("images/fig6.7.png")
-```
+#```{r fig6-5, echo = FALSE, fig.cap="The Split File procedure is used to split on the variable Imputation_.", #out.width='90%', fig.align='center'}
+#knitr::include_graphics("images/fig6.4.png")
+#```
 
 Then the analysis can be performed as planned with th interaction term as one of the predictors. 
 
