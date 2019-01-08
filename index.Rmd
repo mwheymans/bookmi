@@ -39,7 +39,7 @@ In this book we use SPSS version 24 and R software version 3.5.1. The R examples
 
 Annotation in this book 
 
-The name of R packages and libraries are used as published under their original names. The name of R functions is in italic form, like the *mice* function.
+The name of R packages and libraries are used as published under their original names. The name of R functions and packages is in R code form, like the `mice` function.
 
 Book examples in R code language can be found in grey text boxes, for example:
 to read in the dataset Backpain 50 missing.sav.

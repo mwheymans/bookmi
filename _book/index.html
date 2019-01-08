@@ -135,7 +135,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="part-ii-basic-missing-data-handling.html"><a href="part-ii-basic-missing-data-handling.html"><i class="fa fa-check"></i>Part II – Basic Missing Data Handling</a></li>
-<li class="chapter" data-level="2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html"><i class="fa fa-check"></i><b>2</b> Missing Data Evaluation</a></li>
+<li class="chapter" data-level="2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html"><i class="fa fa-check"></i><b>2</b> Missing Data Evaluation</a><ul>
+<li class="chapter" data-level="2.0.1" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#exploring-missing-data-patterns-in-r"><i class="fa fa-check"></i><b>2.0.1</b> Exploring Missing data patterns in R</a></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html"><i class="fa fa-check"></i><b>3</b> Single Missing data imputations</a><ul>
 <li class="chapter" data-level="3.1" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#complete-cases-analysis"><i class="fa fa-check"></i><b>3.1</b> Complete cases analysis</a></li>
 <li class="chapter" data-level="3.2" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#mean-imputation"><i class="fa fa-check"></i><b>3.2</b> Mean Imputation</a><ul>
@@ -254,7 +256,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="foreword" class="section level1 unnumbered">
 <h1>Foreword</h1>
-<p>In the past decades, the attention for missing data has grown and so has the need for researchers to apply suitable methods to deal with missing data. Leading methodologists and statisticians have published papers in leading journals about the problems of missing data and recommended researchers to take missing data seriously. Examples can be found in the British Medical Journal (BMJ, @2009multiple), New England Journal of Medicine, (NEJM, <span class="citation">Little et al. (<a href="#ref-little2012prevention">2012</a>)</span>) and the Journal of the American Medical Association (JAMA, <span class="citation">Li P (<a href="#ref-Li2015">2015</a>)</span>). From our experience, applied researchers still find it difficult to reserve extra time to evaluate the missing data in their study and to find a suitable solution to handle their missing data for their primary data analysis. This book is developed for those researchers who are looking for a solution for a missing data problem or who want to learn more about dealing with missing data. The book is initially developed for a missing data course for epidemiologist, but we feel that applied researchers from other disciplines may also find this book useful. Further, we are active in giving statistical advice in general and more specific about missing data. Because our time for consultations is mostly limited, this practical guide may be useful to help researchers get started with their missing data problem. With this book we provide an overview of the currently available methods to deal with missing data. The use of the methods are thoroughly explained and supported by practical examples. We hope you will enjoy this book and that you find it useful, at that as a result you will use recommended methods to solve your missing data problem.</p>
+<p>In the past decades, the attention for missing data has grown and so has the need for researchers to apply suitable methods to deal with missing data. Leading methodologists and statisticians have published papers in leading journals about the problems of missing data and recommended researchers to take missing data seriously. Examples can be found in the British Medical Journal (BMJ, <span class="citation">Sterne et al. (<a href="#ref-sterne2009multiple">2009</a>)</span>), New England Journal of Medicine, (NEJM, <span class="citation">Little et al. (<a href="#ref-little2012prevention">2012</a>)</span>) and the Journal of the American Medical Association (JAMA, <span class="citation">Li P (<a href="#ref-Li2015">2015</a>)</span>). From our experience, applied researchers still find it difficult to reserve extra time to evaluate the missing data in their study and to find a suitable solution to handle their missing data for their primary data analysis. This book is developed for those researchers who are looking for a solution for a missing data problem or who want to learn more about dealing with missing data. The book is initially developed for a missing data course for epidemiologist, but we feel that applied researchers from other disciplines may also find this book useful. Further, we are active in giving statistical advice in general and more specific about missing data. Because our time for consultations is mostly limited, this practical guide may be useful to help researchers get started with their missing data problem. With this book we provide an overview of the currently available methods to deal with missing data. The use of the methods are thoroughly explained and supported by practical examples. We hope you will enjoy this book and that you find it useful, at that as a result you will use recommended methods to solve your missing data problem.</p>
 <div id="software" class="section level2">
 <h2><span class="header-section-number">0.1</span> Software</h2>
 <p>In this book the software packages SPSS and R play a central role. SPSS is one of the most popular software package for applied researchers, worldwide, to use for statistical analyses. Currently, R is growing in popularity fast and will probably become the most popular software packages for statistical analysis, also for applied researchers.</p>
@@ -266,7 +268,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="notation-in-this-book" class="section level2">
 <h2><span class="header-section-number">0.2</span> Notation in this book</h2>
 <p>Annotation in this book</p>
-<p>The name of R packages and libraries are used as published under their original names. The name of R functions is in italic form, like the <em>mice</em> function.</p>
+<p>The name of R packages and libraries are used as published under their original names. The name of R functions is in R code form, like the <code>mice</code> function.</p>
 <p>Book examples in R code language can be found in grey text boxes, for example: to read in the dataset Backpain 50 missing.sav.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Activate the foreign package and read in the SPSS dataset</span>
 
@@ -283,6 +285,9 @@ dataset &lt;-<span class="st"> </span><span class="kw">read.spss</span>(<span cl
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
+<div id="ref-sterne2009multiple">
+<p>Sterne, Jonathan AC, Ian R White, John B Carlin, Michael Spratt, Patrick Royston, Michael G Kenward, Angela M Wood, and James R Carpenter. 2009. “Multiple Imputation for Missing Data in Epidemiological and Clinical Research: Potential and Pitfalls.” <em>BMJ: British Medical Journal</em> 338.</p>
+</div>
 <div id="ref-little2012prevention">
 <p>Little, R.J., R. D’Agostino, M.L. Cohen, K. Dickersin, S.S. Emerson, J.T. Farrar, C. Frangakis, et al. 2012. “The Prevention and Treatment of Missing Data in Clinical Trials.” <em>New England Journal of Medicine</em> 367 (14): 1355–60.</p>
 </div>
