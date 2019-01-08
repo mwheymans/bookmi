@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-01-07}
+    \date{2019-01-08}
 
 \usepackage{booktabs}
 
@@ -496,10 +496,10 @@ more about functions in R later):
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  0.14857190 -1.66056687 -0.89346147  1.02328722  0.66223111
-##  [6] -0.60326661 -0.18465040  1.91779276 -0.46874676 -0.88870492
-## [11]  0.11494649 -0.26168097 -0.08369566  1.19665638 -0.21290018
-## [16]  0.36407158 -0.77066128  0.59756105  0.24699267 -0.35528774
+##  [1]  1.3771403 -1.5377494  0.2904994  0.8265555 -2.2117000 -0.4334080
+##  [7]  0.3072183 -0.5355288  0.1780226  3.2872926  0.7076791  0.8884309
+## [13]  1.3513361 -1.3469503  0.9053333  1.5974297 -1.2564619 -0.8499978
+## [19]  0.2674224 -0.3644397
 \end{verbatim}
 
 The number {[}1{]} between brackets is the index of the first number or
@@ -4115,7 +4115,7 @@ do the following:
 \end{Shaded}
 
 In literature several guidelines for the imputation model are described
-(\citet{COLLINS2001}, \citet{VanBuuren2018}, \citet{Rubin1976}). A
+(\citet{Collins2001}, \citet{VanBuuren2018}, \citet{Rubin1976}). A
 summary of guidelines for building the imputation model is as follows:
 
 \begin{enumerate}
@@ -4812,7 +4812,7 @@ variables are correlated with the variables with missing data the FMI
 becomes lower.
 
 The relationship between the \(RE\) and the pooled sampling variance
-(\$T\_) can be written as (\citet{VanBuuren2012}):
+(\$T\_) can be written as (\citet{VanBuuren2018}):
 \[T_{Pooled,finite}=RE×T_{Pooled,infinite}\] which is equal to:
 \[SE_{Pooled,finite}^2=RE×SE_{Pooled,infinite}^2 \]
 
@@ -4842,7 +4842,7 @@ least equal to the percentage of missing cases. This means that when
 10\% of the subjects have missing values, at least 10 imputed datasets
 should be generated.
 
-Iterations Van Buuren (\citet{VanBuuren2012}) states that the number of
+Iterations Van Buuren (\citet{VanBuuren2018}) states that the number of
 iterations may depend on the correlation between variables and the
 percentage of missing data in variables. He proposed that a number of
 5-20 iterations is enough to reach convergence. This number may be
@@ -5951,11 +5951,11 @@ There are several complex and more simple procedures to derive a p-value
 for the overall Wald test. The simplest procedure is just taking the
 median of the p-values from the overall Wald test of all imputed
 datasets, this rule is called the Median P Rule (MPR)
-(\citet{eekhout3}). This rule will be discussed more thoroughly below.
-Other more complex procedures are the multiple parameter Wald test or D2
-method, the pooled sampling variance or D1 method and the Meng and Rubin
-pooling procedure. These methods can only be performed in R; the codes
-are presented in the following paragraph.
+(\citet{Eekhout2017}). This rule will be discussed more thoroughly
+below. Other more complex procedures are the multiple parameter Wald
+test or D2 method, the pooled sampling variance or D1 method and the
+Meng and Rubin pooling procedure. These methods can only be performed in
+R; the codes are presented in the following paragraph.
 
 \section{Logistic regression with a categorical variable in
 R}\label{logistic-regression-with-a-categorical-variable-in-r}
@@ -6358,14 +6358,7 @@ datasets in the corner on the right below you see the statement ``Split
 by Imputation\_ Gender''. To include the variable Gender in the model we
 first have to unsplit the data by Gender).
 
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{images/fig6.4} 
-
-}
-
-\caption{The Split File procedure is used to split on the variable Imputation_.}\label{fig:fig6-5}
-\end{figure}
+\chapter{\texorpdfstring{\texttt{\{r\ fig6-5,\ echo\ =\ FALSE,\ fig.cap="The\ Split\ File\ procedure\ is\ used\ to\ split\ on\ the\ variable\ Imputation\_.",\ \#out.width=\textquotesingle{}90\%\textquotesingle{},\ fig.align=\textquotesingle{}center\textquotesingle{}\}\ \#knitr::include\_graphics("images/fig6.4.png")\ \#}}{\{r fig6-5, echo = FALSE, fig.cap="The Split File procedure is used to split on the variable Imputation\_.", \#out.width='90\%', fig.align='center'\} \#knitr::include\_graphics("images/fig6.4.png") \#}}\label{r-fig6-5-echo-false-fig.capthe-split-file-procedure-is-used-to-split-on-the-variable-imputation_.-out.width90-fig.aligncenter-knitrinclude_graphicsimagesfig6.4.png}
 
 Then the analysis can be performed as planned with th interaction term
 as one of the predictors.

@@ -83,7 +83,7 @@ This value is equal to the (rounded) pooled standard error value of 0.921 in Fig
 
 ## Significance testing
 
-For significance testing of the pooled parameter, i.e. the mean difference in Figure \@ref(fig:tab9-1), Formula \@ref(eq:wald-pooled) is used. This is the univariate Wald test (@rubin1987, @VanBuuren2018, @Marshall2009MedResMeth). This test is defined as:
+For significance testing of the pooled parameter, i.e. the mean difference in Figure \@ref(fig:tab9-1), Formula \@ref(eq:wald-pooled) is used. This is the univariate Wald test (@Rubin1987, @VanBuuren2018, @Marshall2009MedResMeth). This test is defined as:
 
 \begin{equation}
 Wald_{Pooled} =\frac{(\overline{\theta} - {\theta_0})^2}{V_T}
@@ -121,7 +121,7 @@ In SPSS the old way to calculate the dfs is used. Adjusted versions are used in 
 knitr::include_graphics("images/table5.2.png")
 ```
 
-The (older method) to calculate the df for the t-distribution is defined as (@rubin1987, @VanBuuren2018):
+The (older method) to calculate the df for the t-distribution is defined as (@Rubin1987, @VanBuuren2018):
 
 \begin{equation}
 df_{Old} = \frac{m-1}{lambda^2} = (m-1) * (1 + \frac{1}{r^2})

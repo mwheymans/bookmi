@@ -81,7 +81,7 @@ imp2 <- mice(data,m=5, maxit=10, method="pmm", predictorMatrix = pred, seed=1050
 ```
 
 
-In literature several guidelines for the imputation model are described (@COLLINS2001, @VanBuuren2018, @Rubin1976). A summary of guidelines for building the imputation model is as follows:
+In literature several guidelines for the imputation model are described (@Collins2001, @VanBuuren2018, @Rubin1976). A summary of guidelines for building the imputation model is as follows:
 
 1. Include all variables that are part of the analysis model, including the dependent (outcome) variable.
 2. Include the variables at the same way in the imputation model as they appear in the analysis model (i.e. if interaction terms are in the analysis model they also have to be included in the imputation model).
@@ -307,7 +307,7 @@ $$RE=  \frac{1}{1+ \frac{FMI}{m}}$$
 
 FMI is the fraction of missing information and m is the number of imputed datasets. Where FMI is roughly equal to the percentage of missing data in the simplest case of one variable with missing data. When there are more variables in the imputation model, and these variables are correlated with the variables with missing data the FMI becomes lower.
 
-The relationship between the $RE$ and the pooled sampling variance ($T_) can be written as (@VanBuuren2012):
+The relationship between the $RE$ and the pooled sampling variance ($T_) can be written as (@VanBuuren2018):
 $$T_{Pooled,finite}=RE×T_{Pooled,infinite}$$
 which is equal to:
 $$SE_{Pooled,finite}^2=RE×SE_{Pooled,infinite}^2 $$
@@ -320,6 +320,6 @@ Accordingly, when 5 imputed datasets are used, the standard error $SE$ is √0.9
 
 
 Iterations
-Van Buuren (@VanBuuren2012) states that the number of iterations may depend on the correlation between variables and the percentage of missing data in variables. He proposed that a number of 5-20 iterations is enough to reach convergence. This number may be adjusted when the percentage of missing data is high. Nowadays computers are fast so that a higher number of iterations can easily be used. 
+Van Buuren (@VanBuuren2018) states that the number of iterations may depend on the correlation between variables and the percentage of missing data in variables. He proposed that a number of 5-20 iterations is enough to reach convergence. This number may be adjusted when the percentage of missing data is high. Nowadays computers are fast so that a higher number of iterations can easily be used. 
 
 
