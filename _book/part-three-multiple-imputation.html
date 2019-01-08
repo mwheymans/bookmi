@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Part three - Multiple Imputation | Applied Missing data analysis with SPSS and R(Studio)</title>
+  <meta name="description" content="Part three - Multiple Imputation | Applied Missing data analysis with SPSS and R(Studio)>
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Part three - Multiple Imputation | Applied Missing data analysis with SPSS and R(Studio) />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Part three - Multiple Imputation | Applied Missing data analysis with SPSS and R(Studio) />
+  
+  
+  
+
+<meta name="author" content="Martijn Heymans and Iris Eekhout">
+
+
+<meta name="date" content="2019-01-08">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="single-missing-data-imputations.html">
+<link rel="next" href="multiple-imputation.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Applied Missing Data Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Foreword</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#software"><i class="fa fa-check"></i><b>0.1</b> Software</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#notation-in-this-book"><i class="fa fa-check"></i><b>0.2</b> Notation in this book</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#acknowledgement"><i class="fa fa-check"></i><b>0.3</b> Acknowledgement</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="part-i-software.html"><a href="part-i-software.html"><i class="fa fa-check"></i>Part I - Software</a></li>
+<li class="chapter" data-level="1" data-path="software-applications.html"><a href="software-applications.html"><i class="fa fa-check"></i><b>1</b> Software applications</a><ul>
+<li class="chapter" data-level="1.1" data-path="software-applications.html"><a href="software-applications.html#spss"><i class="fa fa-check"></i><b>1.1</b> SPSS</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="software-applications.html"><a href="software-applications.html#data-and-variable-view-windows"><i class="fa fa-check"></i><b>1.1.1</b> Data and Variable View windows</a></li>
+<li class="chapter" data-level="1.1.2" data-path="software-applications.html"><a href="software-applications.html#analyzing-data-in-spss"><i class="fa fa-check"></i><b>1.1.2</b> Analyzing data in SPSS</a></li>
+<li class="chapter" data-level="1.1.3" data-path="software-applications.html"><a href="software-applications.html#the-output-window-in-spss"><i class="fa fa-check"></i><b>1.1.3</b> The Output window in SPSS</a></li>
+<li class="chapter" data-level="1.1.4" data-path="software-applications.html"><a href="software-applications.html#the-syntax-editor-in-spss"><i class="fa fa-check"></i><b>1.1.4</b> The Syntax Editor in SPSS</a></li>
+<li class="chapter" data-level="1.1.5" data-path="software-applications.html"><a href="software-applications.html#reading-and-saving-data-in-spss"><i class="fa fa-check"></i><b>1.1.5</b> Reading and saving data in SPSS</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="software-applications.html"><a href="software-applications.html#r-and-rstudio"><i class="fa fa-check"></i><b>1.2</b> R and RStudio</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="software-applications.html"><a href="software-applications.html#the-role-of-the-console-window"><i class="fa fa-check"></i><b>1.2.1</b> The role of the Console Window</a></li>
+<li class="chapter" data-level="1.2.2" data-path="software-applications.html"><a href="software-applications.html#r-assignments-and-objects"><i class="fa fa-check"></i><b>1.2.2</b> R assignments and objects</a></li>
+<li class="chapter" data-level="1.2.3" data-path="software-applications.html"><a href="software-applications.html#vectors-matrices-lists-and-data-frames"><i class="fa fa-check"></i><b>1.2.3</b> Vectors, matrices, lists and data frames</a></li>
+<li class="chapter" data-level="1.2.4" data-path="software-applications.html"><a href="software-applications.html#indexing-vectors-matrices-lists-and-data-frames"><i class="fa fa-check"></i><b>1.2.4</b> Indexing Vectors, Matrices, Lists and Data frames</a></li>
+<li class="chapter" data-level="1.2.5" data-path="software-applications.html"><a href="software-applications.html#vectorized-calculation"><i class="fa fa-check"></i><b>1.2.5</b> Vectorized Calculation</a></li>
+<li class="chapter" data-level="1.2.6" data-path="software-applications.html"><a href="software-applications.html#r-functions"><i class="fa fa-check"></i><b>1.2.6</b> R Functions</a></li>
+<li class="chapter" data-level="1.2.7" data-path="software-applications.html"><a href="software-applications.html#the-help-function"><i class="fa fa-check"></i><b>1.2.7</b> The Help function</a></li>
+<li class="chapter" data-level="1.2.8" data-path="software-applications.html"><a href="software-applications.html#working-with-script-files"><i class="fa fa-check"></i><b>1.2.8</b> Working with script files</a></li>
+<li class="chapter" data-level="1.2.9" data-path="software-applications.html"><a href="software-applications.html#creating-a-working-directory"><i class="fa fa-check"></i><b>1.2.9</b> Creating a working directory</a></li>
+<li class="chapter" data-level="1.2.10" data-path="software-applications.html"><a href="software-applications.html#reading-in-spss-data-in-rstudio"><i class="fa fa-check"></i><b>1.2.10</b> Reading in SPSS data in RStudio</a></li>
+<li class="chapter" data-level="1.2.11" data-path="software-applications.html"><a href="software-applications.html#saving-and-reading-r-data-in-rstudio"><i class="fa fa-check"></i><b>1.2.11</b> Saving and Reading R data in RStudio</a></li>
+<li class="chapter" data-level="1.2.12" data-path="software-applications.html"><a href="software-applications.html#reading-in-rstudio-data-into-spss"><i class="fa fa-check"></i><b>1.2.12</b> Reading in (R)Studio data into SPSS</a></li>
+<li class="chapter" data-level="1.2.13" data-path="software-applications.html"><a href="software-applications.html#installing-r-packages"><i class="fa fa-check"></i><b>1.2.13</b> Installing R Packages</a></li>
+<li class="chapter" data-level="1.2.14" data-path="software-applications.html"><a href="software-applications.html#loading-r-packages"><i class="fa fa-check"></i><b>1.2.14</b> Loading R Packages</a></li>
+<li class="chapter" data-level="1.2.15" data-path="software-applications.html"><a href="software-applications.html#updating-r-packages"><i class="fa fa-check"></i><b>1.2.15</b> Updating R Packages</a></li>
+<li class="chapter" data-level="1.2.16" data-path="software-applications.html"><a href="software-applications.html#useful-missing-data-packages-and-links"><i class="fa fa-check"></i><b>1.2.16</b> Useful Missing data Packages and links</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="part-ii-basic-missing-data-handling.html"><a href="part-ii-basic-missing-data-handling.html"><i class="fa fa-check"></i>Part II – Basic Missing Data Handling</a></li>
+<li class="chapter" data-level="2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html"><i class="fa fa-check"></i><b>2</b> Missing Data Evaluation</a><ul>
+<li class="chapter" data-level="2.1" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#definition-of-missing-data"><i class="fa fa-check"></i><b>2.1</b> Definition of Missing Data</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#defining-missing-data-in-spss"><i class="fa fa-check"></i><b>2.1.1</b> Defining Missing Data in SPSS</a></li>
+<li class="chapter" data-level="2.1.2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-in-r"><i class="fa fa-check"></i><b>2.1.2</b> Missing data in R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-patterns"><i class="fa fa-check"></i><b>2.2</b> Missing data Patterns</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-patterns-in-spss"><i class="fa fa-check"></i><b>2.2.1</b> Missing data patterns in SPSS</a></li>
+<li class="chapter" data-level="2.2.2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-patterns-in-r"><i class="fa fa-check"></i><b>2.2.2</b> Missing data patterns in R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-mechanisms"><i class="fa fa-check"></i><b>2.3</b> Missing data Mechanisms</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-completely-at-random"><i class="fa fa-check"></i><b>2.3.1</b> Missing Completely At Random</a></li>
+<li class="chapter" data-level="2.3.2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-at-random"><i class="fa fa-check"></i><b>2.3.2</b> Missing At Random</a></li>
+<li class="chapter" data-level="2.3.3" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-not-at-random"><i class="fa fa-check"></i><b>2.3.3</b> Missing Not At Random</a></li>
+<li class="chapter" data-level="2.3.4" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#the-missing-data-indicator"><i class="fa fa-check"></i><b>2.3.4</b> The Missing Data Indicator</a></li>
+<li class="chapter" data-level="2.3.5" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#the-role-of-auxiliary-variables"><i class="fa fa-check"></i><b>2.3.5</b> The Role of Auxiliary Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-evaluation-1"><i class="fa fa-check"></i><b>2.4</b> Missing Data evaluation</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-evaluation-in-spss"><i class="fa fa-check"></i><b>2.4.1</b> Missing data Evaluation in SPSS</a></li>
+<li class="chapter" data-level="2.4.2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-evaluation-in-r"><i class="fa fa-check"></i><b>2.4.2</b> Missing data Evaluation in R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html"><i class="fa fa-check"></i><b>3</b> Single Missing data imputations</a><ul>
+<li class="chapter" data-level="3.1" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#complete-cases-analysis"><i class="fa fa-check"></i><b>3.1</b> Complete cases analysis</a></li>
+<li class="chapter" data-level="3.2" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#mean-imputation"><i class="fa fa-check"></i><b>3.2</b> Mean Imputation</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#mean-imputation-in-spss"><i class="fa fa-check"></i><b>3.2.1</b> Mean imputation in SPSS</a></li>
+<li class="chapter" data-level="3.2.2" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#mean-imputation-in-r"><i class="fa fa-check"></i><b>3.2.2</b> Mean imputation in R</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#regression-imputation"><i class="fa fa-check"></i><b>3.3</b> Regression imputation</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#regression-imputation-in-spss"><i class="fa fa-check"></i><b>3.3.1</b> Regression imputation in SPSS</a></li>
+<li class="chapter" data-level="3.3.2" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#regression-imputation-in-r"><i class="fa fa-check"></i><b>3.3.2</b> Regression imputation in R</a></li>
+<li class="chapter" data-level="3.3.3" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#stochastic-regression-imputation"><i class="fa fa-check"></i><b>3.3.3</b> Stochastic regression imputation</a></li>
+<li class="chapter" data-level="3.3.4" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#stochastic-regression-imputation-in-r"><i class="fa fa-check"></i><b>3.3.4</b> Stochastic regression imputation in R</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#bayesian-stochastic-regression-imputation"><i class="fa fa-check"></i><b>3.4</b> Bayesian Stochastic regression imputation</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#bayesian-stochastic-regression-imputation-in-spss"><i class="fa fa-check"></i><b>3.4.1</b> Bayesian Stochastic regression imputation in SPSS</a></li>
+<li class="chapter" data-level="3.4.2" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#bayesian-stochastic-regression-imputation-in-r"><i class="fa fa-check"></i><b>3.4.2</b> Bayesian Stochastic regression imputation in R</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#predictive-mean-matching-or-regression-imputation"><i class="fa fa-check"></i><b>3.5</b> Predictive Mean Matching or Regression imputation</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#predictive-mean-matching-how-does-it-work"><i class="fa fa-check"></i><b>3.5.1</b> Predictive Mean Matching, how does it work?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="part-three-multiple-imputation.html"><a href="part-three-multiple-imputation.html"><i class="fa fa-check"></i>Part three - Multiple Imputation</a></li>
+<li class="chapter" data-level="4" data-path="multiple-imputation.html"><a href="multiple-imputation.html"><i class="fa fa-check"></i><b>4</b> Multiple Imputation</a><ul>
+<li class="chapter" data-level="4.1" data-path="multiple-imputation.html"><a href="multiple-imputation.html#multivariate-imputation-by-chained-equations"><i class="fa fa-check"></i><b>4.1</b> Multivariate Imputation by Chained Equations</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="multiple-imputation.html"><a href="multiple-imputation.html#the-mice-algorithm-and-iteration-steps"><i class="fa fa-check"></i><b>4.1.1</b> The mice algorithm and iteration steps</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="multiple-imputation.html"><a href="multiple-imputation.html#multiple-imputation-in-r"><i class="fa fa-check"></i><b>4.2</b> Multiple Imputation in R</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="multiple-imputation.html"><a href="multiple-imputation.html#customizing-the-imputation-model"><i class="fa fa-check"></i><b>4.2.1</b> Customizing the Imputation model</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="multiple-imputation.html"><a href="multiple-imputation.html#output-of-the-mice-function"><i class="fa fa-check"></i><b>4.3</b> Output of the <code>mice</code> function</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="multiple-imputation.html"><a href="multiple-imputation.html#checking-convergence-in-r"><i class="fa fa-check"></i><b>4.3.1</b> Checking Convergence in R</a></li>
+<li class="chapter" data-level="4.3.2" data-path="multiple-imputation.html"><a href="multiple-imputation.html#imputation-diagnostics-in-r"><i class="fa fa-check"></i><b>4.3.2</b> Imputation diagnostics in R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="multiple-imputation.html"><a href="multiple-imputation.html#multiple-imputation-in-spss"><i class="fa fa-check"></i><b>4.4</b> Multiple imputation in SPSS</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="multiple-imputation.html"><a href="multiple-imputation.html#multiple-imputation-in-spss-1"><i class="fa fa-check"></i><b>4.4.1</b> Multiple imputation in SPSS</a></li>
+<li class="chapter" data-level="4.4.2" data-path="multiple-imputation.html"><a href="multiple-imputation.html#the-output-for-multiple-imputation-in-spss"><i class="fa fa-check"></i><b>4.4.2</b> The output for Multiple imputation in SPSS</a></li>
+<li class="chapter" data-level="4.4.3" data-path="multiple-imputation.html"><a href="multiple-imputation.html#checking-convergence-after-multiple-imputation-in-spss"><i class="fa fa-check"></i><b>4.4.3</b> Checking Convergence after Multiple imputation in SPSS</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="multiple-imputation.html"><a href="multiple-imputation.html#number-of-imputed-datasets-and-iterations"><i class="fa fa-check"></i><b>4.5</b> Number of Imputed datasets and iterations</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="part-iv-data-analysis-after-multiple-imputation.html"><a href="part-iv-data-analysis-after-multiple-imputation.html"><i class="fa fa-check"></i>Part IV – Data Analysis After Multiple Imputation</a></li>
+<li class="chapter" data-level="5" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html"><i class="fa fa-check"></i><b>5</b> Data analysis after Multiple Imputation</a><ul>
+<li class="chapter" data-level="5.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-results-after-mi-in-spss"><i class="fa fa-check"></i><b>5.1</b> Pooling results after MI in SPSS</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#imputed-values-are-yellow"><i class="fa fa-check"></i><b>5.1.1</b> Imputed values are yellow</a></li>
+<li class="chapter" data-level="5.1.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#the-imputation_-variable"><i class="fa fa-check"></i><b>5.1.2</b> The Imputation_ variable</a></li>
+<li class="chapter" data-level="5.1.3" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#special-pooling-icon"><i class="fa fa-check"></i><b>5.1.3</b> Special pooling icon</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-results-after-mi-in-r"><i class="fa fa-check"></i><b>5.2</b> Pooling results after MI in R</a></li>
+<li class="chapter" data-level="5.3" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-means-and-standard-deviations-in-spss"><i class="fa fa-check"></i><b>5.3</b> Pooling Means and Standard deviations in SPSS</a></li>
+<li class="chapter" data-level="5.4" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-means-and-standard-deviations-in-r"><i class="fa fa-check"></i><b>5.4</b> Pooling Means and Standard Deviations in R</a></li>
+<li class="chapter" data-level="5.5" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-correlation-coefficients"><i class="fa fa-check"></i><b>5.5</b> Pooling Correlation coefficients</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-correlation-coefficients-in-spss"><i class="fa fa-check"></i><b>5.5.1</b> Pooling Correlation coefficients in SPSS</a></li>
+<li class="chapter" data-level="5.5.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-correlation-coefficients-in-r"><i class="fa fa-check"></i><b>5.5.2</b> Pooling Correlation Coefficients in R</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#the-pooled-independent-t-test"><i class="fa fa-check"></i><b>5.6</b> The Pooled Independent T-test</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-independent-t-tests-in-spss"><i class="fa fa-check"></i><b>5.6.1</b> Pooling Independent T-tests in SPSS</a></li>
+<li class="chapter" data-level="5.6.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-independent-t-tests-in-r-with-mice"><i class="fa fa-check"></i><b>5.6.2</b> Pooling Independent T-tests in R with mice</a></li>
+<li class="chapter" data-level="5.6.3" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-independent-t-tests-in-r-with-mi.t.test"><i class="fa fa-check"></i><b>5.6.3</b> Pooling Independent T-tests in R with mi.t.test</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-chi-square-tests"><i class="fa fa-check"></i><b>5.7</b> Pooling Chi-square tests</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-chi-square-tests-in-spss"><i class="fa fa-check"></i><b>5.7.1</b> Pooling Chi-square tests in SPSS</a></li>
+<li class="chapter" data-level="5.7.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-chi-square-tests-in-r"><i class="fa fa-check"></i><b>5.7.2</b> Pooling Chi-square tests in R</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#analysis-of-variance-anova-pooling"><i class="fa fa-check"></i><b>5.8</b> Analysis of Variance (ANOVA) pooling</a><ul>
+<li class="chapter" data-level="5.8.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#analysis-of-variance-anova-pooling-in-spss"><i class="fa fa-check"></i><b>5.8.1</b> Analysis of Variance (ANOVA) pooling in SPSS</a></li>
+<li class="chapter" data-level="5.8.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#analysis-of-variance-anova-pooling-in-r"><i class="fa fa-check"></i><b>5.8.2</b> Analysis of Variance (ANOVA) pooling in R</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-regression-models"><i class="fa fa-check"></i><b>5.9</b> Pooling Regression models</a><ul>
+<li class="chapter" data-level="5.9.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-linear-regression-models-in-spss"><i class="fa fa-check"></i><b>5.9.1</b> Pooling Linear Regression Models in SPSS</a></li>
+<li class="chapter" data-level="5.9.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-linear-regression-models-in-r"><i class="fa fa-check"></i><b>5.9.2</b> Pooling Linear regression models in R</a></li>
+<li class="chapter" data-level="5.9.3" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-logistic-regression-models-in-spss"><i class="fa fa-check"></i><b>5.9.3</b> Pooling Logistic Regression models in SPSS</a></li>
+<li class="chapter" data-level="5.9.4" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-logistic-regression-models-in-r"><i class="fa fa-check"></i><b>5.9.4</b> Pooling Logistic Regression models in R</a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-logistic-regression-models-including-categorical-independent-variables"><i class="fa fa-check"></i><b>5.10</b> Pooling logistic regression models including categorical independent variables</a><ul>
+<li class="chapter" data-level="5.10.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-cox-regression-models"><i class="fa fa-check"></i><b>5.10.1</b> Pooling Cox regression models</a></li>
+<li class="chapter" data-level="5.10.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-cox-regression-models-in-spss"><i class="fa fa-check"></i><b>5.10.2</b> Pooling Cox regression models in SPSS</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="more-topics-on-multiple-imputation-and-regression-modelling.html"><a href="more-topics-on-multiple-imputation-and-regression-modelling.html"><i class="fa fa-check"></i><b>6</b> More topics on Multiple Imputation and Regression Modelling</a></li>
+<li class="chapter" data-level="7" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html"><i class="fa fa-check"></i><b>7</b> Multiple Imputation and Regression Modelling</a><ul>
+<li class="chapter" data-level="7.1" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#imputing-the-outcome-variable"><i class="fa fa-check"></i><b>7.1</b> Imputing the Outcome variable</a></li>
+<li class="chapter" data-level="7.2" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#logistic-regression-with-a-categorical-covariate-in-spss"><i class="fa fa-check"></i><b>7.2</b> Logistic regression with a categorical covariate in SPSS</a></li>
+<li class="chapter" data-level="7.3" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#logistic-regression-with-a-categorical-variable-in-r"><i class="fa fa-check"></i><b>7.3</b> Logistic regression with a categorical variable in R</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#multiple-parameter-wald-test-or-d2-method"><i class="fa fa-check"></i><b>7.3.1</b> Multiple parameter Wald test or D2 method</a></li>
+<li class="chapter" data-level="7.3.2" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#the-pooled-sampling-variance-or-d1-method"><i class="fa fa-check"></i><b>7.3.2</b> The pooled sampling variance or D1 method</a></li>
+<li class="chapter" data-level="7.3.3" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#meng-and-rubin-pooling"><i class="fa fa-check"></i><b>7.3.3</b> Meng and Rubin pooling</a></li>
+<li class="chapter" data-level="7.3.4" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#the-median-p-rule"><i class="fa fa-check"></i><b>7.3.4</b> The Median P Rule</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#cox-regression-with-a-categorical-variable-in-r"><i class="fa fa-check"></i><b>7.4</b> Cox Regression with a categorical variable in R</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#multiple-parameter-wald-test-or-d2-method-1"><i class="fa fa-check"></i><b>7.4.1</b> Multiple parameter Wald test or D2 method</a></li>
+<li class="chapter" data-level="7.4.2" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#the-pooled-sampling-variance-or-d1-method-1"><i class="fa fa-check"></i><b>7.4.2</b> The pooled sampling variance or D1 method</a></li>
+<li class="chapter" data-level="7.4.3" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#the-median-p-rule-1"><i class="fa fa-check"></i><b>7.4.3</b> The Median P Rule</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#predictor-selection"><i class="fa fa-check"></i><b>7.5</b> Predictor selection</a><ul>
+<li class="chapter" data-level="7.5.1" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#predictor-selection-functions-in-r"><i class="fa fa-check"></i><b>7.5.1</b> Predictor Selection functions in R</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#interaction-terms-in-model"><i class="fa fa-check"></i><b>7.6</b> Interaction terms in model</a><ul>
+<li class="chapter" data-level="7.6.1" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#imputation-of-interaction-terms-in-spss"><i class="fa fa-check"></i><b>7.6.1</b> Imputation of interaction terms in SPSS</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="r-fig6-5-echo-false-fig-capthe-split-file-procedure-is-used-to-split-on-the-variable-imputation-out-width90-fig-aligncenter-knitrinclude-graphicsimagesfig6-4-png.html"><a href="r-fig6-5-echo-false-fig-capthe-split-file-procedure-is-used-to-split-on-the-variable-imputation-out-width90-fig-aligncenter-knitrinclude-graphicsimagesfig6-4-png.html"><i class="fa fa-check"></i><b>8</b> <code>{r fig6-5, echo = FALSE, fig.cap=&quot;The Split File procedure is used to split on the variable Imputation_.&quot;, #out.width='90%', fig.align='center'} #knitr::include_graphics(&quot;images/fig6.4.png&quot;) #</code></a><ul>
+<li class="chapter" data-level="8.0.1" data-path="r-fig6-5-echo-false-fig-capthe-split-file-procedure-is-used-to-split-on-the-variable-imputation-out-width90-fig-aligncenter-knitrinclude-graphicsimagesfig6-4-png.html"><a href="r-fig6-5-echo-false-fig-capthe-split-file-procedure-is-used-to-split-on-the-variable-imputation-out-width90-fig-aligncenter-knitrinclude-graphicsimagesfig6-4-png.html#imputation-of-interaction-terms-in-r"><i class="fa fa-check"></i><b>8.0.1</b> Imputation of interaction terms in R</a></li>
+<li class="chapter" data-level="8.0.2" data-path="r-fig6-5-echo-false-fig-capthe-split-file-procedure-is-used-to-split-on-the-variable-imputation-out-width90-fig-aligncenter-knitrinclude-graphicsimagesfig6-4-png.html"><a href="r-fig6-5-echo-false-fig-capthe-split-file-procedure-is-used-to-split-on-the-variable-imputation-out-width90-fig-aligncenter-knitrinclude-graphicsimagesfig6-4-png.html#comparing-methods"><i class="fa fa-check"></i><b>8.0.2</b> Comparing methods</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="part-v-advanced-multiple-imputation-methods.html"><a href="part-v-advanced-multiple-imputation-methods.html"><i class="fa fa-check"></i>Part V – Advanced Multiple Imputation methods</a></li>
+<li class="chapter" data-level="9" data-path="multiple-imputation-models-for-multilevel-data.html"><a href="multiple-imputation-models-for-multilevel-data.html"><i class="fa fa-check"></i><b>9</b> Multiple Imputation models for Multilevel data</a></li>
+<li class="chapter" data-level="10" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html"><i class="fa fa-check"></i><b>10</b> Advanced Multiple Imputation models for Multilevel data</a><ul>
+<li class="chapter" data-level="10.1" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#characteristics-of-multilevel-data"><i class="fa fa-check"></i><b>10.1</b> Characteristics of Multilevel data</a></li>
+<li class="chapter" data-level="10.2" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#multilevel-data---from-wide-to-long"><i class="fa fa-check"></i><b>10.2</b> Multilevel data - from wide to long</a></li>
+<li class="chapter" data-level="10.3" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#multilevel-data---from-wide-to-long-1"><i class="fa fa-check"></i><b>10.3</b> Multilevel data - from wide to long</a></li>
+<li class="chapter" data-level="10.4" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#multilevel-data---clusters-and-levels"><i class="fa fa-check"></i><b>10.4</b> Multilevel data - Clusters and Levels</a></li>
+<li class="chapter" data-level="10.5" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#the-multilevel-model"><i class="fa fa-check"></i><b>10.5</b> The Multilevel model</a></li>
+<li class="chapter" data-level="10.6" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#restructuring-datasets-from-wide-to-long-in-spss"><i class="fa fa-check"></i><b>10.6</b> Restructuring datasets from wide to long in SPSS</a><ul>
+<li class="chapter" data-level="10.6.1" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#restructuring-a-dataset-from-wide-to-long-in-r"><i class="fa fa-check"></i><b>10.6.1</b> Restructuring a dataset from wide to long in R</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#missing-data-at-different-levels"><i class="fa fa-check"></i><b>10.7</b> Missing data at different levels</a></li>
+<li class="chapter" data-level="10.8" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#multilevel-imputation-models"><i class="fa fa-check"></i><b>10.8</b> Multilevel imputation models</a><ul>
+<li class="chapter" data-level="10.8.1" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#sporadically-and-systematically-missing-data"><i class="fa fa-check"></i><b>10.8.1</b> Sporadically and Systematically missing data</a></li>
+</ul></li>
+<li class="chapter" data-level="10.9" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#one-stage-multilevel-imputation"><i class="fa fa-check"></i><b>10.9</b> One stage Multilevel Imputation</a><ul>
+<li class="chapter" data-level="10.9.1" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#one-stage-multilevel-imputation-in-r"><i class="fa fa-check"></i><b>10.9.1</b> One stage Multilevel Imputation in R</a></li>
+</ul></li>
+<li class="chapter" data-level="10.10" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#missing-data-at-different-levels-1"><i class="fa fa-check"></i><b>10.10</b> Missing data at different levels</a></li>
+<li class="chapter" data-level="10.11" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#multilevel-imputation-models-1"><i class="fa fa-check"></i><b>10.11</b> Multilevel imputation models</a><ul>
+<li class="chapter" data-level="10.11.1" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#sporadically-and-systematically-missing-data-1"><i class="fa fa-check"></i><b>10.11.1</b> Sporadically and Systematically missing data</a></li>
+<li class="chapter" data-level="10.11.2" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#one-stage-multilevel-imputation-1"><i class="fa fa-check"></i><b>10.11.2</b> One stage Multilevel Imputation</a></li>
+<li class="chapter" data-level="10.11.3" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#one-stage-multilevel-imputation-in-r-1"><i class="fa fa-check"></i><b>10.11.3</b> One stage Multilevel Imputation in R</a></li>
+</ul></li>
+<li class="chapter" data-level="10.12" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#two-stage-multilevel-imputation"><i class="fa fa-check"></i><b>10.12</b> Two stage Multilevel Imputation</a><ul>
+<li class="chapter" data-level="10.12.1" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#two-stage-multilevel-imputation-in-r"><i class="fa fa-check"></i><b>10.12.1</b> Two stage Multilevel Imputation in R</a></li>
+</ul></li>
+<li class="chapter" data-level="10.13" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#the-micemd-package"><i class="fa fa-check"></i><b>10.13</b> The micemd Package</a></li>
+<li class="chapter" data-level="10.14" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#pooling-multilevel-models"><i class="fa fa-check"></i><b>10.14</b> Pooling Multilevel models</a><ul>
+<li class="chapter" data-level="10.14.1" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#pooling-multilevel-models-in-r"><i class="fa fa-check"></i><b>10.14.1</b> Pooling Multilevel Models in R</a></li>
+<li class="chapter" data-level="10.14.2" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#pooling-multilevel-models-in-spss"><i class="fa fa-check"></i><b>10.14.2</b> Pooling Multilevel Models in SPSS</a></li>
+</ul></li>
+<li class="chapter" data-level="10.15" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#pooling-gee-models"><i class="fa fa-check"></i><b>10.15</b> Pooling GEE models</a><ul>
+<li class="chapter" data-level="10.15.1" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#pooling-gee-models-in-r"><i class="fa fa-check"></i><b>10.15.1</b> Pooling GEE Models in R</a></li>
+<li class="chapter" data-level="10.15.2" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#pooling-gee-models-in-spss"><i class="fa fa-check"></i><b>10.15.2</b> Pooling GEE Models in SPSS</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="part-vi-missing-data-in-questionnaires.html"><a href="part-vi-missing-data-in-questionnaires.html"><i class="fa fa-check"></i>Part VI – Missing Data in Questionnaires</a></li>
+<li class="chapter" data-level="11" data-path="missing-data-in-questionnaires.html"><a href="missing-data-in-questionnaires.html"><i class="fa fa-check"></i><b>11</b> Missing data in questionnaires</a><ul>
+<li class="chapter" data-level="11.1" data-path="missing-data-in-questionnaires.html"><a href="missing-data-in-questionnaires.html#methods-for-missing-questionnaire-data"><i class="fa fa-check"></i><b>11.1</b> Methods for missing questionnaire data</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="missing-data-in-questionnaires.html"><a href="missing-data-in-questionnaires.html#complete-case-analysis"><i class="fa fa-check"></i><b>11.1.1</b> Complete case analysis</a></li>
+<li class="chapter" data-level="11.1.2" data-path="missing-data-in-questionnaires.html"><a href="missing-data-in-questionnaires.html#mean-imputation-1"><i class="fa fa-check"></i><b>11.1.2</b> Mean imputation</a></li>
+<li class="chapter" data-level="11.1.3" data-path="missing-data-in-questionnaires.html"><a href="missing-data-in-questionnaires.html#stochastic-regression-imputation-1"><i class="fa fa-check"></i><b>11.1.3</b> (Stochastic) regression imputation</a></li>
+<li class="chapter" data-level="11.1.4" data-path="missing-data-in-questionnaires.html"><a href="missing-data-in-questionnaires.html#multiple-imputation-1"><i class="fa fa-check"></i><b>11.1.4</b> Multiple imputation</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="missing-data-in-questionnaires.html"><a href="missing-data-in-questionnaires.html#practical-issues-with-missing-data-in-questionnaires"><i class="fa fa-check"></i><b>11.2</b> Practical issues with missing data in questionnaires</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="missing-data-in-questionnaires.html"><a href="missing-data-in-questionnaires.html#parcel-summary-multiple-imputation"><i class="fa fa-check"></i><b>11.2.1</b> Parcel summary multiple imputation</a></li>
+<li class="chapter" data-level="11.2.2" data-path="missing-data-in-questionnaires.html"><a href="missing-data-in-questionnaires.html#passive-multiple-imputation"><i class="fa fa-check"></i><b>11.2.2</b> Passive multiple imputation</a></li>
+<li class="chapter" data-level="11.2.3" data-path="missing-data-in-questionnaires.html"><a href="missing-data-in-questionnaires.html#passive-multiple-imputation-in-r"><i class="fa fa-check"></i><b>11.2.3</b> Passive multiple imputation in R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="background-information-to-multiple-imputation-methods.html"><a href="background-information-to-multiple-imputation-methods.html"><i class="fa fa-check"></i>Background information to Multiple Imputation Methods</a></li>
+<li class="chapter" data-level="12" data-path="rubins-rules.html"><a href="rubins-rules.html"><i class="fa fa-check"></i><b>12</b> Rubin’s Rules</a><ul>
+<li class="chapter" data-level="12.1" data-path="rubins-rules.html"><a href="rubins-rules.html#pooling-effect-estimates"><i class="fa fa-check"></i><b>12.1</b> Pooling Effect estimates</a></li>
+<li class="chapter" data-level="12.2" data-path="rubins-rules.html"><a href="rubins-rules.html#pooling-standard-errors"><i class="fa fa-check"></i><b>12.2</b> Pooling Standard errors</a></li>
+<li class="chapter" data-level="12.3" data-path="rubins-rules.html"><a href="rubins-rules.html#significance-testing"><i class="fa fa-check"></i><b>12.3</b> Significance testing</a></li>
+<li class="chapter" data-level="12.4" data-path="rubins-rules.html"><a href="rubins-rules.html#degrees-of-freedom-and-p-values"><i class="fa fa-check"></i><b>12.4</b> Degrees of Freedom and P-values</a></li>
+<li class="chapter" data-level="12.5" data-path="rubins-rules.html"><a href="rubins-rules.html#confidence-intervals"><i class="fa fa-check"></i><b>12.5</b> Confidence Intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="measures-of-missing-data-information.html"><a href="measures-of-missing-data-information.html"><i class="fa fa-check"></i><b>13</b> Measures of Missing data information</a><ul>
+<li class="chapter" data-level="13.1" data-path="measures-of-missing-data-information.html"><a href="measures-of-missing-data-information.html#fraction-of-missing-information---lambda"><i class="fa fa-check"></i><b>13.1</b> Fraction of Missing Information - Lambda</a></li>
+<li class="chapter" data-level="13.2" data-path="measures-of-missing-data-information.html"><a href="measures-of-missing-data-information.html#relative-increase-in-variance"><i class="fa fa-check"></i><b>13.2</b> Relative increase in variance</a></li>
+<li class="chapter" data-level="13.3" data-path="measures-of-missing-data-information.html"><a href="measures-of-missing-data-information.html#fraction-of-missing-information---fmi"><i class="fa fa-check"></i><b>13.3</b> Fraction of Missing Information - FMI</a></li>
+<li class="chapter" data-level="13.4" data-path="measures-of-missing-data-information.html"><a href="measures-of-missing-data-information.html#relative-efficiency"><i class="fa fa-check"></i><b>13.4</b> Relative Efficiency</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="pooling-correlation-coefficients-1.html"><a href="pooling-correlation-coefficients-1.html"><i class="fa fa-check"></i><b>14</b> Pooling correlation coefficients</a><ul>
+<li class="chapter" data-level="14.1" data-path="pooling-correlation-coefficients-1.html"><a href="pooling-correlation-coefficients-1.html#pooled-wald-test"><i class="fa fa-check"></i><b>14.1</b> Pooled Wald test</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Applied Missing data analysis with SPSS and R(Studio)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="part-three---multiple-imputation" class="section level1 unnumbered">
+<h1>Part three - Multiple Imputation</h1>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="single-missing-data-imputations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multiple-imputation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["Book_MI.pdf", "Book_MI.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

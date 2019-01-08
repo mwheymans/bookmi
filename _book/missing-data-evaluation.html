@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 2 Missing Data Evaluation | Applied Missing data analysis with SPSS and R(Studio)</title>
+  <meta name="description" content="Chapter 2 Missing Data Evaluation | Applied Missing data analysis with SPSS and R(Studio)>
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 2 Missing Data Evaluation | Applied Missing data analysis with SPSS and R(Studio) />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Missing Data Evaluation | Applied Missing data analysis with SPSS and R(Studio) />
+  
+  
+  
+
+<meta name="author" content="Martijn Heymans and Iris Eekhout">
+
+
+<meta name="date" content="2019-01-08">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="part-ii-basic-missing-data-handling.html">
+<link rel="next" href="single-missing-data-imputations.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Applied Missing Data Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Foreword</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#software"><i class="fa fa-check"></i><b>0.1</b> Software</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#notation-in-this-book"><i class="fa fa-check"></i><b>0.2</b> Notation in this book</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#acknowledgement"><i class="fa fa-check"></i><b>0.3</b> Acknowledgement</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="part-i-software.html"><a href="part-i-software.html"><i class="fa fa-check"></i>Part I - Software</a></li>
+<li class="chapter" data-level="1" data-path="software-applications.html"><a href="software-applications.html"><i class="fa fa-check"></i><b>1</b> Software applications</a><ul>
+<li class="chapter" data-level="1.1" data-path="software-applications.html"><a href="software-applications.html#spss"><i class="fa fa-check"></i><b>1.1</b> SPSS</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="software-applications.html"><a href="software-applications.html#data-and-variable-view-windows"><i class="fa fa-check"></i><b>1.1.1</b> Data and Variable View windows</a></li>
+<li class="chapter" data-level="1.1.2" data-path="software-applications.html"><a href="software-applications.html#analyzing-data-in-spss"><i class="fa fa-check"></i><b>1.1.2</b> Analyzing data in SPSS</a></li>
+<li class="chapter" data-level="1.1.3" data-path="software-applications.html"><a href="software-applications.html#the-output-window-in-spss"><i class="fa fa-check"></i><b>1.1.3</b> The Output window in SPSS</a></li>
+<li class="chapter" data-level="1.1.4" data-path="software-applications.html"><a href="software-applications.html#the-syntax-editor-in-spss"><i class="fa fa-check"></i><b>1.1.4</b> The Syntax Editor in SPSS</a></li>
+<li class="chapter" data-level="1.1.5" data-path="software-applications.html"><a href="software-applications.html#reading-and-saving-data-in-spss"><i class="fa fa-check"></i><b>1.1.5</b> Reading and saving data in SPSS</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="software-applications.html"><a href="software-applications.html#r-and-rstudio"><i class="fa fa-check"></i><b>1.2</b> R and RStudio</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="software-applications.html"><a href="software-applications.html#the-role-of-the-console-window"><i class="fa fa-check"></i><b>1.2.1</b> The role of the Console Window</a></li>
+<li class="chapter" data-level="1.2.2" data-path="software-applications.html"><a href="software-applications.html#r-assignments-and-objects"><i class="fa fa-check"></i><b>1.2.2</b> R assignments and objects</a></li>
+<li class="chapter" data-level="1.2.3" data-path="software-applications.html"><a href="software-applications.html#vectors-matrices-lists-and-data-frames"><i class="fa fa-check"></i><b>1.2.3</b> Vectors, matrices, lists and data frames</a></li>
+<li class="chapter" data-level="1.2.4" data-path="software-applications.html"><a href="software-applications.html#indexing-vectors-matrices-lists-and-data-frames"><i class="fa fa-check"></i><b>1.2.4</b> Indexing Vectors, Matrices, Lists and Data frames</a></li>
+<li class="chapter" data-level="1.2.5" data-path="software-applications.html"><a href="software-applications.html#vectorized-calculation"><i class="fa fa-check"></i><b>1.2.5</b> Vectorized Calculation</a></li>
+<li class="chapter" data-level="1.2.6" data-path="software-applications.html"><a href="software-applications.html#r-functions"><i class="fa fa-check"></i><b>1.2.6</b> R Functions</a></li>
+<li class="chapter" data-level="1.2.7" data-path="software-applications.html"><a href="software-applications.html#the-help-function"><i class="fa fa-check"></i><b>1.2.7</b> The Help function</a></li>
+<li class="chapter" data-level="1.2.8" data-path="software-applications.html"><a href="software-applications.html#working-with-script-files"><i class="fa fa-check"></i><b>1.2.8</b> Working with script files</a></li>
+<li class="chapter" data-level="1.2.9" data-path="software-applications.html"><a href="software-applications.html#creating-a-working-directory"><i class="fa fa-check"></i><b>1.2.9</b> Creating a working directory</a></li>
+<li class="chapter" data-level="1.2.10" data-path="software-applications.html"><a href="software-applications.html#reading-in-spss-data-in-rstudio"><i class="fa fa-check"></i><b>1.2.10</b> Reading in SPSS data in RStudio</a></li>
+<li class="chapter" data-level="1.2.11" data-path="software-applications.html"><a href="software-applications.html#saving-and-reading-r-data-in-rstudio"><i class="fa fa-check"></i><b>1.2.11</b> Saving and Reading R data in RStudio</a></li>
+<li class="chapter" data-level="1.2.12" data-path="software-applications.html"><a href="software-applications.html#reading-in-rstudio-data-into-spss"><i class="fa fa-check"></i><b>1.2.12</b> Reading in (R)Studio data into SPSS</a></li>
+<li class="chapter" data-level="1.2.13" data-path="software-applications.html"><a href="software-applications.html#installing-r-packages"><i class="fa fa-check"></i><b>1.2.13</b> Installing R Packages</a></li>
+<li class="chapter" data-level="1.2.14" data-path="software-applications.html"><a href="software-applications.html#loading-r-packages"><i class="fa fa-check"></i><b>1.2.14</b> Loading R Packages</a></li>
+<li class="chapter" data-level="1.2.15" data-path="software-applications.html"><a href="software-applications.html#updating-r-packages"><i class="fa fa-check"></i><b>1.2.15</b> Updating R Packages</a></li>
+<li class="chapter" data-level="1.2.16" data-path="software-applications.html"><a href="software-applications.html#useful-missing-data-packages-and-links"><i class="fa fa-check"></i><b>1.2.16</b> Useful Missing data Packages and links</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="part-ii-basic-missing-data-handling.html"><a href="part-ii-basic-missing-data-handling.html"><i class="fa fa-check"></i>Part II – Basic Missing Data Handling</a></li>
+<li class="chapter" data-level="2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html"><i class="fa fa-check"></i><b>2</b> Missing Data Evaluation</a><ul>
+<li class="chapter" data-level="2.1" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#definition-of-missing-data"><i class="fa fa-check"></i><b>2.1</b> Definition of Missing Data</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#defining-missing-data-in-spss"><i class="fa fa-check"></i><b>2.1.1</b> Defining Missing Data in SPSS</a></li>
+<li class="chapter" data-level="2.1.2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-in-r"><i class="fa fa-check"></i><b>2.1.2</b> Missing data in R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-patterns"><i class="fa fa-check"></i><b>2.2</b> Missing data Patterns</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-patterns-in-spss"><i class="fa fa-check"></i><b>2.2.1</b> Missing data patterns in SPSS</a></li>
+<li class="chapter" data-level="2.2.2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-patterns-in-r"><i class="fa fa-check"></i><b>2.2.2</b> Missing data patterns in R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-mechanisms"><i class="fa fa-check"></i><b>2.3</b> Missing data Mechanisms</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-completely-at-random"><i class="fa fa-check"></i><b>2.3.1</b> Missing Completely At Random</a></li>
+<li class="chapter" data-level="2.3.2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-at-random"><i class="fa fa-check"></i><b>2.3.2</b> Missing At Random</a></li>
+<li class="chapter" data-level="2.3.3" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-not-at-random"><i class="fa fa-check"></i><b>2.3.3</b> Missing Not At Random</a></li>
+<li class="chapter" data-level="2.3.4" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#the-missing-data-indicator"><i class="fa fa-check"></i><b>2.3.4</b> The Missing Data Indicator</a></li>
+<li class="chapter" data-level="2.3.5" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#the-role-of-auxiliary-variables"><i class="fa fa-check"></i><b>2.3.5</b> The Role of Auxiliary Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-evaluation-1"><i class="fa fa-check"></i><b>2.4</b> Missing Data evaluation</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-evaluation-in-spss"><i class="fa fa-check"></i><b>2.4.1</b> Missing data Evaluation in SPSS</a></li>
+<li class="chapter" data-level="2.4.2" data-path="missing-data-evaluation.html"><a href="missing-data-evaluation.html#missing-data-evaluation-in-r"><i class="fa fa-check"></i><b>2.4.2</b> Missing data Evaluation in R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html"><i class="fa fa-check"></i><b>3</b> Single Missing data imputations</a><ul>
+<li class="chapter" data-level="3.1" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#complete-cases-analysis"><i class="fa fa-check"></i><b>3.1</b> Complete cases analysis</a></li>
+<li class="chapter" data-level="3.2" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#mean-imputation"><i class="fa fa-check"></i><b>3.2</b> Mean Imputation</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#mean-imputation-in-spss"><i class="fa fa-check"></i><b>3.2.1</b> Mean imputation in SPSS</a></li>
+<li class="chapter" data-level="3.2.2" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#mean-imputation-in-r"><i class="fa fa-check"></i><b>3.2.2</b> Mean imputation in R</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#regression-imputation"><i class="fa fa-check"></i><b>3.3</b> Regression imputation</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#regression-imputation-in-spss"><i class="fa fa-check"></i><b>3.3.1</b> Regression imputation in SPSS</a></li>
+<li class="chapter" data-level="3.3.2" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#regression-imputation-in-r"><i class="fa fa-check"></i><b>3.3.2</b> Regression imputation in R</a></li>
+<li class="chapter" data-level="3.3.3" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#stochastic-regression-imputation"><i class="fa fa-check"></i><b>3.3.3</b> Stochastic regression imputation</a></li>
+<li class="chapter" data-level="3.3.4" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#stochastic-regression-imputation-in-r"><i class="fa fa-check"></i><b>3.3.4</b> Stochastic regression imputation in R</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#bayesian-stochastic-regression-imputation"><i class="fa fa-check"></i><b>3.4</b> Bayesian Stochastic regression imputation</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#bayesian-stochastic-regression-imputation-in-spss"><i class="fa fa-check"></i><b>3.4.1</b> Bayesian Stochastic regression imputation in SPSS</a></li>
+<li class="chapter" data-level="3.4.2" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#bayesian-stochastic-regression-imputation-in-r"><i class="fa fa-check"></i><b>3.4.2</b> Bayesian Stochastic regression imputation in R</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#predictive-mean-matching-or-regression-imputation"><i class="fa fa-check"></i><b>3.5</b> Predictive Mean Matching or Regression imputation</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="single-missing-data-imputations.html"><a href="single-missing-data-imputations.html#predictive-mean-matching-how-does-it-work"><i class="fa fa-check"></i><b>3.5.1</b> Predictive Mean Matching, how does it work?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="part-three-multiple-imputation.html"><a href="part-three-multiple-imputation.html"><i class="fa fa-check"></i>Part three - Multiple Imputation</a></li>
+<li class="chapter" data-level="4" data-path="multiple-imputation.html"><a href="multiple-imputation.html"><i class="fa fa-check"></i><b>4</b> Multiple Imputation</a><ul>
+<li class="chapter" data-level="4.1" data-path="multiple-imputation.html"><a href="multiple-imputation.html#multivariate-imputation-by-chained-equations"><i class="fa fa-check"></i><b>4.1</b> Multivariate Imputation by Chained Equations</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="multiple-imputation.html"><a href="multiple-imputation.html#the-mice-algorithm-and-iteration-steps"><i class="fa fa-check"></i><b>4.1.1</b> The mice algorithm and iteration steps</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="multiple-imputation.html"><a href="multiple-imputation.html#multiple-imputation-in-r"><i class="fa fa-check"></i><b>4.2</b> Multiple Imputation in R</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="multiple-imputation.html"><a href="multiple-imputation.html#customizing-the-imputation-model"><i class="fa fa-check"></i><b>4.2.1</b> Customizing the Imputation model</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="multiple-imputation.html"><a href="multiple-imputation.html#output-of-the-mice-function"><i class="fa fa-check"></i><b>4.3</b> Output of the <code>mice</code> function</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="multiple-imputation.html"><a href="multiple-imputation.html#checking-convergence-in-r"><i class="fa fa-check"></i><b>4.3.1</b> Checking Convergence in R</a></li>
+<li class="chapter" data-level="4.3.2" data-path="multiple-imputation.html"><a href="multiple-imputation.html#imputation-diagnostics-in-r"><i class="fa fa-check"></i><b>4.3.2</b> Imputation diagnostics in R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="multiple-imputation.html"><a href="multiple-imputation.html#multiple-imputation-in-spss"><i class="fa fa-check"></i><b>4.4</b> Multiple imputation in SPSS</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="multiple-imputation.html"><a href="multiple-imputation.html#multiple-imputation-in-spss-1"><i class="fa fa-check"></i><b>4.4.1</b> Multiple imputation in SPSS</a></li>
+<li class="chapter" data-level="4.4.2" data-path="multiple-imputation.html"><a href="multiple-imputation.html#the-output-for-multiple-imputation-in-spss"><i class="fa fa-check"></i><b>4.4.2</b> The output for Multiple imputation in SPSS</a></li>
+<li class="chapter" data-level="4.4.3" data-path="multiple-imputation.html"><a href="multiple-imputation.html#checking-convergence-after-multiple-imputation-in-spss"><i class="fa fa-check"></i><b>4.4.3</b> Checking Convergence after Multiple imputation in SPSS</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="multiple-imputation.html"><a href="multiple-imputation.html#number-of-imputed-datasets-and-iterations"><i class="fa fa-check"></i><b>4.5</b> Number of Imputed datasets and iterations</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="part-iv-data-analysis-after-multiple-imputation.html"><a href="part-iv-data-analysis-after-multiple-imputation.html"><i class="fa fa-check"></i>Part IV – Data Analysis After Multiple Imputation</a></li>
+<li class="chapter" data-level="5" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html"><i class="fa fa-check"></i><b>5</b> Data analysis after Multiple Imputation</a><ul>
+<li class="chapter" data-level="5.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-results-after-mi-in-spss"><i class="fa fa-check"></i><b>5.1</b> Pooling results after MI in SPSS</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#imputed-values-are-yellow"><i class="fa fa-check"></i><b>5.1.1</b> Imputed values are yellow</a></li>
+<li class="chapter" data-level="5.1.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#the-imputation_-variable"><i class="fa fa-check"></i><b>5.1.2</b> The Imputation_ variable</a></li>
+<li class="chapter" data-level="5.1.3" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#special-pooling-icon"><i class="fa fa-check"></i><b>5.1.3</b> Special pooling icon</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-results-after-mi-in-r"><i class="fa fa-check"></i><b>5.2</b> Pooling results after MI in R</a></li>
+<li class="chapter" data-level="5.3" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-means-and-standard-deviations-in-spss"><i class="fa fa-check"></i><b>5.3</b> Pooling Means and Standard deviations in SPSS</a></li>
+<li class="chapter" data-level="5.4" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-means-and-standard-deviations-in-r"><i class="fa fa-check"></i><b>5.4</b> Pooling Means and Standard Deviations in R</a></li>
+<li class="chapter" data-level="5.5" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-correlation-coefficients"><i class="fa fa-check"></i><b>5.5</b> Pooling Correlation coefficients</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-correlation-coefficients-in-spss"><i class="fa fa-check"></i><b>5.5.1</b> Pooling Correlation coefficients in SPSS</a></li>
+<li class="chapter" data-level="5.5.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-correlation-coefficients-in-r"><i class="fa fa-check"></i><b>5.5.2</b> Pooling Correlation Coefficients in R</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#the-pooled-independent-t-test"><i class="fa fa-check"></i><b>5.6</b> The Pooled Independent T-test</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-independent-t-tests-in-spss"><i class="fa fa-check"></i><b>5.6.1</b> Pooling Independent T-tests in SPSS</a></li>
+<li class="chapter" data-level="5.6.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-independent-t-tests-in-r-with-mice"><i class="fa fa-check"></i><b>5.6.2</b> Pooling Independent T-tests in R with mice</a></li>
+<li class="chapter" data-level="5.6.3" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-independent-t-tests-in-r-with-mi.t.test"><i class="fa fa-check"></i><b>5.6.3</b> Pooling Independent T-tests in R with mi.t.test</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-chi-square-tests"><i class="fa fa-check"></i><b>5.7</b> Pooling Chi-square tests</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-chi-square-tests-in-spss"><i class="fa fa-check"></i><b>5.7.1</b> Pooling Chi-square tests in SPSS</a></li>
+<li class="chapter" data-level="5.7.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-chi-square-tests-in-r"><i class="fa fa-check"></i><b>5.7.2</b> Pooling Chi-square tests in R</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#analysis-of-variance-anova-pooling"><i class="fa fa-check"></i><b>5.8</b> Analysis of Variance (ANOVA) pooling</a><ul>
+<li class="chapter" data-level="5.8.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#analysis-of-variance-anova-pooling-in-spss"><i class="fa fa-check"></i><b>5.8.1</b> Analysis of Variance (ANOVA) pooling in SPSS</a></li>
+<li class="chapter" data-level="5.8.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#analysis-of-variance-anova-pooling-in-r"><i class="fa fa-check"></i><b>5.8.2</b> Analysis of Variance (ANOVA) pooling in R</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-regression-models"><i class="fa fa-check"></i><b>5.9</b> Pooling Regression models</a><ul>
+<li class="chapter" data-level="5.9.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-linear-regression-models-in-spss"><i class="fa fa-check"></i><b>5.9.1</b> Pooling Linear Regression Models in SPSS</a></li>
+<li class="chapter" data-level="5.9.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-linear-regression-models-in-r"><i class="fa fa-check"></i><b>5.9.2</b> Pooling Linear regression models in R</a></li>
+<li class="chapter" data-level="5.9.3" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-logistic-regression-models-in-spss"><i class="fa fa-check"></i><b>5.9.3</b> Pooling Logistic Regression models in SPSS</a></li>
+<li class="chapter" data-level="5.9.4" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-logistic-regression-models-in-r"><i class="fa fa-check"></i><b>5.9.4</b> Pooling Logistic Regression models in R</a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-logistic-regression-models-including-categorical-independent-variables"><i class="fa fa-check"></i><b>5.10</b> Pooling logistic regression models including categorical independent variables</a><ul>
+<li class="chapter" data-level="5.10.1" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-cox-regression-models"><i class="fa fa-check"></i><b>5.10.1</b> Pooling Cox regression models</a></li>
+<li class="chapter" data-level="5.10.2" data-path="data-analysis-after-multiple-imputation.html"><a href="data-analysis-after-multiple-imputation.html#pooling-cox-regression-models-in-spss"><i class="fa fa-check"></i><b>5.10.2</b> Pooling Cox regression models in SPSS</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="more-topics-on-multiple-imputation-and-regression-modelling.html"><a href="more-topics-on-multiple-imputation-and-regression-modelling.html"><i class="fa fa-check"></i><b>6</b> More topics on Multiple Imputation and Regression Modelling</a></li>
+<li class="chapter" data-level="7" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html"><i class="fa fa-check"></i><b>7</b> Multiple Imputation and Regression Modelling</a><ul>
+<li class="chapter" data-level="7.1" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#imputing-the-outcome-variable"><i class="fa fa-check"></i><b>7.1</b> Imputing the Outcome variable</a></li>
+<li class="chapter" data-level="7.2" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#logistic-regression-with-a-categorical-covariate-in-spss"><i class="fa fa-check"></i><b>7.2</b> Logistic regression with a categorical covariate in SPSS</a></li>
+<li class="chapter" data-level="7.3" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#logistic-regression-with-a-categorical-variable-in-r"><i class="fa fa-check"></i><b>7.3</b> Logistic regression with a categorical variable in R</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#multiple-parameter-wald-test-or-d2-method"><i class="fa fa-check"></i><b>7.3.1</b> Multiple parameter Wald test or D2 method</a></li>
+<li class="chapter" data-level="7.3.2" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#the-pooled-sampling-variance-or-d1-method"><i class="fa fa-check"></i><b>7.3.2</b> The pooled sampling variance or D1 method</a></li>
+<li class="chapter" data-level="7.3.3" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#meng-and-rubin-pooling"><i class="fa fa-check"></i><b>7.3.3</b> Meng and Rubin pooling</a></li>
+<li class="chapter" data-level="7.3.4" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#the-median-p-rule"><i class="fa fa-check"></i><b>7.3.4</b> The Median P Rule</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#cox-regression-with-a-categorical-variable-in-r"><i class="fa fa-check"></i><b>7.4</b> Cox Regression with a categorical variable in R</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#multiple-parameter-wald-test-or-d2-method-1"><i class="fa fa-check"></i><b>7.4.1</b> Multiple parameter Wald test or D2 method</a></li>
+<li class="chapter" data-level="7.4.2" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#the-pooled-sampling-variance-or-d1-method-1"><i class="fa fa-check"></i><b>7.4.2</b> The pooled sampling variance or D1 method</a></li>
+<li class="chapter" data-level="7.4.3" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#the-median-p-rule-1"><i class="fa fa-check"></i><b>7.4.3</b> The Median P Rule</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#predictor-selection"><i class="fa fa-check"></i><b>7.5</b> Predictor selection</a><ul>
+<li class="chapter" data-level="7.5.1" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#predictor-selection-functions-in-r"><i class="fa fa-check"></i><b>7.5.1</b> Predictor Selection functions in R</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#interaction-terms-in-model"><i class="fa fa-check"></i><b>7.6</b> Interaction terms in model</a><ul>
+<li class="chapter" data-level="7.6.1" data-path="multiple-imputation-and-regression-modelling.html"><a href="multiple-imputation-and-regression-modelling.html#imputation-of-interaction-terms-in-spss"><i class="fa fa-check"></i><b>7.6.1</b> Imputation of interaction terms in SPSS</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="r-fig6-5-echo-false-fig-capthe-split-file-procedure-is-used-to-split-on-the-variable-imputation-out-width90-fig-aligncenter-knitrinclude-graphicsimagesfig6-4-png.html"><a href="r-fig6-5-echo-false-fig-capthe-split-file-procedure-is-used-to-split-on-the-variable-imputation-out-width90-fig-aligncenter-knitrinclude-graphicsimagesfig6-4-png.html"><i class="fa fa-check"></i><b>8</b> <code>{r fig6-5, echo = FALSE, fig.cap=&quot;The Split File procedure is used to split on the variable Imputation_.&quot;, #out.width='90%', fig.align='center'} #knitr::include_graphics(&quot;images/fig6.4.png&quot;) #</code></a><ul>
+<li class="chapter" data-level="8.0.1" data-path="r-fig6-5-echo-false-fig-capthe-split-file-procedure-is-used-to-split-on-the-variable-imputation-out-width90-fig-aligncenter-knitrinclude-graphicsimagesfig6-4-png.html"><a href="r-fig6-5-echo-false-fig-capthe-split-file-procedure-is-used-to-split-on-the-variable-imputation-out-width90-fig-aligncenter-knitrinclude-graphicsimagesfig6-4-png.html#imputation-of-interaction-terms-in-r"><i class="fa fa-check"></i><b>8.0.1</b> Imputation of interaction terms in R</a></li>
+<li class="chapter" data-level="8.0.2" data-path="r-fig6-5-echo-false-fig-capthe-split-file-procedure-is-used-to-split-on-the-variable-imputation-out-width90-fig-aligncenter-knitrinclude-graphicsimagesfig6-4-png.html"><a href="r-fig6-5-echo-false-fig-capthe-split-file-procedure-is-used-to-split-on-the-variable-imputation-out-width90-fig-aligncenter-knitrinclude-graphicsimagesfig6-4-png.html#comparing-methods"><i class="fa fa-check"></i><b>8.0.2</b> Comparing methods</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="part-v-advanced-multiple-imputation-methods.html"><a href="part-v-advanced-multiple-imputation-methods.html"><i class="fa fa-check"></i>Part V – Advanced Multiple Imputation methods</a></li>
+<li class="chapter" data-level="9" data-path="multiple-imputation-models-for-multilevel-data.html"><a href="multiple-imputation-models-for-multilevel-data.html"><i class="fa fa-check"></i><b>9</b> Multiple Imputation models for Multilevel data</a></li>
+<li class="chapter" data-level="10" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html"><i class="fa fa-check"></i><b>10</b> Advanced Multiple Imputation models for Multilevel data</a><ul>
+<li class="chapter" data-level="10.1" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#characteristics-of-multilevel-data"><i class="fa fa-check"></i><b>10.1</b> Characteristics of Multilevel data</a></li>
+<li class="chapter" data-level="10.2" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#multilevel-data---from-wide-to-long"><i class="fa fa-check"></i><b>10.2</b> Multilevel data - from wide to long</a></li>
+<li class="chapter" data-level="10.3" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#multilevel-data---from-wide-to-long-1"><i class="fa fa-check"></i><b>10.3</b> Multilevel data - from wide to long</a></li>
+<li class="chapter" data-level="10.4" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#multilevel-data---clusters-and-levels"><i class="fa fa-check"></i><b>10.4</b> Multilevel data - Clusters and Levels</a></li>
+<li class="chapter" data-level="10.5" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#the-multilevel-model"><i class="fa fa-check"></i><b>10.5</b> The Multilevel model</a></li>
+<li class="chapter" data-level="10.6" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#restructuring-datasets-from-wide-to-long-in-spss"><i class="fa fa-check"></i><b>10.6</b> Restructuring datasets from wide to long in SPSS</a><ul>
+<li class="chapter" data-level="10.6.1" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#restructuring-a-dataset-from-wide-to-long-in-r"><i class="fa fa-check"></i><b>10.6.1</b> Restructuring a dataset from wide to long in R</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#missing-data-at-different-levels"><i class="fa fa-check"></i><b>10.7</b> Missing data at different levels</a></li>
+<li class="chapter" data-level="10.8" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#multilevel-imputation-models"><i class="fa fa-check"></i><b>10.8</b> Multilevel imputation models</a><ul>
+<li class="chapter" data-level="10.8.1" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#sporadically-and-systematically-missing-data"><i class="fa fa-check"></i><b>10.8.1</b> Sporadically and Systematically missing data</a></li>
+</ul></li>
+<li class="chapter" data-level="10.9" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#one-stage-multilevel-imputation"><i class="fa fa-check"></i><b>10.9</b> One stage Multilevel Imputation</a><ul>
+<li class="chapter" data-level="10.9.1" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#one-stage-multilevel-imputation-in-r"><i class="fa fa-check"></i><b>10.9.1</b> One stage Multilevel Imputation in R</a></li>
+</ul></li>
+<li class="chapter" data-level="10.10" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#missing-data-at-different-levels-1"><i class="fa fa-check"></i><b>10.10</b> Missing data at different levels</a></li>
+<li class="chapter" data-level="10.11" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#multilevel-imputation-models-1"><i class="fa fa-check"></i><b>10.11</b> Multilevel imputation models</a><ul>
+<li class="chapter" data-level="10.11.1" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#sporadically-and-systematically-missing-data-1"><i class="fa fa-check"></i><b>10.11.1</b> Sporadically and Systematically missing data</a></li>
+<li class="chapter" data-level="10.11.2" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#one-stage-multilevel-imputation-1"><i class="fa fa-check"></i><b>10.11.2</b> One stage Multilevel Imputation</a></li>
+<li class="chapter" data-level="10.11.3" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#one-stage-multilevel-imputation-in-r-1"><i class="fa fa-check"></i><b>10.11.3</b> One stage Multilevel Imputation in R</a></li>
+</ul></li>
+<li class="chapter" data-level="10.12" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#two-stage-multilevel-imputation"><i class="fa fa-check"></i><b>10.12</b> Two stage Multilevel Imputation</a><ul>
+<li class="chapter" data-level="10.12.1" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#two-stage-multilevel-imputation-in-r"><i class="fa fa-check"></i><b>10.12.1</b> Two stage Multilevel Imputation in R</a></li>
+</ul></li>
+<li class="chapter" data-level="10.13" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#the-micemd-package"><i class="fa fa-check"></i><b>10.13</b> The micemd Package</a></li>
+<li class="chapter" data-level="10.14" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#pooling-multilevel-models"><i class="fa fa-check"></i><b>10.14</b> Pooling Multilevel models</a><ul>
+<li class="chapter" data-level="10.14.1" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#pooling-multilevel-models-in-r"><i class="fa fa-check"></i><b>10.14.1</b> Pooling Multilevel Models in R</a></li>
+<li class="chapter" data-level="10.14.2" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#pooling-multilevel-models-in-spss"><i class="fa fa-check"></i><b>10.14.2</b> Pooling Multilevel Models in SPSS</a></li>
+</ul></li>
+<li class="chapter" data-level="10.15" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#pooling-gee-models"><i class="fa fa-check"></i><b>10.15</b> Pooling GEE models</a><ul>
+<li class="chapter" data-level="10.15.1" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#pooling-gee-models-in-r"><i class="fa fa-check"></i><b>10.15.1</b> Pooling GEE Models in R</a></li>
+<li class="chapter" data-level="10.15.2" data-path="advanced-multiple-imputation-models-for-multilevel-data.html"><a href="advanced-multiple-imputation-models-for-multilevel-data.html#pooling-gee-models-in-spss"><i class="fa fa-check"></i><b>10.15.2</b> Pooling GEE Models in SPSS</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="part-vi-missing-data-in-questionnaires.html"><a href="part-vi-missing-data-in-questionnaires.html"><i class="fa fa-check"></i>Part VI – Missing Data in Questionnaires</a></li>
+<li class="chapter" data-level="11" data-path="missing-data-in-questionnaires.html"><a href="missing-data-in-questionnaires.html"><i class="fa fa-check"></i><b>11</b> Missing data in questionnaires</a><ul>
+<li class="chapter" data-level="11.1" data-path="missing-data-in-questionnaires.html"><a href="missing-data-in-questionnaires.html#methods-for-missing-questionnaire-data"><i class="fa fa-check"></i><b>11.1</b> Methods for missing questionnaire data</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="missing-data-in-questionnaires.html"><a href="missing-data-in-questionnaires.html#complete-case-analysis"><i class="fa fa-check"></i><b>11.1.1</b> Complete case analysis</a></li>
+<li class="chapter" data-level="11.1.2" data-path="missing-data-in-questionnaires.html"><a href="missing-data-in-questionnaires.html#mean-imputation-1"><i class="fa fa-check"></i><b>11.1.2</b> Mean imputation</a></li>
+<li class="chapter" data-level="11.1.3" data-path="missing-data-in-questionnaires.html"><a href="missing-data-in-questionnaires.html#stochastic-regression-imputation-1"><i class="fa fa-check"></i><b>11.1.3</b> (Stochastic) regression imputation</a></li>
+<li class="chapter" data-level="11.1.4" data-path="missing-data-in-questionnaires.html"><a href="missing-data-in-questionnaires.html#multiple-imputation-1"><i class="fa fa-check"></i><b>11.1.4</b> Multiple imputation</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="missing-data-in-questionnaires.html"><a href="missing-data-in-questionnaires.html#practical-issues-with-missing-data-in-questionnaires"><i class="fa fa-check"></i><b>11.2</b> Practical issues with missing data in questionnaires</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="missing-data-in-questionnaires.html"><a href="missing-data-in-questionnaires.html#parcel-summary-multiple-imputation"><i class="fa fa-check"></i><b>11.2.1</b> Parcel summary multiple imputation</a></li>
+<li class="chapter" data-level="11.2.2" data-path="missing-data-in-questionnaires.html"><a href="missing-data-in-questionnaires.html#passive-multiple-imputation"><i class="fa fa-check"></i><b>11.2.2</b> Passive multiple imputation</a></li>
+<li class="chapter" data-level="11.2.3" data-path="missing-data-in-questionnaires.html"><a href="missing-data-in-questionnaires.html#passive-multiple-imputation-in-r"><i class="fa fa-check"></i><b>11.2.3</b> Passive multiple imputation in R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="background-information-to-multiple-imputation-methods.html"><a href="background-information-to-multiple-imputation-methods.html"><i class="fa fa-check"></i>Background information to Multiple Imputation Methods</a></li>
+<li class="chapter" data-level="12" data-path="rubins-rules.html"><a href="rubins-rules.html"><i class="fa fa-check"></i><b>12</b> Rubin’s Rules</a><ul>
+<li class="chapter" data-level="12.1" data-path="rubins-rules.html"><a href="rubins-rules.html#pooling-effect-estimates"><i class="fa fa-check"></i><b>12.1</b> Pooling Effect estimates</a></li>
+<li class="chapter" data-level="12.2" data-path="rubins-rules.html"><a href="rubins-rules.html#pooling-standard-errors"><i class="fa fa-check"></i><b>12.2</b> Pooling Standard errors</a></li>
+<li class="chapter" data-level="12.3" data-path="rubins-rules.html"><a href="rubins-rules.html#significance-testing"><i class="fa fa-check"></i><b>12.3</b> Significance testing</a></li>
+<li class="chapter" data-level="12.4" data-path="rubins-rules.html"><a href="rubins-rules.html#degrees-of-freedom-and-p-values"><i class="fa fa-check"></i><b>12.4</b> Degrees of Freedom and P-values</a></li>
+<li class="chapter" data-level="12.5" data-path="rubins-rules.html"><a href="rubins-rules.html#confidence-intervals"><i class="fa fa-check"></i><b>12.5</b> Confidence Intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="measures-of-missing-data-information.html"><a href="measures-of-missing-data-information.html"><i class="fa fa-check"></i><b>13</b> Measures of Missing data information</a><ul>
+<li class="chapter" data-level="13.1" data-path="measures-of-missing-data-information.html"><a href="measures-of-missing-data-information.html#fraction-of-missing-information---lambda"><i class="fa fa-check"></i><b>13.1</b> Fraction of Missing Information - Lambda</a></li>
+<li class="chapter" data-level="13.2" data-path="measures-of-missing-data-information.html"><a href="measures-of-missing-data-information.html#relative-increase-in-variance"><i class="fa fa-check"></i><b>13.2</b> Relative increase in variance</a></li>
+<li class="chapter" data-level="13.3" data-path="measures-of-missing-data-information.html"><a href="measures-of-missing-data-information.html#fraction-of-missing-information---fmi"><i class="fa fa-check"></i><b>13.3</b> Fraction of Missing Information - FMI</a></li>
+<li class="chapter" data-level="13.4" data-path="measures-of-missing-data-information.html"><a href="measures-of-missing-data-information.html#relative-efficiency"><i class="fa fa-check"></i><b>13.4</b> Relative Efficiency</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="pooling-correlation-coefficients-1.html"><a href="pooling-correlation-coefficients-1.html"><i class="fa fa-check"></i><b>14</b> Pooling correlation coefficients</a><ul>
+<li class="chapter" data-level="14.1" data-path="pooling-correlation-coefficients-1.html"><a href="pooling-correlation-coefficients-1.html#pooled-wald-test"><i class="fa fa-check"></i><b>14.1</b> Pooled Wald test</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Applied Missing data analysis with SPSS and R(Studio)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="missing-data-evaluation" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Missing Data Evaluation</h1>
+<p>Before you decide what to do with your missing data it is important to consider the reasons and probable causes of your missing data problem. With that information you can compose an analysis plan to deal with the missing data in your dataset. In this Chapter, you will learn how to explore and evaluate your missing data in SPSS and R and why it is important to think about the underlying missing data mechanism. Knowledge about your missing data problem is important for the method you choose to deal with the missing data problem.</p>
+<div id="definition-of-missing-data" class="section level2">
+<h2><span class="header-section-number">2.1</span> Definition of Missing Data</h2>
+<div id="defining-missing-data-in-spss" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Defining Missing Data in SPSS</h3>
+<p>Missing data in SPSS can be defined in two ways, as a system missing or user missing value. System missing data are missing data that is not present in the dataset and can be recognized by an empty cell (or dot). User missing data are data that are coded as missing values in the dataset by the user for some specific kind of reason. As an example we use a small dataset with 50 Backpain patients consisting of male (coded as 1) and female (coded as 0) patients (Figure <a href="missing-data-evaluation.html#fig:fig2-1">2.1</a>). For the female patients in this dataset the duration of a previous pregnancy was regisered in the Gestational Age (GA) variable.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig2-1"></span>
+<img src="images/fig2.1.png" alt="SPSS dataset containing variables with system and user missing data" width="90%" />
+<p class="caption">
+Figure 2.1: SPSS dataset containing variables with system and user missing data
+</p>
+</div>
+<p>The Variable GA in the dataset consists of different values: pregenancy durations in weeks, such as 36 and 29, but also the value 8 and empty cells. The value 8 is specified by the user to exclude males from further analysis that include the GA variable. This is a user missing value, that was indicated because males cannot be pregnant. The system missing values are recognizable by the empty cells (or dots) in the dataset, and these indicate the missing GA values for women who did not report the GA for their pregnancy. It makes no difference if we code the missing values as a system or user missing value in SPSS, because both kinds of missing values are recognized as missing values by SPSS and will be excluded from further analyses.</p>
+</div>
+<div id="missing-data-in-r" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Missing data in R</h3>
+<p>In R the missing values are denoted by <code>NA</code> which means “Not Available”. If we open the same dataset as above in R we get the following result.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(haven)
+dataset &lt;-<span class="st"> </span><span class="kw">read_sav</span>(<span class="st">&quot;data/CH2 example.sav&quot;</span>)
+<span class="kw">head</span>(dataset,<span class="dv">10</span>)</code></pre></div>
+<pre><code>## # A tibble: 10 x 7
+##       ID  Pain Tampascale Disability Radiation Gender    GA
+##    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+##  1     1     9         45         20         1      1     8
+##  2     2     6         43         10         0      1    36
+##  3     3     1         36          1         0      1     8
+##  4     4     5         38         14         0      0    NA
+##  5     5     6         44         14         1      1     8
+##  6     6     7         43         11         1      0    29
+##  7     7     8         43         18         0      0    NA
+##  8     8     6         43         11         1      0    34
+##  9     9     2         37         11         1      1     8
+## 10    10     4         36          3         0      0    38</code></pre>
+<p>The Variable Gestational Age (GA) contains the values for GA (e.g. 36, 29, etc.), the value 8 for males and the NA’s. In R the value 8 will be treated as a real value, so we have to recode that value to NA by using the following code to exclude the males for GA.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataset<span class="op">$</span>GA[dataset<span class="op">$</span>GA<span class="op">==</span><span class="dv">8</span>] &lt;-<span class="st"> </span><span class="ot">NA</span>
+<span class="kw">head</span>(dataset,<span class="dv">10</span>)</code></pre></div>
+<pre><code>## # A tibble: 10 x 7
+##       ID  Pain Tampascale Disability Radiation Gender    GA
+##    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+##  1     1     9         45         20         1      1    NA
+##  2     2     6         43         10         0      1    36
+##  3     3     1         36          1         0      1    NA
+##  4     4     5         38         14         0      0    NA
+##  5     5     6         44         14         1      1    NA
+##  6     6     7         43         11         1      0    29
+##  7     7     8         43         18         0      0    NA
+##  8     8     6         43         11         1      0    34
+##  9     9     2         37         11         1      1    NA
+## 10    10     4         36          3         0      0    38</code></pre>
+<p>The <code>NA</code> values will be recognized as missing values. For most functions in R the handling of <code>NA</code> values has to be defined. For example, the following code to obtain the mean of Gestational Age results in an <code>NA</code> because the handling of missing data is not defined.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(dataset<span class="op">$</span>GA)</code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>To obtain the mean of the observed data the statement <code>na.rm = TRUE</code> can be added.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(dataset<span class="op">$</span>GA, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## [1] 35.09524</code></pre>
+<p>The <code>na.rm = TRUE</code> statement in the mean-function, indicates that values that are <code>NA</code> need to be removed before the analysis is executed. Another <code>NA</code> handling procedure that is regularly used in functions is called <code>na.action</code> with as options <code>na.fail</code>, <code>na.omit</code>, <code>NULL</code> (no action) and <code>na.exclude</code>. For more information about na.action options you can look at the help-file by typing <code>?na.action</code> in the Console window.</p>
+</div>
+</div>
+<div id="missing-data-patterns" class="section level2">
+<h2><span class="header-section-number">2.2</span> Missing data Patterns</h2>
+<p>To get an idea about the complexity of the missing data problem in your dataset and information about the location of the missing values, the missing data pattern can be evaluated. Historically, the missing data pattern was an important starting point to choose the missing data handling method (<span class="citation">R.J.A. Little and Rubin (<a href="#ref-little1987statistical">2007</a>)</span>). Currently, the missing data pattern is less important because the most advanced (missing) data analysis methods as multiple imputation can handle almost any missing data pattern. We will discuss some frequently seen missing data patterns, which are graphically displayed in Figure <a href="missing-data-evaluation.html#fig:fig2-2">2.2</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig2-2"></span>
+<img src="images/fig2.2.png" alt="Missing data patterns (ID means person identification number, X1 to X3 represent variables, Time 1 to 3 means that data is measured at 3 time points over time, Study means study number). The white cells represent the missing data" width="90%" />
+<p class="caption">
+Figure 2.2: Missing data patterns (ID means person identification number, X1 to X3 represent variables, Time 1 to 3 means that data is measured at 3 time points over time, Study means study number). The white cells represent the missing data
+</p>
+</div>
+<p>A univariate missing data pattern is a pattern with missing values in only one variable. An example of such a pattern is when the independent variables are completely observed, but the outcome variable is not, or when a selection of subjects refuse to fill in a specific question such as their income level. The second and third pattern are examples of multivariate missing data patterns, where multiple variables contain missing values. The second pattern is an example where subjects miss values of the same two variables and the third pattern a more general pattern where different subject miss different variable scores. A monotone pattern of missing data may occur in a longitudinal study with data repeatedly assessed over time, and subjects “drop-out” of the study (fourth pattern). For example in a study on elderly where persons get too frail to participate as they get older or just because persons do not want to attend the study anymore because they loose interest and don’t feel like filling in questionnaires. A pattern called “file matching”&quot; can be observed when data from several studies is merged for an individual participant data analysis and some variables are not assessed in all studies. In this example, one variable is observed in both studies (X1), but X2 and is only observed in study 1 and X3 only in study 2.</p>
+<div id="missing-data-patterns-in-spss" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Missing data patterns in SPSS</h3>
+<p>To evaluate the missing data pattern, we can use the options of the Missing Value Analysis (MVA) procedure in SPSS [SPSS2016]. The example dataset contains information on 9 study variables for 150 back pain patients. The variables are pain (continuous), tampa scale (continuous), radiation in the leg (dichotomous), disability (continuous), body weight (continuous), body length (continuous), age (continuous), smoking (dichotomous), and gender (dichotomous). Only the variables gender and age are completely observed.</p>
+<p>To access the MVA function in the SPSS menu choose: &gt;Analyze -&gt; Missing Value Analysis…</p>
+<p>A new window will open that is called “Missing Value Analysis” (Figure <a href="missing-data-evaluation.html#fig:fig2-3">2.3</a>)</p>
+<div class="figure" style="text-align: center"><span id="fig:fig2-3"></span>
+<img src="images/fig2.3.png" alt="The Missing Value Analysis menu" width="90%" />
+<p class="caption">
+Figure 2.3: The Missing Value Analysis menu
+</p>
+</div>
+<p>In this menu, transfer all variables of interest in the categorical variables to the Quantitative variables window and the continuous variables to the Categorical variables window. Then the Patterns option is selected. From the Patterns menu select the options <code>Tabulated cases, grouped by missing value patterns</code> and <code>sort variables by missing value pattern</code>. To obtain the full list of all patterns that occur in the data, set the “Omit patterns with less than 1% of cases at 0%, then click continue and OK. This will produce the output table that is displayed in Figure <a href="missing-data-evaluation.html#fig:tab2-1">2.5</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig2-4"></span>
+<img src="images/fig2.4.png" alt="The Patterns menu" width="90%" />
+<p class="caption">
+Figure 2.4: The Patterns menu
+</p>
+</div>
+<p>By default, univariate statistics are presented that include output information about the number and percentages of missing data and descriptive statistics for each variable. Information about the missing data patterns is provided in the Tabulated patterns table. On the left column of that table, named “Number of Cases”, the number of cases are presented with that specific missing data pattern. In our example, there are 75 cases without any missing values and 13 cases with a missing value in only the tampa scale variable (see row 1 and 2 in <a href="missing-data-evaluation.html#fig:tab2-1">2.5</a>). In the right column of that table named “Complete if…”, the total number of subjects is presented if the variables that contain missing data in that pattern are not used in the analysis. Those variables are marked with the “X” symbol. For example, 88 subjects remain in the analysis when the variable tampa scale is not used in the analysis, these are the 75 subjects that have completely observed data on top of the 13 subjects with missing data in the Tampa scale variable only.</p>
+<div class="figure" style="text-align: center"><span id="fig:tab2-1"></span>
+<img src="images/tab2.1a.png" alt="Descriptive missing data statistics and the missing data patterns." width="90%" />
+<p class="caption">
+Figure 2.5: Descriptive missing data statistics and the missing data patterns.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:tab2-1"></span>
+<img src="images/tab2.1b.png" alt="Descriptive missing data statistics and the missing data patterns." width="90%" />
+<p class="caption">
+Figure 2.5: Descriptive missing data statistics and the missing data patterns.
+</p>
+</div>
+<p>Another way to obtain information about the missing data patterns is via the Multiple Imputation function. To access this option, choose: &gt; Analyze -&gt; Multiple Imputation -&gt; Analyze Patterns…</p>
+<div class="figure" style="text-align: center"><span id="fig:fig2-5"></span>
+<img src="images/fig2.5.png" alt="Analyse Patterns menu." width="90%" />
+<p class="caption">
+Figure 2.6: Analyse Patterns menu.
+</p>
+</div>
+<p>Now transfer all variables for the missing value analysis to the window “Analyze Across Variables”. The following output options can be selected:</p>
+<ul>
+<li>Summary of missing values: displays missing data information in pie charts, Patterns of missing values (displays tabulated patterns of missing values.</li>
+<li>Variables with the highest frequency of missing values: displays a table of analysis variables sorted by percent of missing values in decreasing order. .</li>
+<li>Minimum percentage missing for varaibles to be displayed: set at 0 to obtain the full list of all patterns.</li>
+<li>Adjust the maximum number of variables displayed.</li>
+</ul>
+The following output will display:
+<div class="figure" style="text-align: center"><span id="fig:fig2-6"></span>
+<img src="images/fig2.6a.png" alt="Output as a result of the Analyze Patterns menu under Multiple Imputation." width="90%" />
+<p class="caption">
+Figure 2.7: Output as a result of the Analyze Patterns menu under Multiple Imputation.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:fig2-6"></span>
+<img src="images/fig2.6b.png" alt="Output as a result of the Analyze Patterns menu under Multiple Imputation." width="90%" />
+<p class="caption">
+Figure 2.7: Output as a result of the Analyze Patterns menu under Multiple Imputation.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:fig2-6"></span>
+<img src="images/fig2.6c.png" alt="Output as a result of the Analyze Patterns menu under Multiple Imputation." width="90%" />
+<p class="caption">
+Figure 2.7: Output as a result of the Analyze Patterns menu under Multiple Imputation.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:fig2-6"></span>
+<img src="images/fig2.6d.png" alt="Output as a result of the Analyze Patterns menu under Multiple Imputation." width="90%" />
+<p class="caption">
+Figure 2.7: Output as a result of the Analyze Patterns menu under Multiple Imputation.
+</p>
+</div>
+</div>
+<div id="missing-data-patterns-in-r" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Missing data patterns in R</h3>
+<p>To display the missing data patterns in R we can use the <code>mice</code> or <code>VIM</code> package. We start with the <code>mice</code> package. This package contains the <code>md.pattern</code> function that produces the missing data pattern.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mice)
+<span class="kw">md.pattern</span>(dataset)</code></pre></div>
+<p><img src="Book_MI_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<pre><code>##    ID Pain Tampascale Disability Radiation Gender GA   
+## 21  1    1          1          1         1      1  1  0
+## 29  1    1          1          1         1      1  0  1
+##     0    0          0          0         0      0 29 29</code></pre>
+<p>The first row contains the variable names. Each other row represents a missing data pattern. The 1’s in each row indicate that the variable is complete and the 0’s indicate that the variable in that pattern contains missing values. The first column on the left (without a column name) shows the number of cases with a specific pattern and the column on the right shows the number of variables that is incomplete in that pattern. The last row shows the total number of missing values for each variable.</p>
+<p>To obtain a visual impression of the missing data patterns in R the <code>VIM</code> package can be used. That package contains the function <code>aggr</code> that produces the univariate proportion of missing data together with two graphs.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(VIM)
+<span class="kw">aggr</span>(dataset, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;white&#39;</span>,<span class="st">&#39;red&#39;</span>), <span class="dt">numbers=</span><span class="ot">TRUE</span>, <span class="dt">sortVars=</span><span class="ot">TRUE</span>, <span class="dt">cex.axis=</span>.<span class="dv">7</span>, <span class="dt">gap=</span><span class="dv">3</span>, <span class="dt">ylab=</span><span class="kw">c</span>(<span class="st">&quot;Percentage of missing data&quot;</span>,<span class="st">&quot;Missing Data Pattern&quot;</span>))</code></pre></div>
+<p><img src="Book_MI_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<pre><code>## 
+##  Variables sorted by number of missings: 
+##    Variable Count
+##          GA  0.58
+##          ID  0.00
+##        Pain  0.00
+##  Tampascale  0.00
+##  Disability  0.00
+##   Radiation  0.00
+##      Gender  0.00</code></pre>
+<p>The variable names are shown at the bottom of the figures. The red cells in the Missing data patterns figure indicate that those variables contain missing values. We see that 0.500 or 50% of the patterns do not contain missing values in any of the variables. Of the total patterns, 8.67% of the patterns have missing values in only the Tampa scale variable.</p>
+</div>
+</div>
+<div id="missing-data-mechanisms" class="section level2">
+<h2><span class="header-section-number">2.3</span> Missing data Mechanisms</h2>
+<p>By evaluating the missing data patterns, we can get insight in the location of the missing data. With respect to the missing data mechanism we are interested in the underlying reasons for the missing values and the relationships between variables with and without missing data. In general, we can say that missing values are either random or non-random. Random missing values may occur because subjects accidentally do not answer some questions or that information of an entire subject is accidentally not assessed. For example, a study subject has to fill out some questionnaire instruments, gets distracted and misses a question accidently or a questionnaire gets lost in the mail. Non-random missing values may occur because subjects purposefully do not answer questions. For example, subjects may be reluctant to answer questions about sensitive topics like income, past crimes or sexual history. In 1976, Donald Rubin introduced a typology for missing data that distincts between random and non-random missing data situations, which are abbreviated as MCAR, MAR and MNAR [RUBIN1976]. These types of missing data are still used as the basic missing data mechanisms. The key idea behind Rubin’s missing data mechanisms is that the probability of missing data in a variable may or may not be related to the values of other measured variables in the dataset. This means that we assume that there is some kind of probability model for the missing data. With probability we loosely mean the likelihood of a missing value to occur, i.e. if a variable has a lot of missing data, the probability of missing data in that variable is high. This probability (i.e. likelihood) can be related to other measured or not-measured variables. For example, when mostly older people have missing values, the probability for missing data is related to age. Moreover, the missing data mechanisms also assume a certain relationship (or correlation) between observed and variables with missing values in the dataset. The extend of the relation between observed variables and the probability of missing data, distinguishes the three missing data mechanisms. In essence the missing data mechanisms describe relationships between variables that may or may not be causal, because in most missing data situations we never know the real reason why data is missing. We will discuss the missing data mechanisms in more detail below. As an example, we will use a study on Low Back Pain (LBP). It is known that people with LBP may develop a fear of movement (which is assessed by the Tampa scale) due to their pain in the back. The idea is that these people believe that some underlying serious problem causes their back pain and in order to prevent more damage they are afraid to move their back and experience a high fear of movement.</p>
+<div id="missing-completely-at-random" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Missing Completely At Random</h3>
+<p>Data are Missing Completely At Random (MCAR) when the probability that a value is missing, is unrelated to the value of other observed (or unobserved) variables, and unrelated to values of the missing data variable itself. An MCAR example in the LBP study could be that, LBP patients had to come to a research center to fill in the Tampa scale (fear of movement) questionnaire and other information for the study and some of these patients were unable to leave their home, due to the flu. In that case, there is no relationship between having the flu and the scores on the Tampa scale or other study-related variables. This is realistic because there is no evidence that patients with the flu, fear their back problems more, or that the odds of having the flu is related to any other study outcomes. For that reason, we can assume that the missing data are MCAR. In other words, the probability of missing data is not related to the values of the Tampa scale variable or any other measures variables. Another example is when respondents accidentally skip questions in a questionnaire. Than the observed values of that questionnaire are just a random sample of the entire dataset. An MCAR missing data situation for the Tampa scale variable is visualized in the MCAR column in the figure below. Note that in in real live we do not know the completely observed data, but as an example (for educational reasons), the completely observed Tampa scale variable is displayed as well. When we compare the MCAR data to the complete Tampa scale variable scores, we can observe that in the MCAR situation an equal number of lower and higher values of the Tampa scale variable are missing (in total 4 Tampa scores are missing, 2 for lower and 2 for higher values,). Also, the missing data in the Tampa scale do not seem to be related to another variable like pain; an equal number of Tampa scale values is missing for patients with low pain scores as well as for patients with higher pain scores. This means that the (observed) probability of missing data in the Tampa scale variable will be equally large for lower and higher values of the Tampa scale and of other measured variables in the data (i.e. pain).</p>
+<div class="figure" style="text-align: center"><span id="fig:fig2-7"></span>
+<img src="images/fig2.7.png" alt="Examples of MCAR, MAR and MNAR data." width="90%" />
+<p class="caption">
+Figure 2.8: Examples of MCAR, MAR and MNAR data.
+</p>
+</div>
+<p>This phenomenon for the Tampa scale variable in the LBP study is shown in Figure @(fig:tab2-2) below. This shows that the percentages (or observed probabilities) of missing data are equally large for lower, middle and higher values of the Tampa scale variable. These values are presented as Percentile Groups of Tampa scale values with a range of 28-34, 35-37, 38-40, 41-44, 45-50 respectively. Over the whole range, the percentage of missing data is around 25% (equally large for different values and (not shown) this is also the case for lower and higher values of other variables e.g. pain). In general, The MCAR mechanism does not lead to parameter estimation problems as for example invalid mean or regression coefficient estimates. However, excluding cases with MCAR data will result in a smaller dataset for the analysis and thus larger standard errors (i.e. lower power).</p>
+<div class="figure" style="text-align: center"><span id="fig:tab2-2"></span>
+<img src="images/tab2.2.png" alt="MCAR missing data in the Tampa scale variable." width="90%" />
+<p class="caption">
+Figure 2.9: MCAR missing data in the Tampa scale variable.
+</p>
+</div>
+</div>
+<div id="missing-at-random" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Missing At Random</h3>
+<p>Data are Missing At Random (MAR) when the probability that a value for a variable is missing is related to other observed values in the dataset but not to the variable itself. An example of MAR data is presented in the MAR column of Figure <a href="missing-data-evaluation.html#fig:fig2-7">2.8</a> and Figure <a href="missing-data-evaluation.html#fig:tab2-3">2.10</a> for the LBP study. In Figure <a href="missing-data-evaluation.html#fig:fig2-7">2.8</a> you can see in the MAR column that 4 Tampa scale scores are missing for pain scores that are ≥ 6 and 1 for a pain score &lt; 6, in other words the probability of missing data in the Tampa scale scores is higher for patients with higher pain scores. However, within the category of pain scores with values ≥ 6, the Tampa scale scores are MCAR, because within each category Tampa scale scores are randomly missing for lower and higher values. In <a href="missing-data-evaluation.html#fig:tab2-3">2.10</a> the Tampa scale data is split for at lower and higher pain score categories. It can be observed that the means and standard deviations do not differ between the observed and missing data for the Tampa scale variable. Which is an indication that the Tampa scale data are MAR. An explanation for this phenomenon can be that patients with higher Tampa scale scores were less likely to show up at a next Tampa scale measurement because their back hurted more. In a MAR missing data situation, missing values can be explained by other (observed) variables, like for the Tampa scale and Pain variable in the example above, due to the their (statistical) relationship in the dataset. Further, within categories of the pain variable (for low and high pain values) the Tampa scale scores are MCAR [Kowarik2016]. However, it is not possible to test this assumption, because for that you need information of the missing values and in real-life, that is not possible. In general, excluding MAR data leads to biased parameter estimates and false results for your statistical tests. For example, regression coefficients or p-values. A missing data method that works well with MAR data is Multiple Imputation (Chapter 4).</p>
+<div class="figure" style="text-align: center"><span id="fig:tab2-3"></span>
+<img src="images/tab2.3.png" alt="MAR missing data in the Tampa scale variable." width="90%" />
+<p class="caption">
+Figure 2.10: MAR missing data in the Tampa scale variable.
+</p>
+</div>
+</div>
+<div id="missing-not-at-random" class="section level3">
+<h3><span class="header-section-number">2.3.3</span> Missing Not At Random</h3>
+<p>The data are MNAR when the probability of missing data in a variable is related to the scores of that variable itself, e.g. mostly high or low scores are missing. In the LBP study, MNAR data can occur when patients with the highest scores on the Tampa scale have missing Tampa scale values. This is shown in the MNAR column of Figure <a href="missing-data-evaluation.html#fig:fig2-7">2.8</a>. The MNAR column shows that the values that are most frequently missing are the highest Tampa scale scores, i.e. for the patients that fear their back problems most. A reason may be that these patients were so afraid to move (which is assessed by the Tamp scale), that they were not able to visit an assessment center. MNAR missing data can also occur indirectly through the relationship of the variable with missing data with another variable that is not available in the dataset. For example, it could also be that patients with a high level of fear of movement, worry a lot and therefore do not want to be confronted with questions about their fear to move their back and therefore skip questions of the Tampa scale. In case of a positive relationship between worry and fear of movement, the highest values on the Tampa scale variable are missing. If worry is not measured in the study, the missing data in the Tampa scale variable seems MNAR. The difference with MAR is that with MNAR, the missing data problem cannot be handled by the observed variables in the dataset or by using a technique as Multiple Imputation. However, as with MAR data, MNAR data can also not be verified.</p>
+</div>
+<div id="the-missing-data-indicator" class="section level3">
+<h3><span class="header-section-number">2.3.4</span> The Missing Data Indicator</h3>
+<p>In the definitions of the missing data mechanisms in the previous paragraphs we used the term probability several times, to indicate that the relationship of variables with the probability of missingness in a variable distinguishes the missing data mechanisms. The probability of missing data can depend on other variables (MAR), on values of the variables itself (MNAR) or nether of these (MCAR). Rubin proposed that variables with missing data can be divided in a part that is observed and a part that is missing. The observed and missing data can be coded by a 0 and 1 respectively [RUBIN1987]. In case of the Tampa scale variable this means that the observed data is coded by a 0 and a 1 is used for the Tampa scale values that are missing. This dichotomous coding variable is called the missing data indicator. Figure <a href="missing-data-evaluation.html#fig:fig2-8">2.11</a> shows the missing data indicator for the observed and missing data in the Tampa scale variable. This indicator variable is now a single variable because there is missing data in only the Tampa scale variable. When more variables contain missing data, multible indicator variables can be generated, for each variable that contains missing data.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig2-8"></span>
+<img src="images/fig2.8.png" alt="The missing data in the Tampa scale variable coded according to the missing data indicator variable." width="90%" />
+<p class="caption">
+Figure 2.11: The missing data in the Tampa scale variable coded according to the missing data indicator variable.
+</p>
+</div>
+<p>Using the missing data indicator variable implies that missing values (or the probability of missing values) can be described by a statistical model. This model may consist of variables that have a relationship with the probability of missing data, in this case the indicator variable. A logistic regression model can be used to describe the relationship of variables with the probability of missing data in the Tampa scale variable. Graphically these models can be visualized as displayed below. With logistic regression, the relationship of a dichotomous outcome variable (i.e. the missing data indicator variable) to other variables can be described by using these models.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig2-9a"></span>
+<img src="images/fig2.9a.png" alt="MCAR" width="90%" />
+<p class="caption">
+Figure 2.12: MCAR
+</p>
+</div>
+<p>There is no relationship between, how the data became missing (indicated by R) and observed and unobserved variables.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig2-9b"></span>
+<img src="images/fig2.9b.png" alt="MAR" width="90%" />
+<p class="caption">
+Figure 2.13: MAR
+</p>
+</div>
+<p>There is a relationship between, how the data became missing (indicated by R) and observed variables.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig2-9c"></span>
+<img src="images/fig2.9c.png" alt="MNAR" width="90%" />
+<p class="caption">
+Figure 2.14: MNAR
+</p>
+</div>
+<p>There is a relationship between, how the data got missing (indicated by R) and observed and unobserved variables.</p>
+<p>The missing data mechanisms of Rubin can then be described by the following logistic regression functions, where <span class="math inline">\(R_{Tampa}\)</span> indicates the missing data indicator for the Tampa scale and <span class="math inline">\(\beta\)</span> the regression coefficient:</p>
+<p>MCAR: No variables in or outside the dataset explain the missingness in the Tampa scale variable, the model would be empty: <span class="math display">\[LN(\frac{R_{Tampa=1}}{1-R_{Tampa=1}}) = \beta_0\]</span></p>
+<p>MAR: Variables in the dataset, like Pain and Radiation in the Leg explain the missingness in the Tampa scale variable and the model would be: <span class="math display">\[LN(\frac{R_{Tampa=1}}{1-R_{Tampa=1}}) = \beta_0 + \beta_1 * Pain + \beta_2 * Radiation\]</span></p>
+<p>MNAR: Missingness in the Tampa scale variable can be explained by variables in the dataset and by the score on the Tampa scale itself:</p>
+<p><span class="math display">\[LN(\frac{R_{Tampa=1}}{1-R_{Tampa=1}}) = \beta_0 + \beta_1 * Pain + \beta_2 * Radiation + \beta_3 * Tampa\]</span></p>
+<p>From these models we observe that the missing data models can be defined by other observed variables in the dataset and/or missing data (which we do not observe). It should be noted however, that we can never be completely sure about the reason why data are missing. The above mentioned relationships are therefore statistical relationships from descriptive models and not from causal models. In summary, the MCAR assumption is mostly very strict and not realistic in practice.The MAR assumption is more realistic and mostly assumed in practice.The difference bewteen MAR and MNAR is that in MNAR the probability of missingness is also related to the unobserved (missing) data.</p>
+</div>
+<div id="the-role-of-auxiliary-variables" class="section level3">
+<h3><span class="header-section-number">2.3.5</span> The Role of Auxiliary Variables</h3>
+<p>Usually, the probability of missing data is related to other variables and/or to the missing values itself (MAR or MNAR). Unfortunately, it is not possible to distinguish between MAR and MNAR mechanisms, because the missing values are unknown. Brand [BRAND1999] describes two examples that demonstrate how an initially MNAR missing data mechanism can change into MAR by including additional variables that are related to the probability of missing data. Accordingly, by including variables related to the probability of missing data a MNAR mechanism can get closer to a MAR mechanism. The MAR assumption can be made more plausible by including additional information in the missing data handling method (<span class="citation">Baraldi and Enders (<a href="#ref-Baraldi2010">2010</a>)</span>). Therefore, it is advised, to include extra variables that have a relationship with the missing data rate in other variables, i.e. have a relationship with the probability of missing data or that have a relationship (correlated) with the variables that contain the missing values (<span class="citation">Collins, Schafer, and Kam (<a href="#ref-Collins2001">2001</a>)</span>). These additional variables can help dealing with missing data as well and are called auxiliary variables.</p>
+</div>
+</div>
+<div id="missing-data-evaluation-1" class="section level2">
+<h2><span class="header-section-number">2.4</span> Missing Data evaluation</h2>
+<p>The performance of missing data methods depends on the underlying missing data mechanism. As previously descirbed, the difference between the MCAR and not-MCAR mechanisms depend on the relationship between the probability for missing data and the observed variables. If this relationship cannot be detected we assume that the data is MCAR. If there is some kind of relationship, the missing data may be MAR or MNAR. We can never distinct between MAR or MNAR data, because for that we need information about the missing values and we do not have that information. Tests to distinguish the missing data assumptions are therefore limited to accept or reject the MCAR missing data assumption. In practice we study and measure outcomes and independent variables that are related to each other. This makes the MAR assumption mostly an accepted “working” missing data assumption in practice. There are two approaches to evaluate the missing data mechanism. First, it is important to think about the most plausible substantive reasons for the data being missing. Researchers mostly have some possible explanation about why data are missing and this information is very important. For example, when during web based data collection, the internet sometimes disconnected, data of a few participants gets lost. When these malfunctions are coincidental, it can be assumed that the missing data are MCAR. However, when cognitive scores are assessed during this web based data collection and these are mostly not filled out by people that have decreased cognitive functions, the missing data can be assumed to be MNAR. Second, statistical tests can be used to get an idea about the missing data mechanism. In these statistical tests, the non-responders (i.e., participants with missing observations), can be compared to the responders on several characteristics. By doing this, we can test whether the missing data mechanism is likely to be MCAR or not-MCAR (because we cannot distinguish between MAR and MNAR missing data). There are several possibilities to compare the non-responders with the responders groups, for example using t-tests or Chi-square tests, logistic regressions with the missing data indicator as the outcome, or Little’s MCAR test [LITTLE1988]. Researchers need to be aware that the assumptions that underlie an independent t-test, logistic regression, and Chi-square test apply to these missing data mechanism procedures as well. This means that the residuals are assumed to be normally distributed and that the tests rely on a decent sample size.</p>
+<div id="missing-data-evaluation-in-spss" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Missing data Evaluation in SPSS</h3>
+<div id="descriptive-statistics" class="section level4">
+<h4><span class="header-section-number">2.4.1.1</span> Descriptive Statistics</h4>
+<p>Descriptive information of variables can be obtained via the following options of the Missing Value Analysis (MVA) module in the SPSS menu:</p>
+<blockquote>
+<p>Analyze -&gt; Missing Value Analysis…</p>
+</blockquote>
+<p>Transfer all variables in the correct Quantitative and Categorical variables window and then click</p>
+<blockquote>
+<p>Descriptives option -&gt; Univariate statistics.</p>
+</blockquote>
+<div class="figure" style="text-align: center"><span id="fig:fig2-10"></span>
+<img src="images/fig2.10.png" alt="Missing value Analysis menu in SPSS" width="90%" />
+<p class="caption">
+Figure 2.15: Missing value Analysis menu in SPSS
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:tab2-4"></span>
+<img src="images/tab2.4.png" alt="Univariate descriptive statistics of variables with and without missing data." width="90%" />
+<p class="caption">
+Figure 2.16: Univariate descriptive statistics of variables with and without missing data.
+</p>
+</div>
+<p>Under the column N, the information of all cases in the dataset are displayed, under the column Missing we get the number and percentage of missing values in each variable and under the column No. of Extremes we get information of cases that fall outside a range, which is specified under the table. Further, for all continuous variables information about the Mean and Standard deviation are displayed. No descriptive information is given for categorical variables. These descriptive information of variables with missing data provide a quick overview of the amount of missing data in each variable. However, it does not provide us information about the relationship between variables with complete and missing data and therefore does not give us an idea about the potential missing data mechanism. Methods as T-tests, regression or Little’s MCAR test, discussed in the next section, can better be used for that purpose.</p>
+</div>
+<div id="t-test-procedure" class="section level4">
+<h4><span class="header-section-number">2.4.1.2</span> T-test procedure</h4>
+<p>For the t-test procedure, SPSS first creates an indicator variable, to distinguish the cases with missing values from the cases with values that are present in each variable with missing values. Then, group means are estimated and compared for other variables that are complete with groups formed by the indicator variable, using Student’s t test. As a result, the t-statistic, degrees of freedom, counts of missing and non-missing values, and means of the two groups are displayed. You can also display any two-tailed probabilities associated with the t statistic.</p>
+<blockquote>
+<p>Analyze -&gt; Missing Value Analysis… -&gt; Descriptives -&gt; click “t-tests with groups formed by indicator variables” and “include probabilities in table” -&gt; Continue -&gt; OK.</p>
+</blockquote>
+<div class="figure" style="text-align: center"><span id="fig:fig2-11"></span>
+<img src="images/fig2.11.png" alt="The T-test procedure as part of the Missing Value Analysis menu" width="90%" />
+<p class="caption">
+Figure 2.17: The T-test procedure as part of the Missing Value Analysis menu
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:tab2-5"></span>
+<img src="images/tab2.5.png" alt="Output table of the t-test procedure." width="90%" />
+<p class="caption">
+Figure 2.18: Output table of the t-test procedure.
+</p>
+</div>
+<p>On the left side of the output table the names of the variables with missing values are presented which are the Tampa scale and Disability variables. Of these variables, indicator variables are defined which are used to compare group means of other variables, that can be tested for significance using independent t-tests. The results of these t-tests are shown in the table according to the information in separate rows on the left side with the t-value (t), degrees of freedom (df), P-value (P(2-tail)), numbers of observed and missing cases (# Present and # Missing) and means of observed and missing cases (Mean(Present) and Mean(Missing)) presented. The variables for which the indicator groups are compared, are listed in the columns of the table and are the Pain, Tampa scale, Disability and Age variables. For the Tampa scale variable that contain missing values, only the observed mean is presented, because for the missing cases the values are missing. Note that in the row of the Tampa scale variable the means of the Disability variable can still be compared between the observed and missing cases, because they do not miss values for exactly the same cases. Figure <a href="missing-data-evaluation.html#fig:tab2-5">2.18</a> shows that patients that have observed values on the Tampa scale variable (row Mean(Present)) differ significantly from patients with missing values on the Tampa scale variable (row Mean(Missing)) on Pain (P(2-tail = 0.033) and Disability (P(2-tail = 0.039). When we look at the means of the Pain variable, we see that the mean of patients with missing values on the Tampa scale variable is higher compared to the mean of patients with observed scores. This means that there is a higher probability of missing data on the Tampa scale variable for patients with higher pain scores. If Tampa scale and Pain scores are correlated, the missing values on the Tampa scale variable can also be explained by the Pain score variable. This is also the case for the Age variable, however, the t-test is not significant. For the Disability variable, it is the other way around. We see more missing data on the Tampa scale variable for lower Disability scores. In the Missing Value Analysis window another option is to select “Crosstabulations of categorical and indicator variables”. In that case a separate table is displayed for each categorical variable with missing values. For each category of the variable, the frequency and percentages of non-missing values for the other variables is displayed as well as the percentages of each type of missing value. To reduce the size of the table, you can omit statistics that are computed for only a small number of cases by adjusting the option “Omit variables missing less than % of cases”. Note that for these tables, the Chi-square tests and p-values are not performed. These can be obtained via the usual Crosstabs function, using a self-generated missing data indicator variable.</p>
+<blockquote>
+<p>Analyze -&gt; Descriptive Statistics -&gt; Crosstabs</p>
+</blockquote>
+</div>
+<div id="logistic-regression-analysis" class="section level4">
+<h4><span class="header-section-number">2.4.1.3</span> Logistic Regression Analysis</h4>
+<p>The missing data mechanism can also be evaluated with a logistic regression procedure [RIDOUT1991]. With logistic regression analysis, we can evaluate if the probability of missing data is related to other variables in the data. For this procedure, we first generate an indicator variable that separates the subjects with missing values from the participants with observed values. This indicator variable is used as the dependent variable in a logistic regression analysis. A backward regression can be used to determine the strongest predictors of missing data. The output for the logistic regression with the Tampa scale variable as the indicator outcome variable is presented below:</p>
+<div class="figure" style="text-align: center"><span id="fig:tab2-6"></span>
+<img src="images/tab2.6.png" alt="Logistic regression analysis with variable that contain missing data as the outcome variable." width="90%" />
+<p class="caption">
+Figure 2.19: Logistic regression analysis with variable that contain missing data as the outcome variable.
+</p>
+</div>
+<p>The variable Pain is significantly related to the missing data indicator variable of the Tampa scale variable, which indicates that the probability for missing data in the Tampa scale variable can be explained by the Pain variable. The positive coefficient of 0.315 indicates that the probability of missing data on the Tampa scale variable is higher for higher Pain scores. The other variables do not show a significant relationship with missing data on the Tampa scale variable. This logistic regression analysis procedure can be repeated for each variable with missing values in the dataset.</p>
+</div>
+<div id="littles-mcar-test-in-spss" class="section level4">
+<h4><span class="header-section-number">2.4.1.4</span> Little’s MCAR test in SPSS</h4>
+<p>Another possibility is to use a test that was developed by Roderick Little: Little’s MCAR test. This test is based on differences between the observed and estimated mean in each missing data pattern. This test is developed for continuous data. In this procedure, the missing data in the entire dataset is evaluated at once, because each missing data pattern is included in the analysis.</p>
+<blockquote>
+<p>Analyze -&gt; Missing Value Analysis…-&gt; select the continuous variables -&gt; Select EM in the Estimation group -&gt; OK</p>
+</blockquote>
+<div class="figure" style="text-align: center"><span id="fig:fig2-12"></span>
+<img src="images/fig2.12.png" alt="EM selection in the Missing Value Analysis menu." width="90%" />
+<p class="caption">
+Figure 2.20: EM selection in the Missing Value Analysis menu.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:tab2-7"></span>
+<img src="images/tab2.7a.png" alt="Output tables with information of Little’s MCAR test." width="90%" />
+<p class="caption">
+Figure 2.21: Output tables with information of Little’s MCAR test.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:tab2-7"></span>
+<img src="images/tab2.7b.png" alt="Output tables with information of Little’s MCAR test." width="90%" />
+<p class="caption">
+Figure 2.21: Output tables with information of Little’s MCAR test.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:tab2-7"></span>
+<img src="images/tab2.7c.png" alt="Output tables with information of Little’s MCAR test." width="90%" />
+<p class="caption">
+Figure 2.21: Output tables with information of Little’s MCAR test.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:tab2-7"></span>
+<img src="images/tab2.7d.png" alt="Output tables with information of Little’s MCAR test." width="90%" />
+<p class="caption">
+Figure 2.21: Output tables with information of Little’s MCAR test.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:tab2-7"></span>
+<img src="images/tab2.7e.png" alt="Output tables with information of Little’s MCAR test." width="90%" />
+<p class="caption">
+Figure 2.21: Output tables with information of Little’s MCAR test.
+</p>
+</div>
+</div>
+</div>
+<div id="missing-data-evaluation-in-r" class="section level3">
+<h3><span class="header-section-number">2.4.2</span> Missing data Evaluation in R</h3>
+<div id="littles-mcar-test-in-r" class="section level4">
+<h4><span class="header-section-number">2.4.2.1</span> Little’s MCAR test in R</h4>
+<p>Little´s MCAR test is available in the <code>BaylorEdPsych</code> package for R from the <code>LittleMCAR</code> function. To apply the test, we select only the continuous variables. In the example we use the dataset of 150 low back pain patients with missing data in Gestatstional Age (GA). The p-value for the test is not-siginificant, indicating that the missings seem to be compeletely at random.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(BaylorEdPsych)
+<span class="kw">LittleMCAR</span>(dataset[,<span class="kw">c</span>(<span class="st">&quot;Pain&quot;</span>, <span class="st">&quot;Tampascale&quot;</span>,<span class="st">&quot;Disability&quot;</span>, <span class="st">&quot;GA&quot;</span>)])</code></pre></div>
+<pre><code>## this could take a while</code></pre>
+<pre><code>## $chi.square
+## [1] 5.395246
+## 
+## $df
+## [1] 3
+## 
+## $p.value
+## [1] 0.14504
+## 
+## $missing.patterns
+## [1] 2
+## 
+## $amount.missing
+##                 Pain Tampascale Disability    GA
+## Number Missing     0          0          0 29.00
+## Percent Missing    0          0          0  0.58
+## 
+## $data
+## $data$DataSet1
+##    Pain Tampascale Disability GA
+## 2     6         43         10 36
+## 6     7         43         11 29
+## 8     6         43         11 34
+## 10    4         36          3 38
+## 13    0         32          3 42
+## 15    3         34         13 39
+## 17    3         35         11 26
+## 20    4         32          9 28
+## 25    5         36          6 35
+## 28    3         36          3 36
+## 30    6         37         16 40
+## 32    4         37          8 39
+## 34    2         37          3 37
+## 37    8         47          8 35
+## 39    3         39          8 33
+## 41    7         45         10 32
+## 44    1         35          2 34
+## 46    5         41         17 38
+## 47    6         43         11 41
+## 48    3         39          9 33
+## 50    8         44         19 32
+## 
+## $data$DataSet2
+##    Pain Tampascale Disability GA
+## 1     9         45         20 NA
+## 3     1         36          1 NA
+## 4     5         38         14 NA
+## 5     6         44         14 NA
+## 7     8         43         18 NA
+## 9     2         37         11 NA
+## 11    5         38         16 NA
+## 12    9         47         14 NA
+## 14    6         38         12 NA
+## 16    6         42          8 NA
+## 18    1         31          1 NA
+## 19    2         31          7 NA
+## 21    5         39         13 NA
+## 22    5         39         12 NA
+## 23    4         34          8 NA
+## 24    8         47         13 NA
+## 26    5         38         16 NA
+## 27    9         48         23 NA
+## 29    2         36          9 NA
+## 31   10         43         21 NA
+## 33   10         42         20 NA
+## 35    6         43         12 NA
+## 36    3         38          7 NA
+## 38    3         38          6 NA
+## 40    7         44         15 NA
+## 42    6         40         12 NA
+## 43    7         40         16 NA
+## 45    9         41         19 NA
+## 49    2         33          6 NA</code></pre>
+
+</div>
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-little1987statistical">
+<p>Little, R.J.A., and D.B. Rubin. 2007. <em>Statistical Analysis with Missing Data</em>. Vol. 2. Wiley New York:</p>
+</div>
+<div id="ref-Baraldi2010">
+<p>Baraldi, A. N., and C. K. Enders. 2010. “An introduction to modern missing data analyses.” <em>J Sch Psychol</em> 48 (1): 5–37.</p>
+</div>
+<div id="ref-Collins2001">
+<p>Collins, L. M., J. L. Schafer, and C. M. Kam. 2001. “A Comparison of Inclusive and Restrictive Strategies in Modern Missing Data Procedures.” <em>Psychological Methods</em> 6 (3): 330–51.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="part-ii-basic-missing-data-handling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="single-missing-data-imputations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["Book_MI.pdf", "Book_MI.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
