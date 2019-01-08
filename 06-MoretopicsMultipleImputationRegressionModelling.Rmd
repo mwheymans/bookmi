@@ -1,0 +1,311 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+
+# More topics on Multiple Imputation and Regression Modelling 
+
+# Multiple Imputation and Regression Modelling
+
+This Chapter is a follow-up on the previous Chapters 4 and 5 about data analysis with Multiple Imputation. In this Chapter, we will deal with some specific topics when you perform regression modeling in multiple imputed datasets. 
+
+
+##Imputing the Outcome variable
+
+In previous literature that has been discussion about how to deal with the outcome variable (i.e. dependent variable) as part of the imputation procedure. For a full overview of the arguments you can review the original literature. There are roughly two situations when the outcome can be considered. Below we will briefly summarize the situations and provide the concluding advice from literature. 
+1.	The outcome is completely observed and independent variables in your analysis model have missing values. 
+
+Advice: include the outcome variable in the imputation model to impute the missing values in the independent variables (Moons, 2006).
+
+2.	Both the outcome and independent variables in your analysis model have missing values. 
+
+Advice: include the outcome variable in the imputation model. I In other words, impute the missing values in the outcome and independent variables (White, 2017).
+
+
+##Logistic regression with a categorical covariate in SPSS
+
+For categorical covariates, SPSS does not generate a pooled p-value for the overall Wald test. This is equal to not presenting a pooled Chi-square value in SPSS because the overall Wald value is a Chi-square value that represents the relationship between variables with > 2 categories and the outcome. An example is shown in Table 6.1a and 6.1b to show that the pooled Chi-square value for the Wald test is presented for the logistic and Cox regression models in SPSS respectively. As an example, we use a categorical version of the Tampascale variable with the categories 0 = low fear of movement, 1 = middle fear of movement and 2 is a high fear of movement. This variable contains missing data and was imputed with MI. We used 5 imputed datasets. The output Tables for the analyses can be found in Figure \@ref(fig:fig6-1).
+
+
+```{r fig6-1, echo = FALSE, fig.cap="Logistic and Cox Regresion with an independent categorical variable.", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig6.1.png")
+```
+
+The information of the overall Wald test can normally be found in the output table in the row above the regression coefficient estimates of the separate categories of the categorical variable. In SPSS, this row only provides information of the overall Wald value, the degrees of freedom and the level of significance (abbreviated as Sig. which is the p-value). In the output tables you see that besides the regression estimates for each different category, no pooled estimates are provided for the overall Wald test (this whole row is missing). 
+	
+There are several complex and more simple procedures to derive a p-value for the overall Wald test. The simplest procedure is just taking the median of the p-values from the overall Wald test of all imputed datasets, this rule is called the Median P Rule (MPR) (@Eekhout2017). This rule will be discussed more thoroughly below. Other more complex procedures  are the multiple parameter Wald test or D2 method, the pooled sampling variance or D1 method and the Meng and Rubin pooling procedure. These methods can only be performed in R; the codes are presented in the following paragraph.
+
+##Logistic regression with a categorical variable in R
+
+###Multiple parameter Wald test or D2 method
+
+One possibility is to pool the Chi-square values from the multiple parameter Wald or likelihood ratio tests with multiple degrees of freedom. This procedure is also called the D2 procedure (Enders 2012). We used this procedure also in the previous Chapter to obtain the pooled Chi-square values. 
+
+The following formula is used to obtain the Chi-square values from a multiple parameter Wald test (Marshall, 2009): 
+											Formula 6.1
+W_chi=(1+r)^(-1) (ω ̅/k-(m+1)/(m-1)  r) ,
+
+where ω ̅ is the mean of the Chi-square values over the imputed datasets, k is the degrees of freedom of the Chi-square test statistic, m is the number of imputed datasets and r reflects the relative increase in variance due to nonresponse, which is obtained by the following formula:
+
+											Formula 6.2
+r=  (m+1)/(m(m-1)) ∑_(j=1)^m▒( 〖√(ω_j )-√(ω ̅ ))〗^2 ,
+
+with m and ω ̅  as above,  j = 1 …, m  the index of  each separate imputed dataset and ω_j is the Chi-square value in each imputed dataset. The p-value is calculated by comparing the W_chi statistic to an F distribution with k and v  degrees of freedom as follows:
+
+											Formula 6.3
+P=Pra[F_(k,v)>W_chi]
+
+The application of the function to pool Chi-square values can be found in the R code below where the function `miPoolChi` is applied. Input values in the function are the Chi-square values of each imputed dataset that are shown in Table 6.1 and the degrees of freedom of the Chi-square test, which is 2 here.
+
+```{r}
+miceadds::micombine.chisquare(c(1.815,
+            1.303,
+            2.826,
+            1.759,
+            3.634),2)
+
+```
+
+As we already showed in the previous Chapter this pooling function is also available in the `miceadds` and `semtools` packages, which will of course provide the same results.
+
+###The pooled sampling variance or D1 method
+
+Alternatively, a combination of the pooled parameter estimates and the pooled sampling variances can be used to construct a test that resembles a multivariate Wald test (Marshall, 2009). This test pools within and between covariance matrices of each imputed dataset and finally corrects the total parameter covariance matrix of the multivariate Wald test by including the average relative increase in variance to account for the missing data. 
+
+The multivariate Wald statistic is calculated as (Enders, 2010; Marshall et al., 2009):
+
+											Formula 6.4
+W_mvar=((1+r_1 )^(-1) (θ_0-θ ̅)U ̅^(-1) 〖(θ_0-θ ̅)〗^t)/k ,
+
+where θ ̅ and θ_0are the pooled coefficient and the value under the null hypothesis, U ̅  is the within imputation variance (Var(θ ̅)within), t is the total variance for the pooled estimate (Var(θ ̅ )), and k is the number of parameters. The r_1is the relative increase in variance due to nonresponse (fraction of missing information), which is in this case obtained by:
+
+											Formula 6.5
+r_1=((1+m^(-1) )Tr(〖BU ̅〗^(-1)))/k,
+
+where B is the between imputation variance (Var(θ ̅)between) and m is the number of imputed datasets. The p-value is calculated by comparing the W_mvar statistic to an F distribution with k and v_1 degrees of freedom. 
+											Formula 6.6
+P=Pra[F_(k,v_1 )>W_mvar]
+
+With the degrees of freedom defined as:
+											Formula 6.7
+v_1=4+(km-k-4) 〖[1+(1-2/(km-k))  1/r_1 ]〗^2,
+
+If km-k<4, the formula above applies, otherwise:
+											Formula 6.8
+v_1=((km-k)(1+1/k)〖(1+1/r_2 )〗^2)/2.
+
+The D1 function for logistic regression  is available from the psfmi  package. The psfmi package is a package that contains predictor selection functions for multiple imputation. The package can be downloaded from Github. An example of the application of this procedure:
+
+```{r}
+
+##example from psfmi package - wel wat minder uitgewerkt. Ook technische kant moet eruit. Daarovor verwijzen naar paper. 
+
+```
+
+###Meng and Rubin pooling
+
+Meng and Rubin proposed a method to test overall categorical variables indirectly based on the likelihood ratio test statistic (MR pooling) (@Meng1992, @Mistler2013). For each regression parameter, two nested models are fitted in each imputed dataset: one restricted model where the parameter is not included in the model and one full model where the parameter is included. The pooled likelihood ratio tests are then compared to obtain pooled p-values for each parameter. The MR pooling method requires fitting multiple models for each variable in the data, hence it is an indirect approach. This can be a very time-consuming process. 
+
+Meng and Rubin pooling (MR pooling)
+The Meng and Rubin pooling method works according to the following steps (@Meng1992): 
+	for each regression parameter θ  two nested models are fitted in each imputed dataset: one where θ  is included (full model) and one where θ  is not included in the model (restricted model). Subsequently, these models are pooled to obtain θ ̅_full and θ ̅_restricted.
+	The average likelihood ratio test statistic d ̅L over the imputed datasets as a result of comparing the log likelihood values between these models is calculated as:
+	
+
+Formula 6.9
+d ̅_L=1/m ∑_(j=1)^m▒2 (L_restricted-L_full ),
+
+where Lrestricted   and Lfull  represent the maximum log likelihood values with respect to θ.  
+	The log likelihood values from the two models of step 2 are then re-calculated  and averaged using the model parameters θ ̅_full and θ ̅_restricted of step 1 (which were constrained to the values from the models in the imputed data): 
+	
+Formula 6.10
+
+d ̅_constrained=1/m ∑_(j=1)^m▒2 (L(θ ̅_full )-L(θ ̅_restricted )),
+
+	The resulting test statistic DL , required to obtain the pooled p-value, is calculated by incorporating the average increase in variance due to nonresponse r ̅L as follows:
+
+Formula 6.11
+D_L=  d ̅_constrained/(k(1+(r_L ) ̅)),
+
+						Formula 6.12
+
+(r_L ) ̅=(m+1)/k(m-1) (d ̅_L-d ̅_constrained),
+
+where k  is the number of degrees of freedom in the complete data likelihood ratio test (@Mistler2013 and @VanBuuren2018). The p-value is calculated by comparing  the D_L statistic with an F distribution with k and vL  (i.e., degrees of freedom of the denominator) according to:
+											Formula 6.13
+
+P_L=Pra[F_(k,v_L )>D_L]
+
+								Formula 6.14
+
+v_L=4+(km-k-4)[1+(1-2/(km-k)  1/r_L ]^2
+
+
+To calculate the pooled p-value by using the Meng and Rubin procedure we use R code 6.3.
+
+```{r}
+###r code met vb uit psfmi package, simpele code = dus aanpassen en niet zo uitgebreid. Gewoon alleen toepassing laten zien. 
+```
+
+###The Median P Rule
+
+For the Median P Rule (MPR) one simply uses the median p-value of the significance tests conducted in each imputed dataset (MPR pooling). Hence, it depends on p-values only and not on the parameter estimates. The MPR can be calculated by using the p-values from the likelihood ratio test for multiple parameters for the categorical variables in the multivariable model (@Eekhout2017). The Median P Rule is therefore very simple to apply, you just take the median of the p-values. For the median p-value to be valid you have to run the MI procedure without the outcome in the imputation model (R code 6.4).
+
+
+```{r}
+
+##Example code of MPR
+```
+
+
+##Cox Regression with a categorical variable in R
+
+As with logistic regression models, pooling categorical variables in Cox regression models is also not possible in SPSS, which was shown in Table 6.1b. In this output table the pooled overall Wald statistics are  also lacking. As a solution we can also use the pooling statistics that were shown in the previous paragraph. All procedures can be applied for overall Wald tests that are obtained by using Cox regression models, except for the Meng and Rubin procedure. The Meng and Rubin procedure is not recommended to use for Cox regression models (@Marshall2009MedResMeth). The other three pooling procedures are available for Cox regression models, which are the Multiple parameter Wald test pooling or D2 method, the pooled sampling variance (VAR pooling) or D1 method and the MPR pooling procedure. The MPR pooling procedure is only extensively tested for the logistic regression model, but not yet for the Cox regression model and should therefore only be used in combination with the other pooling procedures.
+
+###Multiple parameter Wald test or D2 method
+
+[Alleen verschillen met Logistic regression utileggen. zo mogelijk samen nemen. nu is het een beteje dubbel allemaal. ]
+
+###The pooled sampling variance or D1 method
+
+The pooled sampling variance procedure can also be applied to Cox regression models. This procedure makes use of the within and between covariance matrices that are obtained in each imputed dataset. Here the function D1.Cox that can be obtained via the psfmi package, does the job. An example of the application of this procedure can be found in R code 6.7. 
+
+###The Median P Rule
+
+The Median P Rule just uses the median of the p-values. For the median p-value to be valid you have to run the MI procedure without the outcome in the imputation model (R code 6.8).
+
+
+##Predictor selection
+Prediction models are frequently developed by using selection procedures in logistic and Cox regression models. As a selection procedure, backward selection is recommended (Moons et al 2015). Predictor selection in multiple imputed datasets may be challenging. Predictor selection in each imputed dataset separately, may result in a different set of selected variables. Royston (2008) showed that the best choice to select predictors from multiply imputed datasets is to select from the pooled model, i.e. the model that is estimated in each imputed dataset and subsequently regression coefficients are pooled. From these pooled estimates the backward selection procedure can start. This is possible in SPSS when the model includes continuous and dichotomous variables. This is however not possible in SPSS when the model contains categorical variables. Because categorical variables are estimated and selected by using an overall Wald Chi-square value and as we have seen in paragraph 6.2, these Chi-square tests cannot be pooled in SPSS. This makes variable selection when categorical variables are included, not possible in SPSS. We have therefore developed an R package, that contains functions to select predictors  multiple imputed datasets and we have integrated the pooling procedures that were discussed in the previous paragraphs within these predictor selection functions. We will discuss these functions in the next paragraphs by running the code and we will discuss the output. The package can be installed via the Github website (code to install the packages will be provided below). 
+As an example, we will use a dataset of 426 patients who received a new hip after a hip fracture. The outcome is recovery at 6 months which was defined as 1=no recovery and 0 = recovery. All functions work more or less in the same way and comparable function parameter settings are used. We start by showing the parameters settings that are used in these functions.
+
+###Predictor Selection functions in R
+
+The functions are developed for Logistic and Cox regression models. They are called:
+psfmi.log
+psfmi.log.MR
+psfmi.cox
+
+To activate these functions, you have to install the psfmi package from the Github website. Before that you have to install and activate the devtools package. The following code in the Console window can be used:
+
+
+```{r}
+
+## voorbeeld laten zien voor predictor selectio met psfmi package - verder niet uitwijden over inhoud. Alleen voorbeeld laten zien!
+
+```
+
+
+##Interaction terms in model
+
+When the analysis model contains an interaction term, and one of the variables that is part of the interaction term contain missing data, it is important to pay extra attention to the imputation procedure. The challenge in this situation is that the imputation model should also include the interaction term, otherwise the imputation model is not compatible with the analysis model and this results in incorrect imputed values. For example, the relationship between (body)weight and blood pressure, with gender as effect modifier. The main aim of this model is to study the relationship between (body)weight and blood pressure. The interaction term between (body)weight and gender investigates whether this relationship depends on gender, i.e. is stronger or less strong for males compared to females. The analysis model is:
+
+SBP=β_0+β_1×BodyWeight+β_2×Gender+β_3×BodyWeight×Gender
+
+Assume now that there is missing data in the weight variable. As a result, there will also be missing data in the interaction term between weight and gender. 
+
+When an imputation model only includes the following formula:
+
+〖BodyWeight〗_mis=β_0+β_1×SBP+β_2×Gender
+
+The imputation model is not consistent (not compatible) with the analysis model and would therefore not be able to generate valid imputations. We have to use  an imputation model that includes the interaction term, such as:
+
+〖BodyWeight〗_mis=β_0+β_1×SBP+β_2×Gender+ β_3×〖BodyWeight〗_mis×Gender
+
+The imputation of weight should take the interaction between weight and gender in relation to blood pressure into account. A method that we can apply is that we impute the relationship between blood pressure and weight separately for males and females. That way, we account for the possibility that the relationship between weight and blood pressure differs between males and females and the imputed values can then differ too. Not taking into account this interaction during the imputation process will result in biased coefficients and standard error estimates (Bartlett et al. 2015). The steps that we have to follow to impute the missing data in the weight variable in SPSS, taking into account the interaction between weight and gender is illustrated in the next paragraph.
+
+###Imputation of interaction terms in SPSS
+
+To impute the missing data in the Bodyweight variable in the example, the fact that the relation between bodyweight and blood pressure depends on gender needs to be taken into account in the imputation. This can be done by using the Split file procedure in SPSS. The example dataset contains information about the variables that are presented in \@ref(fig:fig6-2).
+
+
+```{r fig6-2, echo = FALSE, fig.cap="Bodyweight dataset with missing values in the Bodyweight variable.", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig6.2.png")
+```
+
+Compare Groups and move the Gender variable to the window: Group based on, then click OK. In the right corner below it you see the information “Split by Gender”, which means that for the next analyses procedures the procedures will be done separately for males and females.
+
+```{r fig6-3, echo = FALSE, fig.cap="The Split File procedure in SPSS.", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig6.3.png")
+```
+
+Perform MI and use all variables in the imputation model, except for the Gender variable. Because the Gender variable was used as a split variable it cannot be included in the imputation model. MI will now be separately performed for Males and Females. Set M=20, use Predictive Mean Matching and 50 iterations and store the imputed datasets in the file Imp_Bodyweight.  In the SPSS output file, in the Imputation Results and the Imputation Models tables you can check that the imputation process was performed for males and females separately.
+
+
+```{r fig6-4, echo = FALSE, fig.cap="Imputation models, splitted for males and Females", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig6.4.png")
+
+```
+
+Compute the Interaction term of Bodyweight times Gender in the dataset that contains the imputed values.Now turn on the split on the variable Imputation_. That will automatically turn off the split on the Gender variable in the imputed datasets (in the Data View window of the imputed datasets in the corner on the right below you see the statement “Split by Imputation_ Gender”. To include the variable Gender in the model we first have to unsplit the data by Gender). 
+
+#```{r fig6-5, echo = FALSE, fig.cap="The Split File procedure is used to split on the variable Imputation_.", #out.width='90%', fig.align='center'}
+#knitr::include_graphics("images/fig6.4.png")
+#```
+
+Then the analysis can be performed as planned with th interaction term as one of the predictors. 
+
+
+###Imputation of interaction terms in R
+
+The split file procedure that we used in SPSS in the previous paragraph to impute missing data and to take interaction terms into account can also be applied in R. First you have to split the data, impute the missing values, merge the data again and generate the interaction term in the dataset . Then results of the analysis model can be pooled. 
+There is also another procedure in R that can be used. This procedure is called Substantive Model Compatible Fully Conditional Specification (SMC-FCS). This is a fairly complex procedure that can generate valid imputations by taking into account interaction terms. More about this procedure can be found in the technical paper of Bartlett et al.( 2015). To apply the procedure we need the smcfcs function which is available in the smcfs package (Bartlett, 2015). To get pooled analysis results we also have to install the mitoolspackage. An example of using the SMC-FCS is presented below.
+
+```{r}
+
+# Read in SPSS File "BodyWeight" and assign to object set
+#set <- read.spss(file = "BodyWeight.sav", to.data.frame = T) ##IE: change to haven package
+
+#set <- set[, -1]## do this in prediction model - otherwise ID variable is lost! 
+#et$Int <- set$Bodyweight*set$Gender
+ 
+# Perform SMCFCS, set seed to reproduce results
+# impute missing values, taking account of the interaction term 
+ 
+#imp.smcfcs <- smcfcs(set, smtype="lm", m=5, numit=10, rjlimit=2000,
+#                smformula="SBP ~ Bodyweight + Gender + Int",
+#                method=c("","","","","", "norm","Bodyweight*Gender"))
+
+# fit analysis model and get pooled results
+#smcfcs.model <- imputationList(imp.smcfcs$impDatasets)
+# model.res <- with(smcfcs.model, lm(SBP~ Bodyweight + Gender + Int))
+# summary(MIcombine(model.res))
+```
+
+
+###Comparing methods
+
+In table 6.6 the procedures to impute missing data and taking into account interaction terms in the model that can be applied in SPSS and R are compared.
+
+
+Table 6.6. Overview of similarities and dissimilarities between the SMC-FCS and Split group imputation methods.
+SMC-FCS	Split group Imputation
+
+Available for linear, logistic and Cox models 	
+Available for linear, logistic and Cox models
+
+Possible Interaction combinations:
+	2 categorical variables 
+	Continuous and categorical variables
+	2 continuous variables
+
+Possible Interaction combinations:
+	2 categorical variables 
+	Continuous and categorical variables
+
+Possible to customize imputation model	
+Possible to customize imputation model
+
+Unknown for interactions > 2 variables	
+Unknown  for interactions > 2 variables
+
+Available for R and Stata software	
+Available in any software program
+
+It  can be summarized that the split file procedure in SPSS is a strong alternative for the smcfcs function in R. Only the data situation of an interaction term between 2 continuous variables can only be applied in R. In that case the smcfcs function has to be used.
+
+
+[Ik denk dat er nog wel een nadeel is aan  die SPSS functie (ik weet niet zeker of dat ook in de smcfcs is) Maar in de split file manier, impliceer je niet alleen een interactie tussen gender en weight, maar ook tussen gender en alle andere variabelen. Met andere woorden, voor de andere variabelen heb je een kleinere sample waarop je de imputaties baseert, omdat je split file doet, terwijl dit misschien niet terecht is omdat daar geen interactie met gender is.
+Misschien goed om even in een simulatie te checken? >> evne opschrijven in de dingen die we nog moeten doen voor we de eindversie maken. ]
+

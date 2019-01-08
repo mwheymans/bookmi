@@ -1,0 +1,6 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Part IV – Data Analysis After Multiple Imputation {-}

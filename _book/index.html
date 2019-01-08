@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Chapter 3 Single Missing data imputations | Applied Missing data analysis with SPSS and R(Studio)</title>
-  <meta name="description" content="Chapter 3 Single Missing data imputations | Applied Missing data analysis with SPSS and R(Studio)>
+  <title>Applied Missing data analysis with SPSS and R(Studio)</title>
+  <meta name="description" content="Applied Missing data analysis with SPSS and R(Studio)">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Chapter 3 Single Missing data imputations | Applied Missing data analysis with SPSS and R(Studio) />
+  <meta property="og:title" content="Applied Missing data analysis with SPSS and R(Studio)" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Single Missing data imputations | Applied Missing data analysis with SPSS and R(Studio) />
+  <meta name="twitter:title" content="Applied Missing data analysis with SPSS and R(Studio)" />
   
   
   
@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="missing-data-evaluation.html">
-<link rel="next" href="part-three-multiple-imputation.html">
+
+<link rel="next" href="part-i-software.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -348,353 +348,50 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="single-missing-data-imputations" class="section level1">
-<h1><span class="header-section-number">Chapter 3</span> Single Missing data imputations</h1>
-<div id="complete-cases-analysis" class="section level2">
-<h2><span class="header-section-number">3.1</span> Complete cases analysis</h2>
-<p>Complete case analysis (CCA) means that the statistical analyses is done in the dataset afetr every persons with a missing data point in a variable is excluded from the analysis. This procedure is still used a lot (<span class="citation">Eekhout et al. (<a href="#ref-Eekhout2012">2012</a>)</span>) but can have a large negative impact on the precision of the statistical test results. It also leads to an incorrect estimation of standard errors when the data is MCAR, MAR and MNAR (<span class="citation">Eekhout et al. (<a href="#ref-Eekhout2014">2014</a>)</span>). It is for that reason not recommended. It is however, the default procedure in a lot of statistical software packages as in SPSS.</p>
+<div id="header">
+<h1 class="title">Applied Missing data analysis with SPSS and R(Studio)</h1>
+<p class="author"><em>Martijn Heymans and Iris Eekhout</em></p>
+<p class="date"><em>2019-01-08</em></p>
 </div>
-<div id="mean-imputation" class="section level2">
-<h2><span class="header-section-number">3.2</span> Mean Imputation</h2>
-<p>Assume that we are interested in the relationship between Pain and the Tampa scale variable. To get a first impression about this relationship we make a scatterplot. The scatterplots of the complete and incomplete datasets are displayed in Figure <a href="single-missing-data-imputations.html#fig:fig3-1">3.1</a> and Figure <a href="single-missing-data-imputations.html#fig:fig3-2">3.2</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:fig3-1"></span>
-<img src="images/fig3.2a.png" alt=" Relationship between the Tampa scale and Pain variables (green dots are observed and red dots are assumed to be missing data" width="70%" />
-<p class="caption">
-Figure 3.1:  Relationship between the Tampa scale and Pain variables (green dots are observed and red dots are assumed to be missing data
-</p>
+<div id="foreword" class="section level1 unnumbered">
+<h1>Foreword</h1>
+<p>In the past decades, the attention for missing data has grown and so has the need for researchers to apply suitable methods to deal with their missing data. Leading methodologists and statisticians have published papers in leading journals about the problems of missing data and recommended researchers to take missing data seriously ((<span class="citation">Sterne et al. (<a href="#ref-sterne2009multiple">2009</a>)</span>, <span class="citation">R.J. Little et al. (<a href="#ref-little2012prevention">2012</a>)</span>, <span class="citation">Li P (<a href="#ref-Li2015">2015</a>)</span>)). From our experience, researchers still find it difficult to reserve time to evaluate the missing data in their study and to find a suitable solution to handle their missing data for their main data analysis. This book is developed for applied researchers who are looking for a solution for their missing data problem or who want to learn more about dealing with missing data. The book is initially developed for a missing data course for epidemiologist, but we feel that applied researchers from other disciplines may also find this book useful. Further, we are active in giving statistical advice in general and more specific about missing data. Because our time for consultations is mostly limited, this practical guide may be useful to help researchers get started with their missing data problem. With this book we provide an overview of the currently available methods to deal with missing data. The use of the methods are thoroughly explained and supported by practical examples. We hope you will enjoy this book and that you find it useful, at that as a result you will use the recommended methods to solve your missing data problem.</p>
+<div id="software" class="section level2">
+<h2><span class="header-section-number">0.1</span> Software</h2>
+<p>In this book the software packages SPSS and R play a central role. The combination of these two software packages may seem random, but it is not. SPSS is one of the most popular software package, worldwide, to do statistical data analyses. Currently, R is growing in popularity fast and will probably become one of the most popular software packages to do data analysis, also for applied researchers.</p>
+<p>Both SPSS and R have their own specific characteristics that may some find an advantage and some a disadvantage. One of the main differences between SPSS and R is that SPSS works with a click-menu that makes windows appear. In these windows you can drag variables into boxes. Subsequently, you can click the OK button and the statistical analysis procedure you specified will run and the output results are automatically presented in a new window. A limitation of working with SPSS may be that you are overloaded with statistical output that may not all be needed to answer your research question. Also, newly developed methods are not immediately available, but have to be included in a new version update by the developers.</p>
+<p>R is a software package that needs code to access statistical procedures. In R you need to be familiar with some R-language in order to use it. However, once you know the language, R can be used for any statistical procedure you can think of. R is a free open source program see anybody can download and use it and it enables users to get insight into the calculations that are programmed by applying procedures. Anyone can contribute by developing packages and functions for statistical procedures. Consequently, state-of-the-art statistical methods are very quickly available in R, and if they are not, you can develop them yourself.</p>
+<p>In this book the handling of missing data is the main topic. We will show how to apply methods in both software packages SPSS and R. The multiple imputation methods that are discussed run with random starting procedures. Both SPSS and R use their own internal random number generators. Because these are different, results might slightly differ between the software packages, even when exactly the same function is applied. Our intention is not to compare the software packages, both packages are reliable, but we aim to provide readers with an overview of all possible methods in different missing data situations. In this book we use SPSS version 24 and R software version 3.5.1. The R examples will be presented by using the output from RStudio version (Version 1.1.463 – © 2009-2018 RStudio, Inc). RStudio is an integrated development environment (IDE) for R. RStudio includes a wide range of productivity enhancing features and runs on all major platforms.</p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:fig3-2"></span>
-<img src="images/fig3.2b.png" alt="Relationship between the Tampa scale and Pain variable. Missing data are excluded" width="70%" />
-<p class="caption">
-Figure 3.2: Relationship between the Tampa scale and Pain variable. Missing data are excluded
-</p>
-</div>
-<p>The green dots represent the observed data and the red dots the missing data points. In practice, in your dataset you have the available points that are visualized in Figure <a href="single-missing-data-imputations.html#fig:fig3-2">3.2</a>.</p>
-<div id="mean-imputation-in-spss" class="section level3">
-<h3><span class="header-section-number">3.2.1</span> Mean imputation in SPSS</h3>
-<p>The easiest methods to do mean imputation are by using the <em>Replace Missing Values</em> procedure under Transform and by using the <em>Linear Regression</em> procedure.</p>
-<p><em>Replace Missing Values procedure</em></p>
-<p>You can find the Replace Missing Values dialog box via</p>
-<blockquote>
-<p>Transform -&gt; Replace Missing Values.</p>
-</blockquote>
-<p>A new window opens. Transport the Tampa scale variable to the New variable(s) window (Figure <a href="single-missing-data-imputations.html#fig:fig3-3">3.3</a>). The default imputation procedure is Mean imputation or called “Series mean”.</p>
-<div class="figure" style="text-align: center"><span id="fig:fig3-3"></span>
-<img src="images/fig3.6.png" alt="Window for mean imputation of the Tampa scale variable." width="70%" />
-<p class="caption">
-Figure 3.3: Window for mean imputation of the Tampa scale variable.
-</p>
-</div>
-<p>When you click on OK, a new variable is created in the dataset using the existing variable name followed by an underscore and a sequential number. The result is shown in Figure <a href="single-missing-data-imputations.html#fig:fig3-7">3.4</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:fig3-7"></span>
-<img src="images/fig3.7.png" alt="Mean imputation of the Tampa scale variable with the Replace Missing Values procedure." width="70%" />
-<p class="caption">
-Figure 3.4: Mean imputation of the Tampa scale variable with the Replace Missing Values procedure.
-</p>
-</div>
-<p>The scatterplot between the Pain and the Tampa scale variable clearly shows the result of the mean imputation procedure, all imputed values are located at the mean value (Figure <a href="single-missing-data-imputations.html#fig:fig3-4">3.5</a>).</p>
-<div class="figure" style="text-align: center"><span id="fig:fig3-4"></span>
-<img src="images/fig3.4.png" alt="Scatterplot between the Tampa scale and Pain variable, after the missing values of the Tampa scale variable have been replaced by the mean." width="70%" />
-<p class="caption">
-Figure 3.5: Scatterplot between the Tampa scale and Pain variable, after the missing values of the Tampa scale variable have been replaced by the mean.
-</p>
-</div>
-<p><em>Linear Regression</em></p>
-<p>Mean imputation in SPSS is also integrated in the Linear Regression menu via:</p>
-<blockquote>
-<p>Analyze -&gt; Regression -&gt; Linear -&gt; Options.</p>
-</blockquote>
-<p>In the Missing Values group you choose for Replace with mean (Figure <a href="single-missing-data-imputations.html#fig:fig3-8">3.6</a>).</p>
-<div class="figure" style="text-align: center"><span id="fig:fig3-8"></span>
-<img src="images/fig3.8.png" alt="The option Replace with mean in the Linear Regression menu." width="70%" />
-<p class="caption">
-Figure 3.6: The option Replace with mean in the Linear Regression menu.
-</p>
-</div>
-<p>You can also obtain the mean values by using <em>Descriptive Statistics</em>, and than replace the missing values by using the “Recode into Same Variables”under the Transform menu.</p>
-</div>
-<div id="mean-imputation-in-r" class="section level3">
-<h3><span class="header-section-number">3.2.2</span> Mean imputation in R</h3>
-<p>You can do mean imputation by using the mice function in the mice package and choose as method “mean”.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(foreign) <span class="co"># activate the foreign package to use the read.spss function</span>
-dataset &lt;-<span class="st"> </span><span class="kw">read.spss</span>(<span class="dt">file=</span><span class="st">&quot;Backpain 50 missing.sav&quot;</span>, <span class="dt">to.data.frame=</span>T)</code></pre></div>
+<div id="notation-in-this-book" class="section level2">
+<h2><span class="header-section-number">0.2</span> Notation in this book</h2>
+<p>Annotation in this book</p>
+<p>The name of R packages and libraries are used as they are published under their original names. The name of R functions is in italic form, like the mice function.</p>
+<p>R code of the procedures used in the book is marked grey.</p>
+<p>Book examples in R code language can be found in grey text boxes, for example: to read in the dataset Backpain 50 missing.sav.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Activate the foreign package and read in the SPSS dataset</span>
+
+<span class="kw">library</span>(foreign)
+dataset &lt;-<span class="st"> </span><span class="kw">read.spss</span>(<span class="dt">file=</span><span class="st">&quot;data/Backpain 50 missing.sav&quot;</span>, <span class="dt">to.data.frame=</span>T)</code></pre></div>
 <pre><code>## re-encoding from UTF-8</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mice) <span class="co"># Activate the mice package to use the mice function</span>
-imp_mean &lt;-<span class="st"> </span><span class="kw">mice</span>(dataset, <span class="dt">method=</span><span class="st">&quot;mean&quot;</span>, <span class="dt">m=</span><span class="dv">1</span>, <span class="dt">maxit=</span><span class="dv">1</span>)</code></pre></div>
-<pre><code>## 
-##  iter imp variable
-##   1   1  Tampascale</code></pre>
-<p>You can extract the mean imputed dataset by using the complete function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">complete</span>(imp_mean)</code></pre></div>
 </div>
-</div>
-<div id="regression-imputation" class="section level2">
-<h2><span class="header-section-number">3.3</span> Regression imputation</h2>
-<div id="regression-imputation-in-spss" class="section level3">
-<h3><span class="header-section-number">3.3.1</span> Regression imputation in SPSS</h3>
-<p>You can apply regression imputation in SPSS via the Missing Value Analysis procedures. There are two options for regression imputation, the Regression option and the Expectation Maximization (EM) option. The Regression option in SPSS has some flaws in the estimation of the regression parameters (<span class="citation">Hippel (<a href="#ref-hippel1">2004</a>)</span>). Therefore, we use the EM algorithm. This algorithm is a likelihood-based procedure. This means that the most likely values of the regression coefficients are estimated given the data and subsequently used to impute the missing value. This EM procedure gives the same results as first performing a normal regression analysis in the dataset and subsequently estimate the missing values from the regression equation, after the missing values have been excluded. We will compare the EM and regression procedures below.</p>
-<div id="em-procedure" class="section level4">
-<h4><span class="header-section-number">3.3.1.1</span> EM procedure</h4>
-<p>Step 1, Choose:</p>
-<blockquote>
-<p>Analyze -&gt; Missing Value Analysis…</p>
-</blockquote>
-<p>In the main Missing Value Analysis dialog box, select the variable(s) that you want to use for the regression method and select EM in the Estimation group (Figure <a href="single-missing-data-imputations.html#fig:fig3-10">3.7</a>).</p>
-<div class="figure" style="text-align: center"><span id="fig:fig3-10"></span>
-<img src="images/fig3.10.png" alt="EM Selection in the Missing Value Analysis window." width="70%" />
-<p class="caption">
-Figure 3.7: EM Selection in the Missing Value Analysis window.
-</p>
-</div>
-<p>Step 2 click Variables, to specify predicted and predictor variables. Place the Tampascale variable in the window of the Predicted variables and the Pain variable in the Predictor Variables window (Figure <a href="single-missing-data-imputations.html#fig:fig3-11">3.8</a>).</p>
-<div class="figure" style="text-align: center"><span id="fig:fig3-11"></span>
-<img src="images/fig3.11.png" alt="Transfer of the Tampascale and Pain variables to the Predicted and Predictor Variables windows." width="70%" />
-<p class="caption">
-Figure 3.8: Transfer of the Tampascale and Pain variables to the Predicted and Predictor Variables windows.
-</p>
-</div>
-<p>Step 3 Click on Continue -&gt; EM and Choose for Normal in the Distribution group. Than thick Save completed data and give the dataset a name, for example “ImpTampa_EM” (Figure <a href="single-missing-data-imputations.html#fig:fig3-12">3.9</a>).</p>
-<div class="figure" style="text-align: center"><span id="fig:fig3-12"></span>
-<img src="images/fig3.12.png" alt="Name of dataset to save the EM results in." width="70%" />
-<p class="caption">
-Figure 3.9: Name of dataset to save the EM results in.
-</p>
-</div>
-<p>Step 4 Click Continue -&gt; OK. The new dataset “ImpTampa_EM” will open in a new window in SPSS. In this dataset the imputed data of the Tampascale Variable together with the original data is stored (Figure <a href="single-missing-data-imputations.html#fig:fig3-13">3.10</a>, first 15 patients are shown). Adjust the Width and Decimals of the Tampa scale variable in the Variable View window to 4 and 3 respectively to get the same results as in Figure 3.13.</p>
-<div class="figure" style="text-align: center"><span id="fig:fig3-13"></span>
-<img src="images/fig3.13.png" alt="Result of the EM procedure." width="70%" />
-<p class="caption">
-Figure 3.10: Result of the EM procedure.
-</p>
-</div>
-<p>Be aware that SPSS uses as default only quantitative variables to impute the missing values with the EM algorithm. If you want to include categorical variables in the imputation model as auxiliary variables, you have to define them as scale variables.</p>
-</div>
-<div id="normal-linear-regression" class="section level4">
-<h4><span class="header-section-number">3.3.1.2</span> Normal Linear Regression</h4>
-<p>We now compare the EM procedure with a two-step linear regression procedure. We first estimate the relationship between Pain and the Tampa scale variable in the dataset with linear regression after we have excluded the cases with missing values in the Tampa scale variable. Subsequently, we use the regression coefficients from this regression model to estimate the imputed values in the Tampa scale variable. Start by estimating the linear regression model with the Tampa scale variable as outcome variable (because we have to predict missing values in this variable) and use the Pain variable as the independent variable.</p>
-<p>To estimate the linear regression model, choose:</p>
-<blockquote>
-<p>Analyze -&gt; Regression -&gt; Linear</p>
-</blockquote>
-<p>Transfer the Tampa scale variable to the Dependent variable window and the Pain variable to the “Independent(s) in the Block 1 of 1 group. Then click OK.</p>
-<div class="figure" style="text-align: center"><span id="fig:fig3-14"></span>
-<img src="images/fig3.14.png" alt="Linear regression analysis with the Tampa scale as the outcome and Pain as the independent variable." width="70%" />
-<p class="caption">
-Figure 3.11: Linear regression analysis with the Tampa scale as the outcome and Pain as the independent variable.
-</p>
-</div>
-<p>The following coefficients will be estimated (Figure <a href="single-missing-data-imputations.html#fig:tab3-3">3.12</a>).</p>
-<div class="figure" style="text-align: center"><span id="fig:tab3-3"></span>
-<img src="images/table3.3.png" alt="Result of the linear regression analysis." width="70%" />
-<p class="caption">
-Figure 3.12: Result of the linear regression analysis.
-</p>
-</div>
-<p>The linear regression model can be described as:</p>
-<p><span class="math display">\[Tampascale = 32.005 + 1.410 × Pain\]</span></p>
-<p>Now impute the missing values in the Tampa scale variable and compare them with the EM estimates. You see that the results are the same.</p>
-<div class="figure" style="text-align: center"><span id="fig:fig3-15"></span>
-<img src="images/fig3.15.png" alt="Predictions of the missing Tampa scale values on basis of the regression model estimated in the dataset after the missing values were excluded." width="70%" />
-<p class="caption">
-Figure 3.13: Predictions of the missing Tampa scale values on basis of the regression model estimated in the dataset after the missing values were excluded.
-</p>
-</div>
-<p>When you make a scatterplot of the imputations from the regression model you see that, as expected, the imputed values lie directly on the regression line (Figure <a href="single-missing-data-imputations.html#fig:fig3-16">3.14</a>).</p>
-<div class="figure" style="text-align: center"><span id="fig:fig3-16"></span>
-<img src="images/fig3.16.png" alt="Relationship between the Tampa scale and the Pain variable." width="70%" />
-<p class="caption">
-Figure 3.14: Relationship between the Tampa scale and the Pain variable.
-</p>
-</div>
-<p>The Tampa scale variable is located on the y-axis. The imputed values of the Tampa scale variable (red dots) are located on the regression line that was used to generate the imputed values. The green dots are the observed data values.</p>
-</div>
-</div>
-<div id="regression-imputation-in-r" class="section level3">
-<h3><span class="header-section-number">3.3.2</span> Regression imputation in R</h3>
-<p>You can aplly regression imputation in R with as method “norm.predict” in the mice function. The Pain variable is used to predict the missing values in the Tampa scale variable.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(foreign)
-dataset &lt;-<span class="st"> </span><span class="kw">read.spss</span>(<span class="dt">file=</span><span class="st">&quot;Mean imputation.sav&quot;</span>, <span class="dt">to.data.frame=</span>T)</code></pre></div>
-<pre><code>## re-encoding from UTF-8</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataset &lt;-<span class="st"> </span>dataset[, <span class="kw">c</span>(<span class="st">&quot;Pain&quot;</span>, <span class="st">&quot;Tampascale&quot;</span>)]
+<div id="acknowledgement" class="section level2">
+<h2><span class="header-section-number">0.3</span> Acknowledgement</h2>
+<p>We first want to thank our students and colleagues in the hospital for their interesting questions about missing data during lectures and statistical consultations.</p>
+<p>The book is written with the R Bookdown package and R Markdown. We thanks the developers for making these awsome packages freely available.</p>
 
-imp.regress &lt;-<span class="st"> </span><span class="kw">mice</span>(dataset, <span class="dt">method=</span><span class="st">&quot;norm.predict&quot;</span>, <span class="dt">m=</span><span class="dv">1</span>, <span class="dt">maxit=</span><span class="dv">1</span>)</code></pre></div>
-<pre><code>## 
-##  iter imp variable
-##   1   1  Tampascale</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp.regress<span class="op">$</span>imp<span class="op">$</span>Tampascale <span class="co"># Extract the imputed values</span></code></pre></div>
-<pre><code>##           1
-## 2  40.46554
-## 6  41.87566
-## 9  34.82506
-## 14 40.46554
-## 21 39.05542
-## 25 39.05542
-## 27 44.69590
-## 31 46.10602
-## 35 40.46554
-## 37 43.28578
-## 44 33.41494
-## 49 34.82506
-## 50 43.28578</code></pre>
-<p>Expectantly, this gives comparable results as the regression imputation with SPSS above. The method “norm.predict” in the mice package fits a linear regression model in the dataset after the missing data is excluded and generates the imputed values for the Tampa scale variable by using the regression coefficients of the linear regression model. The same regression coefficients are used to predict the missing values in the Tampa scale variable as shown in Figure <a href="single-missing-data-imputations.html#fig:tab3-3">3.12</a>. The completed dataset can be extracted by using the complete function in the mice package.</p>
-</div>
-<div id="stochastic-regression-imputation" class="section level3">
-<h3><span class="header-section-number">3.3.3</span> Stochastic regression imputation</h3>
-<p>With Stochastic regression models imputation uncertainty is accounted for by adding extra error variance to the predicted values that are generated by the linear regression model. Stochastic regression can be activated in SPSS via the Missing Value Analysis and the Regression Estimation option. However, the Regression Estimation option generates incorrect regression coefficient estimates (<span class="citation">Hippel (<a href="#ref-hippel1">2004</a>)</span>) and will therefore not further discussed.</p>
-</div>
-<div id="stochastic-regression-imputation-in-r" class="section level3">
-<h3><span class="header-section-number">3.3.4</span> Stochastic regression imputation in R</h3>
-<p>You can apply stochastic regression imputation in R with the mice function. For this you use as method “norm.nob”.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataset &lt;-<span class="st"> </span><span class="kw">read.spss</span>(<span class="dt">file=</span><span class="st">&quot;Backpain 50 missing.sav&quot;</span>, <span class="dt">to.data.frame=</span>T)</code></pre></div>
-<pre><code>## re-encoding from UTF-8</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataset &lt;-<span class="st"> </span>dataset[, <span class="kw">c</span>(<span class="st">&quot;Pain&quot;</span>, <span class="st">&quot;Tampascale&quot;</span>)]
-
-imp_nob &lt;-<span class="st"> </span><span class="kw">mice</span>(dataset, <span class="dt">method=</span><span class="st">&quot;norm.nob&quot;</span>, <span class="dt">m=</span><span class="dv">1</span>, <span class="dt">maxit=</span><span class="dv">1</span>)</code></pre></div>
-<pre><code>## 
-##  iter imp variable
-##   1   1  Tampascale</code></pre>
-<p>The completed dataset can be extracted by using the complete function in the mice package.</p>
-</div>
-</div>
-<div id="bayesian-stochastic-regression-imputation" class="section level2">
-<h2><span class="header-section-number">3.4</span> Bayesian Stochastic regression imputation</h2>
-<p>The difference between the non-Bayesian imputation procedure that you applied above and Bayesian imputation is that with the latter method extra variation is added to the imputed values via the regression coefficients. The idea is used that there is not one true (population) regression coefficient but that the regression coefficient itself follows a (probability) distribution. This is in contrast to the frequentist idea, which assume that there is one true population parameter. In this case the regression coefficient (is reflected by the confidence interval). In this book (and most statistial books) the freuentist approach is used For more information about the theory of Bayesian statistics we refer to the books of <span class="citation">Box and Tiao (<a href="#ref-box2007bayesianinferencein">2007</a>)</span>, <span class="citation">C. K. Enders (<a href="#ref-enders2010applied">2010</a>)</span> and <span class="citation">Gelman et al. (<a href="#ref-gelman2014bayesian">2014</a>)</span>.</p>
-<div id="bayesian-stochastic-regression-imputation-in-spss" class="section level3">
-<h3><span class="header-section-number">3.4.1</span> Bayesian Stochastic regression imputation in SPSS</h3>
-<p>In SPSS Bayesian Stochastic regression imputation can be performed via the multiple imputation menu. To generate imputations for the Tampa scale variable, we use the Pain variable as the only predictor.</p>
-<p><strong>Step 1</strong></p>
-<p>To start the imputation procedure, Go to</p>
-<blockquote>
-<p>Analyze -&gt; Multiple Imputation -&gt; Impute Missing Data Values.</p>
-</blockquote>
-<p>In the first window you define which variables are included in the imputation model. Transfer the Tampa scale and Pain variable to the Variables in Model window. Than set the number of imputed datasets to 1 under Imputations and give the dataset where the imputed values are stored under “Create a new dataset” a name. Here we give it the name “ImpStoch_Tampa” (Figure <a href="single-missing-data-imputations.html#fig:fig3-18">3.15</a>).</p>
-<div class="figure" style="text-align: center"><span id="fig:fig3-18"></span>
-<img src="images/fig3.18.png" alt="The Variables window." width="70%" />
-<p class="caption">
-Figure 3.15: The Variables window.
-</p>
-</div>
-<p><strong>Step 2</strong></p>
-<p>In the Methods window, choose under Imputation Method for customand then Fully conditional specification (MCMC). Set the Maximum iterations number at 50. This specifies the number of iterations as part of the FCS method (Figure <a href="single-missing-data-imputations.html#fig:fig3-19">3.16</a>). We further use the default settings.</p>
-<div class="figure" style="text-align: center"><span id="fig:fig3-19"></span>
-<img src="images/fig3.19.png" alt="The Methods window." width="70%" />
-<p class="caption">
-Figure 3.16: The Methods window.
-</p>
-</div>
-<p><strong>Step 3</strong></p>
-<p>In the constraints window (Figure <a href="single-missing-data-imputations.html#fig:fig3-20">3.17</a>) click on the Scan Data button and further use the default settings.</p>
-<div class="figure" style="text-align: center"><span id="fig:fig3-20"></span>
-<img src="images/fig3.20.png" alt="Stochastic regression imputation" width="70%" />
-<p class="caption">
-Figure 3.17: Stochastic regression imputation
-</p>
-</div>
-<p><strong>Step 4</strong></p>
-<p>In the Output window we only use the default settings.</p>
-<div class="figure" style="text-align: center"><span id="fig:fig3-21"></span>
-<img src="images/fig3.21.png" alt="The Output window." width="70%" />
-<p class="caption">
-Figure 3.18: The Output window.
-</p>
-</div>
-<p><strong>Step 5</strong></p>
-<p>Now click on OK button to start the imputation procedure</p>
-<p>The output dataset consists of the original data with missing data plus a set of cases with imputed values for each imputation. These imputed datasets are stacked under each other. The file also contains a new variable, Imputation_, which indicates the number of the imputed dataset (0 for original data and more than 0 for the imputed datasets). The variable Imputation_ is added to the dataset and the imputed values are marked yellow.</p>
-<div class="figure" style="text-align: center"><span id="fig:fig3-22"></span>
-<img src="images/fig3.22.png" alt="Aanpassen Titel." width="70%" />
-<p class="caption">
-Figure 3.19: Aanpassen Titel.
-</p>
-</div>
-<div class="figure" style="text-align: center"><span id="fig:fig3-23"></span>
-<img src="images/fig3.23.png" alt="Imputed dataset with the imputed values marked yellow." width="70%" />
-<p class="caption">
-Figure 3.20: Imputed dataset with the imputed values marked yellow.
-</p>
-</div>
-<p>When we make a scatterplot of the Pain and the Tampascale variable (Figure <a href="single-missing-data-imputations.html#fig:fig3-24">3.21</a>) we see that there is more variation in the Tampascale variable, or you could say that the variation in the Tampascale variable is “repaired”.</p>
-<div class="figure" style="text-align: center"><span id="fig:fig3-24"></span>
-<img src="images/fig3.24.png" alt="Scatterplot of the relationship between Tampascale and the Pain variable, including the imputed values for the Tampascale variable (red dots)." width="70%" />
-<p class="caption">
-Figure 3.21: Scatterplot of the relationship between Tampascale and the Pain variable, including the imputed values for the Tampascale variable (red dots).
-</p>
-</div>
-<p>The full Multiple Imputation procedure will be discussed in more detail in the next Chapter.</p>
-</div>
-<div id="bayesian-stochastic-regression-imputation-in-r" class="section level3">
-<h3><span class="header-section-number">3.4.2</span> Bayesian Stochastic regression imputation in R</h3>
-<p>The package mice also include a Bayesian stochastic regression imputation procedure. You can apply this imputation procedure with the mice function and use as method “norm”. The pain variable is the only predictor variable for the missing values in the Tampa scale variable.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataset &lt;-<span class="st"> </span><span class="kw">read.spss</span>(<span class="dt">file=</span><span class="st">&quot;Backpain 50 missing.sav&quot;</span>, <span class="dt">to.data.frame=</span>T)</code></pre></div>
-<pre><code>## re-encoding from UTF-8</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataset &lt;-<span class="st"> </span>dataset[, <span class="kw">c</span>(<span class="st">&quot;Pain&quot;</span>, <span class="st">&quot;Tampascale&quot;</span>)]
-
-imp_b &lt;-<span class="st"> </span><span class="kw">mice</span>(dataset, <span class="dt">method=</span><span class="st">&quot;norm&quot;</span>, <span class="dt">m=</span><span class="dv">1</span>, <span class="dt">maxit=</span><span class="dv">1</span>)</code></pre></div>
-<pre><code>## 
-##  iter imp variable
-##   1   1  Tampascale</code></pre>
-<p>The completed dataset can be extracted by using the complete function in the mice package.</p>
-</div>
-</div>
-<div id="predictive-mean-matching-or-regression-imputation" class="section level2">
-<h2><span class="header-section-number">3.5</span> Predictive Mean Matching or Regression imputation</h2>
-<p>To impute continuous variables two methods can be used. Linear regression imputation or Predictive Mean Matching (PMM).PMM is an imputation method that predicts values and subsequently selects observed values to be used to replace the missing values. It is the default imputation procedure in the mice package (<span class="citation">(<span class="citeproc-not-found" data-reference-id="rubin1987"><strong>???</strong></span>)</span>). Linear regression imputation was explained in (paragraph (3.3.1.2)).</p>
-<div id="predictive-mean-matching-how-does-it-work" class="section level3">
-<h3><span class="header-section-number">3.5.1</span> Predictive Mean Matching, how does it work?</h3>
-<p>Predictive Mean Matching takes place in several steps:</p>
-<p>We take as an example the missing values in the Tampa scale variable. They are defined as NA in the dataset. The Pain variable is used to predict the missing Tampa scale values.</p>
-<pre><code>##    ID Pain Tampascale
-## 1   1    5         40
-## 2   2    6         NA
-## 3   3    1         41
-## 4   4    5         42
-## 5   5    6         44
-## 6   6    7         NA
-## 7   7    8         43
-## 8   8    6         40
-## 9   9    2         NA
-## 10 10    6         38</code></pre>
-<p><strong>Step 1</strong>: Estimate linear regression model</p>
-<p>A linear regression model is estimated with the Tampa scale variable as the outcome and the Pain variable as the predictor variable for the missing values. We define this regression coefficient as <span class="math inline">\(\hat{\beta_{Pain}}\)</span>.</p>
-<p><strong>Step 2</strong>: Determine Bayesion version of regression coefficient</p>
-<p>A Bayesian regression coefficient for the Pain variable is determined (paragraph (XX)). We define this regression coefficient as <span class="math inline">\(\beta_{Pain}^*\)</span>.</p>
-<p><strong>Step 3</strong>: Predict Missing values</p>
-<ul>
-<li><em>Observed</em> Tampa scale valueas are predicted by the Pain regression coefficient <span class="math inline">\(\hat{\beta_{Pain}}\)</span> from step 1 and the Pain data, we call these values <span class="math inline">\(Tampa_{Obs}\)</span>.</li>
-</ul>
-
-<ul>
-<li><em>Missing</em> Tampa scale valueas are predicted by the regression coefficient <span class="math inline">\(\beta_{Pain}^*\)</span> from step 2 and the Pain data, we call these <span class="math inline">\(Tampa_{Pred}\)</span>.</li>
-</ul>
-<p>These values are: 43.594, 41.456 and 39.852.</p>
-<p><strong>Step 4</strong>: Find closest donor</p>
-<p>Find the closest donor for the first missing value by subtracting the first <span class="math inline">\(Tampa_{Pred}\)</span> value of 43.594 from all predicted observed values in the <span class="math inline">\(Tampa_{Obs}\)</span> column. These differences are shown in the column Difference.</p>
-
-<p>The smallest differences are 1.574, 1.970 and 2.168 and these belong to the cases with observed Tampa scale values of 40, 41 and 42 respectively. Subsequently, a value is randomly drawn from these observed values and used to impute the first missing Tampa scale value. Other missing values are imputed by following the same procedure.</p>
-<p>The strength of PMM is that missing data is replaced by data that is observed in the dataset and not replaced by unrealistic values (as negative Tampa scale scores).</p>
-
-</div>
 </div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
-<div id="ref-Eekhout2012">
-<p>Eekhout, I., R. M. de Boer, J. W. Twisk, H. C. de Vet, and M. W. Heymans. 2012. “Missing data: a systematic review of how they are reported and handled.” <em>Epidemiology</em> 23 (5): 729–32.</p>
+<div id="ref-sterne2009multiple">
+<p>Sterne, Jonathan AC, Ian R White, John B Carlin, Michael Spratt, Patrick Royston, Michael G Kenward, Angela M Wood, and James R Carpenter. 2009. “Multiple Imputation for Missing Data in Epidemiological and Clinical Research: Potential and Pitfalls.” <em>BMJ: British Medical Journal</em> 338.</p>
 </div>
-<div id="ref-Eekhout2014">
-<p>Eekhout, I., H. C. de Vet, J. W. Twisk, J. P. Brand, M. R. de Boer, and M. W. Heymans. 2014. “Missing data in a multi-item instrument were best handled by multiple imputation at the item score level.” <em>J Clin Epidemiol</em> 67 (3): 335–42.</p>
+<div id="ref-little2012prevention">
+<p>Little, R.J., R. D’Agostino, M.L. Cohen, K. Dickersin, S.S. Emerson, J.T. Farrar, C. Frangakis, et al. 2012. “The Prevention and Treatment of Missing Data in Clinical Trials.” <em>New England Journal of Medicine</em> 367 (14): 1355–60.</p>
 </div>
-<div id="ref-hippel1">
-<p>Hippel, P.T. von. 2004. “Biases in SPSS 12.0 Missing Values Analysis.” <em>The American Statistician</em> 58 (2): 160–64.</p>
-</div>
-<div id="ref-box2007bayesianinferencein">
-<p>Box, G. E. P., and G. C. Tiao. 2007. <em>Bayesian Inference in Statistical Analysis</em>. Addison-Wesley Publishing Company.</p>
-</div>
-<div id="ref-enders2010applied">
-<p>Enders, Craig K. 2010. <em>Applied Missing Data Analysis</em>. Guilford Press.</p>
-</div>
-<div id="ref-gelman2014bayesian">
-<p>Gelman, Andrew, John B Carlin, Hal S Stern, and Donald B Rubin. 2014. <em>Bayesian Data Analysis</em>. Vol. 2. Taylor; Francis.</p>
+<div id="ref-Li2015">
+<p>Li P, Allison DB, Stuart EA. 2015. “Multiple Imputation: A Flexible Tool for Handling Missing Data.” <em>JAMA</em> 314 (18): 1966–7. doi:<a href="https://doi.org/10.1001/jama.2015.15281">10.1001/jama.2015.15281</a>.</p>
 </div>
 </div>
             </section>
@@ -702,8 +399,8 @@ imp_b &lt;-<span class="st"> </span><span class="kw">mice</span>(dataset, <span 
           </div>
         </div>
       </div>
-<a href="missing-data-evaluation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="part-three-multiple-imputation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+
+<a href="part-i-software.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
