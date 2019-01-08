@@ -7,6 +7,9 @@ documentclass: book
 bibliography: [appliedmiss.bib]
 biblio-style: apalike
 link-citations: yes
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 Copyright ©2018 by Heymans and Eekhout
