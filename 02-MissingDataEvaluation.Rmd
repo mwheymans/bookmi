@@ -25,7 +25,7 @@ The Variable GA in the dataset consists of different values: pregenancy duration
 In R the missing values are denoted by `NA` which means “Not Available”. If we open the same dataset as above in R we get the following result.
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
-library(foreign)
+library(haven)
 dataset <- read_sav("data/CH2 example.sav")
 head(dataset,10) # Data of first 10 patients is shown
 ```
@@ -237,7 +237,7 @@ Under the column N, the information of all cases in the dataset are displayed. F
 
 #### T-test procedure
 
-For the t-test procedure, SPSS first separates cases with complete and missing values by creating an indicator variable of variables that ontain missing values. Then, group means of other variables are compared by using the indicator variable as group variable within the t-test procedure. You can apply his procedure by following:
+For the t-test procedure, SPSS first separates cases with complete and missing values by creating an indicator variable of variables that ontain missing values. This can be all type of variables. Then, group means of other (only continuous) variables are compared by using the indicator variable as group variable within the t-test procedure. You can apply his procedure by following:
 
 > Analyze -> Missing Value Analysis... -> Descriptives -> click “t-tests with groups formed by indicator variables” and “include probabilities in table” -> Continue -> OK (Figure 2.15).
 
@@ -253,13 +253,17 @@ knitr::include_graphics("images/tab2.5.png")
 
 On the left side of the output table the names of the variables with missing values are presented which are the Tampa scale and Disability variables. Of these variables, indicator variables are defined which are used to compare group means of other variables, that can be tested for significance using independent t-tests. The results of these t-tests are shown in the table according to the information in separate rows on the left side with the t-value (t), degrees of freedom (df), P-value (P(2-tail)), numbers of observed and missing cases (# Present and # Missing) and means of observed and missing cases (Mean(Present) and Mean(Missing)) presented. The variables for which the indicator groups are compared, are listed in the columns of the table and are the Pain, Tampa scale, Disability and Age variables. For the Tampa scale variable that contain missing values, only the observed mean is presented, because for the missing cases the values are missing. Note that in the row of the Tampa scale variable the means of the Disability variable can still be compared between the observed and missing cases, because they do not miss values for exactly the same cases. Figure \@ref(fig:tab2-5) shows that patients that have observed values on the Tampa scale variable (row Mean(Present)) differ significantly from patients with missing values on the Tampa scale variable (row Mean(Missing)) on Pain (P(2-tail = 0.033) and Disability (P(2-tail = 0.039). When we look at the means of the Pain variable, we see that the mean of patients with missing values on the Tampa scale variable is higher compared to the mean of patients with observed scores. This means that there is a higher probability of missing data on the Tampa scale variable for patients with higher pain scores. If Tampa scale and Pain scores are correlated, the missing values on the Tampa scale variable can also be explained by the Pain score variable. This is also the case for the Age variable, however, the t-test is not significant. For the Disability variable, it is the other way around. We see more missing data on the Tampa scale variable for lower Disability scores.
 
-In the Missing Value Analysis window another option is to select “Crosstabulations of categorical and indicator variables”. In that case a separate table is displayed for each categorical variable with missing values. For each category of the variable, the frequency and percentages of non-missing values for the other variables is displayed as well as the percentages of each type of missing value. To reduce the size of the table, you can omit statistics that are computed for only a small number of cases by adjusting the option “Omit variables missing less than % of cases”. Note that for these tables, the Chi-square tests and p-values are not performed. These can be obtained via the usual Crosstabs function, using a self-generated missing data indicator variable. 
+In the Missing Value Analysis and subsequently the descriptives option, another possiblity is to select “Crosstabulations of categorical and indicator variables”. In that case a table is displayed to compare the percentage of present and missing data for categorical variables related to the indicator variable similarly defined as explained above. An example can be found in Figure \@ref(fig:tab2-8) that prodces SPSS when a missing data indicator variable is used for the Radiation variable, where for 11 cases data is missing.
 
-> Analyze -> Descriptive Statistics -> Crosstabs
+```{r tab2-8, echo = FALSE, fig.cap="Output table of the Crosstabulations procedure.", out.width='70%', fig.align='center'}
+knitr::include_graphics("images/Crosstabulation.png")
+```
+
+You see in the table that Radiation values are more frequently missing for males (coded as 1 on the Gender variable) than for females (coded as 0). Note that for these tables, the Chi-square tests and p-values are not performed. These have to be obtained via the usual Crosstabs function, using a self-generated missing data indicator variable.
 
 #### Logistic Regression Analysis
 
-The missing data mechanism can also be evaluated with a logistic regression procedure (@Ridout1991). With logistic regression analysis, we can evaluate if the probability of missing data is related to other variables in the data. For this procedure, we first generate an indicator variable that separates the subjects with missing values from the participants with observed values. This indicator variable is used as the dependent variable in a logistic regression analysis. A backward regression can be used to determine the strongest predictors of missing data. The output for the logistic regression with the Tampa scale variable as the indicator outcome variable is presented below:
+The missing data mechanism can also be evaluated with a logistic regression procedure (@Ridout1991). With logistic regression analysis, we can evaluate if the probability of missing data is related to other variables in the data. For this procedure, we first generate an indicator variable that separates the subjects with missing values from the participants with observed values. This indicator variable is used as the dependent variable in a logistic regression analysis. A backward regression can be used to determine the strongest predictors of missing data. The output for the logistic regression with the Tampa scale variable as the indicator outcome variable is presented in the table below:
 
 ```{r tab2-6, echo = FALSE, fig.cap="Logistic regression analysis with variable that contain missing data as the outcome variable.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/tab2.6.png")
@@ -269,30 +273,30 @@ The variable Pain is significantly related to the missing data indicator variabl
 
 #### Little's MCAR test in SPSS
 
-Another possibility is to use a test that was developed by Roderick Little: Little’s MCAR test. This test is based on differences between the observed and estimated mean in each missing data pattern. This test is developed for continuous data. In this procedure, the missing data in the entire dataset is evaluated at once, because each missing data pattern is included in the analysis.
+Another possibility is to use a test that was developed by Roderick Little: Little’s MCAR test. This test is based on differences between the observed and estimated means in each missing data pattern. This test is developed for continuous data. We use it for the data in Figure \@ref(fig:fig2-1). The test can be applied via: 
 
 > Analyze -> Missing Value Analysis...-> select the continuous variables -> Select EM in the Estimation group -> OK
-
 
 ```{r fig2-12, echo = FALSE, fig.cap="EM selection in the Missing Value Analysis menu.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig2.12.png")
 ```
 
+The following table that is called EM Means can be found in the output window of SPSS. Under the table the result of Little's MCAR test is displayed (tables that provide information of univariate statistics and a summary of estimated means and standard deviations are also provided. Further, tables that are called EM Covariances and EM Correlations are also generated, but they provide the same results for Little's MCAR test as under the EM Means table. These tables are not shown)
+
 ```{r tab2-7, echo = FALSE, fig.cap="Output tables with information of Little’s MCAR test.", out.width='60%', fig.align='center'}
-knitr::include_graphics("images/tab2.7a.png")
-knitr::include_graphics("images/tab2.7b.png")
 knitr::include_graphics("images/tab2.7c.png")
-knitr::include_graphics("images/tab2.7d.png")
-knitr::include_graphics("images/tab2.7e.png")
+
 ```
 
 ### Missing data Evaluation in R
 
 #### Little's MCAR test in R
 
-Little´s MCAR test is available in the `BaylorEdPsych` package for R from the `LittleMCAR` function. To apply the test, we select only the continuous variables. In the example we use the dataset of 150 low back pain patients with missing data in Gestatstional Age (GA). The p-value for the test is not-siginificant, indicating that the missings seem to be compeletely at random.
+Little´s MCAR test is available in the `BaylorEdPsych` package as the `LittleMCAR` function. To apply the test, we select only the continuous variables. We use it for the same dataset as in the previous paragraph. The p-value for the test is not-siginificant, indicating that the missings seem to be compeletely at random.
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(haven)
+dataset <- read_sav("data/CH2 example.sav")
 library(BaylorEdPsych)
 LittleMCAR(dataset[,c("Pain", "Tampascale","Disability", "GA")])
 
