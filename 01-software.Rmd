@@ -3,6 +3,9 @@ output:
   pdf_document: default
   html_document: default
 ---
+
+# (PART) Part I: Software {-}
+
 # Software applications
 
 We start the book with an introduction into the software packages SPSS and RStudio that are needed to conduct the procedures explained in the other chapters. If you are an user of SPSS and does not have experience with RStudio we recommend to read th parts about RStudio before you continue to the next chapters. If you are an RStudio user and you do not want to learn SPSS, you can skip this Chapter without losing relevant information and continue with the next chapter.

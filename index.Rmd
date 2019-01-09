@@ -12,6 +12,10 @@ output:
   html_document: default
 ---
 
+```{r cover, echo = FALSE}
+knitr::include_graphics("images/fig5.5.png")
+```
+
 Copyright ©2018 by Heymans and Eekhout
 
 All rights reserved. No part of this book may be reproduced or utilized in any form or by any means, electronic or mechanical, including photocopying, recording, or by any information storage and retrieval system, without permission in writing from the authors.
@@ -57,3 +61,4 @@ dataset <- read.spss(file="data/Backpain 50 missing.sav", to.data.frame=T)
 We first want to thank our students and colleagues in the Amsterdam UMC hospital for their interesting questions about missing data during lectures and statistical consultations.
 
 The book is written with the R Bookdown package and R Markdown. We thanks the developers for making these awsome packages freely available.
+
