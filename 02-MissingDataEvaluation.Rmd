@@ -3,6 +3,9 @@ output:
   html_document: default
   pdf_document: default
 ---
+
+# (PART) Part II: Basic Missing Data Handling {-}
+
 # Missing Data Evaluation
 
 Before you decide what to do with your missing data it is important to consider the reasons and probable causes of your missing data problem. With that information you can compose an analysis plan to deal with the missing data in your dataset. In this Chapter, you will learn how to explore and evaluate missing data in SPSS and R and why it is important to think about the reasons for missing data. Knowledge about the missing data problem is important for the method to solve the missing data problem. 
