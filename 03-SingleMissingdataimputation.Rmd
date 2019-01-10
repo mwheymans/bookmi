@@ -4,29 +4,43 @@ output:
   pdf_document: default
 ---
 
-# Single Missing data imputations
+# Single Missing data imputation
 
-## Complete cases analysis
+The topic of this Chapter is to explain how simple missing data methods like complete case analysis, mean and single regression imputation work. These procedures are still very often applied [@Eekhout2012] but generally not recommended because they decreases statistical power or lead to an incorrect estimation of standard errors when the data is MCAR, MAR and MNAR [@Eekhout2014; @VanBuuren2018; @enders2010applied].  
 
-Complete case analysis (CCA) means that the statistical analyses is done in the dataset afetr every persons with a missing data point in a variable is excluded from the analysis. This procedure is still used a lot (@Eekhout2012) but can have a large negative impact on the precision of the statistical test results. It also leads to an incorrect estimation of standard errors when the data is MCAR, MAR and MNAR (@Eekhout2014). It is for that reason not recommended. It is however, the default procedure in a lot of statistical software packages as in SPSS. 
+We use as an example data from a study about low back pain and we want to study if the Tampa scale variable is a predictor of low back pain. Both variables are continuous. Pain represents the intensity of the low back pain and the Tampa scale measures fear of moving the low back. The Tampa scale variable contains missing values. The number or type of missing values is not important because the main topic is to show how simple missing data methods work in SPSS and R.  
 
-## Mean Imputation
+To get a first impression about the relationship between the Pain and the Tampa scale variables we make a scatterplot. The scatterplots with the complete and intended incomplete data is displayed in Figure \@ref(fig:fig3-1).
 
-Assume that we are interested in the relationship between Pain and the Tampa scale variable. To get a first impression about this relationship we make a scatterplot. The scatterplots of the complete and incomplete datasets are displayed in Figure \@ref(fig:fig3-1) and Figure \@ref(fig:fig3-2).
-
-```{r fig3-1, echo = FALSE, fig.cap=" Relationship between the Tampa scale and Pain variables (green dots are observed and red dots are assumed to be missing data", out.width='70%', fig.align="center"}
+```{r fig3-1, echo = FALSE, fig.cap="Relationship between the Tampa scale and Pain variables (green dots are observed and red dots are the missing data", out.width='70%', fig.align="center"}
 knitr::include_graphics("images/fig3.2a.png")
 ```
+
+The green dots in Figure 3.1 represent the observed data and the red dots the missing data points. In practice, you work with the available points that are visualized in Figure \@ref(fig:fig3-2).   
 
 ```{r fig3-2, echo = FALSE, fig.cap="Relationship between the Tampa scale and Pain variable. Missing data are excluded", out.width='70%', fig.align='center'}
 knitr::include_graphics("images/fig3.2b.png")
 ```
 
-The green dots represent the observed data and the red dots the missing data points. In practice, in your dataset you have the available points that are visualized in Figure \@ref(fig:fig3-2). 
+## Complete cases analysis
+
+Complete case analysis (CCA) means that persons with a missing data point are excluded from the dataset before statistical analyses are performed. Nevertheless it is the default procedure in many statistical software packages such as SPSS. 
+
+## Mean Imputation
+
+With mean imputation the mean of a variable that contains missing values is calculated and used to replace all missing values in that variable. 
 
 ### Mean imputation in SPSS
 
-The easiest methods to do mean imputation are by using the *Replace Missing Values* procedure under Transform and by using the *Linear Regression* procedure. 
+*Descriptive Statistics*
+
+The easiest method to do mean imputation is by calculating the mean using 
+
+> Analyze -> Descriptive Statistics -> Descriptives
+
+and than replace the missing values by the mean value by using the "Recode into Same Variables"under the Transform menu.
+
+Other procedures for mean imputation are the *Replace Missing Values* procedure under Transform and by using the *Linear Regression* procedure. 
 
 *Replace Missing Values procedure*
 
@@ -46,7 +60,7 @@ When you click on OK, a new variable is created in the dataset using the existin
 knitr::include_graphics("images/fig3.7.png")
 ```
 
-The scatterplot between the Pain and the Tampa scale variable clearly shows the result of the mean imputation procedure, all imputed values are located at the mean value (Figure \@ref(fig:fig3-4)).
+If we now make the scatterplot between the Pain and the Tampa scale variable it clearly shows the result of the mean imputation procedure, all imputed values are located at the mean value (Figure \@ref(fig:fig3-4)).
 
 ```{r fig3-4, echo = FALSE, fig.cap="Scatterplot between the Tampa scale and Pain variable, after the missing values of the Tampa scale variable have been replaced by the mean.", out.width='70%', fig.align='center'}
 knitr::include_graphics("images/fig3.4.png")
@@ -54,7 +68,7 @@ knitr::include_graphics("images/fig3.4.png")
 
 *Linear Regression*
 
-Mean imputation in SPSS is also integrated in the Linear Regression menu via:
+Mean imputation is also integrated in the Linear Regression menu via:
 
 > Analyze -> Regression -> Linear -> Options. 
 
@@ -63,8 +77,6 @@ In the Missing Values group you choose for Replace with mean (Figure \@ref(fig:f
 ```{r fig3-8, echo = FALSE, fig.cap="The option Replace with mean in the Linear Regression menu.", out.width='70%', fig.align='center'}
 knitr::include_graphics("images/fig3.8.png")
 ```
-
-You can also obtain the mean values by using *Descriptive Statistics*, and than replace the missing values by using the "Recode into Same Variables"under the Transform menu.
 
 ### Mean imputation in R
 
@@ -85,70 +97,64 @@ imp_mean <- mice(dataset, method="mean", m=1, maxit=1)
 
 ```
 
-You can extract the mean imputed dataset by using the complete function.
-
-```{r eval=FALSE}
-
-complete(imp_mean)
-
-```
+You can extract the mean imputed dataset by using the complete function as follows: `complete(imp_mean)`
 
 ## Regression imputation
 
+With regression imputation the information of other variables is used to predict the missing values in a variable by using a regression model. Commonly, first the regression model is estimated in the observed data and subsequently using the regression weights the missing values are predicted and replaced.  
+
 ### Regression imputation in SPSS
 
-You can apply regression imputation in SPSS via the Missing Value Analysis procedures. There are two options for regression imputation, the Regression option and the Expectation Maximization (EM) option. The Regression option in SPSS has some flaws in the estimation of the regression parameters (@hippel1). Therefore, we use the EM algorithm. This algorithm is a likelihood-based procedure. This means that the most likely values of the regression coefficients are estimated given the data and subsequently used to impute the missing value. This EM procedure gives the same results as first performing a normal regression analysis in the dataset and subsequently estimate the missing values from the regression equation, after the missing values have been excluded. We will compare the EM and regression procedures below.
+You can apply regression imputation in SPSS via the Missing Value Analysis menu. There are two options for regression imputation, the Regression option and the Expectation Maximization (EM) option. The Regression option in SPSS has some flaws in the estimation of the regression parameters [@hippel2004]. Therefore, we recommend the EM algorithm. This algorithm is a likelihood-based procedure. This means that the most likely values of the regression coefficients are estimated given the data and subsequently used to impute the missing value. This EM procedure gives the same results as first performing a simple regression analysis in the dataset and subsequently estimate the missing values from the regression equation. Both methods are described below.
 
 #### EM procedure
 
-Step 1, Choose: 
+Step 1, go to: 
 
 > Analyze -> Missing Value Analysis...
 
-In the main Missing Value Analysis dialog box, select the variable(s) that you want to use for the regression method and select EM in the Estimation group (Figure \@ref(fig:fig3-10)).
+In the main Missing Value Analysis dialog box, select the variable(s) and select EM in the Estimation group (Figure \@ref(fig:fig3-10)).
 
 ```{r fig3-10, echo = FALSE, fig.cap="EM Selection in the Missing Value Analysis window.", out.width='70%', fig.align='center'}
 knitr::include_graphics("images/fig3.10.png")
 ```
 
 Step 2
-click Variables, to specify predicted and predictor variables. Place the Tampascale variable in the window of the Predicted variables and the Pain variable in the Predictor Variables window (Figure \@ref(fig:fig3-11)).
+click Variables, to specify predicted and predictor variables. Place the Tampascale variable in the Predicted variables window and the Pain variable in the Predictor Variables window (Figure \@ref(fig:fig3-11)).
 
 ```{r fig3-11, echo = FALSE, fig.cap="Transfer of the Tampascale and Pain variables to the Predicted and Predictor Variables windows.", out.width='70%', fig.align='center'}
 knitr::include_graphics("images/fig3.11.png")
 ```
 
 Step 3
-Click on Continue -> EM and Choose for Normal in the Distribution group. Than thick Save completed data and give the dataset a name, for example “ImpTampa_EM” (Figure \@ref(fig:fig3-12)). 
+Click on Continue -> EM and select Normal in the Distribution group. Than thick Save completed data and give the dataset a name, for example “ImpTampa_EM” (Figure \@ref(fig:fig3-12)). 
 
 ```{r fig3-12, echo = FALSE, fig.cap="Name of dataset to save the EM results in.", out.width='70%', fig.align='center'}
 knitr::include_graphics("images/fig3.12.png")
 ```
 
 Step 4
-Click Continue -> OK. The new dataset “ImpTampa_EM” will open in a new window in SPSS. In this dataset the imputed data of the Tampascale Variable together with the original data is stored (Figure \@ref(fig:fig3-13), first 15 patients are shown). Adjust the Width and Decimals of the Tampa scale variable in the Variable View window to 4 and 3 respectively to get the same results as in Figure 3.13. 
+Click Continue -> OK. The new dataset “ImpTampa_EM” will open in a new window in SPSS. In this dataset the imputed data for the Tampascale Variable together with the original data is stored (Figure \@ref(fig:fig3-13), first 15 patients are shown). 
 
 ```{r fig3-13, echo = FALSE, fig.cap="Result of the EM procedure.", out.width='70%', fig.align='center'}
 knitr::include_graphics("images/fig3.13.png")
 ```
 
-Be aware that SPSS uses as default only quantitative variables to impute the missing values with the EM algorithm. If you want to include categorical variables in the imputation model as auxiliary variables, you have to define them as scale variables.
+BNote that SPSS uses as default only quantitative variables to impute the missing values with the EM algorithm.
 
-#### Normal Linear Regression
+#### Normal Linear Regression imputation
 
-We now compare the EM procedure with a two-step linear regression procedure. We first estimate the relationship between Pain and the Tampa scale variable in the dataset with linear regression after we have excluded the cases with missing values in the Tampa scale variable. Subsequently, we use the regression coefficients from this regression model to estimate the imputed values in the Tampa scale variable. Start by estimating the linear regression model with the Tampa scale variable as outcome variable (because we have to predict missing values in this variable) and use the Pain variable as the independent variable.
+We first estimate the relationship between Pain and the Tampa scale variable in the dataset with linear regression, by default subjects with missing values are excluded. Subsequently, we use the regression coefficients from this regression model to estimate the imputed values in the Tampa scale variable. 
 
 To estimate the linear regression model, choose: 
 
 > Analyze -> Regression -> Linear
 
-Transfer the Tampa scale variable to the Dependent variable window and the Pain variable to the "Independent(s) in the Block 1 of 1 group. Then click OK. 
+Transfer the Tampa scale variable to the Dependent variable box and the Pain variable to the "Independent(s) in the Block 1 of 1 group. Then click OK. 
 
 ```{r fig3-14, echo = FALSE, fig.cap="Linear regression analysis with the Tampa scale as the outcome and Pain as the independent variable.", out.width='70%', fig.align='center'}
 knitr::include_graphics("images/fig3.14.png")
 ```
-
-The following coefficients will be estimated (Figure \@ref(fig:tab3-3)).
 
 ```{r tab3-3, echo = FALSE, fig.cap="Result of the linear regression analysis.", out.width='70%', fig.align='center'}
 knitr::include_graphics("images/table3.3.png")
@@ -164,17 +170,15 @@ Now impute the missing values in the Tampa scale variable and compare them with 
 knitr::include_graphics("images/fig3.15.png")
 ```
 
-When you make a scatterplot of the imputations from the regression model you see that, as expected, the imputed values lie directly on the regression line (Figure \@ref(fig:fig3-16)).
+In the scatterplot of the imputations from the regression model you see that, as expected, the imputed values are directly on the regression line (Figure \@ref(fig:fig3-16)).
 
 ```{r fig3-16, echo = FALSE, fig.cap="Relationship between the Tampa scale and the Pain variable.", out.width='70%', fig.align='center'}
 knitr::include_graphics("images/fig3.16.png")
 ```
 
-The Tampa scale variable is located on the y-axis. The imputed values of the Tampa scale variable (red dots) are located on the regression line that was used to generate the imputed values. The green dots are the observed data values.
-
 ### Regression imputation in R
 
-You can aplly regression imputation in R with as method “norm.predict” in the mice function. The Pain variable is used to predict the missing values in the Tampa scale variable.
+You can aply regression imputation in R with as method setting “norm.predict” in the mice function. The Pain variable is used to predict the missing values in the Tampa scale variable.
 
 ```{r }
 
@@ -187,15 +191,15 @@ imp.regress$imp$Tampascale # Extract the imputed values
 
 ```
 
-Expectantly, this gives comparable results as the regression imputation with SPSS above. The method “norm.predict” in the mice package fits a linear regression model in the dataset after the missing data is excluded and generates the imputed values for the Tampa scale variable by using the regression coefficients of the linear regression model. The same regression coefficients are used to predict the missing values in the Tampa scale variable as shown in Figure \@ref(fig:tab3-3). The completed dataset can be extracted by using the complete function in the mice package.
+Expectantly, this gives comparable results as the regression imputation to SPSS above. The method “norm.predict” in the mice package fits a linear regression model in the dataset and generates the imputed values for the Tampa scale variable by using the regression coefficients of the linear regression model. The completed dataset can be extracted by using the complete function in the mice package.
 
 ### Stochastic regression imputation
 
-With Stochastic regression models imputation uncertainty is accounted for by adding extra error variance to the predicted values that are generated by the linear regression model. Stochastic regression can be activated in SPSS via the Missing Value Analysis and the Regression Estimation option. However, the Regression Estimation option generates incorrect regression coefficient estimates (@hippel1) and will therefore not further discussed.
+In Stochastic regression models imputation uncertainty is accounted for by adding extra error variance to the predicted values from the linear regression model. Stochastic regression can be activated in SPSS via the Missing Value Analysis and the Regression Estimation option. However, the Regression Estimation option generates incorrect regression coefficient estimates [@hippel2004] and will therefore not further discussed.
 
 ### Stochastic regression imputation in R
 
-You can apply stochastic regression imputation in R with the mice function. For this you use as method "norm.nob".
+You can apply stochastic regression imputation in R with the mice function using the method "norm.nob".
 
 ```{r }
 
@@ -210,7 +214,7 @@ The completed dataset can be extracted by using the complete function in the mic
 
 ## Bayesian Stochastic regression imputation
 
-The difference between the non-Bayesian imputation procedure that you applied above and Bayesian imputation is that with the latter method extra variation is added to the imputed values via the regression coefficients. The idea is used that there is not one true (population) regression coefficient but that the regression coefficient itself follows a (probability) distribution. This is in contrast to the frequentist idea, which assume that there is one true population parameter. In this case the regression coefficient (is reflected by the confidence interval). In this book (and most statistial books) the freuentist approach is used For more information about the theory of Bayesian statistics we refer to the books of @box2007bayesianinferencein, @enders2010applied and @gelman2014bayesian. 
+For more information about the theory of Bayesian statistics we refer to the books of [@box2007bayesianinferencein; @enders2010applied; @gelman2014bayesian]. 
 
 ### Bayesian Stochastic regression imputation in SPSS
 
@@ -222,7 +226,7 @@ To start the imputation procedure, Go to
 
 > Analyze -> Multiple Imputation -> Impute Missing Data Values. 
 
-In the first window you define which variables are included in the imputation model. Transfer the Tampa scale and Pain variable to the Variables in Model window. Than set the  number of imputed datasets to 1 under Imputations and give the dataset where the imputed values are stored under "Create a new dataset" a name. Here we give it the name “ImpStoch_Tampa” (Figure \@ref(fig:fig3-18)).
+In the first window you define which variables are included in the imputation model. Transfer the Tampa scale and Pain variable to the Variables in Model box. Than set the  number of imputed datasets to 1 under Imputations and give the dataset where the imputed values are stored under "Create a new dataset" a name. Here we give it the name “ImpStoch_Tampa” (Figure \@ref(fig:fig3-18)).
 
 ```{r fig3-18, echo = FALSE, fig.cap="The Variables window.", out.width='70%', fig.align='center'}
 knitr::include_graphics("images/fig3.18.png")
@@ -230,9 +234,9 @@ knitr::include_graphics("images/fig3.18.png")
 
 **Step 2**
 
-In the Methods window, choose under Imputation Method for customand then Fully conditional specification (MCMC). Set the Maximum iterations number at 50. This specifies the number of iterations as part of the FCS method (Figure \@ref(fig:fig3-19)). We further use the default settings.
+In the Methods tab, choose under Imputation Method for custom and then Fully conditional specification (MCMC). Set the Maximum iterations number at 50. This specifies the number of iterations as part of the FCS method (Figure \@ref(fig:fig3-19)). We further use the default settings.
 
-```{r fig3-19, echo = FALSE, fig.cap="The Methods window.", out.width='70%', fig.align='center'}
+```{r fig3-19, echo = FALSE, fig.cap="The Methods tab.", out.width='70%', fig.align='center'}
 knitr::include_graphics("images/fig3.19.png")
 ```
 
@@ -240,7 +244,7 @@ knitr::include_graphics("images/fig3.19.png")
 
 In the constraints window (Figure \@ref(fig:fig3-20)) click on the Scan Data button and further use the default settings. 
 
-```{r fig3-20, echo = FALSE, fig.cap="Stochastic regression imputation", out.width='70%', fig.align='center'}
+```{r fig3-20, echo = FALSE, fig.cap="Bayesian Stochastic regression imputation", out.width='70%', fig.align='center'}
 knitr::include_graphics("images/fig3.20.png")
 ```
 
@@ -248,7 +252,7 @@ knitr::include_graphics("images/fig3.20.png")
 
 In the Output window we only use the default settings. 
 
-```{r fig3-21, echo = FALSE, fig.cap="The Output window.", out.width='70%', fig.align='center'}
+```{r fig3-21, echo = FALSE, fig.cap="The Output tab.", out.width='70%', fig.align='center'}
 knitr::include_graphics("images/fig3.21.png")
 ```
 
@@ -256,9 +260,9 @@ knitr::include_graphics("images/fig3.21.png")
 
 Now click on OK button to start the imputation procedure
 
-The output dataset consists of the original data with missing data plus a set of cases with imputed values for each imputation. These imputed datasets are stacked under each other. The file also contains a new variable, Imputation_, which indicates the number of the imputed dataset (0 for original data and more than 0 for the imputed datasets). The variable Imputation_ is added to the dataset and the imputed values are marked yellow. 
+The output dataset consists of the original data with missing data plus a set of cases with imputed values for each imputation. The imputed datasets are stacked under each other. The file also contains a new variable, Imputation_, which indicates the number of the imputed dataset (0 for original data and more than 0 for the imputed datasets). The variable Imputation_ is added to the dataset and the imputed values are marked yellow. 
 
-```{r fig3-22, echo = FALSE, fig.cap="Aanpassen Titel.", out.width='70%', fig.align='center'}
+```{r fig3-22, echo = FALSE, fig.cap="Imputed dataset.", out.width='70%', fig.align='center'}
 knitr::include_graphics("images/fig3.22.png")
 ```
 
@@ -288,151 +292,3 @@ imp_b <- mice(dataset, method="norm", m=1, maxit=1)
 ```
 
 The completed dataset can be extracted by using the complete function in the mice package.
-
-## Predictive Mean Matching or Regression imputation
-
-To impute continuous variables two methods can be used. Linear regression imputation or Predictive Mean Matching (PMM).PMM is an imputation method that predicts values and subsequently selects observed values to be used to replace the missing values. It is the default imputation procedure in the mice package (@rubin1987). Linear regression imputation was explained in (paragraph (3.3.1.2)). 
-
-### Predictive Mean Matching, how does it work?
-
-Predictive Mean Matching takes place in several steps:
-
-We take as an example the missing values in the Tampa scale variable. They are defined as NA in the dataset. The Pain variable is used to predict the missing Tampa scale values.
-
-```{r echo=FALSE}
-
-library(foreign)
-dataset <- suppressWarnings(suppressMessages(read.spss(file="PMM 10 missing.sav", to.data.frame = T)))
-dataset
-
-```
-
-**Step 1**: Estimate linear regression model 
-
-A linear regression model is estimated with the Tampa scale variable as the outcome and the Pain variable as the predictor variable for the missing values. We define this regression coefficient as $\hat{\beta_{Pain}}$.
-
-**Step 2**: Determine Bayesion version of regression coefficient 
-
-A Bayesian regression coefficient for the Pain variable is determined (paragraph (XX)). We define this regression coefficient as $\beta_{Pain}^*$.
-
-**Step 3**: Predict Missing values
-
-- _Observed_ Tampa scale valueas are predicted by the Pain regression coefficient $\hat{\beta_{Pain}}$ from step 1 and the Pain data, we call these values $Tampa_{Obs}$.
-
-```{r , echo=FALSE, eval=FALSE}
-suppressWarnings(suppressMessages(library(knitr)))
-suppressWarnings(suppressMessages(library(kableExtra)))
-suppressWarnings(suppressMessages(library(mice)))
-suppressWarnings(suppressMessages(library(float)))
-```
-
-```{r , echo=FALSE}
-library(float)
-library(foreign)
-library(mice)
-library(knitr)
-library(kableExtra)
-dataset <- suppressWarnings(suppressMessages(read.spss(file="PMM 10 missing.sav", to.data.frame = T)))
-
-y <- dataset$Tampascale
-ry <- !is.na(y)
-
-x <- as.matrix(dataset[, 1])
-dimnames(x) <- list(NULL, "Pain")
-
-donors = 3
-type = 1
-ridge = 1e-05
-
-  x <- cbind(1, as.matrix(x))
-  ynum <- y
-
-  set.seed(3281)
-  parm <- .norm.draw(ynum, ry, x, ridge = ridge)
-  
-  yhatobs <- x[ry, ] %*% parm$coef
-  yhatmis <- x[!ry, ] %*% parm$beta
-  
-y[is.na(y)] <- yhatmis  
-x[ry, ] <- yhatobs
-x[!ry, ] <- yhatmis
-dataset <- data.frame(dataset, x[, 1], ry, y)
-
-# predicted missing value = 1, predicted observed value =0
-# Prepare dataset to make plot
-dataset$ry <- ifelse(dataset$ry, 0, 1)
-
-names(dataset) <- c("ID", "Pain", "Tampascale", "Tampa_Obs", "Group", "Tampascale_Complete")
-
-dataset <- dataset[, -c(5, 6)]
-dataset <- round(dataset, 3)
-dataset$Tampa_Obs[which(is.na(dataset$Tampascale))] <- NA
-
-kable(dataset, "latex", booktabs = T)
-```
-
-- _Missing_ Tampa scale valueas are predicted by the regression coefficient $\beta_{Pain}^*$ from step 2 and the Pain data, we call these $Tampa_{Pred}$.
-
-These values are: 43.594, 41.456 and 39.852.
-
-**Step 4**: Find closest donor
-
-Find the closest donor for the first missing value by subtracting the first $Tampa_{Pred}$ value of 43.594 from all predicted observed values in the $Tampa_{Obs}$ column. These differences are shown in the column Difference. 
-
-```{r , echo=FALSE}
-library(foreign)
-library(mice)
-dataset <- suppressWarnings(suppressMessages(read.spss(file="PMM 10 missing.sav", to.data.frame = T)))
-
-y <- dataset$Tampascale
-
-ry <- !is.na(y)
-
-x <- as.matrix(dataset[, 1])
-dimnames(x) <- list(NULL, "Pain")
-
-donors = 3
-type = 1
-ridge = 1e-05
-
-  x <- cbind(1, as.matrix(x))
-  ynum <- y
-
-  set.seed(3281)
-  parm <- .norm.draw(ynum, ry, x, ridge = ridge)
-  
-  yhatobs <- x[ry, ] %*% parm$coef
-  yhatmis <- x[!ry, ] %*% parm$beta
-  
-y[is.na(y)] <- yhatmis  
-x[ry, ] <- yhatobs
-x[!ry, ] <- yhatmis
-dataset <- data.frame(dataset, x[, 1], ry, y)
-
-# predicted missing value = 1, predicted observed value =0
-# Prepare dataset to make plot
-dataset$ry <- ifelse(dataset$ry, 0, 1)
-
-names(dataset) <- c("ID", "Pain", "Tampascale", "Tampa_Obs", "Group", "Tampascale_Complete")
-
-dataset <- dataset[, -c(5, 6)]
-#dataset$Col <- ry
-dataset <- round(dataset, 3)
-dataset$Tampa_Obs[which(is.na(dataset$Tampascale))] <- NA
-
-z <- as.array(yhatmis)
-yhat = yhatobs
-y = y[ry]
-donors = donors
-
-# subtract first missing value from all predicted values of observed data
-dataset$Difference <- abs(round(dataset$Tampa_Obs, 3)-43.594)
-dataset <- round(dataset, 3)
-
-kable(dataset, "latex", booktabs = T)
-```
-
-The smallest differences are 1.574, 1.970 and 2.168 and these belong to the cases with observed Tampa scale values of 40, 41 and 42 respectively. Subsequently, a value is randomly drawn from these observed values and used to impute the first missing Tampa scale value. Other missing values are imputed by following the same procedure. 
-
-The strength of PMM is that missing data is replaced by data that is observed in the dataset and not replaced by unrealistic values (as negative Tampa scale scores).  
-
