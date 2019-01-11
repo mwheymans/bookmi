@@ -1,36 +1,24 @@
 ---
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 # (PART) Part IV: Data Analysis After Multiple Imputation {-}
 
-## Pooling results after MI in SPSS 
+# Data analysis after Multiple Imputation 
 
-### Imputed values are yellow
+After Multiple Imputation has been performed, the next steps are to apply statistical tests in each imputed dataset and to pool the results to obtain summary estimates. In SPSS and R these steps are mostly part of the same analysis step. In SPSS pooling results of statistical tests can be obtained by navigating to the familiar options under Analyze. In R, many pooling procedures are available as part of the mice package. However, for some specific statistical tests, other packages have to be installed. Further, it is also necessary to check if the imputation procedure worked without problems. How to retrieve pooled statistical test results and to evaluate the imputations in SPSS and R are the topics of this Chapter. 
+ 
+For the data examples in this Chapter We use three imputed datasets, to keep the output Tables readable. The examples easily generalize to a larger number of imputed datasets.
 
-After multiple imputation, the multiple imputed datasets are stored in a new SPSS file. In order to obtain pooled analysis results, the imputed values must be marked yellow. Than SPSS recognizes the dataset is an "imputed" dataset and is able to generate pooled analyses results. Figure \@ref(fig:fig5-1)) shows an example of a multiple imputed dataset with imputed values marked yellow. If SPSS does not recognize the dataset as a multiple imputed dataset, the data will be treated as one large dataset.
-
-```{r fig5-1, echo = FALSE, fig.cap="Example of SPSS dataset after MI has been applied.", out.width='90%', fig.align='center'}
-knitr::include_graphics("images/fig5.1.png")
-```
-
-You can mark the imputed values by using the option “Mark Imputed Data” under the View menu in the Data View window ((Figure \@ref(fig:fig5-1))). 
-
-### The Imputation_ variable
-
-The Imputation_ variable is a nominal variable that separates the original from the imputed datasets. It is used as a variable that splits the file into separate groups for analysis based on the different categories. This is also indicated in the corner on the right side below in the Data View and Variable View windows by the note “Split by imputation_”.
-
-```{r fig5-2, echo = FALSE, fig.cap="Procedure to mark imputed values in SPSS.", out.width='90%', fig.align='center'}
-knitr::include_graphics("images/fig5.2.png")
-```
-
-When missing values are imputed with any another software program, you can include an Imputation_ variable in SPSS. It is than recognized as an imputed dataset in SPSS.
+## Data analysis in SPSS
 
 ### Special pooling icon
 
-When imputation markings are turned on, a special icon is displayed next to the statistical procedures in the analyze menu. This icon shows you if a pooled result is generated after multiple imputation is used ((Figure \@ref(fig:fig5-3))). 
+In order to obtain pooled analysis results, the imputed values must be marked yellow. Than SPSS recognizes the dataset is an "imputed" dataset and is able to generate pooled analyses results. If SPSS does not recognize the dataset as a multiple imputed dataset, the data will be treated as one large dataset.
+
+When imputation markings are turned on, a special icon is displayed in front of the statistical procedures in the analyze menu. This icon shows you if a pooled result will be generated after multiple imputation is used ((Figure \@ref(fig:fig5-3))). 
 
 ```{r fig5-3, echo = FALSE, fig.cap="Multiple Imputation icon.", out.width='5%', fig.align='center'}
 knitr::include_graphics("images/fig5.3.png")
@@ -42,15 +30,11 @@ This icon is shown in the analyze menu in SPSS (Figure \@ref(fig:fig5-4b))).
 knitr::include_graphics("images/fig5.4b.png")
 ```
 
-SPSS provides two levels of pooling, which are called the Naïve and Univariate combination. The Naïve combination only shows the pooled parameter (if available). The Univariate combination shows the pooled parameter, its standard error, test statistic, effective degrees of freedom, p-value, confidence interval, and pooling diagnostics (fraction of missing information, relative efficiency, relative increase in variance), when available. Although the special icon in SPSS to indicate that the dataset is recognized as a multiple imputed dataset appears for many analysis procedures, it is not always clear what procedures really provide the Univariate combination output. It is therefore recommended to explore what kind of pooled information is provided by SPSS before MI is applied.
+SPSS provides two levels of pooling, which are called the Naïve and Univariate combination. The Naïve combination only shows the pooled parameter (if available). The Univariate combination shows the pooled parameter, its standard error, test statistic, effective degrees of freedom, p-value, confidence interval, and pooling diagnostics (fraction of missing information, relative efficiency, relative increase in variance), when available. Although the special icon in SPSS to indicate that the dataset is recognized as a multiple imputed dataset appears for many statistical analysis procedures, it is not always clear what procedures really provide a summary estimate that contains the pooled estimate, related confidence intervals and p-value. It is therefore recommended to visit the help index in SPSS to expplore what kind of pooled information is provided by SPSS before MI is applied.
 
-## Pooling results after MI in R
+## Pooling Statistical tests
 
-Many pooling procedures are available as part of the mice package. However, for some specific statistical procedures, other packages are required to obtain pooled estimates. For example, pooling ANOVA results is not available in the mice package itself. For this, the miceadds package has to be used.  
-
-For the examples in this Chapter We will use three imputed datasets, to keep the output Tables readable, although the examples easily generalize to a larger number of imputed datasets.
-
-## Pooling Means and Standard deviations in SPSS
+### Pooling Means and Standard deviations in SPSS
 
 To get pooled means you just use 
 
@@ -62,7 +46,7 @@ Figure \@ref(fig:tab5-3) shows that in the “Pooled” row the mean values of t
 knitr::include_graphics("images/table5.3.png")
 ```
 
-## Pooling Means and Standard Deviations in R
+### Pooling Means and Standard Deviations in R
 
 To pool the means and standard deviations you use the with function in mice.
 
@@ -90,11 +74,11 @@ Reduce("+",desc)/length(desc)
 
 ```
 
-## Pooling Correlation coefficients
+### Pooling Correlation coefficients
 
 When a normal distribution of the parameter estimates cannot be assumed, like for the correlation coefficients, a Fishers Z transformation has to be performed before pooling (see the appendix for the formula's). This is automatically done in SPSS and R.
 
-### Pooling Correlation coefficients in SPSS
+#### Pooling Correlation coefficients in SPSS
 
 A pooled Pearsons correlation coefficient between for example, the Tampascale and Age variables can be extracted using 
 
@@ -106,7 +90,7 @@ Than transfer the variable Tampa scale and Age to the variables window and click
 knitr::include_graphics("images/table5.4.png")
 ```
 
-### Pooling Correlation Coefficients in R
+#### Pooling Correlation Coefficients in R
 
 You can use the micombine.cor function in the miceadds package to obtain pooled correlation coefficients. 
 
@@ -143,11 +127,11 @@ res.mi.cor
 
 ```
 
-## The Pooled Independent T-test
+### The Pooled Independent T-test
 
 To pool the independent t-test, Rubin´s Rules can be used. These steps are discussed in detail, including the formula's to get the results, in Chapter 9.
 
-### Pooling Independent T-tests in SPSS
+#### Pooling Independent T-tests in SPSS
 
 To get a pooled t-test result to estimate the difference in mean Tampascale values between patients with and without Radiation in the leg you go to:
 
@@ -165,7 +149,7 @@ knitr::include_graphics("images/table5.1b.png")
 
 The result in the original dataset (including missing values) is presented in the row that is indicated by Imputation_ number 0. Results in each imputed dataset are shown in the rows starting with number 1 to 3. In the last row which is indicated as “Pooled”, the summary estimates of the mean differences, standard errors, p-values and 95% Confidence Interval are presented.
 
-### Pooling Independent T-tests in R with mice
+#### Pooling Independent T-tests in R with mice
 
 The mice package itself does not have a pooled t-test option. Instead a linear regression analysis has to be conducted. A linear regression analysis with a continuous outcome variable and an independent dichotomous variable is the same procedure as an independent t-test. Use for this the lm procedure in mice with as independent variable Radiation and dependent variable Tampascale.
 
@@ -190,7 +174,7 @@ We see in the output, under est and se the same values as in SPSS (Figure \@ref(
 
 Under the column df in R you see that the dfs for the mean differences in the Tampascale variable are much smaller than those in (Figure \@ref(fig:tab5-4)) above. This is due to the different formulas used to calculate the df. SPSS uses an older version and mice an adjusted one (see Chapter 9 for more information about different ways to calculate the df between SPSS and R)
 
-### Pooling Independent T-tests in R with mi.t.test
+#### Pooling Independent T-tests in R with mi.t.test
 
 you can also use the mi.t.test function in the MKmisc package. Note that the mi.t.test function uses the parameter setting var.equal is True when equal variances are assumed and var.equal is False when equal variances are not assumed (the default setting is var.equal is False). 
 
@@ -224,9 +208,9 @@ mi.t.test(dataset.imp, x = "Tampascale", y = "Radiation", var.equal = T)
 
 With the mi.t.test function also a one sample and a paired t-test can be conducted.
 
-## Pooling Chi-square tests
+### Pooling Chi-square tests
 
-### Pooling Chi-square tests in SPSS
+#### Pooling Chi-square tests in SPSS
 
 The pooling of Chi-square values as a result of the Chi-square test is not available in SPSS. This lack of reporting of the Chi-Square test is shown in (Figure \@ref(fig:tab5-6)) where the association between the Tampa scale variable as a categorical variable (with the categories 0 = low fear of movement, 1 = middle fear of movement and 2 is a high fear of movement) and Radiation in the leg is studied. The Chi-square test is presented in the original dataset and in each imputed dataset, but a pooled Chi-square value and pooled p-value is missing. This is remarkable because when you choose for Descriptive Statistics -> Crosstabs to conduct the Chi-square test the special Multiple Imputation icon is shown. This is an indication that you get pooled results, however in this case it is not.  
 
@@ -234,7 +218,7 @@ The pooling of Chi-square values as a result of the Chi-square test is not avail
 knitr::include_graphics("images/table5.6.png")
 ```
 
-### Pooling Chi-square tests in R
+#### Pooling Chi-square tests in R
 
 Procedures to pool Chi-square values are available in the miceadds package. The pooling functions are based on formulas that can be found in Marshall (2009) and Enders (2012) and are referred to as the D2 statistic. 
 To pool the Chi-square values of the SPSS example you use:  
@@ -246,9 +230,9 @@ micombine.chisquare(c(1.829, 1.311, 2.861, 1.771, 3.690), 2, display = TRUE, ver
 
 The function micombine.chisquare also has a parameter setting that is called “version”. The default version=1 refers to the correct formula as in Enders (2010), while version=0 uses an incorrect formula as printed in Allison (2001). 
 
-## Analysis of Variance (ANOVA) pooling
+### Analysis of Variance (ANOVA) pooling
 
-### Analysis of Variance (ANOVA) pooling in SPSS
+#### Analysis of Variance (ANOVA) pooling in SPSS
 
 The pooling of Analysis of Variance (ANOVA) statistics is not available in SPSS. In Figure \@ref(fig:tab5-7) the table is shown as a result of ANOVA after multiple imputation. It is clear from the Figure that the pooled results are lacking.
 
@@ -256,7 +240,7 @@ The pooling of Analysis of Variance (ANOVA) statistics is not available in SPSS.
 knitr::include_graphics("images/table5.7.png")
 ```
 
-### Analysis of Variance (ANOVA) pooling in R
+#### Analysis of Variance (ANOVA) pooling in R
 
 The pooled ANOVA procedure uses the same function as was used in the previous paragraph to derive the pooled Chi-square value, because the Chi and the F-value are related. The easiest way to obtain a p-value for the ANOVA is by using the mi.anova function in the miceadds package. In this function a regression based formula can be defined to get a p-value. 
 
@@ -278,9 +262,9 @@ mi.anova(mi.res=imp.Tampa.cat, formula="Function ~ Tampa_Cat" )
 
 The pooled F and p-values are reported under the columns F value and Pr(>F) respectively.  
 
-##	Pooling Regression models
+###	Pooling Regression models
 
-###	Pooling Linear Regression Models in SPSS
+####	Pooling Linear Regression Models in SPSS
 
 To pool the results from a linear regression analysis Rubin´s Rules are used. To study the relationship between the Tampascale (independent) and Function (dependent) variables go to:
 
@@ -294,7 +278,7 @@ knitr::include_graphics("images/table5.8.png")
 
 Information is provided in the row called Pooled about the parameter estimates, i.e. regression coefficients, standard errors, t-values, p-values and confidence interval. Further, information is provided about the Fraction of Missing Information, Relative Increase Variance and Relative Efficiency.
 
-###	Pooling Linear regression models in R
+####	Pooling Linear regression models in R
 
 A pooled linear regression analyses can be produced by using the with and pool functions in the mice package.  
 
@@ -320,7 +304,7 @@ summary(lin.pool)
 
 ```
 
-###	Pooling Logistic Regression models in SPSS
+####	Pooling Logistic Regression models in SPSS
 
 To study the relationship between the variables Function (independent variable) and Radiation in the Leg (dependent variable we need Logistic regression. This procedure can be done in SPSS via
 
@@ -334,7 +318,7 @@ knitr::include_graphics("images/table5.9.png")
 
 information is provided in the row called Pooled about the parameter estimates, i.e. regression coefficients (B), standard errors (S.E.), p-values (Sig.), odds ratio´s (Exp(B) and 95% confidence intervals around the OR (95% C.I. for EXP(B). Further, information is provided about the Fraction of Missing Information, Relative Increase Variance and Relative Efficiency. For the pooled coefficient and standard error Rubin´s Rules (RR) are used. 
 
-### Pooling Logistic Regression models in R
+#### Pooling Logistic Regression models in R
 
 You can use mice to get pooled results after logistic regression. In combination with the pool function you have to use the following R code.
 
@@ -418,15 +402,11 @@ pool.OR
 
 The p-value in the NORM package is equal to the p-value in SPSS. This means that the NORM package also uses the older method to calculate the degrees of freedom.
 
-## Pooling logistic regression models including categorical independent variables
-
-For categorical variables in logistic regression models, different methods are available to test the variable as a whole for significance. These so called Multiparameter tests are not available in SPSS, but they are available in R. These tests will be discussed in the next Chapter. We will start with an example of univariate pooling in SPSS.
-
 ### Pooling Cox regression models
 
 One of the most used statistical models for survival data is the Cox regression model. With survival data you have two outcome measures, the status variable and the time to event variable. As a guideline, all variables of the main analysis, including the outcome variable have to be part of the imputation model. The best way to include the outcome variable in a Cox regression model is not by using the Time variable itself, but by using the cumulative hazard to the survival time. This value has to be included in the imputation model together with the status variable and the auxiliary variables. 
 
-###	Pooling Cox regression models in SPSS
+####	Pooling Cox regression models in SPSS
 
 The cumulative hazard value can easily be calculated in SPSS by using the Survival menu and then choose for 
 

@@ -10,12 +10,8 @@ link-citations: yes
 output:
   pdf_document: default
   html_document: default
-cover-image: images/cover.png  
----
 
-```{r cover, echo = FALSE}
-knitr::include_graphics("images/cover.png")
-```
+---
 
 Copyright ©2018 by Heymans and Eekhout
 

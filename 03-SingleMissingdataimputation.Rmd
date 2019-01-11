@@ -214,7 +214,7 @@ The completed dataset can be extracted by using the complete function in the mic
 
 ## Bayesian Stochastic regression imputation
 
-For more information about the theory of Bayesian statistics we refer to the books of [@box2007bayesianinferencein; @enders2010applied; @gelman2014bayesian]. 
+With Bayesian Stochastic regression imputation uncertainty is not only accounted for by adding error variance to the predicted values but also by taking into account the uncertainty in estimating the regression coefficients of the imputation model. The Bayesian idea is used that there is not one (true) population regression coefficient but that the regression coefficients itself follows a distribution. For more information about the theory of Bayesian statistics we refer to the books of [@box2007bayesianinferencein; @enders2010applied; @gelman2014bayesian]. 
 
 ### Bayesian Stochastic regression imputation in SPSS
 
