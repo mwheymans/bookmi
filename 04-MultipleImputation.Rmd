@@ -8,7 +8,7 @@ output:
 
 # Multiple Imputation
 
-In this Chapter we discuss an advanced missing data handling method, that is called Multiple Imputation (MI). With MI, each missing value is replaced by several different values and consequently several different completed datasets are generated. The concept of MI can be made clear by the following figure \@ref(fig:fig4-1).
+In this Chapter we discuss an advanced missing data handling method, Multiple Imputation (MI). With MI, each missing value is replaced by several different values and consequently several different completed datasets are generated. The concept of MI can be made clear by the following figure \@ref(fig:fig4-1).
 
 ```{r fig4-1, echo = FALSE, fig.cap="Graphical presentation of the MI procedure.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig4.1.png")
