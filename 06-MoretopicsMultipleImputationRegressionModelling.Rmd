@@ -6,7 +6,7 @@ output:
 
 # More topics on Multiple Imputation and Regression Modelling 
 
-# Multiple Imputation and Regression Modelling
+## Multiple Imputation and Regression Modelling
 
 This Chapter is a follow-up on the previous Chapters 4 and 5 about data analysis with Multiple Imputation. In this Chapter, we will deal with some specific topics when you perform regression modeling in multiple imputed datasets. 
 

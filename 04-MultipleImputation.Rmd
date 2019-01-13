@@ -96,7 +96,7 @@ knitr::include_graphics("images/fig4.11.png")
 
 ```
 
-### The Imputation history
+### Imputation history
 
 The iteration history is stored in the Iter_Backpain dataset as we defined in the Output window. In this dataset the means and standard deviations of the imputed values at each iteration are stored. These values can be used to construct Convergence plots. More about making convergence plots will be discussed in the next paragraph.
 
@@ -177,76 +177,85 @@ knitr::include_graphics("images/fig4.19.png")
 
 ```
 
-### The mice algorithm and iteration steps 
+## Multiple Imputation in R
 
-Each imputed dataset is generated after several iterations of the imputation algorithm. The imputation algorithm includes the chain of regression equations to estimate the imputed values. How this works exactly is explained with the LBP data as an illustration. In this data we have missing values in the Tampa scale variable and the disability variable; the other two variables, radiation and pain, are completely observed.
+In R multiple imputation can be performed with the `mice` function from the `mice` package. As an example dataset to show MI in R we use the same dataset as in the previous paragraph with 50 patient with low back pain. The variables Tampa scale and Disability contain missing values and the Pain and Radiation variables are complete. 
 
-Per imputed dataset we start with iteration number 0. Data points are randomly drawn from the observed values of the Tampa scale and the Disability variable and these are used to replace the missing values in these variables. 
+The following default settings are used in the `mice` function to start MI, `m=5`, to generate 5 imputed datasets, `maxit=10`, to use 10 iterations for each imputed dataset, `method=”pmm”` to use predictive mean matching (see paragraph 4.8). For an elobate explanation of all options withing the mice function, see `?mice`.
 
-For iteration 1 the Tampa scale values are set back to missing. Subsequently, a linear regression model is applied in the available data (i.e. all subjects with observed Tampa scale values) using the Tampa scale as the dependent variable and Pain, Disability and Radiation as independent variables. Note that for this regression the imputed values for disability from the previous iteration are used. The Baysian sampling method then draws regression coefficients from the posterior distribution of the parameters of this regression. The imputed values for Tampa scale are the predicted values from the linear regression. This regression equation is defined as: 
-
-$Tampa_{mis} = \beta_0 + \beta_1Pain + \beta_2Disability + \beta_3Radiation$
-
-where $\beta_0$, $\beta_1$, $\beta_2$ and $\beta_3$ are Bayseian sampling draws from their posterior distributions. The same procedure is repeated for the Disability variable. The Disability scores are first set back to missing, then the regression coefficients for the Pain, Tampa scale and Radiation variables are obtained from the subjects without missing diability values. Note that the imputed values for Tampa scale are used. The imputed values for disability are estimated using the regression coefficients with additional random error drawn from the residual error distribution. 
-
-$Disability_{mis} = \beta_0 + \beta_1Pain + \beta_2Tampa + \beta_3Radiation$
-
-For iteration 2 the Tampa scale values are again set back to missing and (new) updated regression coefficients for Pain, Disability and Radiation are obtained, using the imputed values for Disability from iteration 1. Accordingly, missing values are estimated from regression model where the coefficients are again drawn from the posterior distributions of the estimated parameters. The same holds for the Disability variable. The imputed values for disability are estimated by the regression model using the imputed values in Tampa scale from iteration 2. This process is repeated in each following iteration until the final iteration where the imputed values are used for the first imputed dataset. For the next imputed dataset, the entire process of iterations is repeated.
-
-##Multiple Imputation in R
-
-In R multiple imputation can be performed with the `mice` function from the `mice` package. The following default settings are used in the `mice` function to start MI, `m=5`, to generate 5 imputed datasets, `maxit=10`, to use 10 iterations for each imputed dataset (i.e. 10 chains of regression imputation models), `method=”pmm”`. For an elobate explanation of all options withing the mice function, see `?mice`.
-
-
-```{r}
+```{r }
 library(mice)
 library(foreign)
-data <- read.spss(file="Backpain50 MI missing.sav", to.data.frame=T)[, -1]
+data <- read.spss(file="Backpain50 MI missing.sav", to.data.frame=T)[, -1] # Read in dataset an exclude ID variable
 imp <- mice(data, m=5, maxit=10, method="pmm")
 ```
 
-By default, the mice fucntion returns information about the iteration and imputation steps for the variable that are imputed under the columns named “iter”, “imp” and “variable”. This information can be turned off by setting the mice function parameter printFlag = FALSE, which results in silent computation of the missing values. A summary of the imputation results can be obtained by calling the imp object.
+By default, the `mice` fucntion returns information about the iteration and imputation steps of the imputed variables under the columns named “iter”, “imp” and “variable” respectively. This information can be turned off by setting the `mice` function parameter `printFlag = FALSE`, which results in silent computation of the missing values. A summary of the imputation results can be obtained by calling the `imp` object.
 
 ```{r}
 imp
 ```
 
-This object contains information about the algorithm, the number of imputed datasets, the missing values in each variable, the imputation method, the VisitSequence which is the order in which the variables are imputed during the imputation process, information of the PredictorMatrix and the seed value for the random number generator. The imputed datasets can be extracted by using the complete function. The setting `action = 1` returns the first imputed dataset. The settings `action = ”long”` and `include = TRUE` returns a data.frame where the imputed datasets are stacked under each other and include the original dataset (with missings) on top (see ?complete for more possibilities how to store the imputed datasets).
+This imp object returns information about the number of imputed datasets, the imputation methods for each variable, information of the PredictorMatrix (used to customize the imputation model, see paragraph below). 
+
+The imputed datasets can be extracted by using the `complete` function. The settings `action = ”long”` and `include = TRUE` return a data.frame where the imputed datasets are stacked under each other and the original dataset (with missings) is included on top.
 
 ```{r}
-complete(imp, action = 1)
 complete(imp, action = "long", include = TRUE)
 ```
 
-In the imputed datasets two variables are added, an .id variable and an .imp variable to distinguish the cases in the dataset and the imputed datasets. The imputed datasets can be further used in mice to conduct pooled analyses or to store them for further use in other software packages as SPSS. 
+In the imputed datasets two variables are added, an `.id` variable and an `.imp` variable to distinguish cases and the imputed datasets. To extract the first imputed dataset, only the setting `action = 1` is needed in the `complete` function. (see ?complete for more possibilities to extract the imputed datasets).The imputed datasets can further be used in mice to conduct pooled analyses or to store them for further use. 
 
-###Customizing the Imputation model
+### The mice algorithm and iteration steps 
 
-In the exemplar imputation model, the variables Tampa scale and Disability are imputed with the help of variables Pain and Radiation. The latter two variables are called auxiliary variables when they are not part of the main analysis model but they help to impute the Tampa scale and disability variables. Variables that are used to impute other variables can be switched off and on in the predictormatrix. 
+During MI, each imputed dataset is generated after several iterations of the imputation algorithm. The imputation algorithm includes the chain of regression models to impute the missing values. We explain how this works is explained with the LBP data from the previous paragraph, with missing values in the Tampa scale and Disability variables.
+
+*Iteration 0*
+Per imputed dataset we start with iteration number 0. Values are randomly drawn from the observed values of the Tampa scale and Disability variable and these are used to replace the missing values in these variables. 
+
+*Iteration 1*
+At this step the Tampa scale values are set back to missing. Subsequently, a linear regression model is applied in the available data (i.e. all subjects with observed Tampa scale values) using the Tampa scale as the dependent variable and the Pain, Disability and Radiation variables as independent variables. From this regression model the missing Tampa scale values are imputed. Note that for this regression model the imputed values for the Disability variable are used from the previous iteration step of 0. The Baysian stochastic regression imputation method adds uncertainty to the imputed values via the error variance (residuals) and the regression coefficients. This regression model is defined as: 
+
+$Tampa_{mis} = \beta_0 + \beta_1Pain + \beta_2Disability + \beta_3Radiation$
+
+The same procedure is repeated for the Disability variable. The Disability scores are first set back to missing, then the regression coefficients for the Pain, Tampa scale and Radiation variables are obtained from the subjects without missing Disability values. Note that now the imputed values for the Tampa scale variable. The imputed values for Disability are estimated using (Bayesian) regression coefficients with additional error variance to the residuals. This regression model is defined as:
+
+$Disability_{mis} = \beta_0 + \beta_1Pain + \beta_2Tampa + \beta_3Radiation$
+
+*Iteration 2*
+For iteration 2 the Tampa scale values are again set back to missing and (new) updated regression coefficients for Pain, Disability and Radiation are obtained, using the imputed values for Disability from iteration 1. Accordingly, missing values are estimated from the regression model, again using Bayesian regression coefficients. The same holds for the Disability variable. The imputed values for the Disability variable are estimated from the regression model using the imputed values in the Tampa scale variable within the same iteration number. 
+
+This process is repeated in each following iteration until the final iteration where the imputed values are used for the first imputed dataset. For the next imputed dataset, the entire process of iterations is repeated.
+
+### Customizing the Imputation model
+
+In the `mice` imputation models, the variables Tampa scale and Disability are imputed with the help of the variables Pain and Radiation. The latter two variables are called auxiliary variables when they are not part of the main analysis model but they help to impute the Tampa scale and Disability variables. By customizing the PredictorMatrix in the `mice` function variables that are used to impute other variables can be switched off and on. 
+
+To get information about the PredictorMatrix that was used in the `mice` function use:
 
 ```{r}
 imp$PredictorMatrix
 ```
 
-The predictor matrix is a matrix with the names of the variables in the dataset listed in the rows and the columns. The variables in the columns are used to impute the row variables. Accordingly, variables in the columns can be switched on or off to in- or exclude them from the imputation model to impute the missing data in the row variable. In our example, the first and fourth rows contain only zeroes, because the Pain and Radiation variables do not have missing values and therefore do not need to be imputed. The variable in the second row, i.e. Tampa scale, contains missing values and the 1´s in this row mean that the column variables Pain, Disability and Radiation are included in the imputation model. For the Disability variable, the variables Pain, Tampa scale and Radiation are used. As a default setting all variables are included in the imputation model to predict missing values in other variables. The diagonal of the predictormatrix is always zero. The predictormatrix can be adapted when for example a variable that contains a high percentage of missing data should be excluded from the imputation model to impute other variables. For example, if we want to exclude the variable Disability from the imputation model of the Tampa scale variable we can do the following:
+The predictor matrix is a matrix with the names of the variables in the dataset listed in the rows and the columns. The variables in the columns are used to impute the row variables. Accordingly, variables in the columns can be switched on or off to in- or exclude them from the imputation model to impute the missing data in the row variable. In our example, the first and fourth rows contain only zeroes, because the Pain and Radiation variables do not have missing values and therefore do not need to be imputed. The variable in the second row, i.e. Tampa scale, contains missing values and the 1´s in this row mean that the column variables Pain, Disability and Radiation are included in the imputation model. For the Disability variable, the variables Pain, Tampa scale and Radiation are used. As a default setting all variables are included in the imputation model to predict missing values in other variables. The diagonal of the predictormatrix is always zero. The predictormatrix can be adapted when for example a variable that contains a high percentage of missing data should be excluded from the imputation model. For example, if we want to exclude the variable Disability from the imputation model of the Tampa scale variable we can do the following:
 
 ```{r, eval=FALSE}
 pred <-imp$PredictorMatrix
 pred["Tampascale", "Disability"] <- 0
 pred
 
-imp2 <- mice(data,m=5, maxit=10, method="pmm", predictorMatrix = pred, seed=1050)
+imp <- mice(data,m=5, maxit=10, method="pmm", predictorMatrix = pred)
 ```
 
-In literature several guidelines for the imputation model are described (@Collins2001, @VanBuuren2018, @Rubin1976). A summary of guidelines for building the imputation model is as follows:
+There are several guidelines that can be used to set the PredictorMatrix (@Collins2001, @VanBuuren2018, @Rubin1976). To summarize:
 
 1. Include all variables that are part of the analysis model, including the dependent (outcome) variable.
 2. Include the variables at the same way in the imputation model as they appear in the analysis model (i.e. if interaction terms are in the analysis model they also have to be included in the imputation model).
 3.	Include additional (auxiliary) variables that are related to missingness or to variables with missing values.
 
-##Output of the `mice` function
+## Output of the `mice` function
 
-The mice function returns a mids (multiple imputed data set) object. In this object, aimputation information is stored and can be extracted by typing `imp$`, followed by the type of information you want to obtain. 
+The mice function returns a mids (multiple imputed data set) object. In this object, imputation information is stored and can be extracted by typing `imp$`, followed by the type of information you want to obtain. 
 
 ```{r}
 imp$m
@@ -254,15 +263,18 @@ imp$nmis
 imp$seed
 imp$iteration
 ```
-The above objects contain the the number of imputed datasets, missing values in each variable, the specified seed value and the number of iterations.
+The above objects contain the the number of imputed datasets, missing values in each variable, the specified seed value (NA here because we did not define one) and the number of iterations.
+
 The original data can be found in:
 ```{r}
 imp$data
 ```
+
 The imputed values for each variable in the imptued values can be found under:
 ```{r}
 imp$imp
 ```
+
 The imputation methods used:
 ```{r}
 imp$method
@@ -278,23 +290,25 @@ The sequence of the variables used in the impution procedure:
 imp$visitSequence
 ```
 
-###Checking Convergence in R
+### Checking Convergence in R
 
-The convergence of the imputation procedure can be evaluates. The means of the imputed values for each iteration can be extracted from the mids object as chainMean. The number of Chains is equal to the number of imputed datasets. A Chain refers to the chain of regression models that is used to generate the imputed values. The length of each chain is equal to the number of iterations. The Chains contain the means of the imputed values. 
+The convergence of the imputation procedure can be evaluated. The means of the imputed values for each iteration can be extracted as `chainMean`.  
+
 ```{r}
 imp$chainMean
 ```
 
-The convergence can be visualised by plotting the chain information in a convergence plot. For our example, the convergence plots are shown below. In this plot you see that the variance between the imputation chains is almost equal to the variance within the chains, which indicates healthy convergence. 
+The number of chains is equal to the number of imputed datasets. A chain refers to the chain of regression models that is used to generate the imputed values. The length of each chain is equal to the number of iterations.
 
+The convergence can be visualised by plotting the means in a convergence plot. For our example, the convergence plots are shown below. In this plot you see that the variance between the imputation chains is almost equal to the variance within the chains, which indicates healthy convergence. 
 
 ```{r}
 plot(imp)
 ```
 
-###Imputation diagnostics in R
+### Imputation diagnostics in R
 
-It can also be of interest to compare the values that are imputed with those that are observed. For that, the `stripplot` function can be used in `mice`. This function visualises the observed and imputed values in one plot. By comparing the observed and the imputed data points we get an idea if the imputed values are in range of the observed data. If there are no large differences between the imputed and observed values under MAR than we can conclude the imputed values are plausible.
+It can also be of interest to compare the values that are imputed with those that are observed. For that, the `stripplot` function can be used in `mice`. This function visualises the observed and imputed values in one plot. By comparing the observed and the imputed data points we get an idea if the imputed values are in range of the observed data. If there are no large differences between the imputed and observed values than we can conclude the imputed values are plausible.
 
 ```{r}
 stripplot(imp)
