@@ -212,7 +212,7 @@ With the `mi.t.test` function also a one sample and a paired t-test can be condu
 
 The pooling of Chi-square values as a result of the Chi-square test is not available in SPSS. This lack of reporting of the Chi-Square test is shown in (Figure \@ref(fig:tab5-6)) where the association between the Tampa scale variable as a categorical variable (with the categories 0 = low fear of movement, 1 = middle fear of movement and 2 is a high fear of movement) and Radiation in the leg is studied. The Chi-square test is presented in the original dataset and in each imputed dataset, but a pooled Chi-square value and pooled p-value is missing. This is remarkable because when you choose for Descriptive Statistics -> Crosstabs to conduct the Chi-square test the special Multiple Imputation icon is shown. This is an indication that you would get pooled results, however in this case it is not.  
 
-```{r tab5-6, echo = FALSE, fig.cap="Chi-square test in 5 imputed dataset to test the relationship between the Tampascale variable and Radiation, where a pooled estimate is missing.", out.width='90%', fig.align='center'}
+```{r tab5-6, echo = FALSE, fig.cap="Chi-square test in 5 imputed dataset to test the relationship between the Tampascale variable and Radiation, where a pooled estimate is missing.", out.width='70%', fig.align='center'}
 knitr::include_graphics("images/table5.6.png")
 ```
 
@@ -341,11 +341,14 @@ The results of the pooled procedure are:
 Under the Line with the R code summary(pool(fit)), the pooled estimates are provided. To extract the ORs and the corresponding 95% Confidence intervals you have to apply the following code:
 
 ```{r }
-#summary.fit <- summary(pool(fit))
-#pool.OR <- exp(cbind(summary.fit[,1],summary.fit[,6],summary.fit[,7]))
-#colnames(pool.OR) <- (c("OR", "95% LO", "95% UP"))
-#pool.OR
+summary.fit <- summary(pool(fit))
+pool.OR <- exp(cbind(summary.fit[,1], (summary.fit[,1]-1.96*(summary.fit[,2])), 
+           (summary.fit[,1]+1.96*(summary.fit[,2]))))
+colnames(pool.OR) <- (c("OR", "95% LO", "95% UP"))
+pool.OR
 ```
+
+exp(cbind(summary.fit[,1],summary.fit[,6],summary.fit[,7]))
 
 Another procedure to get the pooled estimates from a logistic regression model is by using the `micombine` function in the `mitools` package. 
 
@@ -453,15 +456,15 @@ dataset <- data.frame(dataset, Hazard)
 # Time variable is not included in the imputation model
 Cox.imp <- mice(dataset, m=1, maxit=0, seed=2795, printFlag=F)
 Pred <- Cox.imp$predictorMatrix
-Pred[2, "Time"] <- 0
+Pred[3, "Time"] <- 0
 Pred
 
 # Start imputations using mice
 Cox.imp <- mice(dataset, m=3, maxit=50, predictorMatrix=Pred, seed=2795, printFlag=F)
 
 fit.Cox <- with(data=Cox.imp, exp=coxph(Surv(Time, Status) ~ Pain))
-Cox.pool <- pool(fit.Cox)
-summary(Cox.pool)
+Cox.pool <- summary(pool(fit.Cox))
+Cox.pool
 
 ```
 
@@ -477,3 +480,11 @@ Results of the pooled procedure are:
   Lambda: Proportion of the variation attributable to the missing data 
 
 Calculation of the Hazard ratio.
+
+```{r }
+Cox.pool <- summary(pool(fit.Cox))
+pool.HR <- exp(cbind(Cox.pool[,1], (Cox.pool[,1]-1.96*(Cox.pool[,2])), 
+           (Cox.pool[,1]+1.96*(Cox.pool[,2]))))
+colnames(pool.HR) <- (c("OR", "95% LO", "95% UP"))
+pool.HR
+```
