@@ -55,16 +55,31 @@ psfmi_lr(data=lbpmilr, nimp=10, impvar="Impnr", Outcome="Chronic",
 
 ```
 
-In the final table that is called "Mixed p-values (MR & RR)", the pooled p-values can be found for all variables, including the categorical variables that are pooled by the Meng and Rubin procedure. For the dichotomous and continuous variables the pooled p-value estimated by Rubin's Rules is reported. Set `print.method = TRUE`, to obtain the table with the pooled p-values by the Meng and Rubin method for all variables.
+In the final table that is called "Mixed p-values (MR & RR)", the pooled p-values can be found for all variables, including the categorical variables that are pooled by the Meng and Rubin procedure. For the dichotomous and continuous variables the pooled p-value estimated by Rubin's Rules is reported. These are equal to the p-values in the first table under "Pooled model (Rubin's Rules)". You can set `print.method = TRUE`, to obtain the table with the pooled p-values by the Meng and Rubin method for all variables.
 
 ## Cox Regression with a categorical variable in R
 
-In the psfmi package, a function is also available to obtain overall pooled p-values for categorical variables in Cox regression models, because this is also not possible in SPSS. All pooling methods can be applied, except for the Meng and Rubin procedure. The Meng and Rubin procedure is not recommended to use for Cox regression models (@Marshall2009MedResMeth). The MPR pooling procedure is only extensively tested for the logistic regression model, and still experimental for the Cox regression models. More research to this method is on the way.
+In the psfmi package, a function that is called `psfmi_coxr`is also available to obtain overall pooled p-values for categorical variables in Cox regression models, because this is also not possible in SPSS. All pooling methods can be applied, except for the Meng and Rubin procedure. The Meng and Rubin procedure is not recommended to use for Cox regression models (@Marshall2009MedResMeth). 
 
+To pool a Cox regression model with a mix of continuous and dichotomous variables and 1 categorical variable over 10 impted datasets (see `?psfmi::lbpmicox` for more information on the dataset) and pooling method "D1" use:
+
+```{r }
+library(foreign)
+library(psfmi)
+
+psfmi_coxr(data=lbpmicox, nimp=10, impvar="Impnr", time="Time", status="Status",
+  predictors=c("Duration", "Radiation", "Onset", "Function", "Age",
+  "Previous", "Tampascale", "JobControl", "JobDemand", "Social"), 
+  cat.predictors=c("Expect_cat"), method="D1", print.method = FALSE)
+
+```
  
-For more information of the possibilities of pooling logistic and Cox regression models with the psfmi package see `?psfmi_lr` or `?psfmi_coxr`.
+The pooled p-values are shown in the table tha is called "Pooled p-values (D1 & RR)". For the categorical variable `factor(Expect_cat)`, the p-value is pooled using method "D1" and for all other variables Rubin's ules are used. These p-values are the same as the p-values in the "Pooled model (Rubin's Rules)" table above in the output. You can set `print.method = TRUE` to obtain the pooled p-values by method "D1" for all variables.  
+ 
+For more information of the possibilities of pooling logistic and Cox regression models with the psfmi package see `?psfmi::psfmi_lr` or `?psfmi::psfmi_coxr`.
 
 ## Variable selection
+
 Prediction models are frequently developed by using selection procedures in logistic and Cox regression models. As a selection procedure, backward selection is recommended (Moons et al 2015). Predictor selection in multiple imputed datasets may be challenging. Predictor selection in each imputed dataset separately, may result in a different set of selected variables. Royston (2008) showed that the best choice to select predictors from multiply imputed datasets is to select from the pooled model, i.e. the model that is estimated in each imputed dataset and subsequently regression coefficients are pooled. From these pooled estimates the backward selection procedure can start. This is possible in SPSS when the model includes continuous and dichotomous variables. This is however not possible in SPSS when the model contains categorical variables. Because categorical variables are estimated and selected by using an overall Wald Chi-square value and as we have seen in paragraph 6.2, these Chi-square tests cannot be pooled in SPSS. This makes variable selection when categorical variables are included, not possible in SPSS. We have therefore developed an R package, that contains functions to select predictors  multiple imputed datasets and we have integrated the pooling procedures that were discussed in the previous paragraphs within these predictor selection functions. We will discuss these functions in the next paragraphs by running the code and we will discuss the output. The package can be installed via the Github website (code to install the packages will be provided below). 
 As an example, we will use a dataset of 426 patients who received a new hip after a hip fracture. The outcome is recovery at 6 months which was defined as 1=no recovery and 0 = recovery. All functions work more or less in the same way and comparable function parameter settings are used. We start by showing the parameters settings that are used in these functions.
 
