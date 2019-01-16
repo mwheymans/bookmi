@@ -6,21 +6,21 @@ output:
 
 # (PART) Part III: Multiple Imputation {-}
 
-# Multiple Imputation
-
 In this Chapter we discuss an advanced missing data handling method, that is called Multiple Imputation (MI). With MI, each missing value is replaced by several different values and consequently several different completed datasets are generated. The concept of MI can be made clear by the following figure \@ref(fig:fig4-1).
 
 ```{r fig4-1, echo = FALSE, fig.cap="Graphical presentation of the MI procedure.", out.width='90%', fig.align='center'}
-knitr::include_graphics("images/fig4.1.png")
+knitr::include_graphics("images/fig4.1_update.png")
 ```
 
 In the first step, the dataset with missing values (i.e. the incomplete dataset) is copied several times. Then in the next step, the missing values are replaced with imputed values in each copy of the dataset. In each copy, slightly different values are imputed due to random variation. This results in mulitple imputed datasets. In the third step, the imputed datasets are each analyzed and the study results are then pooled into the final study result. In this Chapter, the first phase in multiple imputation, the imputation step, is the main topic. In the next Chapter, the analysis and pooling phases are discussed. 
 
 There are many different algorithms developed to impute missing values with a multiple imptuation procedure. For example multivariate imputation, where all variables are imputed in one iteration under the multivariate normal assumption, or multivariate imputation by chained equations, where variables are imputed sequentially. The latter method will be explained more thorougly in the next paragraph.
+ 
 
 ##Multivariate Imputation by Chained Equations
 
 Multivariate imputation by chained equations (MICE) is also known as Sequential Regression Imputation, Fully Conditional Specification or Gibbs sampling. In the MICE algorithm, a chain of regression equations is used to obtain imputations, which means that variables with missing data are imputed one by one. The regression models use information from all other variables in the model, i.e. conditional imputation models. In order to add sampling variability to the imputations, residual error is added to create the imputed values. This residual error can either be added to the prediced values directly, which is esentially similar to repeating stochastic regression imputation over several imputation runs. Or, the residual variance can be added via the parameter estimates of the regression model, which is a Bayesian sampling method. The Bayesian method is the default in the `mice` package in R. 
+
 
 ###The mice algorithm and iteration steps 
 
@@ -38,6 +38,7 @@ $Disability_{mis} = \beta_0 + \beta_1Pain + \beta_2Tampa + \beta_3Radiation$
 
 For iteration 2 the Tampa scale values are again set back to missing and (new) updated regression coefficients for Pain, Disability and Radiation are obtained, using the imputed values for Disability from iteration 1. Accordingly, missing values are estimated from regression model where the coefficients are again drawn from the posterior distributions of the estimated parameters. The same holds for the Disability variable. The imputed values for disability are estimated by the regression model using the imputed values in Tampa scale from iteration 2. This process is repeated in each following iteration until the final iteration where the imputed values are used for the first imputed dataset. For the next imputed dataset, the entire process of iterations is repeated.
 
+
 ##Multiple Imputation in R
 
 In R multiple imputation can be performed with the `mice` function from the `mice` package. The following default settings are used in the `mice` function to start MI, `m=5`, to generate 5 imputed datasets, `maxit=10`, to use 10 iterations for each imputed dataset (i.e. 10 chains of regression imputation models), `method=”pmm”`. For an elobate explanation of all options withing the mice function, see `?mice`.
@@ -45,8 +46,8 @@ In R multiple imputation can be performed with the `mice` function from the `mic
 
 ```{r}
 library(mice)
-library(foreign)
-data <- read.spss(file="Backpain50 MI missing.sav", to.data.frame=T)[, -1]
+library(haven)
+data <- read_sav("data/Backpain 50 missing.sav")
 imp <- mice(data, m=5, maxit=10, method="pmm")
 ```
 
@@ -64,6 +65,8 @@ complete(imp, action = "long", include = TRUE)
 ```
 
 In the imputed datasets two variables are added, an .id variable and an .imp variable to distinguish the cases in the dataset and the imputed datasets. The imputed datasets can be further used in mice to conduct pooled analyses or to store them for further use in other software packages as SPSS. 
+
+
 
 ###Customizing the Imputation model
 
@@ -83,11 +86,13 @@ pred
 imp2 <- mice(data,m=5, maxit=10, method="pmm", predictorMatrix = pred, seed=1050)
 ```
 
-In literature several guidelines for the imputation model are described (@Collins2001, @VanBuuren2018, @Rubin1976). A summary of guidelines for building the imputation model is as follows:
+
+In literature several guidelines for the imputation model are described \@ref(COLLINS2001} \@ref(VANBUUREN2018) \@ref(RUBIN1976). A summary of guidelines for building the imputation model is as follows:
 
 1. Include all variables that are part of the analysis model, including the dependent (outcome) variable.
 2. Include the variables at the same way in the imputation model as they appear in the analysis model (i.e. if interaction terms are in the analysis model they also have to be included in the imputation model).
 3.	Include additional (auxiliary) variables that are related to missingness or to variables with missing values.
+
 
 ##Output of the `mice` function
 
@@ -122,6 +127,7 @@ The sequence of the variables used in the impution procedure:
 ```{r}
 imp$visitSequence
 ```
+
 
 ###Checking Convergence in R
 
@@ -179,6 +185,7 @@ knitr::include_graphics("images/fig4.7.png")
 
 ```
 
+
 In the Method tab we choose for a “Custom” under Imputation Method and for Fully conditional specification. The Fully Conditional Specification (FCS) procedure is the Bayesian sequential regression imputation method as explained in *section 4.3 and 4.4*. Under Model type for scale (continuous) variables we choose for Predictive Mean Matching. This procedure was explained in *section 3.7*. In the `mice` package PMM is the default procedure for continuous variables with missing data. In SPSS the default is the linear regression procedure. In the Constraints Tab the options per variable are defined.
 
 ```{r fig4-8, echo = FALSE, fig.cap="The Constraints Tab", out.width='90%', fig.align='center'}
@@ -193,6 +200,7 @@ knitr::include_graphics("images/fig4.9.png")
 
 ```
 
+
 Display the Imputation model and the Descriptive statistics for variables with imputed values options can be selected for information about the imputation. When the FCS imputation method is used, you can request a dataset that contains iteration history data for FCS imputation. In our example this iteration history information is stored in the dataset “Iter_Backpain”. The dataset contains means and standard deviations by iteration for each scale variable for which values are imputed. You can plot the data to help assess model convergence.
 
 ###The output for Multiple imputation in SPSS
@@ -203,6 +211,7 @@ After the multiple imputation procedure is done, a new data window opens that co
 
 If you switch this possibility on, SPSS automatically recognizes the dataset as a multiple imputed dataset. If you switch this possibility off, SPSS treats the dataset as one dataset. This marking and unmarking can also be done in the Data view window via the button with yellow and white squares on the right site above (Figure \@ref(fig:fig4-11)). If you click the button, a selection box appears with “Original data” selected,where you can easily move to the different imputed datasets. 
 The variable `Imputation_` is a variable with a nominal measure. You can compare the use of this variable with the Split File option in SPSS where all analyses are done separately for the categories of the variable use to split the analyses. The difference is that with the `Imputation_` variable you also obtain pooled estimates for the statistical analyses. 
+
 
 ```{r fig4-10, echo = FALSE, fig.cap="Example of Multiple Imputed dataset", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig4.10.png")
@@ -216,10 +225,12 @@ knitr::include_graphics("images/fig4.11.png")
 
 The iteration history is stored in the Iter_Backpain dataset as we defined in the Output window. In this dataset the means and standard deviations of the imputed values at each iteration are stored. These values can be used to construct Convergence plots. More about making convergence plots will be discussed in the next paragraph.
 
+
 ```{r fig4-12, echo = FALSE, fig.cap="The iteration history data", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig4.12.png")
 
 ```
+
 
 Based on our settings, SPSS produces the following results in the output window. In the Imputation Specifications table, information is provided on the imputation method used, the number of imputations, the model used for the scale variables, if interactions were included in the imputation models, the setting for the maximum percentage of missing values and the setting for the maximum number of parameters in the imputation model (Figure \@ref(fig:tab4-4)).
 
@@ -260,6 +271,7 @@ knitr::include_graphics("images/fig4.17.png")
 
 ```
 
+
 After activation of the split file option, the Graph menu in SPSS can be used to make the plots. 
 
 >Graph -> Char Builder.
@@ -270,6 +282,7 @@ knitr::include_graphics("images/fig4.13.png")
 ```
 
 Two windows will open that can be used to build a chart:
+
 
 ```{r fig4-14, echo = FALSE, fig.cap="Chart Builder", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig4.14.png")
@@ -291,163 +304,16 @@ knitr::include_graphics("images/fig4.19.png")
 
 ```
 
-## Predictive Mean Matching or Regression imputation
-
-Within the mice algorithm continuous variables can be imputed by two methods, linear regression imputation or Predictive Mean Matching (PMM). PMM is an imputation method that predicts values and subsequently selects observed values to be used to replace the missing values. We recommend to use PMM during imputation. It is the default imputation procedure in the mice package [@Rubin1987]. In SPSS the default imputation procedure is linear regression. 
-
-### Predictive Mean Matching, how does it work?
-
-The Predictive Mean Matching algorithm takes place in several steps:
-
-We take as an example a dataset with 10 cases with 3 missing values in the Tampa scale variable. They are defined as `NA` in the dataset below. The Pain variable is used to predict the missing Tampa scale values.
-
-```{r echo=FALSE}
-
-library(foreign)
-dataset <- suppressWarnings(suppressMessages(read.spss(file="PMM 10 missing.sav", to.data.frame = T)))
-dataset
-
-```
-
-**Step 1**: Estimate a linear regression model 
-
-A linear regression model is estimated with the Tampa scale variable as the outcome and the Pain variable as the predictor variable. We define the regression coefficient for Pain as $\hat{\beta_{Pain}}$.
-
-**Step 2**: Determine Bayesion version of regression coefficient 
-
-A Bayesian regression coefficient for the Pain variable is determined. We define this regression coefficient as $\beta_{Pain}^*$.
-
-**Step 3**: Predict Missing values
-
-_Observed_ Tampa scale valueas are predicted by the Pain regression coefficient $\hat{\beta_{Pain}}$ from step 1 and the Pain data, we call these values $Tampa_{Obs}$ and can be found in the Table below.
-
-```{r , echo=FALSE, eval=FALSE}
-suppressWarnings(suppressMessages(library(knitr)))
-suppressWarnings(suppressMessages(library(kableExtra)))
-suppressWarnings(suppressMessages(library(mice)))
-suppressWarnings(suppressMessages(library(float)))
-```
-
-```{r , echo=FALSE}
-library(float)
-library(foreign)
-library(mice)
-library(knitr)
-library(kableExtra)
-dataset <- suppressWarnings(suppressMessages(read.spss(file="PMM 10 missing.sav", to.data.frame = T)))
-
-y <- dataset$Tampascale
-ry <- !is.na(y)
-
-x <- as.matrix(dataset[, 1])
-dimnames(x) <- list(NULL, "Pain")
-
-donors = 3
-type = 1
-ridge = 1e-05
-
-  x <- cbind(1, as.matrix(x))
-  ynum <- y
-
-  set.seed(3281)
-  parm <- .norm.draw(ynum, ry, x, ridge = ridge)
-  
-  yhatobs <- x[ry, ] %*% parm$coef
-  yhatmis <- x[!ry, ] %*% parm$beta
-  
-y[is.na(y)] <- yhatmis  
-x[ry, ] <- yhatobs
-x[!ry, ] <- yhatmis
-dataset <- data.frame(dataset, x[, 1], ry, y)
-
-# predicted missing value = 1, predicted observed value =0
-# Prepare dataset to make plot
-dataset$ry <- ifelse(dataset$ry, 0, 1)
-
-names(dataset) <- c("ID", "Pain", "Tampascale", "Tampa_Obs", "Group", "Tampascale_Complete")
-
-dataset <- dataset[, -c(5, 6)]
-dataset <- round(dataset, 3)
-dataset$Tampa_Obs[which(is.na(dataset$Tampascale))] <- NA
-
-kable(dataset, "latex", booktabs = T)
-```
-
-_Missing_ Tampa scale valueas are predicted by the regression coefficient $\beta_{Pain}^*$ from step 2 and the Pain data, we call these $Tampa_{Pred}$.
-
-These values for the three missing Tampa scale are: 43.594, 41.456 and 39.852.
-
-**Step 4**: Find closest donor
-
-Find the closest donor for the first missing value by subtracting the first $Tampa_{Pred}$ value of 43.594 from all predicted observed values in the $Tampa_{Obs}$ column. These differences are shown in the column Difference in the table below. 
-
-```{r , echo=FALSE}
-library(foreign)
-library(mice)
-dataset <- suppressWarnings(suppressMessages(read.spss(file="PMM 10 missing.sav", to.data.frame = T)))
-
-y <- dataset$Tampascale
-
-ry <- !is.na(y)
-
-x <- as.matrix(dataset[, 1])
-dimnames(x) <- list(NULL, "Pain")
-
-donors = 3
-type = 1
-ridge = 1e-05
-
-  x <- cbind(1, as.matrix(x))
-  ynum <- y
-
-  set.seed(3281)
-  parm <- .norm.draw(ynum, ry, x, ridge = ridge)
-  
-  yhatobs <- x[ry, ] %*% parm$coef
-  yhatmis <- x[!ry, ] %*% parm$beta
-  
-y[is.na(y)] <- yhatmis  
-x[ry, ] <- yhatobs
-x[!ry, ] <- yhatmis
-dataset <- data.frame(dataset, x[, 1], ry, y)
-
-# predicted missing value = 1, predicted observed value =0
-# Prepare dataset to make plot
-dataset$ry <- ifelse(dataset$ry, 0, 1)
-
-names(dataset) <- c("ID", "Pain", "Tampascale", "Tampa_Obs", "Group", "Tampascale_Complete")
-
-dataset <- dataset[, -c(5, 6)]
-#dataset$Col <- ry
-dataset <- round(dataset, 3)
-dataset$Tampa_Obs[which(is.na(dataset$Tampascale))] <- NA
-
-z <- as.array(yhatmis)
-yhat = yhatobs
-y = y[ry]
-donors = donors
-
-# subtract first missing value from all predicted values of observed data
-dataset$Difference <- abs(round(dataset$Tampa_Obs, 3)-43.594)
-dataset <- round(dataset, 3)
-
-kable(dataset, "html")
-```
-
-The smallest differences are 1.574, 1.970 and 2.168 and these belong to the cases with observed Tampa scale values of 40, 41 and 42 respectively. Subsequently, a value is randomly drawn from these observed values and used to impute the first missing Tampa scale value. Other missing values are imputed by following the same procedure, i.e. now subtracting the second $Tampa_{Pred}$ value of 41.456 from all predicted observed alues and finding the closest match. 
-
-The strength of PMM is that missing data is replaced by data that is observed in the dataset and not replaced by unrealistic values (as negative Tampa scale scores). PMM can therefore handle better the imputation of variables with skewed distributions or non-linear relationships between variables.   
-
 ##Number of Imputed datasets and iterations
 
-Researchers assume that the number of imputations needed to generate valid imputations has to be set at 3-5 imputations. This idea was based on the work of Rubin (@Rubin1987). He showed that the precision of a pooled parameter becomes lower when a finite number of multiply imputed datasets is used compared to an infinite number (finite means a limited number of imputed datasets, like 5 imputed datasets and infinite means unlimited and can be recognized by the mathematical symbol ∞). The precision of a parameter is often represented by the sampling variance (or standard error (SE) estimate; the sampling variance is equal to SE2) of for example a regression coefficient. In case of multiple imputed datasets precision is determined by the pooled sampling variance or pooled SE. A measure to value the amount of precision (i.e. between the pooled sampling variance estimated in a finite compared to an infinite number of imputed datasets) is the relative efficiency ($RE$). The $RE$ is low when the number of imputations is high (and the precision becomes larger) and is defined as:
+Researchers assume that the number of imputations needed to generate valid imputations has to be set at 3-5 imputations. This idea was based on the work of Rubin \@ref(RUBIN1987). He showed that the precision of a pooled parameter becomes lower when a finite number of multiply imputed datasets is used compared to an infinite number (finite means a limited number of imputed datasets, like 5 imputed datasets and infinite means unlimited and can be recognized by the mathematical symbol ∞). The precision of a parameter is often represented by the sampling variance (or standard error (SE) estimate; the sampling variance is equal to SE2) of for example a regression coefficient. In case of multiple imputed datasets precision is determined by the pooled sampling variance or pooled SE. A measure to value the amount of precision (i.e. between the pooled sampling variance estimated in a finite compared to an infinite number of imputed datasets) is the relative efficiency ($RE$). The $RE$ is low when the number of imputations is high (and the precision becomes larger) and is defined as:
 
 
 $$RE=  \frac{1}{1+ \frac{FMI}{m}}$$
 
 FMI is the fraction of missing information and m is the number of imputed datasets. Where FMI is roughly equal to the percentage of missing data in the simplest case of one variable with missing data. When there are more variables in the imputation model, and these variables are correlated with the variables with missing data the FMI becomes lower.
 
-The relationship between the $RE$ and the pooled sampling variance ($T_) can be written as (@VanBuuren2018):
+The relationship between the $RE$ and the pooled sampling variance ($T_) can be written as \@ref(VANBUUREN2012):
 $$T_{Pooled,finite}=RE×T_{Pooled,infinite}$$
 which is equal to:
 $$SE_{Pooled,finite}^2=RE×SE_{Pooled,infinite}^2 $$
@@ -456,9 +322,10 @@ These can be interpreted as follows: if the $RE$ is 0.93 for FMI=0.4 and m=5, $T
 
 $$T_{Pooled,finite}=0.93×T_{Pooled,infinite}$$
 
-Accordingly, when 5 imputed datasets are used, the standard error $SE$ is √0.93=0.96 times as large as the $SE$ when an infinite number of imputed datasets are used. Because the $RE$ is divided by 1, when 5 imputed datasets are used, the $SE$ is 1/√0.93=1.04 times larger (or 4%) than the $SE$ when an infinite number of imputed datasets are used. Graham (@Graham2007) also studied the loss in power when infinite numbers of imputed datasets are used. They recommended that at least 20 imputed datasets are needed to restrict the loss of power when testing a relationship between variables. Bodner (@Bodner2008) proposed the following guidelines after a simulation study using different values for the FMI to determine the number of imputed datasets. For FMI´s of 0.05, 0.1, 0.2, 0.3, 0.5 the following number of imputed dataets are needed: ≥3, 6, 12, 24, 59, respectively. Following the study of Bodner (@Bodner2008), White et al. (@White2011), proposed a rule of thumb, based on the idea that the FMI is frequently lower than the percentage of missing cases. Their rule of thumb states that the number of imputed datasets should be at least equal to the percentage of missing cases. This means that when 10% of the subjects have missing values, at least 10 imputed datasets should be generated.
+Accordingly, when 5 imputed datasets are used, the standard error $SE$ is √0.93=0.96 times as large as the $SE$ when an infinite number of imputed datasets are used. Because the $RE$ is divided by 1, when 5 imputed datasets are used, the $SE$ is 1/√0.93=1.04 times larger (or 4%) than the $SE$ when an infinite number of imputed datasets are used. Graham \@ref(GRAHAM2007) also studied the loss in power when infinite numbers of imputed datasets are used. They recommended that at least 20 imputed datasets are needed to restrict the loss of power when testing a relationship between variables. Bodner \@ref(BODNER2008) proposed the following guidelines after a simulation study using different values for the FMI to determine the number of imputed datasets. For FMI´s of 0.05, 0.1, 0.2, 0.3, 0.5 the following number of imputed dataets are needed: ≥3, 6, 12, 24, 59, respectively. Following the study of Bodner \@ref(BODNER2008), White et al. \@ref(WHITE2010), proposed a rule of thumb, based on the idea that the FMI is frequently lower than the percentage of missing cases. Their rule of thumb states that the number of imputed datasets should be at least equal to the percentage of missing cases. This means that when 10% of the subjects have missing values, at least 10 imputed datasets should be generated.
+
 
 Iterations
-Van Buuren (@VanBuuren2018) states that the number of iterations may depend on the correlation between variables and the percentage of missing data in variables. He proposed that a number of 5-20 iterations is enough to reach convergence. This number may be adjusted when the percentage of missing data is high. Nowadays computers are fast so that a higher number of iterations can easily be used. 
+Van Buuren \@ref(VANBUUREN2012) states that the number of iterations may depend on the correlation between variables and the percentage of missing data in variables. He proposed that a number of 5-20 iterations is enough to reach convergence. This number may be adjusted when the percentage of missing data is high. Nowadays computers are fast so that a higher number of iterations can easily be used. 
 
 

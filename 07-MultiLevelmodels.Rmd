@@ -159,7 +159,7 @@ suppressWarnings(suppressMessages(library(foreign)))
 ```{r }
 
 library(foreign)
-dataset <- read.spss(file="AGGO_wide.sav", to.data.frame = T)
+dataset <- read.spss(file="data/AGGO_wide.sav", to.data.frame = T)
 head(dataset, 10)
 
 ```
@@ -236,7 +236,7 @@ suppressWarnings(suppressMessages(library(foreign)))
 ```
 
 ```{r }
-dataset <- read.spss(file="Aggo_long_missing.sav",to.data.frame = T)
+dataset <- read.spss(file="data/Aggo_long_missing.sav",to.data.frame = T)
 #dataset
 
 ```
@@ -297,7 +297,7 @@ The FCS-GLM procedure assumes that the within cluster error variance is constant
 We will now show how to impute missing data by using the FCS-GLM procedure in the longitudinally measured AGGO dataset. In the dataset, missing values exist in the independent Sum of Skinfolds variable and the outcome variable is Cholesterol. Both these variables are repeatedly assessed. There are also other variables in the dataset, as Gender, and Fitness score which can be used as auxiliary variables to improve the imputations. ID is the cluster variable. For this example, there is sporadically missing data in de dataset within the clusters 1, 2, 4 and 5 and systemat ically missing data in cluster 3, which means that within clusters 1, 2, 4 and 5, for 1 or 2 some repeated measured values are missing and that within cluster 3 all values are missing.   
 
 ```{r }
-dataset <- read.spss(file="Aggo_long_missing.sav",to.data.frame = T)
+dataset <- read.spss(file="data/Aggo_long_missing.sav",to.data.frame = T)
 #dataset
 
 ```

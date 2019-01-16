@@ -90,7 +90,7 @@ You can do mean imputation by using the mice function in the mice package and ch
 ```{r }
 
 library(foreign) # activate the foreign package to use the read.spss function
-dataset <- read.spss(file="Backpain 50 missing.sav", to.data.frame=T)
+dataset <- read.spss(file="data/Backpain 50 missing.sav", to.data.frame=T)
 
 library(mice) # Activate the mice package to use the mice function
 imp_mean <- mice(dataset, method="mean", m=1, maxit=1)
@@ -183,7 +183,7 @@ You can aply regression imputation in R with as method setting â€œnorm.predictâ€
 ```{r }
 
 library(foreign)
-dataset <- read.spss(file="Mean imputation.sav", to.data.frame=T)
+dataset <- read.spss(file="data/Backpain 50 missing.sav", to.data.frame=T)
 dataset <- dataset[, c("Pain", "Tampascale")]
 
 imp.regress <- mice(dataset, method="norm.predict", m=1, maxit=1)
@@ -203,7 +203,7 @@ You can apply stochastic regression imputation in R with the mice function using
 
 ```{r }
 
-dataset <- read.spss(file="Backpain 50 missing.sav", to.data.frame=T)
+dataset <- read.spss(file="data/Backpain 50 missing.sav", to.data.frame=T)
 dataset <- dataset[, c("Pain", "Tampascale")]
 
 imp_nob <- mice(dataset, method="norm.nob", m=1, maxit=1)
@@ -284,7 +284,7 @@ The package mice also include a Bayesian stochastic regression imputation proced
 
 ```{r }
 
-dataset <- read.spss(file="Backpain 50 missing.sav", to.data.frame=T)
+dataset <- read.spss(file="data/Backpain 50 missing.sav", to.data.frame=T)
 dataset <- dataset[, c("Pain", "Tampascale")]
 
 imp_b <- mice(dataset, method="norm", m=1, maxit=1)
