@@ -10,7 +10,6 @@ output:
 
 This Chapter is a follow-up on the previous Chapters 4 and 5 about data analysis with Multiple Imputation. In this Chapter, we will deal with some specific topics when you perform regression modeling in multiple imputed datasets. 
 
-
 ##Imputing the Outcome variable
 
 In previous literature that has been discussion about how to deal with the outcome variable (i.e. dependent variable) as part of the imputation procedure. For a full overview of the arguments you can review the original literature. There are roughly two situations when the outcome can be considered. Below we will briefly summarize the situations and provide the concluding advice from literature. 
@@ -240,12 +239,7 @@ knitr::include_graphics("images/fig6.4.png")
 
 Compute the Interaction term of Bodyweight times Gender in the dataset that contains the imputed values.Now turn on the split on the variable Imputation_. That will automatically turn off the split on the Gender variable in the imputed datasets (in the Data View window of the imputed datasets in the corner on the right below you see the statement “Split by Imputation_ Gender”. To include the variable Gender in the model we first have to unsplit the data by Gender). 
 
-#```{r fig6-5, echo = FALSE, fig.cap="The Split File procedure is used to split on the variable Imputation_.", #out.width='90%', fig.align='center'}
-#knitr::include_graphics("images/fig6.4.png")
-#```
-
 Then the analysis can be performed as planned with th interaction term as one of the predictors. 
-
 
 ###Imputation of interaction terms in R
 
