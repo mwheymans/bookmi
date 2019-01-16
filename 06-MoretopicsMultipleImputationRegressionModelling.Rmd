@@ -18,9 +18,9 @@ knitr::include_graphics("images/fig6.1_logistic.png")
 
 There are several procedures to derive a pooled p-value for categorical variables, the pooled sampling variance or D1 method, the multiple parameter Wald test or D2 method, and the Meng and Rubin pooling procedure (@VanBuuren2018; @enders2010applied; @Eekhout2017; @Meng1992; @Mistler2013; @Marshall2009MedResMeth). A more simple procedures to derive a pooled p-value for the overall Wald test is just taking the median of the p-values from the overall Wald test of all imputed datasets, this rule is called the Median P Rule (MPR) (@Eekhout2017). These methods can only be performed in R.
 
-##Logistic regression with a categorical variable in R
+## Logistic regression with a categorical variable in R
 
-Pooling can be done by using the psfmi package that is downloadable via Github. The package needs R version 3.4.4 or higher. The package contains a function called `psfmi_lr` for pooling of logistic regression models and `psfmi_coxr`, to pool right censored Cox regression models. Install the package by first running:
+Pooling of categorical variables can be done by using the psfmi package that is downloadable via Github. The package needs R version 3.4.4 or higher. The package contains a function called `psfmi_lr` for pooling of logistic regression models and `psfmi_coxr`, to pool right censored Cox regression models. Install the package by first running:
 
 `install.packages("devtools")`
 
@@ -42,7 +42,7 @@ psfmi_lr(data=data, nimp=5, impvar="Imputation_", Outcome="Radiation",
 
 ```
 
-Pooling a multivariable regression model that contains a mix of continuous, dichotomous and categorical variables can easily be performed with the `psfmi_lr` function. With the following code example, pooling is done in 10 multiple imputed datasets that are stored in the file `lbpmilr` (see `?lbpmilr` for more information about the dataset) . The relationship with the outcome variable "Chronic" is estimated, using a model with 2 dichotomous, 4 continuous and 2 categorical variables. The pooling method is the Meng and Rubin procedure, indicated by `method="MR"`.
+Pooling a multivariable regression model that contains a mix of continuous, dichotomous and categorical variables can easily be performed with the `psfmi_lr` function. With the next code example, pooling is done in 10 multiple imputed datasets that are stored in the file `lbpmilr` (see `?lbpmilr` for more information about the dataset) . The relationship with the outcome variable "Chronic" is estimated, using a model with 2 dichotomous, 4 continuous and 2 categorical variables. The method to obtain a pooled p-value for the categorical variables is the Meng and Rubin procedure, indicated by `method="MR"`. To obtain a pooled p-value for continuous and dichotomous variables Rubin's Rules are used. 
 
 ```{r }
 library(foreign)
@@ -74,31 +74,45 @@ psfmi_coxr(data=lbpmicox, nimp=10, impvar="Impnr", time="Time", status="Status",
 
 ```
  
-The pooled p-values are shown in the table tha is called "Pooled p-values (D1 & RR)". For the categorical variable `factor(Expect_cat)`, the p-value is pooled using method "D1" and for all other variables Rubin's ules are used. These p-values are the same as the p-values in the "Pooled model (Rubin's Rules)" table above in the output. You can set `print.method = TRUE` to obtain the pooled p-values by method "D1" for all variables.  
+The pooled p-values are shown in the table that is called "Pooled p-values (D1 & RR)". For the categorical variable `factor(Expect_cat)`, the p-value is pooled using method "D1" and for all other variables Rubin's ules are used. These p-values are the same as the p-values in the "Pooled model (Rubin's Rules)" table above in the output. You can set `print.method = TRUE` to obtain the pooled p-values by method "D1" for all variables.  
  
-For more information of the possibilities of pooling logistic and Cox regression models with the psfmi package see `?psfmi::psfmi_lr` or `?psfmi::psfmi_coxr`.
+For more information about pooling possibilities of logistic and Cox regression models with the psfmi package see `?psfmi::psfmi_lr` or `?psfmi::psfmi_coxr`.
 
 ## Variable selection
 
-Prediction models are frequently developed by using selection procedures in logistic and Cox regression models. As a selection procedure, backward selection is recommended (Moons et al 2015). Predictor selection in multiple imputed datasets may be challenging. Predictor selection in each imputed dataset separately, may result in a different set of selected variables. Royston (2008) showed that the best choice to select predictors from multiply imputed datasets is to select from the pooled model, i.e. the model that is estimated in each imputed dataset and subsequently regression coefficients are pooled. From these pooled estimates the backward selection procedure can start. This is possible in SPSS when the model includes continuous and dichotomous variables. This is however not possible in SPSS when the model contains categorical variables. Because categorical variables are estimated and selected by using an overall Wald Chi-square value and as we have seen in paragraph 6.2, these Chi-square tests cannot be pooled in SPSS. This makes variable selection when categorical variables are included, not possible in SPSS. We have therefore developed an R package, that contains functions to select predictors  multiple imputed datasets and we have integrated the pooling procedures that were discussed in the previous paragraphs within these predictor selection functions. We will discuss these functions in the next paragraphs by running the code and we will discuss the output. The package can be installed via the Github website (code to install the packages will be provided below). 
-As an example, we will use a dataset of 426 patients who received a new hip after a hip fracture. The outcome is recovery at 6 months which was defined as 1=no recovery and 0 = recovery. All functions work more or less in the same way and comparable function parameter settings are used. We start by showing the parameters settings that are used in these functions.
+Prediction models are frequently developed by using selection procedures in logistic and Cox regression models. As a selection procedure, backward selection is generally recommended (@Moons2015). However, variable selection in multiple imputed datasets may be challenging. When you apply variable selection in each imputed dataset, different variables may be selected between imputed datasets. The question is than what is the best procedure to merge these different selected models into one final model. Wood (@Wood2008) showed that the best choice to select variables from multiply imputed datasets is to start your selection procedure in the pooled model. It is possible to do this in SPSS when the model includes continuous and dichotomous variables. This is however not possible in SPSS when the model contains categorical variables. Because categorical variables are estimated and selected by using an overall Wald Chi-square value and as we have seen in the previous paragraphs that that is not possible in SPSS. For that reason we have developed the R `psfmi` package, that contains functions to pool and select variables in multiple imputed datasets. 
 
-###Predictor Selection functions in R
+### Variable Selection with Logistic Regression models in R
 
-The functions are developed for Logistic and Cox regression models. They are called:
-psfmi.log
-psfmi.log.MR
-psfmi.cox
+For variable selection we use the `psfmi` package that was introduced in paragraph 6.2 (see that paragraph of how to install the package). With this package variable selection can be applied by using different methods to obtain pooled p-values and to select on basis of these pooled p-values. These methods were introduced in paragraph 6.1 and 6.2 and are called the "D1", "D2", "MR" (Meng and Rubin) and "MPR" (Median P Rule). Variable selection of the multivariable model that was pooled in paragraph 6.2 can be done by using the following code, where method "D1" is used and a p-value of 0.05 as selection criterium. 
 
-To activate these functions, you have to install the psfmi package from the Github website. Before that you have to install and activate the devtools package. The following code in the Console window can be used:
+```{r }
+library(foreign)
+library(psfmi)
 
-
-```{r}
-
-## voorbeeld laten zien voor predictor selectio met psfmi package - verder niet uitwijden over inhoud. Alleen voorbeeld laten zien!
+psfmi_lr(data=lbpmilr, nimp=10, impvar="Impnr", Outcome="Chronic",
+  predictors=c("Gender", "Smoking", "Function", "JobControl", "JobDemands",
+  "SocialSupport"), cat.predictors = c("Carrying", "Satisfaction"), 
+  p.crit = 0.05, method="D1", print.method = FALSE)
 
 ```
 
+See `?psfmi::psfmi_lr` for other possibilities during variable selection with the `psfmi_lr`function like forcing variables in the model during variable selection or variable selection with interaction terms.
+
+### Variable Selection with Cox Regression models in R
+
+Variable selection with Cox regression models can be applied with the `psfmi` package, that was introduced in paragraph 6.2 (see that paragraph of how to install the package). The package contains the function `psfmi_coxr` that was used in paragraph 6.3 to pool a multivariable Cox regression model. We can apply variable selection in that model by the next code using the "D1" method to obtain pooled p-values for categorical variables and Rubin's Rules for dichotomous and continuous variables and using a p-value of 0.05 as selection criterium.  
+
+```{r }
+library(foreign)
+library(psfmi)
+
+psfmi_coxr(data=lbpmicox, nimp=10, impvar="Impnr", time="Time", status="Status",
+  predictors=c("Duration", "Radiation", "Onset", "Function", "Age",
+  "Previous", "Tampascale", "JobControl", "JobDemand", "Social"), 
+  cat.predictors=c("Expect_cat"), p.crit = 0.05, method="D1", print.method = FALSE)
+
+```
 
 ##Interaction terms in model
 

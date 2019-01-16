@@ -1,5 +1,6 @@
 bookdown::gitbook:
   css: style.css
+  cover-image: "images/cover.png"
   config:
     download: ["pdf", "epub"]
 bookdown::pdf_book:
