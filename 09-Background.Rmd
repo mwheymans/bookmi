@@ -335,43 +335,58 @@ Alternatively, a combination of the pooled parameter estimates and the pooled sa
 
 The multivariate Wald statistic is calculated as (Enders, 2010; Marshall et al., 2009):
 
-											Formula 6.4
-W_mvar=((1+r_1 )^(-1) (θ_0-θ ̅)U ̅^(-1) 〖(θ_0-θ ̅)〗^t)/k ,
+\begin{equation}
+  D_1 = \frac{ (\bar\theta - \theta_0)V_T^{-1} (\bar\theta - \theta_0) } {k}
+  (\#eq:d1)
+\end{equation}
+ 
+where $\bar\theta$ and $theta_0$ are the pooled coefficient and the value under the null hypothesis (mostly zero), $V_T$ is the total variance, and k is the number of parameters. $V_T$ is:
+ 
+ $$V_T = (1+r_{1})V_W$$
+ 
+$r_1$ is the relative increase in variance due to nonresponse (fraction of missing information), which is in this case obtained by:
 
-where θ ̅ and θ_0are the pooled coefficient and the value under the null hypothesis, U ̅  is the within imputation variance (Var(θ ̅)within), t is the total variance for the pooled estimate (Var(θ ̅ )), and k is the number of parameters. The r_1is the relative increase in variance due to nonresponse (fraction of missing information), which is in this case obtained by:
+\begin{equation}
+\bar r_1 = \left(1+\frac{1}{m}\right)\mathrm{tr}(V_B\bar V_W^{-1})/k
+(\#eq:r1)
+\end{equation}
 
-											Formula 6.5
-r_1=((1+m^(-1) )Tr(〖BU ̅〗^(-1)))/k,
+where $V_B$ is the between imputation variance, $V_W$ the within imputation variance, m the number of imputed datasets. 
 
-where B is the between imputation variance (Var(θ ̅)between) and m is the number of imputed datasets. The p-value is calculated by comparing the W_mvar statistic to an F distribution with k and v_1 degrees of freedom. 
-											Formula 6.6
-P=Pra[F_(k,v_1 )>W_mvar]
+The p-value of the $D_1$ statistic is calculated by comparing the value to an F distribution with $k$ and $v_1$ degrees of freedom. 
 
-With the degrees of freedom defined as:
-											Formula 6.7
-v_1=4+(km-k-4) 〖[1+(1-2/(km-k))  1/r_1 ]〗^2,
+$$p = \Pr[F_{k,\nu_1}>D_1]$$
 
-If km-k<4, the formula above applies, otherwise:
-											Formula 6.8
-v_1=((km-k)(1+1/k)〖(1+1/r_2 )〗^2)/2.
+\begin{equation}
+v_1 = 4 + (t-4)[1+(1-2t^{-1})r_1^{-1}]^2
+(\#eq:v1a)
+\end{equation}
+
+this equation is used when $t = k(m-1) > 4$, otherwise use:
+
+\begin{equation}
+v_1 = t(1+k^{-1})(1+r_1^{-1})^2/2 
+(\#eq:v1b)
+\end{equation}
 
 ## Multiple parameter Wald test or D2 method
 
 One possibility is to pool the Chi-square values from the multiple parameter Wald or likelihood ratio tests with multiple degrees of freedom. This procedure is also called the D2 procedure (Enders 2012). We used this procedure also in the previous Chapter to obtain the pooled Chi-square values. 
 
 The following formula is used to obtain the Chi-square values from a multiple parameter Wald test (Marshall, 2009): 
-											Formula 6.1
-W_chi=(1+r)^(-1) (ω ̅/k-(m+1)/(m-1)  r) ,
 
-where ω ̅ is the mean of the Chi-square values over the imputed datasets, k is the degrees of freedom of the Chi-square test statistic, m is the number of imputed datasets and r reflects the relative increase in variance due to nonresponse, which is obtained by the following formula:
+\begin{equation}
+ D_2 = (1+r)^{-1} (\frac{ \bar\omega}{k}-\frac{ m+1}{m-1}r)
+  (\#eq:d2)
+\end{equation}
 
-											Formula 6.2
-r=  (m+1)/(m(m-1)) ∑_(j=1)^m▒( 〖√(ω_j )-√(ω ̅ ))〗^2 ,
+where $$\bar\omega$$ is the mean of the Chi-square values over the imputed datasets, k is the degrees of freedom of the Chi-square test statistic, m is the number of imputed datasets and r reflects the relative increase in variance due to nonresponse, which is obtained by the following formula:
 
-with m and ω ̅  as above,  j = 1 …, m  the index of  each separate imputed dataset and ω_j is the Chi-square value in each imputed dataset. The p-value is calculated by comparing the W_chi statistic to an F distribution with k and v  degrees of freedom as follows:
+$$r_2 = \left(\frac{m+1}{m(m-1)}\right)\sum_{j=1}^m\left(\sqrt{\omega_j}-{\sqrt{\bar\omega}}\right)^2$$
 
-											Formula 6.3
-P=Pra[F_(k,v)>W_chi]
+with m and $\bar\omega$ as above,  j = 1 …, m  the index of  each separate imputed dataset and $\omega_j$ is the Chi-square value in each imputed dataset. The p-value is calculated by comparing the $D_2$ statistic to an F distribution with k and v  degrees of freedom as follows:
+
+$$p = \Pr[F_{k,\nu_1}>D_2]$$
 
 The application of the function to pool Chi-square values can be found in the R code below where the function `miPoolChi` is applied. Input values in the function are the Chi-square values of each imputed dataset that are shown in Table 6.1 and the degrees of freedom of the Chi-square test, which is 2 here.
 
@@ -391,53 +406,36 @@ As we already showed in the previous Chapter this pooling function is also avail
 Meng and Rubin proposed a method to test overall categorical variables indirectly based on the likelihood ratio test statistic (MR pooling) (@Meng1992, @Mistler2013). For each regression parameter, two nested models are fitted in each imputed dataset: one restricted model where the parameter is not included in the model and one full model where the parameter is included. The pooled likelihood ratio tests are then compared to obtain pooled p-values for each parameter. The MR pooling method requires fitting multiple models for each variable in the data, hence it is an indirect approach. This can be a very time-consuming process. 
 
 Meng and Rubin pooling (MR pooling)
-The Meng and Rubin pooling method works according to the following steps (@Meng1992): 
-	for each regression parameter θ  two nested models are fitted in each imputed dataset: one where θ  is included (full model) and one where θ  is not included in the model (restricted model). Subsequently, these models are pooled to obtain θ ̅_full and θ ̅_restricted.
-	The average likelihood ratio test statistic d ̅L over the imputed datasets as a result of comparing the log likelihood values between these models is calculated as:
+The Meng and Rubin pooling method (also called $D_3$ method) works according to the following steps (@Meng1992): 
+1. For each regression parameter $\theta$ two nested models are fitted in each imputed dataset: one where $\theta$  is included (full model) and one where $\theta$ is not included in the model (restricted model). Subsequently, these models are pooled to obtain $\bar\theta_{full}$ and $\bar\theta_{restricted}$.
+
+2. The average likelihood ratio test statistic $\bar d_L$ over the imputed datasets as a result of comparing the log likelihood values between these models is calculated as:
 	
-
-Formula 6.9
-d ̅_L=1/m ∑_(j=1)^m▒2 (L_restricted-L_full ),
-
-where Lrestricted   and Lfull  represent the maximum log likelihood values with respect to θ.  
-	The log likelihood values from the two models of step 2 are then re-calculated  and averaged using the model parameters θ ̅_full and θ ̅_restricted of step 1 (which were constrained to the values from the models in the imputed data): 
+3.	
 	
-Formula 6.10
+$$\bar d = \frac{1}{m} \sum_{j=1}^m 2(L_{restricted} - L_{full})$$
 
-d ̅_constrained=1/m ∑_(j=1)^m▒2 (L(θ ̅_full )-L(θ ̅_restricted )),
+where $L_{restricted}$ and $L_{full}$ represent the maximum log likelihood values with respect to $\theta$.
 
-	The resulting test statistic DL , required to obtain the pooled p-value, is calculated by incorporating the average increase in variance due to nonresponse r ̅L as follows:
+4. The log likelihood values from the two models of step 2 are then re-calculated  and averaged using the model parameters $\bar\theta_{full}$ and $\bar\theta_{restricted}$ of step 1 (which were constrained to the values from the models in the imputed data): 
+	
+$$\bar d_{constrained} = \frac{1}{m} \sum_{j=1}^m 2(L(\bar\theta_{full} - \bar\theta_{restricted})$$
 
-Formula 6.11
-D_L=  d ̅_constrained/(k(1+(r_L ) ̅)),
+5. The resulting test statistic $D_L$, required to obtain the pooled p-value, is calculated by incorporating the average increase in variance due to nonresponse $\bar r_L$ as follows:
 
-						Formula 6.12
+$$D_3 = \frac{\bar d_{constrained}}{k(1+\bar r_L)}$$
 
-(r_L ) ̅=(m+1)/k(m-1) (d ̅_L-d ̅_constrained),
+$$\bar r_L = \frac{m+1}{k(m-1)}(\bar d_L-\bar d_{constrained})$$
 
-where k  is the number of degrees of freedom in the complete data likelihood ratio test (@Mistler2013 and @VanBuuren2018). The p-value is calculated by comparing  the D_L statistic with an F distribution with k and vL  (i.e., degrees of freedom of the denominator) according to:
-											Formula 6.13
+where k is the number of degrees of freedom in the complete data likelihood ratio test (@Mistler2013; @VanBuuren2018). The p-value is calculated by comparing  the $D_3$ statistic with an F distribution with k and $v_L$  (i.e., degrees of freedom of the denominator) according to:
 
-P_L=Pra[F_(k,v_L )>D_L]
+$$p = \Pr[F_{k,\nu_L}>D_3]$$
 
-								Formula 6.14
+with:
 
-v_L=4+(km-k-4)[1+(1-2/(km-k)  1/r_L ]^2
+$$v_L = 4 + (km-k-4)[1+(1-\frac{2}{(km-k)}\frac{1}{(r_L)}]^2$$
 
-
-To calculate the pooled p-value by using the Meng and Rubin procedure we use R code 6.3.
-
-```{r}
-###r code met vb uit psfmi package, simpele code = dus aanpassen en niet zo uitgebreid. Gewoon alleen toepassing laten zien. 
-```
 
 ## The Median P Rule
 
-For the Median P Rule (MPR) one simply uses the median p-value of the significance tests conducted in each imputed dataset (MPR pooling). Hence, it depends on p-values only and not on the parameter estimates. The MPR can be calculated by using the p-values from the likelihood ratio test for multiple parameters for the categorical variables in the multivariable model (@Eekhout2017). The Median P Rule is therefore very simple to apply, you just take the median of the p-values. For the median p-value to be valid you have to run the MI procedure without the outcome in the imputation model (R code 6.4).
-
-
-```{r}
-
-##Example code of MPR
-```
-
+For the Median P Rule (MPR) one simply uses the median p-value of the significance tests conducted in each imputed dataset (MPR pooling). Hence, it depends on p-values only and not on the parameter estimates. The MPR can be calculated by using the p-values from the likelihood ratio test for multiple parameters for the categorical variables in the multivariable model (@Eekhout2017). The Median P Rule is therefore very simple to apply. For the median p-value to be valid you have to run the MI procedure without the outcome variable in the imputation model.
