@@ -163,28 +163,6 @@ For logistic or Cox regression models the same steps can be followed. For these 
 ###Imputation of interaction terms in R
 
 The split file procedure that we used in SPSS in the previous paragraph to impute missing data and to take interaction terms into account can also be applied in R. First you have to split the data, impute the missing values, merge the data again and generate the interaction term in the dataset . Then results of the analysis model can be pooled. 
-There is also another procedure in R that can be used. This procedure is called Substantive Model Compatible Fully Conditional Specification (SMC-FCS). This is a fairly complex procedure that can generate valid imputations by taking into account interaction terms. More about this procedure can be found in the technical paper of Bartlett et al.( 2015). To apply the procedure we need the smcfcs function which is available in the smcfs package (Bartlett, 2015). To get pooled analysis results we also have to install the mitoolspackage. An example of using the SMC-FCS is presented below.
+There is also another procedure in R that can be used. This procedure is called Substantive Model Compatible Fully Conditional Specification (SMC-FCS). This is a fairly complex procedure that can generate valid imputations by taking into account interaction terms. More about this procedure can be found in the technical paper of Bartlett et al.( 2015). To apply the procedure we need the smcfcs function which is available in the smcfs package (Bartlett, 2015). To get pooled analysis results we also have to install the mitoolspackage. 
 
-```{r}
-
-# Read in SPSS File "BodyWeight" and assign to object set
-#set <- read.spss(file = "BodyWeight.sav", to.data.frame = T) ##IE: change to haven package
-
-#set <- set[, -1]## do this in prediction model - otherwise ID variable is lost! 
-#et$Int <- set$Bodyweight*set$Gender
- 
-# Perform SMCFCS, set seed to reproduce results
-# impute missing values, taking account of the interaction term 
- 
-#imp.smcfcs <- smcfcs(set, smtype="lm", m=5, numit=10, rjlimit=2000,
-#                smformula="SBP ~ Bodyweight + Gender + Int",
-#                method=c("","","","","", "norm","Bodyweight*Gender"))
-
-# fit analysis model and get pooled results
-#smcfcs.model <- imputationList(imp.smcfcs$impDatasets)
-# model.res <- with(smcfcs.model, lm(SBP~ Bodyweight + Gender + Int))
-# summary(MIcombine(model.res))
-```
-
-
-We are currently updating this Chapter.
+We are currently working on this Chapter.

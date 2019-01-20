@@ -283,12 +283,12 @@ The full Multiple Imputation procedure will be discussed in more detail in the n
 The package mice also include a Bayesian stochastic regression imputation procedure. You can apply this imputation procedure with the mice function and use as method "norm". The pain variable is the only predictor variable for the missing values in the Tampa scale variable.
 
 ```{r }
-
-dataset <- read.spss(file="Backpain 50 missing.sav", to.data.frame=T)
+library(haven)
+dataset <- read_sav(file="Backpain 50 missing.sav")
 dataset <- dataset[, c("Pain", "Tampascale")]
 
 imp_b <- mice(dataset, method="norm", m=1, maxit=1)
 
 ```
 
-The completed dataset can be extracted by using the complete function in the mice package.
+The completed dataset can be extracted by using the `complete` function in the `mice` package.

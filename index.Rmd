@@ -1,7 +1,4 @@
 --- 
-title: "Applied Missing data analysis with SPSS and R(Studio)"
-author: "Martijn Heymans and Iris Eekhout"
-date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [appliedmiss.bib]
@@ -13,7 +10,13 @@ output:
 
 ---
 
-Copyright ©2018 by Heymans and Eekhout
+# {-}
+
+```{r fig.align='center', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html') }
+knitr::include_graphics("images/cover2.png", dpi = NA)
+```
+
+Copyright ©2019 by Heymans and Eekhout
 
 All rights reserved. No part of this book may be reproduced or utilized in any form or by any means, electronic or mechanical, including photocopying, recording, or by any information storage and retrieval system, without permission in writing from the authors.
 
@@ -39,7 +42,7 @@ In this book we use SPSS version 24 and R software version 3.5.1. The R examples
 
 Annotation in this book 
 
-The name of R packages and libraries are used as published under their original names. The name of R functions and packages is in R code form, like the `mice` function.
+The name of R packages and libraries are used as published under their original names. The name of R functions is in R code form, like the `mice` function.
 
 Book examples in R code language can be found in grey text boxes, for example:
 to read in the dataset Backpain 50 missing.sav.
@@ -56,5 +59,5 @@ dataset <- read.spss(file="data/Backpain 50 missing.sav", to.data.frame=T)
 
 We first want to thank our students and colleagues in the Amsterdam UMC hospital for their interesting questions about missing data during lectures and statistical consultations.
 
-The book is written with the R Bookdown package and R Markdown. We thanks the developers for making these awsome packages freely available.
+The book is written with the R Bookdown package (@R-bookdown) and R Markdown (@R-rmarkdown). We thank the developers for making these awsome packages freely available.
 

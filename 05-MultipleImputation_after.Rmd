@@ -218,7 +218,8 @@ knitr::include_graphics("images/table5.6.png")
 
 #### Pooling Chi-square tests in R
 
-Procedures to pool Chi-square values are available in the `miceadds` package. The pooling functions are based on formulas that can be found in Marshall (2009) and Enders (2012) and are referred to as the D2 statistic. 
+Procedures to pool Chi-square values are available in the `miceadds` package. The pooling functions are based on formulas that can be found in Marshall (@Marshall2009MedResMeth) and Enders (@enders2010applied) and are referred to as the D2 statistic. 
+
 To pool the Chi-square values of the SPSS example you use:  
 
 ```{r }
@@ -226,7 +227,7 @@ library(miceadds)
 micombine.chisquare(c(1.829, 1.311, 2.861, 1.771, 3.690), 2, display = TRUE, version=1)
 ```
 
-The function `micombine.chisquare` also has a parameter setting that is called “version”. The default version=1 refers to the correct formula as in Enders (2010), while version=0 uses an incorrect formula as printed in Allison (2001). 
+The function `micombine.chisquare` also has a parameter setting that is called “version”. The default version=1 refers to the correct formula as in Enders (@enders2010applied), while version=0 uses an incorrect formula as printed in Allison (@Allison2002). 
 
 ### Analysis of Variance (ANOVA) pooling
 
