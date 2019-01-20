@@ -1,4 +1,5 @@
 --- 
+date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [appliedmiss.bib]
