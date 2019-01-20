@@ -485,6 +485,12 @@ Calculation of the Hazard ratio.
 Cox.pool <- summary(pool(fit.Cox))
 pool.HR <- exp(cbind(Cox.pool[,1], (Cox.pool[,1]-1.96*(Cox.pool[,2])), 
            (Cox.pool[,1]+1.96*(Cox.pool[,2]))))
-colnames(pool.HR) <- (c("OR", "95% LO", "95% UP"))
+colnames(pool.HR) <- (c("HR", "95% LO", "95% UP"))
 pool.HR
+
+pool.HR %>%
+  kable() %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
 ```
+

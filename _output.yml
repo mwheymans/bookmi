@@ -1,7 +1,9 @@
 bookdown::gitbook:
   css: style.css
-  cover-image: "images/cover.png"
   config:
+    toc:
+      before: |
+        <li><a href="./">Applied Missing Data Analysis</a></li>
     download: ["pdf", "epub"]
 bookdown::pdf_book:
   includes:
@@ -10,4 +12,3 @@ bookdown::pdf_book:
   citation_package: natbib
   keep_tex: yes
 bookdown::epub_book: default
-

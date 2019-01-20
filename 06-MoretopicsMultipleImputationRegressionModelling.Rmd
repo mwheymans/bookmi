@@ -114,50 +114,51 @@ psfmi_coxr(data=lbpmicox, nimp=10, impvar="Impnr", time="Time", status="Status",
 
 ```
 
-##Interaction terms in model
+## Interaction terms in model
 
-When the analysis model contains an interaction term, and one of the variables that is part of the interaction term contain missing data, it is important to pay extra attention to the imputation procedure. The challenge in this situation is that the imputation model should also include the interaction term, otherwise the imputation model is not compatible with the analysis model and this results in incorrect imputed values. For example, the relationship between (body)weight and blood pressure, with gender as effect modifier. The main aim of this model is to study the relationship between (body)weight and blood pressure. The interaction term between (body)weight and gender investigates whether this relationship depends on gender, i.e. is stronger or less strong for males compared to females. The analysis model is:
+When the analysis model contains an interaction term, and one of the variables that is part of the interaction term contains missing data, it is important that the imputation procedure takes into account that different effects exist with the outcome for different categories of the effect modifier that is part of the interaction term. Otherwise the imputation model may not be consistent with the analysis model and this results in incorrect imputed values and biased coefficients and standard error estimates (@Bartlett2015). 
 
-SBP=β_0+β_1×BodyWeight+β_2×Gender+β_3×BodyWeight×Gender
+For example, we may be interested in the relationship between (body)weight and blood pressure, with gender as effect modifier. The main aim of this model is to study the relationship between (body)weight and blood pressure (SBP) and whether this relationship depends on gender, i.e. is stronger or less strong for males compared to females. The analysis model is:
 
-Assume now that there is missing data in the weight variable. As a result, there will also be missing data in the interaction term between weight and gender. 
+$$SBP = β{_0} + β{_1} * BodyWeight + β{_2} * Gender + β{_3} * BodyWeight * Gender$$
 
-When an imputation model only includes the following formula:
+Assume now that there is missing data in the bodyweight variable. As a result, there will also be missing data in the interaction term between bodyweight and Gender. 
 
-〖BodyWeight〗_mis=β_0+β_1×SBP+β_2×Gender
+When the imputation model consists of the following formula:
 
-The imputation model is not consistent (not compatible) with the analysis model and would therefore not be able to generate valid imputations. We have to use  an imputation model that includes the interaction term, such as:
+$$BodyWeight{_{mis}} = β{_0} + β{_1} * SBP + β{_2} * Gender$$
+The imputation model is not consistent with the analysis model and would therefore not be able to generate valid imputations. We have to use an imputation procedure that takes into account that the relationship between Bodyweight and Blood pressure depends on Gender. A solution is to impute the relationship between blood pressure and bodyweight separately for males and females. That way, you account for the possibility that the relationship between bodyweight and blood pressure differs between males and females and the imputed values can then differ too. 
 
-〖BodyWeight〗_mis=β_0+β_1×SBP+β_2×Gender+ β_3×〖BodyWeight〗_mis×Gender
+**Imputation of interaction terms in SPSS**
 
-The imputation of weight should take the interaction between weight and gender in relation to blood pressure into account. A method that we can apply is that we impute the relationship between blood pressure and weight separately for males and females. That way, we account for the possibility that the relationship between weight and blood pressure differs between males and females and the imputed values can then differ too. Not taking into account this interaction during the imputation process will result in biased coefficients and standard error estimates (Bartlett et al. 2015). The steps that we have to follow to impute the missing data in the weight variable in SPSS, taking into account the interaction between weight and gender is illustrated in the next paragraph.
+To impute the missing data in the Bodyweight variable to examine the relationship between bodyweight and blood pressure, in a model including the interaction between bodyweight and gender are explained in the next steps. 
 
-###Imputation of interaction terms in SPSS
+**Step 1**
+Split the dataset by Gender. 
 
-To impute the missing data in the Bodyweight variable in the example, the fact that the relation between bodyweight and blood pressure depends on gender needs to be taken into account in the imputation. This can be done by using the Split file procedure in SPSS. The example dataset contains information about the variables that are presented in \@ref(fig:fig6-2).
+> Data -> Split File -> Compare Groups 
 
+Move the Gender variable to the window: Group based on, then click OK. 
 
 ```{r fig6-2, echo = FALSE, fig.cap="Bodyweight dataset with missing values in the Bodyweight variable.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig6.2.png")
 ```
 
-Compare Groups and move the Gender variable to the window: Group based on, then click OK. In the right corner below it you see the information “Split by Gender”, which means that for the next analyses procedures the procedures will be done separately for males and females.
+**Step 2**
+Perform Multiple Imputation. Use all variables in the imputation model, except the Gender variable. The Gender variable was used as a split variable and cannot be included in the imputation model. MI is now separately performed for Males and Females. 
 
-```{r fig6-3, echo = FALSE, fig.cap="The Split File procedure in SPSS.", out.width='90%', fig.align='center'}
-knitr::include_graphics("images/fig6.3.png")
-```
+**Step 3**
+Subsequently, turn on the split on the variable Imputation_ in the dataset with the imputed values. This will automatically turn off the split on Gender.
 
-Perform MI and use all variables in the imputation model, except for the Gender variable. Because the Gender variable was used as a split variable it cannot be included in the imputation model. MI will now be separately performed for Males and Females. Set M=20, use Predictive Mean Matching and 50 iterations and store the imputed datasets in the file Imp_Bodyweight.  In the SPSS output file, in the Imputation Results and the Imputation Models tables you can check that the imputation process was performed for males and females separately.
+**Step 4**
+Compute the Interaction term between Bodyweight and Gender via:
 
+> Transform -> Compute Variable
 
-```{r fig6-4, echo = FALSE, fig.cap="Imputation models, splitted for males and Females", out.width='90%', fig.align='center'}
-knitr::include_graphics("images/fig6.4.png")
+**Step 5**
+Fit the regression model to Obtain Pooled results for the main analysis model.
 
-```
-
-Compute the Interaction term of Bodyweight times Gender in the dataset that contains the imputed values.Now turn on the split on the variable Imputation_. That will automatically turn off the split on the Gender variable in the imputed datasets (in the Data View window of the imputed datasets in the corner on the right below you see the statement “Split by Imputation_ Gender”. To include the variable Gender in the model we first have to unsplit the data by Gender). 
-
-Then the analysis can be performed as planned with th interaction term as one of the predictors. 
+For logistic or Cox regression models the same steps can be followed. For these models at step 4 it is not necessary to compute an interaction term. The inclusion of interaction terms in the model can be activated by first selecting 1 variable that is part of the interaction term, than pressing the Ctrl key and selecting the other variable at the same time. The >a*b> key will than be lighted and after you click on that button the interaction term is included in the model.
 
 ###Imputation of interaction terms in R
 
