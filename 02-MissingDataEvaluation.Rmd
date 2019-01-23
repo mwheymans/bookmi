@@ -8,7 +8,7 @@ output:
 
 # Missing Data Evaluation
 
-Before you decide what to do with your missing data it is important to consider the reasons and probable causes of your missing data problem. With that information you can compose an analysis plan to deal with the missing data in your dataset. In this Chapter, you will learn how to explore and evaluate missing data in SPSS and R and why it is important to think about the reasons for missing data. Knowledge about the missing data problem is important for the method to solve the missing data problem. 
+Before you decide what to do with your missing data it is important to consider the reasons and probable causes of your missing data problem. With that information you can compose an analysis plan to deal with the missing data in your dataset. In this Chapter, you will learn how to explore and evaluate missing data in SPSS and R and why it is important to think about the reasons for missing data. Knowledge about this helps you to solve the missing data problem. 
 
 ##	Definition of Missing Data
 
@@ -71,6 +71,7 @@ A univariate missing data pattern is a pattern with missing values in only one v
 To evaluate the missing data pattern, we use the options of the Missing Value Analysis (MVA) procedure in SPSS (@spss75). The example dataset contains information on 9 study variables for 150 back pain patients. The continuous variables are Pain, Tampa scale, Disability, Body weight, Body length and Age. The dichotomous variables are Radiation in the leg, Smoking, and Gender. Only the variables Gender and Age are completely observed.
 
 To access the MVA function in the SPSS menu choose: 
+
 > Analyze -> Missing Value Analysis…  
 
 A new window will open that is called “Missing Value Analysis”.
@@ -92,6 +93,7 @@ knitr::include_graphics("images/tab2.1b.png")
 ```
 
 Another way to obtain information about the missing data patterns is by accessing the Multiple Imputation menu option. To access this menu, choose: 
+
 > Analyze -> Multiple Imputation -> Analyze Patterns…  
 
 ```{r fig2-5, echo = FALSE, fig.cap="Analyse Patterns menu.", out.width='90%', fig.align='center'}

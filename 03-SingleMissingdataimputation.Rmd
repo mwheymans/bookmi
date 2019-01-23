@@ -273,7 +273,8 @@ knitr::include_graphics("images/fig3.23.png")
 When we make a scatterplot of the Pain and the Tampascale variable (Figure \@ref(fig:fig3-24)) we see that there is more variation in the Tampascale variable, or you could say that the variation in the Tampascale variable is “repaired”.
 
 ```{r fig3-24, echo = FALSE, fig.cap="Scatterplot of the relationship between Tampascale and the Pain variable, including the imputed values for the Tampascale variable (red dots).", out.width='70%', fig.align='center'}
-knitr::include_graphics("images/fig3.24.png")
+knitr::include_graphics("images/Fig3.24.png")
+
 ```
 
 The full Multiple Imputation procedure will be discussed in more detail in the next Chapter.
