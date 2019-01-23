@@ -8,7 +8,7 @@ output:
 
 # Software applications
 
-We start the book with an introduction into the software packages SPSS and RStudio that are needed to conduct the procedures explained in the other chapters. If you are an user of SPSS and does not have experience with RStudio we recommend to read th parts about RStudio before you continue to the next chapters. If you are an RStudio user and you do not want to learn SPSS, you can skip this Chapter without losing relevant information and continue with the next chapter.
+We start the book with an introduction of the software packages SPSS and R(Studio). If you are an SPSS user and does not have experience with R(Studio) we recommend to read the parts about R(Studio) before you continue to the next chapters. If you are an RStudio user and you do not want to learn SPSS, you can skip this Chapter without losing relevant information and continue with the next chapter.
 
 ## SPSS
 
@@ -82,7 +82,9 @@ Saving files in SPSS is possible via the Save Data As option under the menu File
 
 ## R and RStudio
 
-RStudio is an integrated environment to work with the software program R. Consequently, to work with RStudio, R has to be installed. RStudio uses the R language and is also freely available. In this manual we will only show some possibilities and options in RStudio that are needed to run the R code and the programs that are discussed in this manual. For more information about RStudio and its possibilities visit the RStudio website at www.rstudio.com. When you open RStudio the following screen will appear.
+RStudio is an integrated environment to work with the software program R. Consequently, to work with RStudio, R has to be installed. RStudio uses the R language and is also freely available. In this manual we will show possibilities and options in RStudio that are needed to run the R code that are discussed in this manual. For more information about RStudio and its possibilities visit the RStudio website at www.rstudio.com. 
+
+When you open RStudio the following screen will appear.
 
 ```{r fig10, echo = FALSE, fig.cap="First screen that appears after you have started RStudio", out.width='95%', fig.align='center'}
 knitr::include_graphics("images/fig1.10.png")
@@ -433,9 +435,16 @@ knitr::include_graphics("images/fig1.13.png")
 
 Here we choose for SPSS. When you apply this procedure for the first time RStudio asks for your permission to download a package called “haven”. This package is built to import and export data from several types. 
 
+Once the package is installed, you can also read in data from the Console window by using:
+
+```{r, echo = T, eval=F} 
+library(haven)
+dataset <- read_sav(file= "data/Backpain50.sav")
+```
+
 2. Using the foreign package
 
-Another way to import an SPSS dataset is by making use of the foreign package. You find this package under the Packages Tab in the window at the right site below under the heading “System Library”. Install that package first. The foreign package includes the function “read.spss”. 
+Another way to import an SPSS dataset is by making use of the foreign package. You find this package under the Packages Tab in the window at the right site below under the heading “System Library”. Install that package first. The `foreign` package includes the function `read.spss`. 
 
 When you are in the correct working directory, i.e. the working directory where the file that you want to import is stored, you use the following code to import the dataset:
 
@@ -656,48 +665,39 @@ In RStudio updating packages can be done in the Package tab as well. You can cli
 
 The main package that we will use in this manual is mice which stand for Multivariate Imputation by Chained Equations (MICE) (Van Buuren, 2009). Other packages that can be used to impute data or that can be used to do analyses after imputation are listed below.
 
-`miceadds`
-
+**miceadds**
 Package contains some additional multiple imputation functions (Robitzsch et al., 2017).
 [See for more information.](https://cran.r-project.org/web/packages/miceadds/index.html)
  
-`micemd` 
-
+**micemd** 
 Package contains additional functions for the mice package to perform multiple imputation in two-level (Multilevel) data (Audigier & Resche-Rigon, 2017).
 [See for more information.](https://cran.r-project.org/web/packages/micemd/index.html)
 
-`mi`
-
+**mi**
 Provides functions for data manipulation, imputing missing values in an approximate Bayesian framework, diagnostics of the models used to generate the imputations, confidence-building mechanisms to validate some of the assumptions of the imputation algorithm, and functions to analyze multiply imputed data sets (Gelman et al., 2015). 
 [See for more information.](https://cran.r-project.org/web/packages/mi/index.html)
 
-`MItools`
-
+**MItools**
 Small package to perform analyses and combine results from multiple-imputation datasets (Lumley, 2015).
 [See for more information.](https://cran.r-project.org/web/packages/mitools/index.html)
 
-`norm`
-
+**norm**
 Package is for the Analysis of multivariate normal datasets with missing values. It contains the mi.inference function. This function combines estimates and standard errors to produce a single inference. Uses the technique described by Rubin (1987), which are called the Rubin’s Rules (RR) (Novo, 2015).
 [See for more information.](https://cran.r-project.org/web/packages/norm/index.html)
 
-`vim (visualization and imputation of missing values)`
-
+**vim (visualization and imputation of missing values)**
 Package includes tools for the visualization of missing and/or imputed values. In addition, the quality of imputation can be visually explored using various univariate, bivariate, multiple and multivariate plot methods (Templ et al., 2017).
 [See for more information.](https://cran.r-project.org/web/packages/mi/index.html)
 
-`BaylorEdPsych`
-
+**BaylorEdPsych**
 Package for Baylor University Educational Psychology Quantitative Courses. This package included Little’s MCAR test (Beaujean, 2015).
 [See for more information.](https://cran.r-project.org/web/packages/BaylorEdPsych/index.html)
 
-`MKmisc`
-
+**MKmisc**
 Contains several functions for statistical data analysis; e.g. for sample size and power calculations, computation of confidence intervals, and generation of similarity matrices. This package contains the mi.t.test function for pooling t-tests after multiple imputation (Kohl, 2016).
 [See for more information.](https://cran.r-project.org/web/packages/MKmisc/index.html)
 
-`mvnmle`
-
+**mvnmle**
 Package estimates the maximum likelihood estimate of the mean vector and variance-covariance matrix for multivariate normal data with missing values. This package is needed for the mlest function this is used for Little’s MCAR test in Cahpter 2.
 [See for more information.](https://cran.r-project.org/web/packages/mvnmle/index.html)
 

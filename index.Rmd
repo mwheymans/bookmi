@@ -1,6 +1,4 @@
 --- 
-title: "Applied Missing data analysis with SPSS and R(Studio)"
-author: "Martijn Heymans and Iris Eekhout"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
@@ -10,14 +8,16 @@ link-citations: yes
 output:
   pdf_document: default
   html_document: default
-cover-image: images/cover.png  
+
 ---
 
-```{r cover, echo = FALSE}
-knitr::include_graphics("images/cover.png")
+# {-}
+
+```{r fig.align='center', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html') }
+knitr::include_graphics("images/cover2.png", dpi = NA)
 ```
 
-Copyright ©2018 by Heymans and Eekhout
+Copyright ©2019 by Heymans and Eekhout
 
 All rights reserved. No part of this book may be reproduced or utilized in any form or by any means, electronic or mechanical, including photocopying, recording, or by any information storage and retrieval system, without permission in writing from the authors.
 
@@ -27,7 +27,7 @@ In the past decades, the attention for missing data has grown and so has the nee
 This book is developed for those researchers who are looking for a solution for a missing data problem or who want to learn more about dealing with missing data. The book is initially developed for a missing data course for epidemiologist, but we feel that applied researchers from other disciplines may also find this book useful. Further, we are active in giving statistical advice in general and more specific about missing data. Because our time for consultations is mostly limited, this practical guide may be useful to help researchers get started with their missing data problem. 
 With this book we provide an overview of the currently available methods to deal with missing data. The use of the methods are thoroughly explained and supported by practical examples. We hope you will enjoy this book and that you find it useful, at that as a result you will use  recommended methods to solve your missing data problem.
 
-## Software 
+## Software {-}
 
 In this book the software packages SPSS and R play a central role. SPSS is one of the most popular software package for applied researchers, worldwide, to use for statistical analyses. Currently, R is growing in popularity fast and will probably become the most popular software packages for statistical analysis, also for applied researchers.
 
@@ -39,11 +39,11 @@ In this book the handling of missing data is the main topic. We will show how to
 
 In this book we use SPSS version 24 and R software version 3.5.1. The R examples will be presented by using the output from RStudio version (Version 1.1.463 – © 2009-2018 RStudio, Inc). RStudio is an integrated development environment (IDE) for R. RStudio includes a wide range of productivity enhancing features and runs on all major platforms. 
 
-## Notation in this book 
+## Notation in this book {-}
 
 Annotation in this book 
 
-The name of R packages and libraries are used as published under their original names. The name of R functions and packages is in R code form, like the `mice` function.
+The name of R packages and libraries are used as published under their original names. The name of R functions is in R code form, like the `mice` function.
 
 Book examples in R code language can be found in grey text boxes, for example:
 to read in the dataset Backpain 50 missing.sav.
@@ -56,9 +56,9 @@ dataset <- read.spss(file="data/Backpain 50 missing.sav", to.data.frame=T)
 
 ```
 
-## Acknowledgement
+## Acknowledgement {-}
 
 We first want to thank our students and colleagues in the Amsterdam UMC hospital for their interesting questions about missing data during lectures and statistical consultations.
 
-The book is written with the R Bookdown package and R Markdown. We thanks the developers for making these awsome packages freely available.
+The book is written with the R Bookdown package (@R-bookdown) and R Markdown (@R-rmarkdown). We thank the developers for making these awsome packages freely available.
 
