@@ -139,7 +139,7 @@ knitr::include_graphics("images/tab4.8.png")
 ## Checking Convergence after Multiple imputation in SPSS
 
 The dataset Iter_Backpain in the previous paragraph contains the means and standard deviations of the imputed values at each iteration and imputation round. This information is similar as the 
-information in `imp$chainMean` in R. This dataset can be used to generate convergence plots, to check if the imputed values have the expected variation between the iterations.The iteration can be checked for the means and standard deviations seperately. In order to obtain seperate plots for htese summary statistics, the split file option in SPSS can be activated. 
+information in `imp$chainMean` in R. This dataset can be used to generate convergence plots, to check if the imputed values have the expected variation between the iterations.The iteration can be checked for the means and standard deviations seperately. In order to obtain seperate plots for these summary statistics, the split file option in SPSS can be activated. 
 
 ```{r fig4-17, echo = FALSE, fig.cap="Split file", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig4.17.png")
