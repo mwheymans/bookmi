@@ -20,7 +20,7 @@ There are several procedures to derive a pooled p-value for categorical variable
 
 ## Logistic regression with a categorical variable in R
 
-Pooling of categorical variables can be done by using the psfmi package that is downloadable via Github. The package needs R version 3.4.4 or higher. The package contains a function called `psfmi_lr` for pooling of logistic regression models and `psfmi_coxr`, to pool right censored Cox regression models. Install the package by first running:
+Pooling of categorical variables can be done by using the psfmi package that is downloadable via Github. The package needs R version 3.4.0 or higher. The package contains a function called `psfmi_lr` for pooling of logistic regression models and `psfmi_coxr`, to pool right censored Cox regression models. Install the package by first running:
 
 `install.packages("devtools")`
 
@@ -30,15 +30,17 @@ Pooling of categorical variables can be done by using the psfmi package that is 
 
 `library(psfmi)`
 
-Than run the following code to pool the logistic regression model with as independent variable the categorical Tampa scale variable and as outcome the Radiation variable. To derive the pooled p-value for the overall Wald test, the D1 method is used. Other settings that can be used for `method=`, are "D2" for the D2 pooling method, "MR" for the Meng and Rubin method and "MPR" for the Median P Rule. 
+Than run the following code to pool the logistic regression model with as independent variable the categorical Tampa scale variable and as outcome the Radiation variable. To derive the pooled p-value for the overall Wald test, the D1 method is used. Other settings that can be used for `method=`, are "D2" for the D2 pooling method, "D3" for the Meng and Rubin method and "MPR" for the Median P Rule. 
 
 ```{r }
 library(foreign)
 library(psfmi)
 data <- read.spss(file="Backpain 150 Missing_Tampa_Cat Imp.sav", to.data.frame = TRUE) 
 
-psfmi_lr(data=data, nimp=5, impvar="Imputation_", Outcome="Radiation",
+pool_lr <- psfmi_lr(data=data, nimp=5, impvar="Imputation_", Outcome="Radiation",
   cat.predictors=c("Tampa_Cat"), method="D1")
+pool_lr$RR_Model
+pool_lr$multiparm_p
 
 ```
 
@@ -48,10 +50,12 @@ Pooling a multivariable regression model that contains a mix of continuous, dich
 library(foreign)
 library(psfmi)
 
-psfmi_lr(data=lbpmilr, nimp=10, impvar="Impnr", Outcome="Chronic",
+pool_lr <- psfmi_lr(data=lbpmilr, nimp=10, impvar="Impnr", Outcome="Chronic",
   predictors=c("Gender", "Smoking", "Function", "JobControl", "JobDemands",
   "SocialSupport"), cat.predictors = c("Carrying", "Satisfaction"), 
   method="D3", print.method = FALSE)
+pool_lr$RR_Model
+pool_lr$multiparm_p
 
 ```
 
@@ -67,10 +71,12 @@ To pool a Cox regression model with a mix of continuous and dichotomous variable
 library(foreign)
 library(psfmi)
 
-psfmi_coxr(data=lbpmicox, nimp=10, impvar="Impnr", time="Time", status="Status",
+pool_coxr <- psfmi_coxr(data=lbpmicox, nimp=10, impvar="Impnr", time="Time", status="Status",
   predictors=c("Duration", "Radiation", "Onset", "Function", "Age",
   "Previous", "Tampascale", "JobControl", "JobDemand", "Social"), 
   cat.predictors=c("Expect_cat"), method="D1", print.method = FALSE)
+pool_coxr$RR_Model
+pool_coxr$multiparm_p
 
 ```
  
@@ -84,16 +90,18 @@ Prediction models are frequently developed by using selection procedures in logi
 
 ### Variable Selection with Logistic Regression models in R
 
-For variable selection we use the `psfmi` package that was introduced in paragraph 6.2 (see that paragraph of how to install the package). With this package variable selection can be applied by using different methods to obtain pooled p-values and to select on basis of these pooled p-values. These methods were introduced in paragraph 6.1 and 6.2 and are called the "D1", "D2", "MR" (Meng and Rubin) and "MPR" (Median P Rule). Variable selection of the multivariable model that was pooled in paragraph 6.2 can be done by using the following code, where method "D1" is used and a p-value of 0.05 as selection criterium. 
+For variable selection we use the `psfmi` package that was introduced in paragraph 6.2 (see that paragraph of how to install the package). With this package variable selection can be applied by using different methods to obtain pooled p-values and to select on basis of these pooled p-values. These methods were introduced in paragraph 6.1 and 6.2 and are called the "D1", "D2", "D3" (Meng and Rubin) and "MPR" (Median P Rule). Variable selection of the multivariable model that was pooled in paragraph 6.2 can be done by using the following code, where method "D1" is used and a p-value of 0.05 as selection criterium. 
 
 ```{r }
 library(foreign)
 library(psfmi)
 
-psfmi_lr(data=lbpmilr, nimp=10, impvar="Impnr", Outcome="Chronic",
+pool_lr <- psfmi_lr(data=lbpmilr, nimp=10, impvar="Impnr", Outcome="Chronic",
   predictors=c("Gender", "Smoking", "Function", "JobControl", "JobDemands",
   "SocialSupport"), cat.predictors = c("Carrying", "Satisfaction"), 
   p.crit = 0.05, method="D1", print.method = FALSE)
+pool_lr$RR_Model
+pool_lr$multiparm_p
 
 ```
 
@@ -107,10 +115,12 @@ Variable selection with Cox regression models can be applied with the `psfmi` pa
 library(foreign)
 library(psfmi)
 
-psfmi_coxr(data=lbpmicox, nimp=10, impvar="Impnr", time="Time", status="Status",
+pool_coxr <- psfmi_coxr(data=lbpmicox, nimp=10, impvar="Impnr", time="Time", status="Status",
   predictors=c("Duration", "Radiation", "Onset", "Function", "Age",
   "Previous", "Tampascale", "JobControl", "JobDemand", "Social"), 
   cat.predictors=c("Expect_cat"), p.crit = 0.05, method="D1", print.method = FALSE)
+pool_coxr$RR_Model
+pool_coxr$multiparm_p
 
 ```
 
