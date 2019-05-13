@@ -27,7 +27,7 @@ In the past decades, the attention for missing data has grown and so has the nee
 This book is developed for those researchers who are looking for a solution for a missing data problem or who want to learn more about dealing with missing data. The book is initially developed for a missing data course for epidemiologist, but we feel that applied researchers from other disciplines may also find this book useful. Further, we are active in giving statistical advice in general and more specific about missing data. Because our time for consultations is mostly limited, this practical guide may be useful to help researchers get started with their missing data problem. 
 With this book we provide an overview of the currently available methods to deal with missing data. The use of the methods are thoroughly explained and supported by practical examples. We hope you will enjoy this book and that you find it useful, at that as a result you will use  recommended methods to solve your missing data problem.
 
-## Software {-}
+## SPSS and R Software {-}
 
 In this book the software packages SPSS and R play a central role. SPSS is one of the most popular software package for applied researchers, worldwide, to use for statistical analyses. Currently, R is growing in popularity fast and will probably become the most popular software packages for statistical analysis, also for applied researchers.
 

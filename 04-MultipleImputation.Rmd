@@ -69,7 +69,7 @@ knitr::include_graphics("images/fig4.5.png")
 
 ```
 
-## The output for Multiple imputation in SPSS
+## The output of Multiple imputation in SPSS
 
 ### The Imputed datasets
 
@@ -179,7 +179,7 @@ knitr::include_graphics("images/fig4.19.png")
 
 ## Multiple Imputation in R
 
-In R multiple imputation can be performed with the `mice` function from the `mice` package. As an example dataset to show MI in R we use the same dataset as in the previous paragraph with 50 patient with low back pain. The variables Tampa scale and Disability contain missing values and the Pain and Radiation variables are complete. 
+In R multiple imputation (MI) can be performed with the `mice` function from the `mice` package. As an example dataset to show MI in R we use the same dataset as in the previous paragraph with 50 patient with low back pain. The variables Tampa scale and Disability contain missing values and the Pain and Radiation variables are complete. 
 
 The following default settings are used in the `mice` function to start MI, `m=5`, to generate 5 imputed datasets, `maxit=10`, to use 10 iterations for each imputed dataset, `method=”pmm”` to use predictive mean matching (see paragraph 4.8). For an elobate explanation of all options withing the mice function, see `?mice`.
 
@@ -200,7 +200,7 @@ This imp object returns information about the number of imputed datasets, the im
 
 The imputed datasets can be extracted by using the `complete` function. The settings `action = ”long”` and `include = TRUE` return a data.frame where the imputed datasets are stacked under each other and the original dataset (with missings) is included on top.
 
-```{r}
+```{r, eval=FALSE}
 complete(imp, action = "long", include = TRUE)
 ```
 
@@ -233,7 +233,7 @@ In the `mice` imputation models, the variables Tampa scale and Disability are im
 
 To get information about the PredictorMatrix that was used in the `mice` function use:
 
-```{r}
+```{r, eval=FALSE}
 imp$PredictorMatrix
 ```
 
@@ -257,7 +257,7 @@ There are several guidelines that can be used to set the PredictorMatrix (@Colli
 
 The mice function returns a mids (multiple imputed data set) object. In this object, imputation information is stored and can be extracted by typing `imp$`, followed by the type of information you want to obtain. 
 
-```{r}
+```{r, eval=FALSE}
 imp$m
 imp$nmis
 imp$seed
@@ -266,27 +266,27 @@ imp$iteration
 The above objects contain the the number of imputed datasets, missing values in each variable, the specified seed value (NA here because we did not define one) and the number of iterations.
 
 The original data can be found in:
-```{r}
+```{r, eval=FALSE}
 imp$data
 ```
 
 The imputed values for each variable in the imptued values can be found under:
-```{r}
+```{r, eval=FALSE}
 imp$imp
 ```
 
 The imputation methods used:
-```{r}
+```{r, eval=FALSE}
 imp$method
 ```
 
 The predictor matrix:
-```{r}
+```{r, eval=FALSE}
 imp$predictorMatrix
 ```
 
 The sequence of the variables used in the impution procedure:
-```{r}
+```{r, eval=FALSE}
 imp$visitSequence
 ```
 
@@ -462,7 +462,7 @@ The smallest differences are 1.574, 1.970 and 2.168 and these belong to the case
 
 The strength of PMM is that missing data is replaced by data that is observed in the dataset and not replaced by unrealistic values (as negative Tampa scale scores). PMM can therefore handle better the imputation of variables with skewed distributions or non-linear relationships between variables.   
 
-##Number of Imputed datasets and iterations
+## Number of Imputed datasets and iterations
 
 Researchers assume that the number of imputations needed to generate valid imputations has to be set at 3-5 imputations. This idea was based on the work of Rubin (@Rubin1987). He showed that the precision of a pooled parameter becomes lower when a finite number of multiply imputed datasets is used compared to an infinite number (finite means a limited number of imputed datasets, like 5 imputed datasets and infinite means unlimited and can be recognized by the mathematical symbol ∞). The precision of a parameter is often represented by the sampling variance (or standard error (SE) estimate; the sampling variance is equal to SE2) of for example a regression coefficient. In case of multiple imputed datasets precision is determined by the pooled sampling variance or pooled SE. A measure to value the amount of precision (i.e. between the pooled sampling variance estimated in a finite compared to an infinite number of imputed datasets) is the relative efficiency ($RE$). The $RE$ is low when the number of imputations is high (and the precision becomes larger) and is defined as:
 

@@ -42,7 +42,7 @@ psfmi_lr(data=data, nimp=5, impvar="Imputation_", Outcome="Radiation",
 
 ```
 
-Pooling a multivariable regression model that contains a mix of continuous, dichotomous and categorical variables can easily be performed with the `psfmi_lr` function. With the next code example, pooling is done in 10 multiple imputed datasets that are stored in the file `lbpmilr` (see `?lbpmilr` for more information about the dataset) . The relationship with the outcome variable "Chronic" is estimated, using a model with 2 dichotomous, 4 continuous and 2 categorical variables. The method to obtain a pooled p-value for the categorical variables is the Meng and Rubin procedure, indicated by `method="MR"`. To obtain a pooled p-value for continuous and dichotomous variables Rubin's Rules are used. 
+Pooling a multivariable regression model that contains a mix of continuous, dichotomous and categorical variables can easily be performed with the `psfmi_lr` function. With the next code example, pooling is done in 10 multiple imputed datasets that are stored in the file `lbpmilr` (see `?lbpmilr` for more information about the dataset) . The relationship with the outcome variable "Chronic" is estimated, using a model with 2 dichotomous, 4 continuous and 2 categorical variables. The method to obtain a pooled p-value for the categorical variables is the Meng and Rubin or D3 method, indicated by `method="D3"`. To obtain a pooled p-value for continuous and dichotomous variables Rubin's Rules are used. 
 
 ```{r }
 library(foreign)
@@ -51,11 +51,11 @@ library(psfmi)
 psfmi_lr(data=lbpmilr, nimp=10, impvar="Impnr", Outcome="Chronic",
   predictors=c("Gender", "Smoking", "Function", "JobControl", "JobDemands",
   "SocialSupport"), cat.predictors = c("Carrying", "Satisfaction"), 
-  method="MR", print.method = FALSE)
+  method="D3", print.method = FALSE)
 
 ```
 
-In the final table that is called "Mixed p-values (MR & RR)", the pooled p-values can be found for all variables, including the categorical variables that are pooled by the Meng and Rubin procedure. For the dichotomous and continuous variables the pooled p-value estimated by Rubin's Rules is reported. These are equal to the p-values in the first table under "Pooled model (Rubin's Rules)". You can set `print.method = TRUE`, to obtain the table with the pooled p-values by the Meng and Rubin method for all variables.
+In the final table that is called "Mixed p-values (D3 & RR)", the pooled p-values can be found for all variables, including the categorical variables that are pooled by the Meng and Rubin or D3 method. For the dichotomous and continuous variables the pooled p-value estimated by Rubin's Rules is reported. These are equal to the p-values in the first table under "Pooled model (Rubin's Rules)". You can set `print.method = TRUE`, to obtain the table with the pooled p-values by the D3 method for all variables.
 
 ## Cox Regression with a categorical variable in R
 
