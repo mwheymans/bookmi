@@ -217,7 +217,13 @@ Filling in this formula with the values for ${V_B}$ and ${V_W}$ from paragraph 5
 
 $$RIV = \frac{0.040027 + \frac{0.040027}{3}}{0.7957147}=0.06704779$$
 
-This value is also presented in (Figure \@ref(fig:tab9-1)) in the column Relative Increase Variance.
+This value is also presented in (Figure \@ref(fig:tab9-1)) in the column Relative Increase Variance. The relation between RIV and Lambda is defined as
+
+\begin{equation}
+RIV = \frac{Lambda }{1 - Lambda}.
+  (\#eq:rivlambda)
+\end{equation}
+
 
 ## Fraction of Missing Information - FMI
 
