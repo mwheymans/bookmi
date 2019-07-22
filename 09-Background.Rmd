@@ -183,11 +183,11 @@ In this formula, $\bar{\theta}$ is the pooled estimate, t is the t-statistic, df
 
 # Measures of Missing data information 
 
-These measures are the Fraction of Missing information (FMI), the relative increase in variance due to nonresponse and the Relative Efficiency. They are derived from values of the between, and within imputation variance and the total variance. There exist two versions of the FMI, which are referred to as lambda and FMI. 
+These measures are the Fraction of Missing information (FMI), the relative increase in variance due to nonresponse (RIV) and the Relative Efficiency (RE). They are derived from values of the between, and within imputation variance and the total variance. There exist two versions of the FMI, which are referred to as lambda and FMI. 
 
-## Fraction of Missing Information - Lambda
+## Lambda
 
-The Fraction of Missing information, lambda, (@VanBuuren2018; @raghunathan2016) can be derived from the between and total missing data variance as: 
+The proportion of total variance due to missingness, lambda, (@VanBuuren2018; @raghunathan2016) can be derived from the between and total missing data variance as: 
 
 \begin{equation}
 Lambda = \frac{V_B + \frac{V_B}{m}}{V_T}
@@ -200,11 +200,11 @@ When we use the ${V_B}$ and ${V_T}$ values that were calculated in paragraph 5.1
 
 $$Lambda = \frac{0.040027 + \frac{0.040027}{3}}{0.849084}=0.06283485$$
 
-This specific value for the FMI, lambda, is not reported by SPSS, but is reported by the mice package in R. Confusingly, @VanBuuren2018 and @enders2010applied use the same formula to calculate this type of missing data information, but van Buuren calls it lambda and Enders FMI.
+This specific value for lambda is not reported by SPSS, but is reported by the mice package in R. @VanBuuren2018 and @enders2010applied use the same formula to calculate this type of missing data information, but van Buuren calls it lambda and Enders FMI.
 
 ## Relative increase in variance
 
-Another related measure is the relative increase in variance (RIV) due to nonresponse. This value is calculated as:
+Another related measure is the relative increase in variance  due to nonresponse. This value is calculated as:
 
 \begin{equation}
 RIV = \frac{V_B + \frac{V_B}{m}}{V_W}
@@ -215,7 +215,7 @@ Where ${V_B}$ and ${V_W}$ are the between and within variance respectively. This
 
 Filling in this formula with the values for ${V_B}$ and ${V_W}$ from paragraph 5.1.2 results in:
 
-$$Lambda = \frac{0.040027 + \frac{0.040027}{3}}{0.7957147}=0.06704779$$
+$$RIV = \frac{0.040027 + \frac{0.040027}{3}}{0.7957147}=0.06704779$$
 
 This value is also presented in (Figure \@ref(fig:tab9-1)) in the column Relative Increase Variance.
 
