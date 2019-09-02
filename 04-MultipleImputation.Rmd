@@ -219,12 +219,12 @@ complete(imp, action = "long", include = TRUE)
 
 In the imputed datasets two variables are added, an `.id` variable and an `.imp` variable to distinguish cases and the imputed datasets. To extract the first imputed dataset, only the setting `action = 1` is needed in the `complete` function. (see ?complete for more possibilities to extract the imputed datasets).The imputed datasets can further be used in mice to conduct pooled analyses or to store them for further use. 
 
-### The mice iteration and imputation steps 
+## The mice MI Shiny app 
 
-During the imputation process the `mice` fucntion returns information about the iteration and imputation steps of the imputed variables under the columns named “iter”, “imp” and “variable” respectively. During this process missing values are filled in by using a chain of regression models. This is a rather complicated process. To get some more insight in what happens during the interation and imputation steps we shortly describe the imputation of the missing values in the Tampa scale and Disability variables during the first two iteration steps below. We have also developed a Shiny app of MI. This is an interactive learning app of how MI with `mice` works and shows a complete picture of how the imputed values in the Tampa scale and Disability variables are generated. Clink on [Shiny app](https://mwheymans.shinyapps.io/mi2variables/) to open the app.   
+During the imputation process the `mice` fucntion returns information about the iteration and imputation steps of the imputed variables under the columns named “iter”, “imp” and “variable” respectively. During this process missing values are filled in by using a chain of regression models. This is a rather complicated process. To get some more insight in what happens during the interation and imputation steps we shortly describe the imputation of the missing values in the Tampa scale and Disability variables during the first two iteration steps below. We have also developed a Shiny app to explain MI in more detail. This is an interactive learning app of how MI with `mice` works and shows how the imputed values in the Tampa scale and Disability variables are calculated. Click on [Shiny app](https://mwheymans.shinyapps.io/mi2variables/) to use the app.   
 
 *Iteration 0*
-Per imputed dataset we start with iteration number 0. Values are randomly drawn from the observed values of the Tampa scale and Disability variable and these are used to replace the missing values in these variables. 
+Per imputed dataset at iteration number 0 values are randomly drawn from the observed values of the Tampa scale and Disability variable and these are used to replace the missing values in these variables. 
 
 *Iteration 1*
 At this step the Tampa scale values are set back to missing. Subsequently, a linear regression model is applied in the available data (i.e. all subjects with observed Tampa scale values) using the Tampa scale as the dependent variable and the Pain, Disability and Radiation variables as independent variables. From this regression model the missing Tampa scale values are imputed. Note that for this regression model the imputed values for the Disability variable are used from the previous iteration step of 0. The Baysian stochastic regression imputation method adds uncertainty to the imputed values via the error variance (residuals) and the regression coefficients. This regression model is defined as: 
@@ -240,25 +240,35 @@ For iteration 2 the Tampa scale values are again set back to missing and (new) u
 
 This process is repeated in each following iteration until the final iteration where the imputed values are used for the first imputed dataset. For the next imputed dataset, the entire process of iterations is repeated.
 
-### Customizing the Imputation model
+## Customizing the Imputation model
 
-In the `mice` imputation models, the variables Tampa scale and Disability are imputed with the help of the variables Pain and Radiation. The latter two variables are called auxiliary variables when they are not part of the main analysis model but they help to impute the Tampa scale and Disability variables. By customizing the PredictorMatrix in the `mice` function variables that are used to impute other variables can be switched off and on. As a default setting all variables are used as predictors to impute other variables. To get information about the PredictorMatrix that is used in the `mice` function use:
+During MI in the example of paragraph 4.6 above the variables Tampa scale and Disability were imputed with the help of the variables Pain and Radiation. The latter two variables are called auxiliary variables when they are not part of the main analysis model but they help to impute the Tampa scale and Disability variables. These variables are included in the imputation model to impute the missing data in the Tampa scale and Disability variables. 
+
+To define the imputation model for variables with missing data `mice` makes use of a predictor matrix. The predictor matrix is a matrix with the names of the variables in the dataset listed in the rows and the columns. The variables in the columns are used to impute the row variables. They are part of the imputation model. As a default setting all variables that are included in the dataset are used as predictors to impute missing values. The predictor matrix that is used in the `mice` function can be obtained by typing:
 
 ```{r }
 imp$predictorMatrix
 ```
 
-The predictor matrix is a matrix with the names of the variables in the dataset listed in the rows and the columns. The variables in the columns are used to impute the row variables. Accordingly, variables in the columns can be switched on or off to in- or exclude them from the imputation model to impute the missing data in the row variable. In our example, the first and fourth rows contain only zeroes, because the Pain and Radiation variables do not have missing values and therefore do not need to be imputed. The variable in the second row, i.e. Tampa scale, contains missing values and the 1´s in this row mean that the column variables Pain, Disability and Radiation are included in the imputation model. For the Disability variable, the variables Pain, Tampa scale and Radiation are used. As a default setting all variables are included in the imputation model to predict missing values in other variables. The diagonal of the predictormatrix is always zero. The predictormatrix can be adapted when for example a variable that contains a high percentage of missing data should be excluded from the imputation model. For example, if we want to exclude the variable Disability from the imputation model of the Tampa scale variable we can do the following:
+Variables in the columns can be switched on or off by using a 1 or a 0 to in- or exclude them from the imputation model. In this way the imputation models for each variable with missing data can be customized. For example, the variable in the second row, i.e. the Tampa scale variable, contains missing values and the 1´s in this row mean that the column variables Pain, Disability and Radiation are included in the imputation model to impute the Tampa scale variable. For the Disability variable, the variables Pain, Tampa scale and Radiation are used. 
 
-```{r, eval=FALSE}
-pred <-imp$PredictorMatrix
+The predictor matrix can be adapted when for example a variable that contains a high percentage of missing data should be excluded from the imputation model. If we want to exclude the variable Disability from the imputation model of the Tampa scale variable we can change the value of 1 for the Disability variable into 0. 
+
+```{r }
+pred <-imp$predictorMatrix
 pred["Tampascale", "Disability"] <- 0
 pred
+```
 
+This adjusted predictor matrix could than be re-used in the `mice` function by refrerring to it. 
+
+```{r, eval=FALSE}
 imp <- mice(data,m=5, maxit=10, method="pmm", predictorMatrix = pred)
 ```
 
-There are several guidelines that can be used to set the PredictorMatrix (@Collins2001, @VanBuuren2018, @Rubin1976). To summarize:
+The diagonal of the predictor matrix always contains zeroes, because variables cannot be included in their own imputation model.
+
+There are several guidelines that can be used to set the predictor matrix (@Collins2001, @VanBuuren2018, @Rubin1976). To summarize:
 
 1. Include all variables that are part of the analysis model, including the dependent (outcome) variable.
 2. Include the variables at the same way in the imputation model as they appear in the analysis model (i.e. if interaction terms are in the analysis model they also have to be included in the imputation model).
