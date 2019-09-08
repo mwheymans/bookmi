@@ -12,63 +12,68 @@ We are currently updating this Chapter.
 
 ## Advanced Multiple Imputation models for Multilevel data
 
-In this Chapter, we will apply more advanced multiple imputation models. With “advanced”, we mean multiple imputation models for Multilevel data, which are also called Mixed models. We start this Chapter with a brief introduction about multilevel data. Subsequently, we will shortly discuss the locations of missing data in Multilevel data. Finally, we will show examples of how to impute missing data in multilevel datasets using different imputation methods with mice. 
+In this Chapter, we will apply more advanced multiple imputation models. With “advanced”, we mean multiple imputation models for Multilevel data, which are also called Mixed models. We start this Chapter with a brief introduction about multilevel data. Subsequently, we will shortly discuss the locations of missing values in Multilevel data. Finally, we will show examples of how to impute missing data in multilevel datasets using different multiple imputation models that can be used as part of the `mice` procedure. 
 
 ## Characteristics of Multilevel data
 
-Multilevel data is also known as clustered data, where collected data is clustered into groups. Examples are observations of patients within the same hospitals or observations of students within the same schools. These data is clustered (or correlated) because assessments of patients or students within the same hospital or school (or cluster) are more equal to each other than assessments of patients or students between different hospitals or schools (@twisk2006appliedmultilevelanalysis). It is called multilevel data because data is assessed at different levels. Data can be assessed at the level of the school when we would be interested in the school type, i.e. private or public. This data is assessed at two levels, i.e. the school level (highest level or level 2) and the students level (lowest level or level 1). 
+Multilevel data is also known as clustered data, where collected data is clustered into groups. Examples are observations of patients within the same hospitals or observations of students within the same schools. These data is clustered (or correlated) because assessments of patients or students within the same hospital or school (or cluster) are more equal to each other than assessments of patients or students between different hospitals or schools (@twisk2006appliedmultilevelanalysis, @hox2018multilevelanalysis). It is called multilevel data because data is assessed at different levels. Data can be assessed at the level of the school when we would be interested in the school type, i.e. private or public. This data is assessed at two levels, i.e. the school level (highest level or level 2) and the students level (lowest level or level 1). 
 
-Data that is repeatedly assessed within the same person over time is another example of multilevel data. Examples are when blood parameters or variables as bodyweight are repeatedly assessed within the same individuals (clusters) over time. Here the clusters are the individuals. This type of data is also called longitudinal data. In this data assessments within the same individual may be more alike than assessments between individuals. This kind of data is also assessed at two levels, now the individuals are the highest level (level 2) and the time measurements are the lowest level (level 1). The different types of Multilevel data are graphically displayed in Figure 7.1a and b. Multilevel data may also consist of data assessed at more than 2 levels, i.e. data that is assessed in different schools, classes and students or different regions, hospitals and patients.
-
-For the analysis of Multilevel data specific regression models have to be used. Logically, if Multilevel data contain missing values these models have to be implemented in the (multiple) imputation method.     
-
-## Multilevel data - from wide to long
-
-In this Chapter we use an example dataset from The Amsterdam Growth and Health Longitudinal Study (AGGO). In this study persons were repeatedly assessed over time and growth, health and life-style factors were measured. Assessments are available of Gender, Fitness, Smoking, Hypercholestrolemia, Cholesterol level and Sum of Skinfolds. The dataset contains information of 147 patients which are assessed six times, once at baseline and at 5 repeated measurement occasions. 
-	Usually, a dataset contains one row per subject and the separate variables are placed in the columns. When subjects are repeatedly assessed, additional variables are added for new assessments. This is also called a wide data format (Figure \@ref(fig:fig71)). 
+Data that is repeatedly assessed within the same person over time is another example of multilevel data. Examples are when variables as bodyweight are repeatedly assessed within the same individuals (clusters) over time. Here the clusters are the individuals. This type of data is also called longitudinal data. In this data assessments within the same individual may be more alike than assessments between individuals. This kind of data is also assessed at two levels, now the individuals are the highest level (level 2) and the time measurements are the lowest level (level 1). The different types of Multilevel data are graphically displayed in Figure \@ref(fig:fig71). Multilevel data may also consist of data assessed at more than 2 levels, i.e. data that is assessed in different schools, classes and students or different regions, hospitals and patients.
 
 ```{r fig71, echo = FALSE, fig.cap="Two-level data structure with measurements in different students within each school (left) and Two-level data structure with repeated assessments within individuals over time (right)", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig7.1.png")
 ```
 
-## Multilevel data - from wide to long
+For the analysis of Multilevel data, multilevel regression models have to be used. Consequently, if multilevel data contain missing values, multilevel models have to be implemented during the multiple imputation process.     
 
-In this Chapter we use an example dataset from The Amsterdam Growth and Health Longitudinal Study (AGGO). In this study persons were repeatedly assessed over time and growth, health and life-style factors were measured. Assessments are available of Gender, Fitness, Smoking, Hypercholestrolemia, Cholesterol level and Sum of Skinfolds. The dataset contains information of 147 patients which are assessed six times, once at baseline and at 5 repeated measurement occasions. 
-	Usually, a dataset contains one row per subject and the separate variables are placed in the columns. When subjects are repeatedly assessed, additional variables are added for new assessments. This is also called a wide data format (Figure \@ref(fig:fig72)). 
+## Multilevel data - Example datasets
 
-```{r fig72, echo = FALSE, fig.cap="Example of the AGGO dataset in wide format.", out.width='90%', fig.align='center'}
-knitr::include_graphics("images/fig7.2.png")
-```
+In this Chapter we will use two example datasets to show multilevel imputation. 
+The first dataset is a classic multilevel dataset  from the book of Hox et al (@hox2018multilevelanalysis) and is called the popular dataset. In this dataset the following information is available from 100 school classes: class (Class number), pupil	(Pupil identity number within classes), extrav	(Pupil extraversion), sex	(Pupil gender), texp (Teacher experience (years)), popular (Pupil popularity), popteach	(Teacher popularity). 
 
-In order to apply multilevel analyses, we need a long version of the data. For the analysis we have to convert the dataset into a long data format, which is explained in paragraph 7.4.1 and 7.4.2. An example of a long dataset is presented in Figure 7.3. The variable that separates the clusters is called the ID variable and the variable that distinguishes the measurements at different time points is the Time variable. This means that repeated assessment within a subject are stacked under each other. Each subject has multiple rows, one row for each repeated measurement. 
-
-```{r fig73, echo = FALSE, fig.cap="Example of the AGGO dataset in long format.", out.width='90%', fig.align='center'}
-knitr::include_graphics("images/fig7.3.png")
-```
+The other example dataset is from The Amsterdam Growth and Health Longitudinal Study (AGGO). In this study persons were repeatedly assessed over time and growth, health and life-style factors were measured. Assessments are available of Gender, Fitness, Smoking, Hypercholestrolemia, Cholesterol level and Sum of Skinfolds. The dataset contains information of 147 patients which are assessed six times, once at baseline and at 5 repeated measurement occasions. This is an example of a longitudinal multilevel dataset. Usually, a dataset contains one row per subject and the separate variables are placed in the columns. When subjects are repeatedly assessed, additional variables are added for new assessments. This is also called a wide data format . 
 
 ##	Multilevel data - Clusters and Levels
 
-In the previous paragraph we have seen an example of a long dataset that is needed for multilevel analyses. We can organize this kind of multilevel information by level of assessment in the following way (Figure \@ref(fig:fig74)):
+The two datasets that are used in this chapter can be organized by their level of assessment of information, resulting in different type of variables. These are graphically presented for the datasets that are used in this chapter, i.e. the Popularity and AGGO datasets in Figure \@ref(fig:fig72) and Figure \@ref(fig:fig73) respectively. 
 
-```{r fig74, echo = FALSE, fig.cap="7.4. AGGO dataset with level 1 and 2 variables.", out.width='90%', fig.align='center'}
+```{r fig72, echo = FALSE, fig.cap="Popular dataset with level 1 and 2 variables.", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig7.2_2.jpg")
+```
+
+```{r fig73, echo = FALSE, fig.cap="AGGO dataset with level 1 and 2 variables.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig7.4.png")
 ```
 
-1)	Level 1 outcome variable: This is for example the Cholesterol variable that is repeatedly assessed over time within persons. Other examples may be math test scores of individual students in a class or their Intelligent Quotient (IQ) scores. In other words, level one outcome information varies within a cluster or the value changes over time (i.e. does not have a fixed value). 
+1)	Level 1 outcome variable: The Student popular variable in the Popular dataset that is repeatedly assessed in the class or the Cholesterol variables that is repeatedly assessed over time within persons in the Aggo dataset. Other examples may be math test scores of individual students in a class or their Intelligent Quotient (IQ) scores. In other words, level one outcome information varies within a cluster or the value changes over time (i.e. does not have a fixed value). 
 
-2)	Level 1 independent variable: These are variables that vary within a cluster, but now are used as independent variables. Examples are the Time or Sum of Skinfold measurements that are repeatedly assessed within persons over time or hours that students in a class spent on their homework each week or the level of education of their parents. 
+2)	Level 1 independent variable: These are variables that vary within a cluster, but now are used as independent variables. Examples are the extrav variable (Pupil extraversion) in the Popular dataset or the Time or Sum of Skinfold measurements that are repeatedly assessed within persons over time in the Aggo dataset. Other examples are  hours that students in a class spent on their homework each week or the level of education of their parents. 
 
-3)	Level 2 independent variables. These variables do not vary within a cluster but vary only between clusters. An example is the Gender or Fitness variable which is only assessed at the start of the study, or in case of schools, if the school is a private or public school.
+3)	Level 2 independent variables. These variables do not vary within a cluster but vary only between clusters. An example is the texp variable (teacher experience) in the Popular dataset or the Gender or Fitness variable in the Aggo dataset, which is only assessed at the start of the study, or in case of schools, if the school is a private or public school.
 
-4)	Level 4 is the cluster variable itself. This is a special variable which distinguishes the clusters. This could be the school identification number which form the blocks of measurement or the identification number that distinguishes individuals with repeated information over time.
+4)	Level 4 is the cluster variable itself. This is a special variable which distinguishes the clusters. This could be the school identification number in the Popular dataset which form the blocks of measurement or the person identification number in the Aggo dataset that distinguishes individuals with repeated information over time.
 
 In the next paragraph the type of statistical model is defined that is used to analyze multilevel data.
 
-## Restructuring datasets from wide to long in SPSS
+## Longitudinal Multilevel data - from wide to long
+
+In this Chapter we use an longitudinal example dataset from The Amsterdam Growth and Health Longitudinal Study (AGGO). In this study persons were repeatedly assessed over time.	Usually, a dataset contains one row per subject and the separate variables are placed in the columns. When subjects are repeatedly assessed, additional variables are added for new assessments. This is also called a wide data format (Figure \@ref(fig:fig74)). 
+
+```{r fig74, echo = FALSE, fig.cap="Example of the AGGO dataset in wide format.", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig7.2.png")
+```
+
+In order to apply multilevel analyses, we need a long version of the data. For the analysis we have to convert the dataset into a long data format, which is explained in paragraph 7.6. An example of a long dataset is presented in Figure \@ref(fig:fig75). The variable that separates the clusters is called the ID variable and the variable that distinguishes the measurements at different time points is the Time variable. This means that repeated assessment within a subject are stacked under each other. Each subject has multiple rows, one row for each repeated measurement. 
+
+```{r fig75, echo = FALSE, fig.cap="Example of the AGGO dataset in long format.", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig7.3.png")
+```
+
+## Restructuring from wide to long in SPSS
 
 We start with the dataset in wide format, which is presented in (Figure \@ref(fig:fig76)). In this dataset, information is repeatedly assessed over time for the Cholesterol and Sum of Skinfold variables and this information is stored in the column variables. The repeated assessments are distinguished by the numbers at the end of the variable names. The number 1 indicates the first measurement, number 2, the second, etc. The Gender and Smoking variable is not repeatedly assessed over time. Each row represents a separate case.
 
-```{r fig76, echo = FALSE, fig.cap="7.6. Example of a dataset in wide format.", out.width='90%', fig.align='center'}
+```{r fig76, echo = FALSE, fig.cap="Example of a dataset in wide format.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig7.6.png")
 ```
 
@@ -130,7 +135,7 @@ knitr::include_graphics("images/fig7.14.png")
 
 Figure 7.14. Converted wide to long dataset.
 
-### Restructuring a dataset from wide to long in R
+### Restructuring from wide to long in R
 
 To convert a dataset in R from wide to long, you can use the reshape function. Before you convert a wide dataset, it is a good idea to redesign the dataset a little bit and to place all variables in the order of their names. It is than easier to apply the reshape function. You see an example in the R code below, where all Cholesterol variables are nicely ordered.
 
@@ -171,18 +176,32 @@ Now that we have restructured the dataset we are going to discover how missing d
 
 ## Missing data at different levels
 
-Missing data in multilevel studies can occur at the same levels as measurements as was discussed above. In other words, missing data can occur at the level of:
+Missing data in multilevel studies can occur at the same levels as measurements as was discussed in paragraph 7.4. In other words, missing data can occur at the level of:
 
 1)	The Level 1 outcome variable:
-Missing data is present in the Cholesterol variable when this variable is repeatedly assessed over time or in math scores of pupils within a class. Note that when Mixed models are used and there is only missing data in the outcome variable, imputation of missing values is not necessary. Full information maximum likelihood procedures, that are used to estimate the parameters of a mixed model, can be used to get estimates of regression coeficients and standard errors.
+Missing data is present in the popularity or cholesterol variable. Note that when Mixed models are used and there is only missing data in the outcome variable, imputation of missing values is not necessary. Full information maximum likelihood procedures, that are used to estimate the parameters of a mixed model, can be used to get estimates of regression coeficients and standard errors.
 
 2)	The Level 1 independent variable:
-Missing data occur at the level of the independent variables that vary within a cluster. Examples are missing data in the Sum of Skinfold variable or the age or IQ scores of students within a class.
+Missing data occur at the level of the independent variables that vary within a cluster. Examples are missing data in the extrav variable (Pupil extraversion) or the Sum of Skinfold variable or the age or IQ scores of students within a class.
 
 3)	The Level 2 independent variables:
-Missing values are located in the variables that have a constant value within a cluster. For example, in the Fitness variable assessed at baseline or if data is missing for the variable if a school is a private or public school. Other examples are when data is missing for variables as gender or educational level of persons that were repeatedly assessed over time.
+Missing values are located in the variables that have a constant value within a cluster. For example, in the texp variable (teacher experience) or in the Fitness variable assessed at baseline or if data is missing for the variable if a school is a private or public school. Other examples are when data is missing for variables as gender or educational level of persons that were repeatedly assessed over time.
 
 4)	The Cluster level variable:
 Missing data may be present in the cluster variable itself, for example if students did not fill in the name of the school or patients did not fill in the name of the hospital they were treated.
+
+## Sporadically and systematically missing data
+
+Missing values can be found within a cluster in variables assessed at different levels. If some of these values are missing, these are called sporadically missing values. If all values for a variable within a cluster are missing these are called systematically missing data (Figure \@ref(fig:fig85)). The multilevel imputation models that are discussed in this chapter can handle both types of missing data.  
+
+```{r fig85, echo = FALSE, fig.cap="Popular Dataset with sporadically missing data in class (cluster) 1 and systematically missing data in class (cluster) 2 of the extrav variable (Pupil extraversion)", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig7.20.png")
+```
+
+## Multilevel Multiple Imputation models
+
+### Continuous variables
+
+### Discrete variables
 
 We are currently working on this Chapter.
