@@ -194,7 +194,7 @@ knitr::include_graphics("images/fig4.19.png")
 
 In R multiple imputation (MI) can be performed with the `mice` function from the `mice` package. As an example dataset to show how to apply MI in R we use the same dataset as in the previous paragraph that included 50 patients with low back pain. The variables Tampa scale and Disability contain missing values and the Pain and Radiation variables are complete. 
 
-The following default settings are used in the `mice` function to start MI, `m=5`, to generate 5 imputed datasets, `maxit=10`, to use 10 iterations for each imputed dataset, `method=”pmm”` to use predictive mean matching (see paragraph 4.8). For an elobate explanation of all options withing the mice function, see `?mice`.
+The following default settings are used in the `mice` function to start MI, `m=5`, to generate 5 imputed datasets, `maxit=10`, to use 10 iterations for each imputed dataset, `method=”pmm”` to use predictive mean matching (see paragraph 4.11). For an elobate explanation of all options withing the mice function, see `?mice`.
 
 ```{r }
 library(mice)
@@ -211,13 +211,46 @@ imp
 
 This imp object returns information about the number of imputed datasets, the imputation methods for each variable, information of the PredictorMatrix (used to customize the imputation model, see paragraph 4.6.2). 
 
-The imputed datasets can be extracted by using the `complete` function. The settings `action = ”long”` and `include = TRUE` return a data.frame where the imputed datasets are stacked under each other and the original dataset (with missings) is included on top.
+The imputed datasets can be extracted by using the `complete` function. The settings `action = ”long”` and `include = TRUE` returns a dataframe where the imputed datasets are stacked under each other and the original dataset (with missings) is included on top.
 
 ```{r, eval=FALSE}
 complete(imp, action = "long", include = TRUE)
 ```
 
 In the imputed datasets two variables are added, an `.id` variable and an `.imp` variable to distinguish cases and the imputed datasets. To extract the first imputed dataset, only the setting `action = 1` is needed in the `complete` function. (see ?complete for more possibilities to extract the imputed datasets).The imputed datasets can further be used in mice to conduct pooled analyses or to store them for further use. 
+
+## Using different imputation methods
+
+The default imputation methods for continous, dichotomous and categorical variables in the mice function are `pmm`, `logreg` and `polyreg` respectively. For complete variables without missing data the default method is set as `""`. 
+
+For example, we assume that we have missing data in two continuous and one dichotomous variable, i.e. the Tampa scale, Disability and Radiation variables. After we have multiple imputed the missing values we can extract the imputation method for each variable by running:
+
+```{r }
+library(mice)
+library(haven)
+# Read in dataset an exclude ID variable
+data <- read_sav(file="Backpain50 MI missing all.sav")[, -1] 
+data$Radiation <- factor(data$Radiation) 
+imp <- mice(data, m=5, maxit=10, printFlag = FALSE)
+imp$method
+
+```
+
+If we want to change the imputation method for the Tampa scale variable from `"pmm"` into `"norm"` (Bayesian linear regression without predictive mean matching) we first run:
+
+```{r }
+impmethod <- imp$method
+impmethod["Tampascale"] <- "norm"
+impmethod
+```
+
+The adjusted method can subsequently be used in the `mice` function:
+
+```{r }
+imp <- mice(data, m=5, maxit=10, method = impmethod,  printFlag = FALSE)
+```
+
+You can also change the imputation method before you do a full multiple imputation analysis by running mice first using the settings `m=1` and `maxit=0`. Subsequently, you can adjust the imputation method for specific variables and run the full multiple imputation procedure, using the new imputation method. 
 
 ## The mice MI Shiny app 
 
@@ -247,6 +280,13 @@ This process is repeated in each following iteration until the final iteration w
 During MI in the example of paragraph 4.6 above the variables Tampa scale and Disability were imputed with the help of the variables Pain and Radiation. The latter two variables are called auxiliary variables when they are not part of the main analysis model but they help to impute the Tampa scale and Disability variables. These variables are included in the imputation model to impute the missing data in the Tampa scale and Disability variables. 
 
 To define the imputation model for variables with missing data `mice` makes use of a predictor matrix. The predictor matrix is a matrix with the names of the variables in the dataset listed in the rows and the columns. The variables in the columns are used to impute the row variables. They are part of the imputation model. As a default setting all variables that are included in the dataset are used as predictors to impute missing values. The predictor matrix that is used in the `mice` function can be obtained by typing:
+
+```{r }
+library(mice)
+library(foreign)
+data <- read.spss(file="Backpain50 MI missing.sav", to.data.frame=T)[, -1] # Read in dataset an exclude ID variable
+imp <- mice(data, m=5, maxit=10, method="pmm")
+```
 
 ```{r }
 imp$predictorMatrix

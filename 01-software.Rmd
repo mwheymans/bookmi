@@ -132,7 +132,7 @@ You can also skip step 2 to 5 by clicking the Finish button twice when you are a
 
 ## R and RStudio
 
-RStudio is an integrated environment to work with the software program R. Consequently, to work with RStudio, R has to be installed. RStudio uses the R language and is also freely available. In this manual we will show possibilities and options in RStudio that are needed to run the R code that are discussed in this manual. For more information about RStudio and its possibilities visit the RStudio website at www.rstudio.com. 
+RStudio is an integrated environment to work with the software program R. Consequently, to work with RStudio, R has to be installed. RStudio uses the R language and is also freely available. In this manual we will show possibilities and options in RStudio that are needed to run the R code that are discussed in this manual. For more information about RStudio and its possibilities visit the [RStudio website](https://www.rstudio.com/). 
 
 When you open RStudio the following screen will appear.
 

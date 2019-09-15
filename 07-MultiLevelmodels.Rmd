@@ -29,6 +29,7 @@ For the analysis of Multilevel data, multilevel regression models have to be use
 ## Multilevel data - Example datasets
 
 In this Chapter we will use two example datasets to show multilevel imputation. 
+
 The first dataset is a classic multilevel dataset  from the book of Hox et al (@hox2018multilevelanalysis) and is called the popular dataset. In this dataset the following information is available from 100 school classes: class (Class number), pupil	(Pupil identity number within classes), extrav	(Pupil extraversion), sex	(Pupil gender), texp (Teacher experience (years)), popular (Pupil popularity), popteach	(Teacher popularity). 
 
 The other example dataset is from The Amsterdam Growth and Health Longitudinal Study (AGGO). In this study persons were repeatedly assessed over time and growth, health and life-style factors were measured. Assessments are available of Gender, Fitness, Smoking, Hypercholestrolemia, Cholesterol level and Sum of Skinfolds. The dataset contains information of 147 patients which are assessed six times, once at baseline and at 5 repeated measurement occasions. This is an example of a longitudinal multilevel dataset. Usually, a dataset contains one row per subject and the separate variables are placed in the columns. When subjects are repeatedly assessed, additional variables are added for new assessments. This is also called a wide data format . 
@@ -135,7 +136,7 @@ knitr::include_graphics("images/fig7.14.png")
 
 Figure 7.14. Converted wide to long dataset.
 
-### Restructuring from wide to long in R
+## Restructuring from wide to long in R
 
 To convert a dataset in R from wide to long, you can use the reshape function. Before you convert a wide dataset, it is a good idea to redesign the dataset a little bit and to place all variables in the order of their names. It is than easier to apply the reshape function. You see an example in the R code below, where all Cholesterol variables are nicely ordered.
 
@@ -200,8 +201,141 @@ knitr::include_graphics("images/fig7.20.png")
 
 ## Multilevel Multiple Imputation models
 
-### Continuous variables
+There are two factors important when multilevel imputation models are used. At which level are the missing values located, which determines the imputation method and how to design the predictormatrix. We start with explaining how to design the predictormatrix.
 
-### Discrete variables
+## The Predictormatrix
+
+In Paragraph 4.9 the meaning and use of the predictormatrix in the `mice` function was explained. It was explained that you can include and exclude variables in the imputation model by asigning them the value 1 or 0 respectively. The predictormatrix for multilevel imputations models allows for more possibilities, depending on if you want to include multilevel models with fixed effects only or fixed and random effects and cluster means. The following values in the predictor matrix are allowed:
+
+```{r, echo=FALSE }
+library(magrittr)
+library(kableExtra)
+text_pm <- data.frame(
+  Setting = c("-2", "1", "2", "3", "4"),
+  Description = c(
+    "to indicate the cluster variable",
+    "imputation model with a fixed effect and a random intercept.", 
+    "imputation model with a fixed effect, random intercept and random slope.",
+    "imputation model with a fixed effect, random intercept and cluster means.",
+    "imputation model with a fixed effect, random intercept and random slope and cluster means."
+  )
+)
+
+kable(text_pm, caption = "Predictormatrix settings for Multilevel Multiple Imputation models") %>%
+  kable_styling(full_width = F) %>%
+  column_spec(1, bold = T, border_right = T) %>%
+  column_spec(2, width = "30em", background = "white")
+```
+
+For example, if we want to impute missing data in the Pupil extraversion variable extrav in the popular dataset and we use the variables sex, texp, popular and popteach in our imputation model, by defining fixed effects for all variables and also random effects for the popular variable, without using the pupil variable, the predictormatrix is: 
+
+```{r, echo=FALSE, eval=FALSE}
+library(haven)
+library(mice)
+dt <- read_sav(file="Popular.sav")
+
+# make deault predictor matrix
+pm <- make.predictorMatrix(dt)
+
+# create imputation model for extrav variable
+pm[, "pupil"] <- 0
+
+pm["extrav", c("class", "pupil", "extrav", "sex", "texp", "popular", "popteach")] <- c(-2, 0, 0, 1, 1, 2, 1)
+pm
+
+```
+
+## Continuous variables 
+
+### Imputation methods
+
+As default imputation method for continuous variables, `mice` uses `pmm`. However, to impute multilevel missing values in continuous variables several other methods have been developed that can be defined as imputation method within the `mice` function. Table 7.2 shows which methods are developed for multilevel models and which package has to be installed to use the method. 
+
+```{r, echo=FALSE }
+library(magrittr)
+library(kableExtra)
+text_pm <- data.frame(
+  Package = c("`mice`", 
+               "",
+              "",
+              "`micemd`", 
+              "",
+              "",
+              "",
+              "`miceadds`",
+              ""),
+  Method = c("2l.norm",
+              "2l.lmer", 
+              "2l.pan", 
+             "2l.glm.norm", 
+             "2l.jomo",
+             "2l.2stage.norm",
+             "2l.2stage.pmm",
+             "2l.continuous",
+             "2l.pmm"),
+  Description = c("Linear Mixed model", 
+    "Linear Mixed model", 
+    "Linear Mixed model (PAN method)",
+    "Linear Mixed model", 
+    "Generalized Linear Mixed model",
+    "Two-level normal model",
+    "Two-level normal model with PMM",
+    "Linear Mixed model",
+    "Linear Mixed model with PMM"
+    ),
+  Notes = c("Imputation of sporadically missing data. Does not handle predictors that are specified as fixed effects (1 in the                 predictormatrix). The current advice is to specify all predictors as random effects (2 in the predictormatrix). Residual             variance may vary beteen groups (heteroscedastic).",
+          "Imputes systematically and sporadically missing data.",
+          "Residual variance cannot vary beteen groups (homoscedastic)",
+          "Imputes systematically and sporadically missing data. Residual variance cannot vary beteen groups (homoscedastic)",
+          "For continuous or binary variables with missing data. For continuous variables, residual variance may vary beteen                             groups (heteroscedastic).",
+          "Two-stage imputation: at step 1, a linear regression model is fitted to each
+observed cluster; at step 2, estimates obtained from each cluster are combined according to a linear
+random effect model. Residual variance may vary beteen groups (heteroscedastic).",
+          "Similar as 2l.2stage.norm but now in combination with predictive mean matching.",
+            "Imputes systematically and sporadically missing data.",
+            "Same as 2l.continuous but now in combination with predictive mean matching."
+             ) 
+)
+
+kable(text_pm, caption = "Multilevel Imputation methods") %>%
+  kable_styling(full_width = F) %>%
+  column_spec(1, bold = T, border_right = T) %>%
+  column_spec(2, border_right = T) %>%
+  column_spec(3, width = "20em", background = "white") %>%
+  column_spec(4, width = "30em", background = "white")
+
+```
+
+### Example
+
+To multiple impute (5 times, 10 iterations) missing data in the Popular dataset in the extrav	(Pupil extraversion) variable with as imputation method `2l.lmer`, using an imputation model including all other variables, except the Pupil identity number variable and using all variables as fixed effects, and only the popular variable as random effect the predictor matrix and imputation procedure is:
+
+```{r }
+library(mice)
+load("Popular_mis.Rdata")
+
+# Set imputation method
+impmethod <- character(ncol(popular_mis))
+names(impmethod) <- colnames(popular_mis)
+impmethod["extrav"] <- "2l.lmer"
+impmethod
+
+# set default predictor matrix
+pm <- make.predictorMatrix(popular_mis)
+pm
+
+# create imputation model for extrav variable
+pm[, "pupil"] <- 0
+pm["extrav", c("class", "pupil", "extrav", "sex", "texp", "popular", "popteach")] <- c(-2, 0, 0, 1, 1, 2, 1)
+pm
+
+# run multiple imputations
+res.mice.md <- mice(popular_mis, m=5, predictorMatrix = pm,
+                    method=impmethod, maxit=10, printFlag = FALSE, seed=1874)
+res.mice.md
+
+```
+
+## Discrete variables
 
 We are currently working on this Chapter.
