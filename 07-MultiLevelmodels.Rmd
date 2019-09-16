@@ -201,7 +201,7 @@ knitr::include_graphics("images/fig7.20.png")
 
 ## Multilevel Multiple Imputation models
 
-There are two factors important when multilevel imputation models are used. At which level are the missing values located, which determines the imputation method and how to design the predictormatrix. We start with explaining how to design the predictormatrix.
+There are two factors important when multilevel imputation models are used. At which level are the missing values located, which determines the imputation method, and how to design the predictormatrix to apply multilevel multiple imputation. We start with explaining how to design the predictormatrix.
 
 ## The Predictormatrix
 
@@ -245,7 +245,7 @@ pm
 
 ```
 
-## Continuous variables 
+## Missing data in continuous variables 
 
 ### Imputation methods
 
@@ -306,7 +306,7 @@ kable(text_pm, caption = "Multilevel Imputation methods") %>%
 
 ```
 
-### Example
+### Level-1 missing values
 
 To multiple impute (5 times, 10 iterations) missing data in the Popular dataset in the extrav	(Pupil extraversion) variable with as imputation method `2l.lmer`, using an imputation model including all other variables, except the Pupil identity number variable and using all variables as fixed effects, and only the popular variable as random effect the predictor matrix and imputation procedure is:
 
@@ -336,6 +336,6 @@ res.mice.md
 
 ```
 
-## Discrete variables
+## Missing data in Dichotomous variables
 
 We are currently working on this Chapter.

@@ -256,7 +256,7 @@ You can also change the imputation method before you do a full multiple imputati
 
 During the imputation process the `mice` fucntion returns information about the iteration and imputation steps of the imputed variables under the columns named “iter”, “imp” and “variable” respectively. During this process missing values are filled in by using a chain of regression models. This is a rather complicated process. To get some more insight in what happens during the interation and imputation steps we shortly describe the imputation of the missing values in the Tampa scale and Disability variables during the first two iteration steps below. 
 
-We have also developed a Shiny app to explain MI in more detail. This is an interactive learning app of how MI with `mice` works and shows how the imputed values in the Tampa scale and Disability variables are calculated. Click on [Shiny app](https://mwheymans.shinyapps.io/mi2variables/) to use the app.   
+We have also developed a Shiny app to explain MI in more detail. This is an interactive learning app of how MI with `mice` works and shows how the imputed values in the Tampa scale and Disability variables are calculated. Click on [Shiny app](https://missingdata.shinyapps.io/mi2variables/) to use the app.   
 
 *Iteration 0*
 Per imputed dataset at iteration number 0 values are randomly drawn from the observed values of the Tampa scale and Disability variable and these are used to replace the missing values in these variables. 
