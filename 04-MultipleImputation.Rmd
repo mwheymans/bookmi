@@ -16,13 +16,11 @@ knitr::include_graphics("images/fig4.1.png")
 
 In the first step, the dataset with missing values (i.e. the incomplete dataset) is copied several times. Then in the next step, the missing values are replaced with imputed values in each copy of the dataset. In each copy, slightly different values are imputed due to random variation. This results in mulitple imputed datasets. In the third step, the imputed datasets are each analyzed and the study results are then pooled into the final study result. In this Chapter, the first phase in multiple imputation, the imputation step, is the main topic. In the next Chapter, the analysis and pooling phases are discussed. 
 
-## Multivariate Imputation by Chained Equations
+## Multivariate imputation by chained equations (MICE) 
 
-Multivariate imputation by chained equations (MICE) [@VanBuuren2018] is also known as Sequential Regression Imputation, Fully Conditional Specification or Gibbs sampling. In the MICE algorithm, a chain of regression equations is used to obtain imputations, which means that variables with missing data are imputed one by one. The regression models use information from all other variables in the model, i.e. (conditional) imputation models. In order to add sampling variability to the imputations, residual error is added to create the imputed values. This residual error can either be added to the prediced values directly, which is esentially similar to repeating stochastic regression imputation over several imputation runs. Or, the residual variance can be added via the parameter estimates of the regression model, which is a Bayesian sampling method. The Bayesian method is the default in the `mice` package in R. The MICE procedure became available in SPSS when version 17 was released.   
+Multivariate imputation by chained equations (MICE) [@VanBuuren2018] is also known as Sequential Regression Imputation, Fully Conditional Specification or Gibbs sampling. In the MICE algorithm, a chain of regression equations is used to obtain imputations, which means that variables with missing data are imputed one by one. The regression models use information from all other variables in the model, i.e. (conditional) imputation models. In order to add sampling variability to the imputations, residual error is added to create the imputed values. This residual error can either be added to the prediced values directly, which is esentially similar to repeating stochastic regression imputation over several imputation runs. Residual variance can also be added to the parameter estimates of the regression model, i.e. the regression coefficients, which makes it a Bayesian method. The Bayesian method is the default in the `mice` package in R. The MICE procedure became available in SPSS when version 17 was released.   
 
 ## Multiple imputation in SPSS
-
-The MI procedure in SPSS is based on the MICE algorithm that was developed in R. It is therefore no surprise that most  options of the mice function in R are also available in SPSS. Note that before you start the MI procedure it is important to set the measurement level of the variables with missing data in the Variable View window of your data. They are important for the regression model that is used to estimate the missing values in that variable. For example, if you define a variable as scale, then linear regression models are used, for categorical variables, logistic regression models are used. 
 
 We use as an example a dataset with 50 patient with low back pain. In these patients information was measured about their Pain, Tampa scale, Disability and Radiation. The variables Tampa scale and Disability contain missing values of 26% and 18% respectively.
 
@@ -310,11 +308,15 @@ imp <- mice(data,m=5, maxit=10, method="pmm", predictorMatrix = pred)
 
 The diagonal of the predictor matrix always contains zeroes, because variables cannot be included in their own imputation model.
 
-There are several guidelines that can be used to set the predictor matrix (@Collins2001, @VanBuuren2018, @Rubin1976). To summarize:
+## Guidelines for the Imputation mode
+
+There are several guidelines that can be used to customize the imputation model for each variable by the predictor matrix (@Collins2001, @VanBuuren2018, @Rubin1976). To summarize:
 
 1. Include all variables that are part of the analysis model, including the dependent (outcome) variable.
-2. Include the variables at the same way in the imputation model as they appear in the analysis model (i.e. if interaction terms are in the analysis model they also have to be included in the imputation model).
+2. Include the variables at the same way in the imputation model as they appear in the analysis model (i.e. if interaction terms are in the analysis model also include them in the imputation model).
 3.	Include additional (auxiliary) variables that are related to missingness or to variables with missing values.
+4. Be aware of including variables with a high correlation (> 0.90).
+5. Be aware of variables with high percentages of missing data (> 50%).
 
 ## Output of the `mice` function
 
@@ -524,6 +526,55 @@ kable(dataset, "html")
 The smallest differences are 1.574, 1.970 and 2.168 and these belong to the cases with observed Tampa scale values of 40, 41 and 42 respectively. Subsequently, a value is randomly drawn from these observed values and used to impute the first missing Tampa scale value. Other missing values are imputed by following the same procedure, i.e. now subtracting the second $Tampa_{Pred}$ value of 41.456 from all predicted observed alues and finding the closest match. 
 
 The strength of PMM is that missing data is replaced by data that is observed in the dataset and not replaced by unrealistic values (as negative Tampa scale scores). PMM can therefore handle better the imputation of variables with skewed distributions or non-linear relationships between variables.   
+
+## Imputation of categorical variables
+
+The mice procedure in SPSS and R uses for the imputation of continuous variables linear regression models, for dichotomous variables, logistic regression models and for categorical variables with >2 categories polytomous regression models. To be sure that the correct regression model is used it is important to define the level of measurement of the variable with missing data before MI is started. In SPSS this is possible in the Variable View window where variables can be defined as scale, nominal or ordinal. In R categorical variables can be defined as categorical in the Console window, or in the script file by using the function `factor`. 
+
+If categorical variables are not defined as categorical, linear regression models will be used to impute them because they are used as default method in SPSS and R (via the default method `pmm`). Instead of discrete values that represent the different categories, continuous values will be imputed. Figure \@ref(fig:fig4-25) shows what happens when the dichtomous variable `Radiation` is defined as a scale variable and MI is applied in SPSS using the default method Linear Regression. The imputed values are estimated by using linear regression models and even negative values are used to replace missing values. This error could be solved by choosing predictive mean matching (PMM) as imputation method, than 0's and 1's will be imputed. However still linear regression models would be used as basic method to generate predicted values. Changing the measurement level of the variable from scale to nominal is the best choice.  
+
+```{r fig4-25, echo = FALSE, fig.cap="Incorrect Imputation of the variable Radiation", out.width='90%', fig.align='center'}
+knitr::include_graphics("images/fig4.25.png")
+
+```
+
+Coding of the level of the variable `Radiation` from continous to categorical is also needed in R. Even if you define the variable as being a nominal variable in SPSS before you read that data in into R, R still assumes that it is a continuous variable and uses PMM and thus linear regression models as imputation method. This can be corrected by using the function 
+`factor` in R before you run MI.
+
+***Incorrect imputation***
+
+```{r }
+library(mice)
+library(foreign)
+# Read in dataset an exclude ID variable
+data <- read.spss(file="Backpain50 MI missing radiation.sav", to.data.frame=T)[, -1] 
+imp <- mice(data, m=5, maxit=10, printFlag = FALSE)
+imp
+```
+
+***Correct Imputation***
+
+See the correct imputation method `logreg` for the variable Radiation.
+
+```{r }
+library(mice)
+library(foreign)
+# Read in dataset an exclude ID variable
+data <- read.spss(file="Backpain50 MI missing radiation.sav", to.data.frame=T)[, -1] 
+data$Radiation <- factor(data$Radiation)
+imp <- mice(data, m=5, maxit=10, printFlag = FALSE)
+imp
+```
+
+It seems that you can not completely solve the problem by using `logreg` as imputation method in the mice function before you run MI because than the following message appears in the Console window `Type mismatch for variable(s): Radiation Imputation method logreg is for categorical data`. This message will disappear after you have defined the variable `Radiation` as a categorical variable with the function `factor`.
+
+```{r }
+library(mice)
+library(foreign)
+# Read in dataset an exclude ID variable
+data <- read.spss(file="Backpain50 MI missing radiation.sav", to.data.frame=T)[, -1] 
+imp <- mice(data, m=5, maxit=10, method=c("", "pmm", "pmm", "logreg"), printFlag = FALSE)
+```
 
 ## Number of Imputed datasets and iterations
 
