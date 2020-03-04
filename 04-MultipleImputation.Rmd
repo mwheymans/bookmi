@@ -147,7 +147,7 @@ knitr::include_graphics("images/tab4.8.png")
 
 ```
 
-## Checking Convergence after Multiple imputation in SPSS
+## Checking Convergence in SPSS
 
 The dataset Iter_Backpain in the previous paragraph contains the means and standard deviations of the imputed values at each iteration and imputation round. This information is similar as the 
 information in `imp$chainMean` in R. This dataset can be used to generate convergence plots, to check if the imputed values have the expected variation between the iterations.The iteration can be checked for the means and standard deviations seperately. In order to obtain seperate plots for these summary statistics, the split file option in SPSS can be activated. 
@@ -217,7 +217,7 @@ complete(imp, action = "long", include = TRUE)
 
 In the imputed datasets two variables are added, an `.id` variable and an `.imp` variable to distinguish cases and the imputed datasets. To extract the first imputed dataset, only the setting `action = 1` is needed in the `complete` function. (see ?complete for more possibilities to extract the imputed datasets).The imputed datasets can further be used in mice to conduct pooled analyses or to store them for further use. 
 
-## Using different imputation methods
+## Setting the imputation methods
 
 The default imputation methods for continous, dichotomous and categorical variables in the mice function are `pmm`, `logreg` and `polyreg` respectively. For complete variables without missing data the default method is set as `""`. 
 
@@ -250,7 +250,7 @@ imp <- mice(data, m=5, maxit=10, method = impmethod,  printFlag = FALSE)
 
 You can also change the imputation method before you do a full multiple imputation analysis by running mice first using the settings `m=1` and `maxit=0`. Subsequently, you can adjust the imputation method for specific variables and run the full multiple imputation procedure, using the new imputation method. 
 
-## The mice MI Shiny app 
+## The MI Shiny app 
 
 During the imputation process the `mice` fucntion returns information about the iteration and imputation steps of the imputed variables under the columns named “iter”, “imp” and “variable” respectively. During this process missing values are filled in by using a chain of regression models. This is a rather complicated process. To get some more insight in what happens during the interation and imputation steps we shortly describe the imputation of the missing values in the Tampa scale and Disability variables during the first two iteration steps below. 
 
@@ -283,7 +283,7 @@ To define the imputation model for variables with missing data `mice` makes use 
 library(mice)
 library(foreign)
 data <- read.spss(file="Backpain50 MI missing.sav", to.data.frame=T)[, -1] # Read in dataset an exclude ID variable
-imp <- mice(data, m=5, maxit=10, method="pmm")
+imp <- mice(data, m=5, maxit=10, method="pmm", printFlag = FALSE)
 ```
 
 ```{r }
@@ -308,7 +308,7 @@ imp <- mice(data,m=5, maxit=10, method="pmm", predictorMatrix = pred)
 
 The diagonal of the predictor matrix always contains zeroes, because variables cannot be included in their own imputation model.
 
-## Guidelines for the Imputation mode
+## Guidelines for the Imputation model
 
 There are several guidelines that can be used to customize the imputation model for each variable by the predictor matrix (@Collins2001, @VanBuuren2018, @Rubin1976). To summarize:
 

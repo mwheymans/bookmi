@@ -8,7 +8,6 @@ link-citations: yes
 output:
   pdf_document: default
   html_document: default
-
 ---
 
 # {-}
@@ -23,9 +22,11 @@ All rights reserved. No part of this book may be reproduced or utilized in any f
 
 # Foreword {-}
 
-In the past decades, the attention for missing data has grown and so has the need for researchers to apply suitable methods to deal with missing data. Leading methodologists and statisticians have published papers in leading journals about the problems of missing data and recommended researchers to take missing data seriously. Examples can be found in the British Medical Journal (BMJ, @sterne2009multiple), New England Journal of Medicine, (NEJM, @little2012prevention) and the Journal of the American Medical Association (JAMA, @Li2015). From our experience, applied researchers still find it difficult to reserve extra time to evaluate the missing data in their study and to find a suitable solution to handle their missing data for their primary data analysis.
-This book is developed for those researchers who are looking for a solution for a missing data problem or who want to learn more about dealing with missing data. The book is initially developed for a missing data course for epidemiologist, but we feel that applied researchers from other disciplines may also find this book useful. Further, we are active in giving statistical advice in general and more specific about missing data. Because our time for consultations is mostly limited, this practical guide may be useful to help researchers get started with their missing data problem. 
-With this book we provide an overview of the currently available methods to deal with missing data. The use of the methods are thoroughly explained and supported by practical examples. We hope you will enjoy this book and that you find it useful, at that as a result you will use  recommended methods to solve your missing data problem.
+In the past decades, the attention for missing data has grown and so has the need for researchers to apply suitable methods to deal with missing data. Leading methodologists and statisticians have published papers in leading journals about the problems of missing data and recommended researchers to take missing data seriously. Examples can be found in the British Medical Journal (@sterne2009multiple), New England Journal of Medicine (@little2012prevention), the Journal of the American Medical Association (@Li2015) and Annals of Internal medicine (@Liao2017). The latter journal also provided an on-line graphical tool to explain missing data [click here to visit the tool.](http://labs.annals.org/missingdata/) (@Stack2018).   
+
+From our experience, applied researchers still find it difficult to reserve extra time to evaluate the missing data in their study and to find a suitable solution to handle their missing data for their primary data analysis. This book is developed for those researchers who are looking for a solution for a missing data problem or who want to learn more about dealing with missing data. The book is initially developed for a missing data course for epidemiologist, but we feel that applied researchers from other disciplines may also find this book useful. Further, we are active in giving statistical advice in general and more specific about missing data. Because our time for consultations is mostly limited, this practical guide may be useful to help researchers get started with their missing data problem. 
+
+With this book we provide an overview of the currently available methods to deal with missing data. The use of the methods are thoroughly explained and supported by practical examples. We hope you will enjoy this book and that you find it useful, at that as a result you will use recommended methods to solve your missing data problem.
 
 ## SPSS and R Software {-}
 
@@ -40,8 +41,6 @@ In this book the handling of missing data is the main topic. We will show how to
 In this book we use SPSS version 24 and R software version 3.5.1. The R examples will be presented by using the output from RStudio version (Version 1.1.463 – © 2009-2018 RStudio, Inc). RStudio is an integrated development environment (IDE) for R. RStudio includes a wide range of productivity enhancing features and runs on all major platforms. 
 
 ## Notation in this book {-}
-
-Annotation in this book 
 
 The name of R packages and libraries are used as published under their original names. The name of R functions is in R code form, like the `mice` function.
 

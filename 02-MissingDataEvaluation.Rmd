@@ -1,18 +1,16 @@
 ---
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 # (PART) Part II: Basic Missing Data Handling {-}
 
 # Missing Data Evaluation
 
-When you explore and evaluate missing data you can compose an analysis plan to handle the missing data for your situation. In this Chapter, you will learn how to that. 
+When you define and evaluate missing data you can compose a missing data analysis plan to handle the missing data for your study situation. In this Chapter, you will learn how to evaluate the missing data that you can use for your missing data analysis plan. We start by the definition of missing data in SPSS and R. 
 
-##	Definition of Missing Data
-
-###	Missing Data in SPSS
+##	Missing Data definition in SPSS
 
 Missing data in SPSS can be defined in two ways, as a system missing or user missing value. System missing data are missing data that is not present in the dataset and can be recognized by an empty cell (or dot). User missing data are data that are coded as missing values in the dataset by the user. Consider for example a small dataset with 50 Backpain patients consisting of male (coded as 1) and female (coded as 0) patients (Figure \@ref(fig:fig2-1)). 
 
@@ -22,7 +20,7 @@ knitr::include_graphics("images/fig2.1.png")
 
 For the female patients in this dataset the duration of a previous pregnancy was regisered in the Gestational Age (GA) variable. This variable consists of different values: pregenancy durations in weeks, such as 36 and 29, but also the value 8 and empty cells. The value 8 is specified by the user to exclude males from further analysis because males cannot be pregnant. The system missing values are recognizable by the empty cells (or dots) in the dataset, and these indicate the missing GA values for women who did not report the GA for their pregnancy. It makes no difference if we code the missing values as a system or user missing value in SPSS, because both kinds of missing values will be excluded from further analyses.
 
-###	Missing data in R
+##	Missing data definition in R
 
 In R the missing values are denoted by `NA` which means “Not Available”. If we open the same dataset as above in R we get the following result.
 
@@ -59,13 +57,13 @@ To get an idea about the complexity of the missing data problem in your dataset 
 
 ###	Missing data patterns in SPSS
 
-We use the options of the Missing Value Analysis (MVA) procedure in SPSS (@spss75). The example dataset contains information on 9 study variables for 150 back pain patients. The continuous variables are Pain, Tampa scale, Disability, Body weight, Body length and Age. The dichotomous variables are Radiation in the leg, Smoking, and Gender. Only the variables Gender and Age are completely observed.
+We use the options of the Missing Value Analysis (MVA) procedure in SPSS. The example dataset contains information on 9 study variables for 150 back pain patients. The continuous variables are Pain, Tampa scale, Disability, Body weight, Body length and Age. The dichotomous variables are Radiation in the leg, Smoking, and Gender. Only the variables Gender and Age are completely observed.
 
 To access the MVA function in the SPSS menu choose: 
 
 > Analyze -> Missing Value Analysis…  
 
-In this menu, transfer all continuous variables to the Quantitative variables window and the categorical variables to the Categorical variables window. Then select the Patterns option. From the Patterns menu (Figure \@ref(fig:fig2-4) select the options `Tabulated cases, grouped by missing value patterns` and `sort variables by missing value pattern`. To obtain the full list of all patterns that occur in the data, set the “Omit patterns with less than 1% of cases" at 0%, then click continue and OK. 
+In this menu, transfer all continuous variables to the Quantitative variables window and the categorical variables to the Categorical variables window. Then select the Patterns option. From the Patterns menu (Figure \@ref(fig:fig2-4)) select the options `Tabulated cases, grouped by missing value patterns` and `sort variables by missing value pattern`. To obtain the full list of all patterns that occur in the data, set the “Omit patterns with less than 1% of cases" at 0%, then click continue and OK. 
 
 ```{r fig2-4, echo = FALSE, fig.cap="The Patterns menu", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig2.4.png")
@@ -126,16 +124,27 @@ aggr(dataset, col=c('white','red'), numbers=TRUE, sortVars=TRUE, cex.axis=.7, ga
 
 The variable names are shown at the bottom of the figures. The red cells in the Missing data patterns figure indicate that those variables contain missing values. We see that 0.500 or 50% of the patterns do not contain missing values in any of the variables. Of the total patterns, 8.67% of the patterns have missing values in only the Tampa scale variable. 
 
+## The Missing Data Indicator
+
+Rubin (@Rubin1987) proposed that variables with missing data can be divided in a part that is observed and a part that is missing. The observed and missing data can be coded by a 1 and 0 respectively. This dichotomous coding variable is called the missing data indicator variable. Figure \@ref(fig:fig2-8) shows the missing data indicator variable for the observed and missing data in the Tampa scale variable. This indicator variable is now a single variable because there is missing data in only the Tampa scale variable. When more variables contain missing data, multiple indicator variables can be generated, one for each variable that contains missing data.
+
+```{r fig2-8, echo = FALSE, fig.cap="The missing data in the Tampa scale variable coded according to the missing data indicator variable.", out.width='80%', fig.align='center'}
+knitr::include_graphics("images/fig2.8.png")
+```
+
+Using the missing data indicator variable implies that missing values (or the probability of missing values) can be described by a statistical model. This model may consist of variables that have a relationship with the probability of missing data, in this case the indicator variable. A logistic regression model can be used to describe the relationship of variables with the probability of missing data in the Tampa scale variable. 
+
 ##	Missing data Mechanisms
 
-By evaluating the missing data patterns, we get insight in the location of the missing data. With respect to the missing data mechanism we are interested in the underlying reasons for the missing values and the relationships between variables with and without missing data. In 1976, Donald Rubin introduced a typology for missing data that distincts between random and non-random missing data situations, which are abbreviated as MCAR, MAR and MNAR (@Rubin1976).   
-The key idea behind Rubin’s missing data mechanisms is that the probability of missing data in a variable may or may not be related to the values of other measured variables in the dataset. This means that we assume that there is some kind of probability model for the missing data. With probability we loosely mean the likelihood of a missing value to occur, i.e. if a variable has a lot of missing data, the probability of missing data in that variable is high. This probability can be related to other measured or not-measured variables. For example, when mostly older people have missing values, the probability for missing data is related to age. Moreover, the missing data mechanisms also assume a certain relationship (or correlation) between observed variables and variables with missing values in the dataset. 
+By evaluating the missing data patterns, we get insight in the location of the missing values. With respect to the missing data mechanism we are interested in the underlying reasons for the missing values and the relationships between variables with and without missing data. In 1976, Donald Rubin introduced a typology for missing data that distincts between random and non-random missing data situations, which are called Missing Completely At Random, Missing At Random and Missing Not At Random and abbreviated as MCAR, MAR and MNAR respectively (@Rubin1976).
+
+The key idea behind Rubin’s missing data mechanisms is that the probability of missing data in a variable may or may not be related to the values of other measured variables in the dataset. With probability we loosely mean the likelihood of a missing value to occur, i.e. if a variable has a lot of missing data, the probability of missing data in that variable is high. This probability can be related to other measured or not-measured variables. For example, when mostly older people have missing values, the probability for missing data is related to age. Moreover, the missing data mechanisms also assume a certain relationship (or correlation) between observed variables and variables with missing values in the dataset. 
 
 ###	Missing Completely At Random
 
-Data are Missing Completely At Random (MCAR) when the probability that a value is missing, is unrelated to the value of other observed (or unobserved) variables, and unrelated to values of the missing data variable itself. An MCAR example could be that, low back pain patients had to come to a research center to fill in a Tampa scale (fear of movement) questionnaire and some of these patients were unable to leave their home, due to the flu. In that case, there is no relationship between having the flu and the scores on the Tampa scale variables. Another example is when respondents accidentally skip questions in a questionnaire. Than the observed values of that questionnaire are just a random sample of the entire dataset. 
+Data are Missing Completely At Random (MCAR) when the probability that a value is missing, is unrelated to the value of other observed (or unobserved) variables, and unrelated to values of the missing data variable itself. An MCAR example could be that, low back pain patients had to come to a research center to determine their level of disability by performing some physical tests and some of these patients were unable to leave their home, due to the flu. There is no assumed relationship between having the flu and scores on the disability variable which makes that this data is MCAR.  
 
-An MCAR missing data situation for the Tampa scale variable is visualized in the MCAR column in Figure 2.7 below. Note that in real live we do not know the completely observed data, but for educational reasons, the completely observed Tampa scale variable is displayed as well. We can observe that in the MCAR situation an equal number of lower and higher values of the Tampa scale variable are missing (in total 4 Tampa scores are missing, 2 for lower and 2 for higher values). Also, the missing data in the Tampa scale do not seem to be related to the values of another variable like pain; an equal number of Tampa scale values is missing for patients with low pain scores as well as for patients with higher pain scores. 
+An MCAR missing data situation for the disability variable is visualized in the MCAR column in Figure 2.7 below. Note that in real live we do not know the completely observed data, but for educational reasons, the completely observed values of the disability variable are displayed as well. We can observe that in the MCAR situation an equal number of lower and higher values of the disability variable are missing (in total 4 disability scores are missing, 2 for lower and 2 for higher values). Also, the missing data in the disability variable do not seem to be related to the values of another variable like pain; an equal number of disability values is missing for patients with low pain scores as well as for patients with higher pain scores. 
 
 ```{r fig2-7, echo = FALSE, fig.cap="Examples of MCAR, MAR and MNAR data.", out.width='90%', fig.align='center'}
 knitr::include_graphics("images/fig2.7.png")
@@ -143,40 +152,91 @@ knitr::include_graphics("images/fig2.7.png")
 
 ### Missing At Random
 
-Data are Missing At Random (MAR) when the probability that a value for a variable is missing is related to other observed values in the dataset but not to the variable itself. An example of MAR data is presented in the MAR column of Figure \@ref(fig:fig2-7). You can see that 4 Tampa scale scores are missing for pain scores that are ≥ 6 and 1 for a pain score < 6, in other words the probability of missing data in the Tampa scale scores is higher for patients with higher pain scores. However, within the category of pain scores with values ≥ 6, the Tampa scale scores are MCAR, because within each category Tampa scale scores are randomly missing for lower and higher values. As a consequence, means and standard deviations do not differ between the observed and missing data for the Tampa scale variable. An explanation for this phenomenon can be that patients with higher Tampa scale scores were less likely to show up at a next Tampa scale measurement because their back hurted more. 
+Data are Missing At Random (MAR) when the probability that a value for a variable is missing is related to other observed values in the dataset but not to the variable itself. An example of MAR data is presented in the MAR column of Figure \@ref(fig:fig2-7). Now 4 disability scores are missing for patients with pain scores ≤ 5. In other words the probability of missing data in the disability variable is higher for patients with lower pain scores. However, MAR also assumes that within the category of pain scores with values ≤ 5, the disability scores are MCAR, because disability scores are randomly missing for lower and higher values within that category. As a consequence, means and standard deviations do not differ between the observed and missing data for the disability variable. An explanation could be that patients with lower pain scores that were assessed by questionnaires that were sent to their home were less likely to visit the research center to determine their level of disability because they thought that information about their level of disability was not of interest anymore. 
 
-In a MAR missing data situation, missing values can be explained by other (observed) variables, like for the Tampa scale and Pain variable in the example above, due to the their (statistical) relationship in the dataset. Further, within categories of the pain variable (for low and high pain values) the Tampa scale scores are MCAR. However, it is not possible to test this assumption, because for that you need information of the missing values and in real-life, that is not possible. In general, excluding MAR data leads to biased parameter estimates and false results for your statistical tests. A missing data method that works well with MAR data is Multiple Imputation (Chapter 4). 
+It is not possible to test the MAR assumption, because for that you need information of the missing values and in real-life, that is not possible. In general, excluding MAR data leads to biased regression coefficient estimates and incorrect study results. A missing data method that works well with MAR data is Multiple Imputation (Chapter 4). 
 
 ### Missing Not At Random
 
-The data are MNAR when the probability of missing data in a variable is related to the scores of that variable itself, e.g. mostly high or low scores are missing. In low back pain patients, MNAR data can occur when patients with the highest scores on the Tampa scale have missing Tampa scale values. This is shown in the MNAR column of Figure \@ref(fig:fig2-7). A reason may be that these patients were so afraid to move (which is assessed by the Tamp scale), that they were not able to visit an assessment center. MNAR missing data can also occur indirectly through the relationship of the variable with missing data with another variable that is not available in the dataset. For example, it could also be that patients with a high level of fear of movement, worry a lot and therefore do not want to be confronted with questions about their fear to move their back and therefore skip questions of the Tampa scale. In case of a positive relationship between worry and fear of movement, the highest values on the Tampa scale variable are missing. If worry is not measured in the study, the missing data in the Tampa scale variable is called MNAR. 
-The difference with MAR is that with MNAR, the missing data problem cannot be handled by using a technique as Multiple Imputation. However, as with MAR data, MNAR data can also not be verified.
+The data are MNAR when the probability of missing data in a variable is related to the scores of that variable itself, e.g. mostly high or low scores are missing. In low back pain patients, MNAR data can occur when patients with the highest scores on the disability variable have missing disability values. This is shown in the MNAR column of Figure \@ref(fig:fig2-7). An explanation could be that these patients were not able to visit the research center due to their high level of disability. 
 
-### The Missing Data Indicator
+MNAR missing data can also occur indirectly through the relationship of the variable with missing data with another variable that is not available in the dataset. For example, it could also be that patients with a high level of disability also have a high fear of moving their back, and for that reason will not visit the research center. In case of a positive relationship between disability and fear of movement, the highest values on the disability variable are than missing. If fear of movement is not measured in the study, the missing data in the disability variable are called MNAR. 
 
-Rubin proposed that variables with missing data can be divided in a part that is observed and a part that is missing. The observed and missing data can be coded by a 0 and 1 respectively (@Rubin1987). This dichotomous coding variable is called the missing data indicator variable. Figure \@ref(fig:fig2-8) shows the missing data indicator variable for the observed and missing data in the Tampa scale variable. This indicator variable is now a single variable because there is missing data in only the Tampa scale variable. When more variables contain missing data, multiple indicator variables can be generated, one for each variable that contains missing data.
+The difference with MAR is that with MNAR, the missing data problem cannot be handled by using a technique as Multiple Imputation. However, as with MAR data, MNAR data can also not be verified because than information about the missing values is needed.
 
-```{r fig2-8, echo = FALSE, fig.cap="The missing data in the Tampa scale variable coded according to the missing data indicator variable.", out.width='90%', fig.align='center'}
-knitr::include_graphics("images/fig2.8.png")
-```
+### The meaning of data being MAR
 
-Using the missing data indicator variable implies that missing values (or the probability of missing values) can be described by a statistical model. This model may consist of variables that have a relationship with the probability of missing data, in this case the indicator variable. A logistic regression model can be used to describe the relationship of variables with the probability of missing data in the Tampa scale variable. 
+In a MAR missing data situation, missing values can be explained by other (observed) variables, like in the MAR data example of the disability and pain variables above. Further, it was stated that within the category of pain scores ≤ 5 the disability scores are MCAR. This means that the mean difference of disability between persons with low and high pain scores is the same between the observed and missing data. This is illustrated by using the mean disability values in table 2.1 below. 
 
-### Auxiliary Variables
+In Table 2.1 the means of the disability variables are presented for the subgroups of patients with pain scores ≤ 5 and > 5. There is MAR missing data in the disability variable in the subgroup of patients with pain scores ≤ 5. The consequence is that the means are equal between the groups with complete and missing data, i.e 9.26 and 9.23 respectively. Consequently this also accounts for the mean difference of disability between patients with complete and missing data, i.e 5.30 (14.56 - 9.26) and 5.34 (14.56 - 9.23) respectively.  
 
-The MAR assumption can be made more plausible by including additional variables in the imputation model (@Baraldi2010). Therefore, it is advised, to include extra variables that have a relationship with the missing data rate in other variables, i.e. have a relationship with the probability of missing data or that have a relationship (correlated) with the variables that contain the missing values (@Collins2001). These additional variables can help dealing with missing data as well and are called auxiliary variables. 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+library(haven)
+library(knitr)
+library(dplyr)
+library(papeR)
+library(kableExtra)
+
+dataset1 <- read_sav("data/MAR Missing_Disability.sav")[, c(2,3)]
+dataset1$Pain_di <- factor(dataset1$Pain_di, labels = c("<= 5", "> 5"))
+
+dataset2 <- read_sav("data/MAR Missing_Disability.sav")[, c(2,4)]
+dataset2$Pain_di <- factor(dataset2$Pain_di, labels = c("<= 5", "> 5"))
+
+kable(list(papeR::summarize(dataset1, type = "numeric", group = "Pain_di", quantiles = FALSE, count = FALSE, test = FALSE),  papeR::summarize(dataset2, type = "numeric", group = "Pain_di", quantiles = FALSE, count = FALSE, test = FALSE)), 
+      row.names = FALSE, 
+      caption = "Mean values of Disability variable for patients with pain scores lower and equal to 5 and higher than 5. Left are the mean and standard deviation values of the complete data and right are those with missing values in the disability variable for the subgroup of patients with pain scores lower and equal to 5.")
+
+``` 
+
+This mean difference is also the result of a linear regression of disability (dependent variable) on pain. Thus, this means that the regression coefficient from the regression of disability on pain is also unbiased as can be seen in Table 2.2. 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+library(haven)
+library(papeR)
+library(knitr)
+library(dplyr)
+library(finalfit)
+
+dataset1 <- data.frame(read_sav("data/MAR Missing_Disability.sav")[, c(2,3)])
+dataset1$Pain_di <- factor(dataset1$Pain_di, labels = c(" <= 5", " > 5"))
+
+dataset2 <- data.frame(read_sav("data/MAR Missing_Disability.sav")[, c(2,4)])
+dataset2$Pain_di <- factor(dataset2$Pain_di, labels = c(" <= 5", " > 5"))
+
+explanatory = c("Pain_di")
+dependent = "Disability"
+dataset1 %>%
+  lmuni(dependent, explanatory) %>% 
+  fit2df() %>%
+  dependent_label(dataset1, dependent) -> t1 
+
+explanatory = c("Pain_di")
+dependent = "Disability_MAR"
+dataset2 %>%
+  lmuni(dependent, explanatory) %>% 
+  fit2df() %>%
+  dependent_label(dataset2, dependent) -> t2 
+
+kable(list(t1, t2), caption = "Regression analysis of Disability on the Pain_di variable in the complete (left) and incomplete MAR data (right).")
+
+``` 
+
+This is an imporatnt consequence of MAR data, especially for multiple imputation where regression models are used to impute missing data. When, as part of this procedure, disability is imputed by using the pain variable, imputations are based on a correctly (unbiased) estimated regression coefficient. This is an important basis to generate valid imputed values. When pain and disability are also correlated imputation more than justified. To follow-up on this, it has been proven that imputations are improved when extra variables that have a relationship with the missing data rate in other variables, i.e. have a relationship with the probability of missing data or that have a relationship (correlated) with the variables that contain the missing values, are included in the imputation process (@Collins2001, @Baraldi2010). These additional variables can help dealing with missing data and are called auxiliary variables. More on this will be discussed in paragraph 4.2.5, 4.9 and 4.10 where we will deal with the imputation model. By the imputation model extra auxilliary variable can be included to improve imputations under the MAR assumption.  
 
 ## Missing Data evaluation
 
-The performance of missing data methods depends on the underlying missing data mechanism. As previously descirbed, the difference between the MCAR and not-MCAR mechanisms depend on the relationship between the probability for missing data and the observed variables. If this relationship cannot be detected we assume that the data is MCAR. If there is some kind of relationship, the missing data may be MAR or MNAR. In practice we study and measure outcomes and independent variables that are related to each other. This makes the MAR assumption mostly an accepted “working” missing data assumption in practice.
+The performance of missing data methods depends on the underlying missing data mechanism. As previously descirbed, the difference between the MCAR and not-MCAR mechanisms depend on the relationship between the probability for missing data and the observed variables. If this relationship cannot be detected (and there are no specific reasons why data is missing) we assume that the data is MCAR. If there is some kind of relationship, the missing data may be MAR or MNAR. In practice we study and measure outcomes and independent variables that are related to each other. This makes the MAR assumption mostly an accepted “working” missing data assumption in practice.
 
 It is important to think about the most plausible reasons for the data being missing. For example, when cognitive scores are assessed during data collection and these are mostly not filled out by people that have decreased cognitive functions, the missing data can be assumed to be MNAR. Statistical tests can also be used to get an idea about the missing data mechanism. In these statistical tests, the non-responders (i.e., participants with missing observations), can be compared to the responders on several characteristics. By doing this, we can test whether the missing data mechanism is likely to be MCAR or not-MCAR. There are several possibilities to compare the non-responders with the responders groups, for example using t-tests or Chi-square tests, logistic regressions with the missing data indicator as the outcome, or Little’s MCAR test (@Little1988).
 
 Researchers need to be aware that the assumptions that underlie an independent t-test, logistic regression, and Chi-square test apply to these missing data mechanism procedures as well. This means that the residuals are assumed to be normally distributed and that the tests rely on a decent sample size.
 
-### Missing data Evaluation in SPSS
+## Missing data Evaluation in SPSS
 
-#### Descriptive Statistics
+### Descriptive Statistics
 
 Descriptive information of variables can be obtained via the following options of the Missing Value Analysis (MVA) module in the SPSS menu: 
 
@@ -194,7 +254,7 @@ knitr::include_graphics("images/tab2.4.png")
 
 Under the column N, the information of all cases in the dataset are displayed. Further, for all continuous variables information about the Mean and Standard deviation are displayed. No descriptive information is given for categorical variables. Under the column Missing we get the number and percentage of missing values in each variable and under the column No. of Extremes we get information of cases that fall outside a range, which is specified under the table. These descriptive information of variables with missing data provide a quick overview of the amount of missing data in each variable. However, it does not provide us information about the relationship between variables with complete and missing data and therefore does not give us an idea about the potential missing data mechanism. Methods as T-tests, regression or Little’s MCAR test, discussed in the next section, can better be used for that purpose.
 
-#### T-test procedure
+### Compare and test group comparisons
 
 For the t-test procedure, SPSS first separates cases with complete and missing values by creating an indicator variable of variables that ontain missing values. This can be all type of variables. Then, group means of other (only continuous) variables are compared by using the indicator variable as group variable within the t-test procedure. You can apply his procedure by following:
 
@@ -220,7 +280,7 @@ knitr::include_graphics("images/Crosstabulation.png")
 
 You see in the table that Radiation values are more frequently missing for males (coded as 1 on the Gender variable) than for females (coded as 0). Note that for these tables, the Chi-square tests and p-values are not performed. These have to be obtained via the usual Crosstabs function, using a self-generated missing data indicator variable.
 
-#### Logistic Regression Analysis
+### Logistic Regression Analysis
 
 With logistic regression analysis, we can evaluate if the probability of missing data is related to other variables in the data (@Ridout1991). For this procedure, we first generate an indicator variable that separates the subjects with missing values from the participants with observed values. This indicator variable can be used as the dependent variable in a logistic regression analysis. A backward regression can be used to determine the strongest predictors of missing data. The output for the logistic regression with the Tampa scale variable as the indicator outcome variable is presented in the table below:
 
@@ -230,35 +290,68 @@ knitr::include_graphics("images/tab2.6.png")
 
 The variable Pain is significantly related to the missing data indicator variable of the Tampa scale variable, which indicates that the probability for missing data in the Tampa scale variable can be explained by the Pain variable. The positive coefficient of 0.315 indicates that the probability of missing data on the Tampa scale variable is higher for higher Pain scores. The other variables do not show a significant relationship with missing data on the Tampa scale variable. This logistic regression analysis procedure can be repeated for each variable with missing values in the dataset. 
 
-#### Little's MCAR test in SPSS
+### Little's MCAR test in SPSS
 
-Another possibility is to use a test that was developed by Roderick Little: Little’s MCAR test. This test is based on differences between the observed and estimated means in each missing data pattern. This test is developed for continuous data. We use it for the data in Figure \@ref(fig:fig2-1). The test can be applied via: 
+Another possibility is to use a test that was developed by Roderick Little: Little’s MCAR test. This test is based on differences between the observed and estimated means in each missing data pattern. This test is developed for continuous data. The test can be applied via: 
 
 > Analyze -> Missing Value Analysis...-> select the continuous variables -> Select EM in the Estimation group -> OK
 
 ```{r fig2-12, echo = FALSE, fig.cap="EM selection in the Missing Value Analysis menu.", out.width='90%', fig.align='center'}
-knitr::include_graphics("images/fig2.12.png")
+knitr::include_graphics("images/fig2.13.png")
 ```
 
 The following table that is called EM Means can be found in the output window of SPSS. Under the table the result of Little's MCAR test is displayed (tables that provide information of univariate statistics and a summary of estimated means and standard deviations are also provided. Further, tables that are called EM Covariances and EM Correlations are also generated, but they provide the same results for Little's MCAR test as under the EM Means table. These tables are not shown)
 
-```{r tab2-7, echo = FALSE, fig.cap="Output tables with information of Little’s MCAR test.", out.width='60%', fig.align='center'}
-knitr::include_graphics("images/tab2.7c.png")
+```{r tab2-7, echo = FALSE, fig.cap="Output tables with information of Little’s MCAR test.", out.width='50%', fig.align='center'}
+knitr::include_graphics("images/fig2.14.png")
 
 ```
 
-### Missing data Evaluation in R
+## Missing data Evaluation in R
 
-#### Little's MCAR test in R
+### Little's MCAR test in R
 
-Little´s MCAR test is available in the `BaylorEdPsych` package as the `LittleMCAR` function. To apply the test, we select only the continuous variables. We use it for the same dataset as in the previous paragraph. The p-value for the test is not-siginificant, indicating that the missings seem to be compeletely at random.
+Little´s MCAR test is available in the `BaylorEdPsych` package as the `LittleMCAR` function. To apply the test, we select only the continuous variables. We use it for the same dataset as in the previous paragraph. The p-value for the test is siginificant, indicating that the missings does not seem to be compeletely at random. The package `MissMech` also contains a function to perform a Little´s MCAR test. This test is called `TestMCARNormality`.
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
 library(haven)
-dataset <- read_sav("data/CH2 example.sav")
+dt <- read_sav("data/Backpain_test.sav")
+df_select <- dt[,c("Pain", "Tampascale","Disability", "Age")]
 library(BaylorEdPsych)
-LittleMCAR(dataset[,c("Pain", "Tampascale","Disability", "GA")])
+LittleMCAR(df_select)
 
 ``` 
 
-Of course T-tests and Regression analyses can also be conducted in R. For this the user can use a script file and some coding.  
+### Compare and test group comparisons
+
+In R also groups of the non-responders (i.e., participants with missing observations) can be compared to the responders (i.e. participants without missing observations). For this we can use the function `missing_compare` of the `finalfit` package. First we have to copy and rename the variables with missing data. We renamed the variables Tampa scale and Disability and called them Tampa_MAR and Disability_MAR respectively. The `missing_compare` function uses the Kruskal Wallis test for continuous variables and the Chi-squared test for categorical variables. This is the reason that the p-values in the tables might differ from those in Figure 2.10.        
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+
+library(haven)
+dt <- read_sav("data/Backpain_test.sav")
+df_select <- data.frame(dt[,c("Pain", "Tampascale","Disability", "Age")])
+
+# Copy variable with missing data and rename 
+df_select$Tampa_MAR <- df_select$Tampascale
+df_select$Disability_MAR <- df_select$Disability
+
+library(finalfit)
+
+explanatory = c("Pain", "Disability", "Age")
+dependent = "Tampa_MAR"
+df_select %>% 
+  missing_compare(dependent, explanatory) %>% 
+    knitr::kable(row.names=FALSE, align = c("l", "l", "r", "r", "r"), 
+        caption = "Mean comparisons between values of responders (Not missing) and 
+        non-responders (Missing) on the Tampa scale variable.") 
+
+explanatory = c("Pain", "Tampascale", "Age")
+dependent = "Disability_MAR"
+df_select %>% 
+  missing_compare(dependent, explanatory) %>% 
+    knitr::kable(row.names=FALSE, align = c("l", "l", "r", "r", "r"), 
+        caption = "Mean comparisons between values of responders (Not missing) and 
+        non-responders (Missing) on the Disability variable.")
+
+```

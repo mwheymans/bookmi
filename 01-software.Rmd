@@ -638,3 +638,7 @@ Contains several functions for statistical data analysis; e.g. for sample size a
 Package estimates the maximum likelihood estimate of the mean vector and variance-covariance matrix for multivariate normal data with missing values. This package is needed for the mlest function this is used for Little’s MCAR test in Cahpter 2.
 [See for more information.](https://cran.r-project.org/web/packages/mvnmle/index.html)
 
+**finalfit**
+Package provides functions that help you quickly create elegant final results tables and plots after regression modelling and also provides functions to evaluate missing data. The package will be used in Chapter 2 to compare group means and proportions between observed and missing data. The package is also compatible with the `mice` function.
+[See for more information.](https://finalfit.org/index.html)
+

@@ -227,11 +227,11 @@ kable(text_pm, caption = "Predictormatrix settings for Multilevel Multiple Imput
   column_spec(2, width = "30em", background = "white")
 ```
 
-For example, if we want to impute missing data in the Pupil extraversion variable extrav in the popular dataset and we use the variables sex, texp, popular and popteach in our imputation model, by defining fixed effects for all variables and also random effects for the popular variable, without using the pupil variable, the predictormatrix is: 
+For example, if we want to impute missing data in the Pupil extraversion variable extrav in the popular dataset and we use the variables sex, texp, popular and popteach in our imputation model, by defining fixed effects for all variables and also a random effect for the popular variable, without using the pupil variable, the predictormatrix is: 
 
-```{r, echo=FALSE, eval=FALSE}
-library(haven)
-library(mice)
+```{r, eval=TRUE, echo=FALSE}
+suppressWarnings(suppressMessages(library(haven)))
+suppressWarnings(suppressMessages(library(mice)))
 dt <- read_sav(file="Popular.sav")
 
 # make deault predictor matrix
@@ -283,36 +283,52 @@ text_pm <- data.frame(
     "Linear Mixed model",
     "Linear Mixed model with PMM"
     ),
-  Notes = c("Imputation of sporadically missing data. Does not handle predictors that are specified as fixed effects (1 in the                 predictormatrix). The current advice is to specify all predictors as random effects (2 in the predictormatrix). Residual             variance may vary beteen groups (heteroscedastic).",
-          "Imputes systematically and sporadically missing data.",
-          "Residual variance cannot vary beteen groups (homoscedastic)",
-          "Imputes systematically and sporadically missing data. Residual variance cannot vary beteen groups (homoscedastic)",
-          "For continuous or binary variables with missing data. For continuous variables, residual variance may vary beteen                             groups (heteroscedastic).",
+  SP = c("", "X", "", "X", "", "X", "X", "X", "X"),
+  SY = c("", "X", "", "X", "", "X", "X", "X", "X"),
+  HO = c("", "", "X", "X", "", "", "", "", ""),
+  HE = c("X", "", "", "", "X", "X", "X", "", ""),
+  Notes = c("Does not handle predictors that are specified as fixed effects (1 in the                 predictormatrix). The current advice is to specify all predictors as random effects (2 in the predictormatrix).",
+          "",
+          "",
+          "",
+          "For continuous or binary variables.",
           "Two-stage imputation: at step 1, a linear regression model is fitted to each
 observed cluster; at step 2, estimates obtained from each cluster are combined according to a linear
-random effect model. Residual variance may vary beteen groups (heteroscedastic).",
-          "Similar as 2l.2stage.norm but now in combination with predictive mean matching.",
-            "Imputes systematically and sporadically missing data.",
-            "Same as 2l.continuous but now in combination with predictive mean matching."
+random effects model.",
+          "Same as 2l.2stage.norm but with PMM.",
+            "",
+            "Same as 2l.continuous but with PMM."
              ) 
 )
 
-kable(text_pm, caption = "Multilevel Imputation methods") %>%
+names(text_pm)[c(4, 5)] <- paste0(names(text_pm)[c(4, 5)], 
+                                footnote_marker_symbol(1))
+names(text_pm)[c(6, 7)] <- paste0(names(text_pm)[c(6, 7)], 
+                                footnote_marker_symbol(2))
+
+kable(text_pm, caption = "Multilevel Imputation methods for continuous variables", escape = F) %>%
   kable_styling(full_width = F) %>%
   column_spec(1, bold = T, border_right = T) %>%
   column_spec(2, border_right = T) %>%
   column_spec(3, width = "20em", background = "white") %>%
-  column_spec(4, width = "30em", background = "white")
+  column_spec(4, border_right = T) %>%
+  column_spec(5, border_right = T) %>%
+  column_spec(6, border_right = T) %>%
+  column_spec(7, border_right = T) %>%
+  column_spec(8, width = "30em", background = "white") %>%
+
+  footnote(symbol = c("SP; sporadically missing, SY: systematically missing", "HO; homogeneous error variance, HE: heterogeneous error variance"), footnote_as_chunk = T)
 
 ```
 
-### Level-1 missing values
+### Example: Level-1 missing values
 
 To multiple impute (5 times, 10 iterations) missing data in the Popular dataset in the extrav	(Pupil extraversion) variable with as imputation method `2l.lmer`, using an imputation model including all other variables, except the Pupil identity number variable and using all variables as fixed effects, and only the popular variable as random effect the predictor matrix and imputation procedure is:
 
 ```{r }
 library(mice)
 load("Popular_mis.Rdata")
+popular_mis %>% print(n = 25)
 
 # Set imputation method
 impmethod <- character(ncol(popular_mis))
@@ -338,4 +354,80 @@ res.mice.md
 
 ## Missing data in Dichotomous variables
 
-We are currently working on this Chapter.
+### Imputation methods
+
+To impute multilevel missing values in dichotomous variables several methods have been developed that can be defined as imputation method within the `mice` function. Table 7.3 shows which methods are developed for multilevel models and which package has to be installed to use the method. 
+
+```{r, echo=FALSE }
+library(magrittr)
+library(kableExtra)
+text_pm <- data.frame(
+  Package = c("`mice`", 
+              "`micemd`", 
+              "",
+              "`miceadds`"),
+  Method = c("2l.bin",
+             "2l.2stage.bin",
+             "2l.glm.bin",
+             "2l.binary"),
+  Description = c("Generalized Linear Mixed model", 
+    "Generalized Linear Mixed model",
+    "Two-level model",
+    "Generalized Linear Mixed model"),
+  SP = c("X", "X", "X", "X"),
+  SY = c("X", "X", "X", "X"),
+  Notes = c("20-50 iterations are recommended and may be hard to run in small datasets",
+          "",
+          "",
+          "") 
+)
+
+names(text_pm)[c(4, 5)] <- paste0(names(text_pm)[c(4, 5)], 
+                                footnote_marker_symbol(1))
+
+kable(text_pm, caption = "Multilevel Imputation methods for dichotomous variables", escape = F) %>%
+  kable_styling(full_width = F) %>%
+  column_spec(1, bold = T, border_right = T) %>%
+  column_spec(2, border_right = T) %>%
+  column_spec(3, width = "20em", background = "white") %>%
+  column_spec(4, border_right = T) %>%
+  column_spec(5, border_right = T) %>%
+  column_spec(6, width = "30em", background = "white") %>%
+
+  footnote(symbol = c("SP; sporadically missing, SY: systematically missing"), footnote_as_chunk = T)
+
+```
+
+### Example: Level-1 missing values
+
+To multiple impute (5 times, 10 iterations) missing data in the Popular dataset in the sex variable with as imputation method `2l.bin`, using an imputation model including all other variables, except the Pupil identity number variable and using all variables as fixed effects, and only the popular variable as random effect the predictor matrix and imputation procedure is:
+
+```{r }
+library(mice)
+load("Popular_mis_di.Rdata")
+
+# define dichotomous variable
+popular_mis_di$sex <- factor(popular_mis_di$sex)
+popular_mis_di %>% print(n = 25)
+
+# Set imputation method
+impmethod <- character(ncol(popular_mis_di))
+names(impmethod) <- colnames(popular_mis_di)
+impmethod["sex"] <- "2l.bin"
+impmethod
+
+# set default predictor matrix
+pm <- make.predictorMatrix(popular_mis_di)
+pm
+
+# create imputation model for sex variable
+pm[, "pupil"] <- 0
+pm["sex", c("class", "pupil", "extrav", "sex", "texp", "popular", "popteach")] <- c(-2, 0, 1, 0, 1, 2, 1)
+pm
+
+# run multiple imputations
+res.mice.md <- mice(popular_mis_di, m=5, predictorMatrix = pm,
+                    method=impmethod, maxit=10, printFlag = FALSE, seed=1983)
+res.mice.md
+
+```
