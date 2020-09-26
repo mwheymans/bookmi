@@ -170,60 +170,6 @@ In a MAR missing data situation, missing values can be explained by other (obser
 
 In Table 2.1 the means of the disability variables are presented for the subgroups of patients with pain scores ≤ 5 and > 5. There is MAR missing data in the disability variable in the subgroup of patients with pain scores ≤ 5. The consequence is that the means are equal between the groups with complete and missing data, i.e 9.26 and 9.23 respectively. Consequently this also accounts for the mean difference of disability between patients with complete and missing data, i.e 5.30 (14.56 - 9.26) and 5.34 (14.56 - 9.23) respectively.  
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-
-library(haven)
-library(knitr)
-library(dplyr)
-library(papeR)
-library(kableExtra)
-
-dataset1 <- read_sav("data/MAR Missing_Disability.sav")[, c(2,3)]
-dataset1$Pain_di <- factor(dataset1$Pain_di, labels = c("<= 5", "> 5"))
-
-dataset2 <- read_sav("data/MAR Missing_Disability.sav")[, c(2,4)]
-dataset2$Pain_di <- factor(dataset2$Pain_di, labels = c("<= 5", "> 5"))
-
-kable(list(papeR::summarize(dataset1, type = "numeric", group = "Pain_di", quantiles = FALSE, count = FALSE, test = FALSE),  papeR::summarize(dataset2, type = "numeric", group = "Pain_di", quantiles = FALSE, count = FALSE, test = FALSE)), 
-      row.names = FALSE, 
-      caption = "Mean values of Disability variable for patients with pain scores lower and equal to 5 and higher than 5. Left are the mean and standard deviation values of the complete data and right are those with missing values in the disability variable for the subgroup of patients with pain scores lower and equal to 5.")
-
-``` 
-
-This mean difference is also the result of a linear regression of disability (dependent variable) on pain. Thus, this means that the regression coefficient from the regression of disability on pain is also unbiased as can be seen in Table 2.2. 
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-
-library(haven)
-library(papeR)
-library(knitr)
-library(dplyr)
-library(finalfit)
-
-dataset1 <- data.frame(read_sav("data/MAR Missing_Disability.sav")[, c(2,3)])
-dataset1$Pain_di <- factor(dataset1$Pain_di, labels = c(" <= 5", " > 5"))
-
-dataset2 <- data.frame(read_sav("data/MAR Missing_Disability.sav")[, c(2,4)])
-dataset2$Pain_di <- factor(dataset2$Pain_di, labels = c(" <= 5", " > 5"))
-
-explanatory = c("Pain_di")
-dependent = "Disability"
-dataset1 %>%
-  lmuni(dependent, explanatory) %>% 
-  fit2df() %>%
-  dependent_label(dataset1, dependent) -> t1 
-
-explanatory = c("Pain_di")
-dependent = "Disability_MAR"
-dataset2 %>%
-  lmuni(dependent, explanatory) %>% 
-  fit2df() %>%
-  dependent_label(dataset2, dependent) -> t2 
-
-kable(list(t1, t2), caption = "Regression analysis of Disability on the Pain_di variable in the complete (left) and incomplete MAR data (right).")
-
-``` 
-
 This is an imporatnt consequence of MAR data, especially for multiple imputation where regression models are used to impute missing data. When, as part of this procedure, disability is imputed by using the pain variable, imputations are based on a correctly (unbiased) estimated regression coefficient. This is an important basis to generate valid imputed values. When pain and disability are also correlated imputation more than justified. To follow-up on this, it has been proven that imputations are improved when extra variables that have a relationship with the missing data rate in other variables, i.e. have a relationship with the probability of missing data or that have a relationship (correlated) with the variables that contain the missing values, are included in the imputation process (@Collins2001, @Baraldi2010). These additional variables can help dealing with missing data and are called auxiliary variables. More on this will be discussed in paragraph 4.2.5, 4.9 and 4.10 where we will deal with the imputation model. By the imputation model extra auxilliary variable can be included to improve imputations under the MAR assumption.  
 
 ## Missing Data evaluation

@@ -368,7 +368,7 @@ dataset.imp <- list(dataset1, dataset2, dataset3)
 imp.LR <- lapply(dataset.imp, function(x) {
    glm(Radiation ~ Function, family = binomial, data = x)
   })
-coef <- MIextract(imp.LR, fun=coef) 
+coef <- MIextract(imp.LR, fun=coefficients) 
 se <- MIextract(imp.LR, fun=vcov) 
  
 summary.fit <- summary(MIcombine(coef, se) )

@@ -1,6 +1,7 @@
 ---
 output:
   pdf_document: default
+  fig_caption: yes
   html_document: default
 ---
 
@@ -12,7 +13,7 @@ We use as an example data from a study about low back pain and we want to study 
 
 To get a first impression about the relationship between the Pain and the Tampa scale variables we make a scatterplot. The scatterplots with the complete and intended incomplete data is displayed in Figure \@ref(fig:fig3-1).
 
-```{r fig3-1, echo = FALSE, fig.cap="Relationship between the Tampa scale and Pain variables (green dots are observed and red dots are the missing data", out.width='70%'}
+```{r fig3-1, echo = FALSE, fig.cap="Relationship between the Tampa scale and Pain variables (green dots are observed and red dots are the missing data", out.width='70%', fig.align='center'}
 knitr::include_graphics("images/fig3.2a.png")
 ```
 

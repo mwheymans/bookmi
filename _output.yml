@@ -1,3 +1,4 @@
+
 bookdown::gitbook:
   cover-image: images/cover2.png
   css: style.css
@@ -12,4 +13,5 @@ bookdown::pdf_book:
   latex_engine: xelatex
   citation_package: natbib
   keep_tex: yes
+  fig_caption: yes
 bookdown::epub_book: default

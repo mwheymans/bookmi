@@ -16,7 +16,7 @@ For categorical covariates, SPSS does not generate a pooled p-value for the over
 knitr::include_graphics("images/fig6.1_logistic.png")
 ```
 
-There are several procedures to derive a pooled p-value for categorical variables, the pooled sampling variance or D1 method, the multiple parameter Wald test or D2 method, and the Meng and Rubin pooling procedure (@VanBuuren2018; @enders2010applied; @Eekhout2017; @Meng1992; @Mistler2013; @Marshall2009MedResMeth). A more simple procedures to derive a pooled p-value for the overall Wald test is just taking the median of the p-values from the overall Wald test of all imputed datasets, this rule is called the Median P Rule (MPR) (@Eekhout2017). These methods can only be performed in R.
+There are several procedures to derive a pooled p-value for categorical variables, the pooled sampling variance or D1 method, the multiple parameter Wald test or D2 method, and the Meng and Rubin pooling procedure (@VanBuuren2018; @enders2010applied; @Eekhout2017; @Meng1992; @Mistler2013; @Marshall2009MedResMeth). A more simple procedures to derive a pooled p-value for the overall Wald test is just taking the median of the p-values from the overall Wald test of all imputed datasets, this rule is called the Median P Rule (MPR) (@Eekhout2017). These methods can be performed in R.
 
 ## Logistic regression with a categorical variable in R
 

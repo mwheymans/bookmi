@@ -6,13 +6,14 @@ bibliography: [appliedmiss.bib]
 biblio-style: apalike
 link-citations: yes
 output:
-  pdf_document: default
-  html_document: default
+  pdf_document
+  html_document
+geometry: margin=1in
 ---
 
 # {-}
 
-```{r fig.align='center', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html') }
+```{r , echo=FALSE, include=identical(knitr:::pandoc_to(), 'html') }
 knitr::include_graphics("images/cover2.png", dpi = NA)
 ```
 
