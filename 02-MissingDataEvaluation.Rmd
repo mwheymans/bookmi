@@ -248,7 +248,7 @@ knitr::include_graphics("images/fig2.13.png")
 
 The following table that is called EM Means can be found in the output window of SPSS. Under the table the result of Little's MCAR test is displayed (tables that provide information of univariate statistics and a summary of estimated means and standard deviations are also provided. Further, tables that are called EM Covariances and EM Correlations are also generated, but they provide the same results for Little's MCAR test as under the EM Means table. These tables are not shown)
 
-```{r tab2-7, echo = FALSE, fig.cap="Output tables with information of Little’s MCAR test.", out.width='50%', fig.align='center'}
+```{r tab2-7, echo = FALSE, fig.cap="Output tables with information of Little’s MCAR test.", out.width='40%', fig.align='center'}
 knitr::include_graphics("images/fig2.14.png")
 
 ```
@@ -257,14 +257,15 @@ knitr::include_graphics("images/fig2.14.png")
 
 ### Little's MCAR test in R
 
-Little´s MCAR test is available in the `BaylorEdPsych` package as the `LittleMCAR` function. To apply the test, we select only the continuous variables. We use it for the same dataset as in the previous paragraph. The p-value for the test is siginificant, indicating that the missings does not seem to be compeletely at random. The package `MissMech` also contains a function to perform a Little´s MCAR test. This test is called `TestMCARNormality`.
+Little´s MCAR test is available in the `MissMech` package as the `TestMCARNormality` function. To apply the test, we select only the continuous variables. We use it for the same dataset as in the previous paragraph. The p-value for the test is siginificant, indicating that the missings does not seem to be compeletely at random. 
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
 library(haven)
 dt <- read_sav("data/Backpain_test.sav")
 df_select <- dt[,c("Pain", "Tampascale","Disability", "Age")]
-library(BaylorEdPsych)
-LittleMCAR(df_select)
+library(MissMech)
+res <- TestMCARNormality(data=df_select)
+print(res)
 
 ``` 
 

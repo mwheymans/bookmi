@@ -1,5 +1,5 @@
 % Options for packages loaded elsewhere
-\PassOptionsToPackage{unicode=true}{hyperref}
+\PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 %
 \documentclass[
@@ -10,8 +10,8 @@
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provides euro and other symbols
-\else % if luatex or xelatex
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
@@ -37,7 +37,7 @@
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
   hidelinks,
-}
+  pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
 \usepackage[margin=1in]{geometry}
 \usepackage{color}
@@ -81,6 +81,11 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
 % Allow footnotes in longtable head/foot
 \IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
 \makesavenoteenv{longtable}
@@ -93,25 +98,14 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\setlength{\emergencystretch}{3em} % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{5}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-  \let\oldparagraph\paragraph
-  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-  \let\oldsubparagraph\subparagraph
-  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
-
 % Set default figure placement to htbp
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
-
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
 \usepackage{booktabs}
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -126,12 +120,11 @@
 \usepackage{threeparttablex}
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
-\usepackage{xcolor}
 \usepackage[]{natbib}
 \bibliographystyle{apalike}
 
 \author{}
-\date{\vspace{-2.5em}2020-03-05}
+\date{\vspace{-2.5em}2020-09-26}
 
 \begin{document}
 
@@ -461,10 +454,10 @@ Other multiplication procedures as divide, square, etc. can also be executed. Th
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  0.49998925 -0.42390599  0.23221956 -1.20022370  1.12045154 -0.80140124
-##  [7] -2.77423276  0.14118071 -0.27632263  1.67606637 -1.34510519 -0.09133822
-## [13]  0.16604854  2.38621676 -0.40657482 -0.88003242 -0.11517579  2.19061205
-## [19] -0.74353515 -0.19377640
+##  [1]  0.82919627  0.47302043 -0.65689044 -0.97366044 -0.81393976  1.41383415
+##  [7]  0.04264738  0.88465307  0.13664449 -0.60785212 -1.01452550  0.39081535
+## [13] -0.67401361  0.43587701  0.50476934  0.66403043  1.12997014 -1.22849113
+## [19]  1.13415811  0.74763875
 \end{verbatim}
 
 The number {[}1{]} between brackets is the index of the first number or item in the vector.
@@ -1189,6 +1182,10 @@ In RStudio updating packages can be done in the Package tab as well. You can cli
 
 The main package that we will use in this manual is mice which stand for Multivariate Imputation by Chained Equations (MICE) (Van Buuren, 2009). Other packages that can be used to impute data or that can be used to do analyses after imputation are listed below.
 
+\textbf{psfmi}
+Prediction Model Selection and Performance Evaluation in Multiple Imputed data sets. Package to pool and select variables for logistic and Cox regression models. Validation with cross-validation and bootstrapping in Multiply Imputed data sets is also possible.
+\href{https://mwheymans.github.io/psfmi/}{See for more information.}
+
 \textbf{miceadds}
 Package contains some additional multiple imputation functions (Robitzsch et al., 2017).
 \href{https://cran.r-project.org/web/packages/miceadds/index.html}{See for more information.}
@@ -1212,10 +1209,6 @@ Package is for the Analysis of multivariate normal datasets with missing values.
 \textbf{vim (visualization and imputation of missing values)}
 Package includes tools for the visualization of missing and/or imputed values. In addition, the quality of imputation can be visually explored using various univariate, bivariate, multiple and multivariate plot methods (Templ et al., 2017).
 \href{https://cran.r-project.org/web/packages/mi/index.html}{See for more information.}
-
-\textbf{BaylorEdPsych}
-Package for Baylor University Educational Psychology Quantitative Courses. This package included Little's MCAR test (Beaujean, 2015).
-\href{https://cran.r-project.org/web/packages/BaylorEdPsych/index.html}{See for more information.}
 
 \textbf{MKmisc}
 Contains several functions for statistical data analysis; e.g.~for sample size and power calculations, computation of confidence intervals, and generation of similarity matrices. This package contains the mi.t.test function for pooling t-tests after multiple imputation (Kohl, 2016).
@@ -1370,7 +1363,7 @@ Information about the missing data patterns is provided in the Tabulated pattern
 
 }
 
-\caption{Descriptive missing data statistics and the missing data patterns.}\label{fig:tab2-11}
+\caption{Descriptive missing data statistics and the missing data patterns.}\label{fig:tab2-1-1}
 \end{figure}
 \begin{figure}
 
@@ -1378,7 +1371,7 @@ Information about the missing data patterns is provided in the Tabulated pattern
 
 }
 
-\caption{Descriptive missing data statistics and the missing data patterns.}\label{fig:tab2-12}
+\caption{Descriptive missing data statistics and the missing data patterns.}\label{fig:tab2-1-2}
 \end{figure}
 
 Another way to obtain information about the missing data patterns is by accessing the Multiple Imputation menu option. To access this menu, choose:
@@ -1418,7 +1411,7 @@ The following output will be displayed after selecting all options:
 
 }
 
-\caption{Output as a result of the Analyze Patterns menu under Multiple Imputation.}\label{fig:fig2-61}
+\caption{Output as a result of the Analyze Patterns menu under Multiple Imputation.}\label{fig:fig2-6-1}
 \end{figure}
 \begin{figure}
 
@@ -1426,7 +1419,7 @@ The following output will be displayed after selecting all options:
 
 }
 
-\caption{Output as a result of the Analyze Patterns menu under Multiple Imputation.}\label{fig:fig2-62}
+\caption{Output as a result of the Analyze Patterns menu under Multiple Imputation.}\label{fig:fig2-6-2}
 \end{figure}
 \begin{figure}
 
@@ -1434,7 +1427,7 @@ The following output will be displayed after selecting all options:
 
 }
 
-\caption{Output as a result of the Analyze Patterns menu under Multiple Imputation.}\label{fig:fig2-63}
+\caption{Output as a result of the Analyze Patterns menu under Multiple Imputation.}\label{fig:fig2-6-3}
 \end{figure}
 \begin{figure}
 
@@ -1442,7 +1435,7 @@ The following output will be displayed after selecting all options:
 
 }
 
-\caption{Output as a result of the Analyze Patterns menu under Multiple Imputation.}\label{fig:fig2-64}
+\caption{Output as a result of the Analyze Patterns menu under Multiple Imputation.}\label{fig:fig2-6-4}
 \end{figure}
 
 \hypertarget{missing-data-patterns-in-r}{%
@@ -1680,7 +1673,7 @@ The following table that is called EM Means can be found in the output window of
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.5\linewidth]{images/fig2.14} 
+{\centering \includegraphics[width=0.4\linewidth]{images/fig2.14} 
 
 }
 
@@ -1693,199 +1686,43 @@ The following table that is called EM Means can be found in the output window of
 \hypertarget{littles-mcar-test-in-r}{%
 \subsection{Little's MCAR test in R}\label{littles-mcar-test-in-r}}
 
-Little´s MCAR test is available in the \texttt{BaylorEdPsych} package as the \texttt{LittleMCAR} function. To apply the test, we select only the continuous variables. We use it for the same dataset as in the previous paragraph. The p-value for the test is siginificant, indicating that the missings does not seem to be compeletely at random. The package \texttt{MissMech} also contains a function to perform a Little´s MCAR test. This test is called \texttt{TestMCARNormality}.
+Little´s MCAR test is available in the \texttt{MissMech} package as the \texttt{TestMCARNormality} function. To apply the test, we select only the continuous variables. We use it for the same dataset as in the previous paragraph. The p-value for the test is siginificant, indicating that the missings does not seem to be compeletely at random.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(haven)}
 \NormalTok{dt <-}\StringTok{ }\KeywordTok{read_sav}\NormalTok{(}\StringTok{"data/Backpain_test.sav"}\NormalTok{)}
 \NormalTok{df_select <-}\StringTok{ }\NormalTok{dt[,}\KeywordTok{c}\NormalTok{(}\StringTok{"Pain"}\NormalTok{, }\StringTok{"Tampascale"}\NormalTok{,}\StringTok{"Disability"}\NormalTok{, }\StringTok{"Age"}\NormalTok{)]}
-\KeywordTok{library}\NormalTok{(BaylorEdPsych)}
-\KeywordTok{LittleMCAR}\NormalTok{(df_select)}
+\KeywordTok{library}\NormalTok{(MissMech)}
+\NormalTok{res <-}\StringTok{ }\KeywordTok{TestMCARNormality}\NormalTok{(}\DataTypeTok{data=}\NormalTok{df_select)}
+\KeywordTok{print}\NormalTok{(res)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## this could take a while
-\end{verbatim}
-
-\begin{verbatim}
-## $chi.square
-## [1] 13.53187
+## Call:
+## TestMCARNormality(data = df_select)
 ## 
-## $df
-## [1] 6
+## Number of Patterns:  3 
 ## 
-## $p.value
-## [1] 0.03532572
+## Total number of cases used in the analysis:  150 
 ## 
-## $missing.patterns
-## [1] 3
+##  Pattern(s) used:
+##           Pain   Tampascale   Disability   Age   Number of cases
+## group.1      1            1            1     1               121
+## group.2      1           NA            1     1                17
+## group.3      1            1           NA     1                12
 ## 
-## $amount.missing
-##                 Pain Tampascale Disability Age
-## Number Missing     0 17.0000000      12.00   0
-## Percent Missing    0  0.1133333       0.08   0
 ## 
-## $data
-## $data$DataSet1
-##     Pain Tampascale Disability Age
-## 1      9         39          4  50
-## 2      7         45          9  39
-## 3      6         42         12  54
-## 4      6         43         13  36
-## 5      2         36         17  36
-## 6      5         35         14  42
-## 7      4         36         12  43
-## 8      5         37          7  41
-## 9      4         35         10  44
-## 11     6         43         14  50
-## 12     5         39         15  37
-## 14     6         43          8  48
-## 15     6         42         16  33
-## 16     2         33         16  43
-## 17     7         45          3  56
-## 18     5         34         13  49
-## 19     5         35          6  44
-## 20     5         35          9  38
-## 21     5         38         11  30
-## 24     6         38         11  39
-## 25     2         30         14  27
-## 26     2         30         13  38
-## 27     6         44         14  41
-## 28     7         45          9  37
-## 29     3         31         10  56
-## 31     6         42         12  25
-## 32     3         31         16  43
-## 33     2         31         20  31
-## 35     3         32         10  39
-## 36     5         32          6  45
-## 37     4         32         14  26
-## 38     7         45          9  48
-## 40     8         47          8  44
-## 41     4         32         16  28
-## 42     2         32         18  32
-## 43     4         32         12  29
-## 44     6         43          7  40
-## 47     4         33         15  44
-## 49     4         33          9  46
-## 50     4         33          5  45
-## 51     4         33         17  30
-## 54     5         34         16  35
-## 55     4         34         13  46
-## 56     4         34         11  52
-## 58     9         35         10  31
-## 59     8         47         13  53
-## 61     1         29         16  32
-## 62     3         31         20  24
-## 63     0         35         18  26
-## 64     3         35         10  43
-## 65     5         35         10  52
-## 66     4         35          6  44
-## 69     8         47          7  44
-## 70     9         50          8  32
-## 71     0         35         22  26
-## 72     3         36         12  47
-## 73     3         36         21  30
-## 74     4         36         11  27
-## 75     4         36         10  35
-## 76     4         36         14  41
-## 77     5         37         10  46
-## 78     3         37         17  31
-## 79     5         37         10  53
-## 81     2         30         15  35
-## 82     3         37         18  31
-## 83     4         37         11  40
-## 84     4         37         15  43
-## 86     8         47         15  24
-## 87     2         37         14  45
-## 88     1         28         16  34
-## 89     2         37         18  35
-## 90     3         37         15  42
-## 91     5         38         10  49
-## 92     5         38         16  39
-## 93     6         43          7  43
-## 94     8         44         14  34
-## 96     7         38         14  44
-## 97     7         39         12  54
-## 98     7         38          9  42
-## 99     4         38         18  32
-## 100    5         38         11  33
-## 101    8         47         10  43
-## 102    3         38         17  35
-## 103    3         39         14  30
-## 104    5         39          8  52
-## 105    5         39          7  41
-## 106    7         46          5  44
-## 107    8         48         15  24
-## 108    4         39         17  37
-## 109    4         40         16  24
-## 111    3         36         13  32
-## 113    5         40         15  30
-## 114    5         40          9  35
-## 115    8         40         12  53
-## 118    7         45         14  42
-## 120    9         45         12  40
-## 121    7         46          9  27
-## 123    3         36         17  39
-## 124    2         40         17  33
-## 125    2         34         19  30
-## 126    5         40         10  57
-## 127    7         45         13  39
-## 128    7         46          4  47
-## 129    6         40          9  33
-## 130    5         41         11  35
-## 131    8         41         13  29
-## 132    9         48          1  55
-## 133    5         41         11  42
-## 134    6         41         10  44
-## 135    5         41          7  44
-## 136    7         41         10  29
-## 137    8         44         11  52
-## 138    2         29         20  33
-## 139    5         41         16  23
-## 141    6         44         10  54
-## 142    8         47          2  53
-## 144    6         42         11  46
-## 145    6         43          4  46
-## 146    3         42         13  43
-## 147    6         42          3  58
-## 148    1         35         19  29
+##     Test of normality and Homoscedasticity:
+##   -------------------------------------------
 ## 
-## $data$DataSet2
-##     Pain Tampascale Disability Age
-## 10     8         NA          7  41
-## 13     9         NA          4  49
-## 22     6         NA          5  46
-## 23     9         NA         14  41
-## 34     2         NA         15  32
-## 39     7         NA         10  35
-## 45     7         NA          3  52
-## 46     6         NA          8  45
-## 48     4         NA         15  33
-## 60     8         NA          8  55
-## 67     5         NA         10  45
-## 110    1         NA         12  37
-## 117    6         NA          9  39
-## 122    8         NA         14  43
-## 140    7         NA          8  41
-## 149    6         NA         16  28
-## 150    8         NA          8  40
+## Hawkins Test:
 ## 
-## $data$DataSet3
-##     Pain Tampascale Disability Age
-## 30     5         31         NA  35
-## 52     7         46         NA  51
-## 53     7         45         NA  51
-## 57     5         34         NA  55
-## 68     4         35         NA  40
-## 80     1         28         NA  36
-## 85     8         49         NA  38
-## 95     9         46         NA  47
-## 112    5         40         NA  49
-## 116    6         44         NA  42
-## 119    7         45         NA  58
-## 143    5         42         NA  53
+##     P-value for the Hawkins test of normality and homoscedasticity:  0.710819 
+## 
+##     There is not sufficient evidence to reject normality
+##     or MCAR at 0.05 significance level
 \end{verbatim}
 
 \hypertarget{compare-and-test-group-comparisons-1}{%
@@ -2674,7 +2511,7 @@ The Descriptive statistics display the descriptive information of the original, 
 
 }
 
-\caption{Descriptive statistics}\label{fig:tab4-71}
+\caption{Descriptive statistics}\label{fig:tab4-7-1}
 \end{figure}
 \begin{figure}
 
@@ -2682,7 +2519,7 @@ The Descriptive statistics display the descriptive information of the original, 
 
 }
 
-\caption{Descriptive statistics}\label{fig:tab4-72}
+\caption{Descriptive statistics}\label{fig:tab4-7-2}
 \end{figure}
 
 \hypertarget{checking-convergence-in-spss}{%
@@ -2745,7 +2582,7 @@ As a result two plots appear with the iteation history for each imputation run.
 
 }
 
-\caption{Convergence plots}\label{fig:fig4-181}
+\caption{Convergence plots}\label{fig:fig4-18-1}
 \end{figure}
 \begin{figure}
 
@@ -2753,7 +2590,7 @@ As a result two plots appear with the iteation history for each imputation run.
 
 }
 
-\caption{Convergence plots}\label{fig:fig4-182}
+\caption{Convergence plots}\label{fig:fig4-18-2}
 \end{figure}
 
 \hypertarget{multiple-imputation-in-r}{%
@@ -3104,66 +2941,66 @@ The convergence of the imputation procedure can be evaluated. The means of the i
 ## 
 ##                   1        2        3        4        5        6        7
 ## Pain            NaN      NaN      NaN      NaN      NaN      NaN      NaN
-## Tampascale 40.38462 40.53846 40.30769 40.30769 41.00000 41.00000 40.84615
-## Disability 11.44444 12.55556 12.00000 11.77778 13.33333 11.55556 10.66667
+## Tampascale 38.15385 41.00000 41.61538 38.76923 41.30769 40.53846 40.53846
+## Disability 10.66667 12.44444 10.33333 12.33333 11.22222 13.77778 11.22222
 ## Radiation       NaN      NaN      NaN      NaN      NaN      NaN      NaN
-##                   8        9       10
-## Pain            NaN      NaN      NaN
-## Tampascale 41.53846 40.00000 40.30769
-## Disability 10.77778 12.55556 11.77778
-## Radiation       NaN      NaN      NaN
+##                    8        9       10
+## Pain             NaN      NaN      NaN
+## Tampascale 40.846154 40.76923 40.46154
+## Disability  9.444444 12.55556 11.88889
+## Radiation        NaN      NaN      NaN
 ## 
 ## , , Chain 2
 ## 
-##                    1        2         3        4        5        6        7
-## Pain             NaN      NaN       NaN      NaN      NaN      NaN      NaN
-## Tampascale 40.461538 41.23077 38.923077 40.46154 41.23077 40.23077 39.46154
-## Disability  9.555556 11.77778  9.444444 11.00000 12.22222 11.33333 11.88889
-## Radiation        NaN      NaN       NaN      NaN      NaN      NaN      NaN
-##                   8         9       10
-## Pain            NaN       NaN      NaN
-## Tampascale 40.69231 39.846154 39.15385
-## Disability 10.22222  9.777778 11.00000
-## Radiation       NaN       NaN      NaN
+##                   1        2        3        4        5        6        7
+## Pain            NaN      NaN      NaN      NaN      NaN      NaN      NaN
+## Tampascale 41.46154 41.38462 40.15385 40.76923 41.15385 40.76923 40.92308
+## Disability 11.00000 11.22222 11.77778 11.66667 11.44444 10.66667 13.88889
+## Radiation       NaN      NaN      NaN      NaN      NaN      NaN      NaN
+##                   8        9       10
+## Pain            NaN      NaN      NaN
+## Tampascale 39.76923 40.46154 40.00000
+## Disability 11.88889 10.22222 11.88889
+## Radiation       NaN      NaN      NaN
 ## 
 ## , , Chain 3
 ## 
 ##                   1        2        3        4        5        6        7
 ## Pain            NaN      NaN      NaN      NaN      NaN      NaN      NaN
-## Tampascale 40.69231 41.23077 40.07692 39.07692 39.76923 39.69231 40.30769
-## Disability 12.77778 11.88889 11.44444 10.55556 10.77778 11.55556 10.55556
+## Tampascale 41.38462 39.92308 40.69231 39.76923 40.69231 41.53846 39.61538
+## Disability 12.00000 12.22222 11.11111 11.33333 13.55556 10.44444 10.22222
 ## Radiation       NaN      NaN      NaN      NaN      NaN      NaN      NaN
 ##                   8        9       10
 ## Pain            NaN      NaN      NaN
-## Tampascale 41.30769 41.53846 40.15385
-## Disability 12.44444 12.88889 13.33333
+## Tampascale 39.92308 39.61538 40.15385
+## Disability 13.00000 12.22222 12.33333
 ## Radiation       NaN      NaN      NaN
 ## 
 ## , , Chain 4
 ## 
-##                   1        2         3        4        5        6        7
-## Pain            NaN      NaN       NaN      NaN      NaN      NaN      NaN
-## Tampascale 39.30769 39.53846 40.076923 39.61538 40.76923 41.15385 42.07692
-## Disability 11.00000 11.00000  8.555556 11.55556 11.33333 10.88889 10.88889
-## Radiation       NaN      NaN       NaN      NaN      NaN      NaN      NaN
+##                    1        2        3        4        5        6        7
+## Pain             NaN      NaN      NaN      NaN      NaN      NaN      NaN
+## Tampascale 40.000000 41.76923 41.00000 39.53846 40.07692 41.61538 41.23077
+## Disability  8.555556 11.77778 12.66667 12.88889 10.33333 12.00000 11.55556
+## Radiation        NaN      NaN      NaN      NaN      NaN      NaN      NaN
 ##                   8        9       10
 ## Pain            NaN      NaN      NaN
-## Tampascale 40.30769 41.30769 41.07692
-## Disability 12.77778 12.77778 10.66667
+## Tampascale 41.07692 40.46154 40.76923
+## Disability 11.11111 11.00000 11.33333
 ## Radiation       NaN      NaN      NaN
 ## 
 ## , , Chain 5
 ## 
-##                   1        2        3        4        5         6        7
-## Pain            NaN      NaN      NaN      NaN      NaN       NaN      NaN
-## Tampascale 39.92308 40.15385 40.92308 39.92308 39.92308 40.538462 40.38462
-## Disability 10.44444 13.33333 11.22222 11.77778 12.22222  9.555556 10.44444
-## Radiation       NaN      NaN      NaN      NaN      NaN       NaN      NaN
-##                   8        9       10
-## Pain            NaN      NaN      NaN
-## Tampascale 41.23077 41.69231 41.30769
-## Disability 10.88889 10.33333 10.66667
-## Radiation       NaN      NaN      NaN
+##                   1        2         3        4        5         6         7
+## Pain            NaN      NaN       NaN      NaN      NaN       NaN       NaN
+## Tampascale 41.46154 39.69231 39.384615 39.38462 40.46154 39.923077 39.923077
+## Disability 11.00000 10.22222  9.666667 13.55556 11.22222  9.666667  9.888889
+## Radiation       NaN      NaN       NaN      NaN      NaN       NaN       NaN
+##                   8   9       10
+## Pain            NaN NaN      NaN
+## Tampascale 40.30769  41 41.00000
+## Disability 10.77778  12 10.22222
+## Radiation       NaN NaN      NaN
 \end{verbatim}
 
 The number of chains is equal to the number of imputed datasets. A chain refers to the chain of regression models that is used to generate the imputed values. The length of each chain is equal to the number of iterations.
@@ -3815,7 +3652,7 @@ you can also use the \texttt{mi.t.test} function in the \texttt{MKmisc} package.
 
 \begin{verbatim}
 ## 
-##  Multiple Imputation Two Sample t-test
+## 	Multiple Imputation Two Sample t-test
 ## 
 ## data:  Variable Tampascale: group 0 vs group 1
 ## t = -2.2078, df = 136.49, p-value = 0.02893
@@ -4295,26 +4132,13 @@ We start by using the \texttt{mice} function to impute missing data in the Pain 
 
 \NormalTok{fit.Cox <-}\StringTok{ }\KeywordTok{with}\NormalTok{(}\DataTypeTok{data=}\NormalTok{Cox.imp, }\DataTypeTok{exp=}\KeywordTok{coxph}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(Time, Status) }\OperatorTok{~}\StringTok{ }\NormalTok{Pain))}
 \NormalTok{Cox.pool <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(}\KeywordTok{pool}\NormalTok{(fit.Cox))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Warning: Unknown or uninitialised column: 'df.residual'.
-\end{verbatim}
-
-\begin{verbatim}
-## Warning in pool.fitlist(getfit(object), dfcom = dfcom): Large sample assumed.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{Cox.pool}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ##   term   estimate  std.error statistic       df      p.value
-## 1 Pain -0.2018408 0.05219944 -3.866724 89.78913 0.0002083936
+## 1 Pain -0.2018408 0.05219944 -3.866724 49.90579 0.0003198422
 \end{verbatim}
 
 Results of the pooled procedure are:
@@ -4333,19 +4157,6 @@ Calculation of the Hazard ratio.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{Cox.pool <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(}\KeywordTok{pool}\NormalTok{(fit.Cox))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Warning: Unknown or uninitialised column: 'df.residual'.
-\end{verbatim}
-
-\begin{verbatim}
-## Warning in pool.fitlist(getfit(object), dfcom = dfcom): Large sample assumed.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{pool.HR <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(Cox.pool[,}\DecValTok{1}\NormalTok{], (Cox.pool[,}\DecValTok{1}\NormalTok{]}\OperatorTok{-}\FloatTok{1.96}\OperatorTok{*}\NormalTok{(Cox.pool[,}\DecValTok{2}\NormalTok{])), }
 \NormalTok{           (Cox.pool[,}\DecValTok{1}\NormalTok{]}\OperatorTok{+}\FloatTok{1.96}\OperatorTok{*}\NormalTok{(Cox.pool[,}\DecValTok{2}\NormalTok{]))))}
 \end{Highlighting}
@@ -4408,26 +4219,16 @@ For categorical covariates, SPSS does not generate a pooled p-value for the over
 \caption{Logistic Regresion with an independent categorical variable.}\label{fig:fig6-1}
 \end{figure}
 
-There are several procedures to derive a pooled p-value for categorical variables, the pooled sampling variance or D1 method, the multiple parameter Wald test or D2 method, and the Meng and Rubin pooling procedure (\citet{VanBuuren2018}; \citet{enders2010applied}; \citet{Eekhout2017}; \citet{Meng1992}; \citet{Mistler2013}; \citet{Marshall2009MedResMeth}). A more simple procedures to derive a pooled p-value for the overall Wald test is just taking the median of the p-values from the overall Wald test of all imputed datasets, this rule is called the Median P Rule (MPR) (\citet{Eekhout2017}). These methods can only be performed in R.
+There are several procedures to derive a pooled p-value for categorical variables, the pooled sampling variance or D1 method, the multiple parameter Wald test or D2 method, and the Meng and Rubin pooling procedure (\citet{VanBuuren2018}; \citet{enders2010applied}; \citet{Eekhout2017}; \citet{Meng1992}; \citet{Mistler2013}; \citet{Marshall2009MedResMeth}). A more simple procedures to derive a pooled p-value for the overall Wald test is just taking the median of the p-values from the overall Wald test of all imputed data sets, this rule is called the Median P Rule (MPR) (\citet{Eekhout2017}). These methods can be performed in R.
 
 \hypertarget{logistic-regression-with-a-categorical-variable-in-r}{%
 \section{Logistic regression with a categorical variable in R}\label{logistic-regression-with-a-categorical-variable-in-r}}
 
-Pooling of categorical variables can be done by using the psfmi package that is downloadable via Github. The package needs R version 3.4.0 or higher. The package contains a function called \texttt{psfmi\_lr} for pooling of logistic regression models and \texttt{psfmi\_coxr}, to pool right censored Cox regression models. Install the package by first running:
-
-\texttt{install.packages("devtools")}
-
-\texttt{library(devtools)}
-
-\texttt{devtools::install\_github("mwheymans/psfmi")}
-
-\texttt{library(psfmi)}
-
-Than run the following code to pool the logistic regression model with as independent variable the categorical Tampa scale variable and as outcome the Radiation variable. To derive the pooled p-value for the overall Wald test, the D1 method is used. Other settings that can be used for \texttt{method=}, are ``D2'' for the D2 pooling method, ``D3'' for the Meng and Rubin method and ``MPR'' for the Median P Rule.
+Pooling of categorical variables can be done by using the \href{https://mwheymans.github.io/psfmi/}{psfmi} package. The package contains a function called \texttt{psfmi\_lr} for pooling of logistic regression models and \texttt{psfmi\_coxr}, to pool right censored Cox regression models. Install the package and run the following code to pool the logistic regression model with as independent variable the categorical Tampa scale variable and as outcome the Radiation variable. To derive the pooled p-value for the overall Wald test, the D1 method is used. Other settings that can be used for \texttt{method=}, are ``D2'' for the D2 pooling method, ``D3'' for the Meng and Rubin method and ``MPR'' for the Median P Rule.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(foreign)}
+\KeywordTok{library}\NormalTok{(haven)}
 \KeywordTok{library}\NormalTok{(psfmi)}
 \end{Highlighting}
 \end{Shaded}
@@ -4443,376 +4244,451 @@ Than run the following code to pool the logistic regression model with as indepe
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data <-}\StringTok{ }\KeywordTok{read.spss}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Backpain 150 Missing_Tampa_Cat Imp.sav"}\NormalTok{, }\DataTypeTok{to.data.frame =} \OtherTok{TRUE}\NormalTok{) }
-\end{Highlighting}
-\end{Shaded}
+\NormalTok{data <-}\StringTok{ }\KeywordTok{read_sav}\NormalTok{(}\DataTypeTok{file=}\StringTok{"Backpain 150 Missing_Tampa_Cat Imp.sav"}\NormalTok{) }
 
-\begin{verbatim}
-## re-encoding from UTF-8
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{pool_lr <-}\StringTok{ }\KeywordTok{psfmi_lr}\NormalTok{(}\DataTypeTok{data=}\NormalTok{data, }\DataTypeTok{nimp=}\DecValTok{5}\NormalTok{, }\DataTypeTok{impvar=}\StringTok{"Imputation_"}\NormalTok{, }\DataTypeTok{Outcome=}\StringTok{"Radiation"}\NormalTok{,}
   \DataTypeTok{cat.predictors=}\KeywordTok{c}\NormalTok{(}\StringTok{"Tampa_Cat"}\NormalTok{), }\DataTypeTok{method=}\StringTok{"D1"}\NormalTok{)}
+\NormalTok{pool_lr}\OperatorTok{$}\NormalTok{RR_model}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## 
-## Pooled model correctly estimated
-##            using a p-value of 1
+## $`Step 1 - no variables removed -`
+##                 term   estimate std.error  statistic        df    p.value
+## 1        (Intercept) -0.7843203 0.3329907 -2.3553819 129.04450 0.02001084
+## 2 factor(Tampa_Cat)2  0.3526233 0.4319316  0.8163869 140.38462 0.41566202
+## 3 factor(Tampa_Cat)3  0.6304326 0.4573147  1.3785532  87.29648 0.17155514
+##          OR lower.EXP upper.EXP
+## 1 0.4564298 0.2376439 0.8766403
+## 2 1.4227951 0.6102036 3.3174929
+## 3 1.8784230 0.7665126 4.6032810
 \end{verbatim}
+
+Pooling a multivariable regression model that contains a mix of continuous, dichotomous and categorical variables can easily be performed with the \texttt{psfmi\_lr} function. With the next code example, pooling is done in 10 multiple imputed datasets that are stored in the file \texttt{lbpmilr} (see \texttt{?lbpmilr} for more information about the data set) . The relationship with the outcome variable ``Chronic'' is estimated, using a model with 2 dichotomous, 4 continuous and 2 categorical variables. The method to obtain a pooled p-value for the categorical variables is the D3 or Meng and Rubin method, indicated by \texttt{method="D3"}. To obtain a pooled p-value for continuous and dichotomous variables Rubin's Rules are used.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pool_lr}\OperatorTok{$}\NormalTok{RR_Model}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## $`Step 1`
-##                        est std.err signif   lower   upper     OR   L.OR   U.OR
-## (Intercept)        -0.7843  0.3330 0.0186 -1.4374 -0.1313 0.4564 0.2375 0.8770
-## factor(Tampa_Cat)2  0.3526  0.4319 0.4143 -0.4940  1.1993 1.4228 0.6102 3.3178
-## factor(Tampa_Cat)3  0.6304  0.4573 0.1691 -0.2698  1.5307 1.8784 0.7635 4.6214
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{pool_lr}\OperatorTok{$}\NormalTok{multiparm_p}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## NULL
-\end{verbatim}
-
-Pooling a multivariable regression model that contains a mix of continuous, dichotomous and categorical variables can easily be performed with the \texttt{psfmi\_lr} function. With the next code example, pooling is done in 10 multiple imputed datasets that are stored in the file \texttt{lbpmilr} (see \texttt{?lbpmilr} for more information about the dataset) . The relationship with the outcome variable ``Chronic'' is estimated, using a model with 2 dichotomous, 4 continuous and 2 categorical variables. The method to obtain a pooled p-value for the categorical variables is the Meng and Rubin or D3 method, indicated by \texttt{method="D3"}. To obtain a pooled p-value for continuous and dichotomous variables Rubin's Rules are used.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(foreign)}
 \KeywordTok{library}\NormalTok{(psfmi)}
 
 \NormalTok{pool_lr <-}\StringTok{ }\KeywordTok{psfmi_lr}\NormalTok{(}\DataTypeTok{data=}\NormalTok{lbpmilr, }\DataTypeTok{nimp=}\DecValTok{10}\NormalTok{, }\DataTypeTok{impvar=}\StringTok{"Impnr"}\NormalTok{, }\DataTypeTok{Outcome=}\StringTok{"Chronic"}\NormalTok{,}
   \DataTypeTok{predictors=}\KeywordTok{c}\NormalTok{(}\StringTok{"Gender"}\NormalTok{, }\StringTok{"Smoking"}\NormalTok{, }\StringTok{"Function"}\NormalTok{, }\StringTok{"JobControl"}\NormalTok{, }\StringTok{"JobDemands"}\NormalTok{,}
   \StringTok{"SocialSupport"}\NormalTok{), }\DataTypeTok{cat.predictors =} \KeywordTok{c}\NormalTok{(}\StringTok{"Carrying"}\NormalTok{, }\StringTok{"Satisfaction"}\NormalTok{), }
-  \DataTypeTok{method=}\StringTok{"D3"}\NormalTok{, }\DataTypeTok{print.method =} \OtherTok{FALSE}\NormalTok{)}
+  \DataTypeTok{method=}\StringTok{"D3"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## 
-## Pooled model correctly estimated
-##            using a p-value of 1
+## Warning: The `keep` argument of `group_split()` is deprecated as of dplyr 1.0.0.
+## Please use the `.keep` argument instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pool_lr}\OperatorTok{$}\NormalTok{RR_Model}
+\NormalTok{pool_lr}\OperatorTok{$}\NormalTok{RR_model}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## $`Step 1`
-##                           est std.err signif   lower  upper     OR   L.OR
-## (Intercept)           -2.2989  2.7095 0.3962 -7.6115 3.0138 0.1004 0.0005
-## Gender                -0.2877  0.4580 0.5299 -1.1855 0.6101 0.7500 0.3056
-## Smoking               -0.0245  0.3761 0.9481 -0.7617 0.7128 0.9758 0.4669
-## Function              -0.0811  0.0505 0.1088 -0.1802 0.0180 0.9221 0.8351
-## JobControl             0.0027  0.0215 0.8996 -0.0394 0.0448 1.0027 0.9614
-## JobDemands             0.0171  0.0412 0.6772 -0.0636 0.0979 1.0173 0.9384
-## SocialSupport          0.0681  0.0610 0.2637 -0.0514 0.1876 1.0705 0.9499
-## factor(Carrying)2      1.3724  0.5369 0.0108  0.3184 2.4264 3.9448 1.3749
-## factor(Carrying)3      2.2255  0.5642 0.0001  1.1195 3.3315 9.2581 3.0632
-## factor(Satisfaction)2 -0.5350  0.4849 0.2704 -1.4877 0.4176 0.5857 0.2259
-## factor(Satisfaction)3 -1.0488  0.6013 0.0818 -2.2306 0.1330 0.3504 0.1075
-##                          U.OR
-## (Intercept)           20.3636
-## Gender                 1.8406
-## Smoking                2.0396
-## Function               1.0182
-## JobControl             1.0458
-## JobDemands             1.1028
-## SocialSupport          1.2064
-## factor(Carrying)2     11.3180
-## factor(Carrying)3     27.9807
-## factor(Satisfaction)2  1.5184
-## factor(Satisfaction)3  1.1422
+## $`Step 1 - no variables removed -`
+##                     term     estimate  std.error   statistic        df
+## 1            (Intercept) -2.298884156 2.70946463 -0.84846435 131.80215
+## 2                 Gender -0.287716530 0.45800040 -0.62820147 138.79112
+## 3                Smoking -0.024470165 0.37611364 -0.06506056 141.52168
+## 4               Function -0.081066575 0.05051515 -1.60479742 123.41654
+## 5             JobControl  0.002706353 0.02145167  0.12616047 119.96270
+## 6             JobDemands  0.017142705 0.04116611  0.41642764 124.59855
+## 7          SocialSupport  0.068131905 0.06095760  1.11769335 139.47522
+## 8      factor(Carrying)2  1.372404083 0.53685785  2.55636402 109.96849
+## 9      factor(Carrying)3  2.225494978 0.56415125  3.94485517 135.14483
+## 10 factor(Satisfaction)2 -0.535017938 0.48487281 -1.10341914 100.59601
+## 11 factor(Satisfaction)3 -1.048782938 0.60133404 -1.74409374  97.98729
+##         p.value        OR   lower.EXP upper.EXP
+## 1  0.3977177144 0.1003708 0.000495752 20.321238
+## 2  0.5309043257 0.7499742 0.305624724  1.840366
+## 3  0.9482175928 0.9758268 0.466894062  2.039516
+## 4  0.1110943286 0.9221323 0.835206515  1.018105
+## 5  0.8998160992 1.0027100 0.961424801  1.045768
+## 6  0.6778135681 1.0172905 0.938433891  1.102773
+## 7  0.2656195026 1.0705065 0.949950888  1.206361
+## 8  0.0119415357 3.9448230 1.377351846 11.298223
+## 9  0.0001277054 9.2580642 3.064114210 27.972767
+## 10 0.2724777817 0.5856588 0.226418857  1.514875
+## 11 0.0842786793 0.3503639 0.107808620  1.138637
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pool_lr}\OperatorTok{$}\NormalTok{multiparm_p}
+\NormalTok{pool_lr}\OperatorTok{$}\NormalTok{multiparm}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## NULL
+## $`Step 1 - no variables removed -`
+##                       p-values D3 F-statistic
+## Gender               0.5395154947 0.376623728
+## Smoking              0.9578727441 0.002790571
+## Function             0.0994785556 2.720351227
+## JobControl           0.8893112153 0.019392026
+## JobDemands           0.6749011364 0.176089120
+## SocialSupport        0.2584423067 1.277387008
+## factor(Carrying)     0.0002628256 8.320616618
+## factor(Satisfaction) 0.2034079261 1.596048233
 \end{verbatim}
 
-In the final table that is called ``Mixed p-values (D3 \& RR)'', the pooled p-values can be found for all variables, including the categorical variables that are pooled by the Meng and Rubin or D3 method. For the dichotomous and continuous variables the pooled p-value estimated by Rubin's Rules is reported. These are equal to the p-values in the first table under ``Pooled model (Rubin's Rules)''. You can set \texttt{print.method\ =\ TRUE}, to obtain the table with the pooled p-values by the D3 method for all variables.
+In the table that is the pooled p-values can be found for all variables, including the categorical variables that are pooled by the Meng and Rubin or D3 method.
 
 \hypertarget{cox-regression-with-a-categorical-variable-in-r}{%
 \section{Cox Regression with a categorical variable in R}\label{cox-regression-with-a-categorical-variable-in-r}}
 
-In the psfmi package, a function that is called \texttt{psfmi\_coxr}is also available to obtain overall pooled p-values for categorical variables in Cox regression models, because this is also not possible in SPSS. All pooling methods can be applied, except for the Meng and Rubin procedure. The Meng and Rubin procedure is not recommended to use for Cox regression models (\citet{Marshall2009MedResMeth}).
+With the function \texttt{psfmi\_coxr}it is also available to obtain overall pooled p-values for categorical variables in Cox regression models. All pooling methods can be applied, except for the Meng and Rubin procedure. The Meng and Rubin procedure is not recommended to use for Cox regression models (\citet{Marshall2009MedResMeth}).
 
-To pool a Cox regression model with a mix of continuous and dichotomous variables and 1 categorical variable over 10 impted datasets (see \texttt{?psfmi::lbpmicox} for more information on the dataset) and pooling method ``D1'' use:
+To pool a Cox regression model with a mix of continuous and dichotomous variables and 1 categorical variable over 10 imputed datasets (see \texttt{?psfmi::lbpmicox} for more information on the dataset) use the following code:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(foreign)}
 \KeywordTok{library}\NormalTok{(psfmi)}
 
 \NormalTok{pool_coxr <-}\StringTok{ }\KeywordTok{psfmi_coxr}\NormalTok{(}\DataTypeTok{data=}\NormalTok{lbpmicox, }\DataTypeTok{nimp=}\DecValTok{10}\NormalTok{, }\DataTypeTok{impvar=}\StringTok{"Impnr"}\NormalTok{, }\DataTypeTok{time=}\StringTok{"Time"}\NormalTok{, }\DataTypeTok{status=}\StringTok{"Status"}\NormalTok{,}
   \DataTypeTok{predictors=}\KeywordTok{c}\NormalTok{(}\StringTok{"Duration"}\NormalTok{, }\StringTok{"Radiation"}\NormalTok{, }\StringTok{"Onset"}\NormalTok{, }\StringTok{"Function"}\NormalTok{, }\StringTok{"Age"}\NormalTok{,}
   \StringTok{"Previous"}\NormalTok{, }\StringTok{"Tampascale"}\NormalTok{, }\StringTok{"JobControl"}\NormalTok{, }\StringTok{"JobDemand"}\NormalTok{, }\StringTok{"Social"}\NormalTok{), }
-  \DataTypeTok{cat.predictors=}\KeywordTok{c}\NormalTok{(}\StringTok{"Expect_cat"}\NormalTok{), }\DataTypeTok{method=}\StringTok{"D1"}\NormalTok{, }\DataTypeTok{print.method =} \OtherTok{FALSE}\NormalTok{)}
+  \DataTypeTok{cat.predictors=}\KeywordTok{c}\NormalTok{(}\StringTok{"Expect_cat"}\NormalTok{), }\DataTypeTok{method=}\StringTok{"D1"}\NormalTok{)}
+\NormalTok{pool_coxr}\OperatorTok{$}\NormalTok{RR_model}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## 
-## Pooled model correctly estimated
-##             using a p-value of 1
+## $`Step 1 - no variables removed -`
+##                   term     estimate   std.error  statistic       df     p.value
+## 1             Duration -0.007783573 0.003994353 -1.9486444 178.4911 0.052905679
+## 2            Radiation -0.074780449 0.153355337 -0.4876286 178.9568 0.626409768
+## 3                Onset -0.093662790 0.175923953 -0.5324050 178.9837 0.595105843
+## 4             Function  0.043898605 0.016858458  2.6039514 177.8688 0.009994408
+## 5                  Age -0.008894365 0.007706700 -1.1541081 178.4243 0.249999346
+## 6             Previous -0.099450041 0.199199462 -0.4992485 178.2878 0.618219792
+## 7           Tampascale -0.023507309 0.013833192 -1.6993409 167.8956 0.091106980
+## 8           JobControl -0.008335826 0.008327722 -1.0009731 178.8756 0.318191958
+## 9            JobDemand -0.021797568 0.015502737 -1.4060465 178.7206 0.161446545
+## 10              Social -0.051460196 0.024886468 -2.0677983 178.7147 0.040099732
+## 11 factor(Expect_cat)2  0.243470041 0.230764671  1.0550577 178.5326 0.292824622
+## 12 factor(Expect_cat)3  0.227934593 0.200197639  1.1385479 178.8455 0.256414596
+##           HR lower.EXP upper.EXP
+## 1  0.9922466 0.9845087 1.0000454
+## 2  0.9279472 0.6870440 1.2533200
+## 3  0.9105898 0.6450201 1.2855005
+## 4  1.0448764 1.0109152 1.0799786
+## 5  0.9911451 0.9762862 1.0062301
+## 6  0.9053352 0.6126993 1.3377390
+## 7  0.9767668 0.9506395 1.0036123
+## 8  0.9916988 0.9756434 1.0080185
+## 9  0.9784383 0.9491552 1.0086248
+## 10 0.9498415 0.9046224 0.9973209
+## 11 1.2756681 0.8115342 2.0052501
+## 12 1.2560032 0.8483578 1.8595266
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pool_coxr}\OperatorTok{$}\NormalTok{RR_Model}
+\NormalTok{pool_coxr}\OperatorTok{$}\NormalTok{multiparm}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## $`Step 1`
-##                         est std.err signif   lower   upper     HR   L.HR   U.HR
-## Duration            -0.0078  0.0040 0.0513 -0.0156  0.0000 0.9922 0.9845 1.0000
-## Radiation           -0.0748  0.1534 0.6258 -0.3754  0.2258 0.9279 0.6870 1.2533
-## Onset               -0.0937  0.1759 0.5944 -0.4385  0.2511 0.9106 0.6450 1.2854
-## Function             0.0439  0.0169 0.0092  0.0109  0.0769 1.0449 1.0110 1.0799
-## Age                 -0.0089  0.0077 0.2485 -0.0240  0.0062 0.9911 0.9763 1.0062
-## Previous            -0.0995  0.1992 0.6176 -0.4899  0.2910 0.9053 0.6127 1.3378
-## Tampascale          -0.0235  0.0138 0.0893 -0.0506  0.0036 0.9768 0.9507 1.0036
-## JobControl          -0.0083  0.0083 0.3168 -0.0247  0.0080 0.9917 0.9756 1.0080
-## JobDemand           -0.0218  0.0155 0.1597 -0.0522  0.0086 0.9784 0.9491 1.0086
-## Social              -0.0515  0.0249 0.0387 -0.1002 -0.0027 0.9498 0.9047 0.9973
-## factor(Expect_cat)2  0.2435  0.2308 0.2914 -0.2088  0.6958 1.2757 0.8116 2.0053
-## factor(Expect_cat)3  0.2279  0.2002 0.2549 -0.1644  0.6203 1.2560 0.8484 1.8595
+## $`Step 1 - no variables removed -`
+##                    p-values D1 F-statistic
+## Duration            0.05133866   3.7972150
+## Radiation           0.62581293   0.2377817
+## Onset               0.59444553   0.2834551
+## Function            0.00921711   6.7805627
+## Age                 0.24845677   1.3319656
+## Previous            0.61760484   0.2492491
+## Tampascale          0.08939452   2.8877596
+## JobControl          0.31683987   1.0019472
+## JobDemand           0.15971062   1.9769667
+## Social              0.03865924   4.2757898
+## factor(Expect_cat)  0.48303066   0.7276753
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{pool_coxr}\OperatorTok{$}\NormalTok{multiparm_p}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## NULL
-\end{verbatim}
-
-The pooled p-values are shown in the table that is called ``Pooled p-values (D1 \& RR)''. For the categorical variable \texttt{factor(Expect\_cat)}, the p-value is pooled using method ``D1'' and for all other variables Rubin's ules are used. These p-values are the same as the p-values in the ``Pooled model (Rubin's Rules)'' table above in the output. You can set \texttt{print.method\ =\ TRUE} to obtain the pooled p-values by method ``D1'' for all variables.
-
-For more information about pooling possibilities of logistic and Cox regression models with the psfmi package see \texttt{?psfmi::psfmi\_lr} or \texttt{?psfmi::psfmi\_coxr}.
+The pooled p-values according to method ``D1'' are shown in the last table.For more information about pooling possibilities of logistic and Cox regression models with the psfmi package see \texttt{?psfmi::psfmi\_lr} or \texttt{?psfmi::psfmi\_coxr}.
 
 \hypertarget{variable-selection}{%
 \section{Variable selection}\label{variable-selection}}
 
-Prediction models are frequently developed by using selection procedures in logistic and Cox regression models. As a selection procedure, backward selection is generally recommended (\citet{Moons2015}). However, variable selection in multiple imputed datasets may be challenging. When you apply variable selection in each imputed dataset, different variables may be selected between imputed datasets. The question is than what is the best procedure to merge these different selected models into one final model. Wood (\citet{Wood2008}) showed that the best choice to select variables from multiply imputed datasets is to start your selection procedure in the pooled model. It is possible to do this in SPSS when the model includes continuous and dichotomous variables. This is however not possible in SPSS when the model contains categorical variables. Because categorical variables are estimated and selected by using an overall Wald Chi-square value and as we have seen in the previous paragraphs that that is not possible in SPSS. For that reason we have developed the R \texttt{psfmi} package, that contains functions to pool and select variables in multiple imputed datasets.
+Prediction models are frequently developed by using selection procedures in logistic and Cox regression models. As a selection procedure, backward selection is generally recommended (\citet{Moons2015}). Variable selection in multiple imputed data sets may be challenging. When you apply variable selection in each imputed data set, different variables may be selected between imputed data sets. The question is than what is the best procedure to merge these different selected models into one final model. Wood (\citet{Wood2008}) showed that the best choice to select variables from multiply imputed data sets is to start your selection procedure from the pooled model. It is possible to do this in SPSS when the model includes continuous and dichotomous variables. This is however not possible in SPSS when the model contains categorical variables. Because categorical variables are estimated and selected by using an overall Wald Chi-square value and as we have seen in the previous paragraphs that that is not possible in SPSS. This is possible with the \texttt{psfmi} package, where you can choose between backward or forward selection.
 
 \hypertarget{variable-selection-with-logistic-regression-models-in-r}{%
 \subsection{Variable Selection with Logistic Regression models in R}\label{variable-selection-with-logistic-regression-models-in-r}}
 
-For variable selection we use the \texttt{psfmi} package that was introduced in paragraph 6.2 (see that paragraph of how to install the package). With this package variable selection can be applied by using different methods to obtain pooled p-values and to select on basis of these pooled p-values. These methods were introduced in paragraph 6.1 and 6.2 and are called the ``D1'', ``D2'', ``D3'' (Meng and Rubin) and ``MPR'' (Median P Rule). Variable selection of the multivariable model that was pooled in paragraph 6.2 can be done by using the following code, where method ``D1'' is used and a p-value of 0.05 as selection criterium.
+Variable selection can be applied by using different methods to obtain pooled p-values and to select on basis of these pooled p-values. These methods were introduced in paragraph 6.1 and 6.2 and are called the ``D1'', ``D2'', ``D3'' (Meng and Rubin) and ``MPR'' (Median P Rule). Variable selection from the multivariable model that was pooled in paragraph 6.2 can be done by using the following settings in the \texttt{psfmi} function, method is ``D1'', a p-value of 0.05 as selection criterion and direction=``BW'' for backward selection.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(foreign)}
 \KeywordTok{library}\NormalTok{(psfmi)}
 
 \NormalTok{pool_lr <-}\StringTok{ }\KeywordTok{psfmi_lr}\NormalTok{(}\DataTypeTok{data=}\NormalTok{lbpmilr, }\DataTypeTok{nimp=}\DecValTok{10}\NormalTok{, }\DataTypeTok{impvar=}\StringTok{"Impnr"}\NormalTok{, }\DataTypeTok{Outcome=}\StringTok{"Chronic"}\NormalTok{,}
   \DataTypeTok{predictors=}\KeywordTok{c}\NormalTok{(}\StringTok{"Gender"}\NormalTok{, }\StringTok{"Smoking"}\NormalTok{, }\StringTok{"Function"}\NormalTok{, }\StringTok{"JobControl"}\NormalTok{, }\StringTok{"JobDemands"}\NormalTok{,}
   \StringTok{"SocialSupport"}\NormalTok{), }\DataTypeTok{cat.predictors =} \KeywordTok{c}\NormalTok{(}\StringTok{"Carrying"}\NormalTok{, }\StringTok{"Satisfaction"}\NormalTok{), }
-  \DataTypeTok{p.crit =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{method=}\StringTok{"D1"}\NormalTok{, }\DataTypeTok{print.method =} \OtherTok{FALSE}\NormalTok{)}
+  \DataTypeTok{p.crit =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{method=}\StringTok{"D1"}\NormalTok{, }\DataTypeTok{direction=}\StringTok{"BW"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Variable excluded at Step 1 is - Smoking
+## Removed at Step 1 is - Smoking
 \end{verbatim}
 
 \begin{verbatim}
-## Variable excluded at Step 2 is - JobControl
+## Removed at Step 2 is - JobControl
 \end{verbatim}
 
 \begin{verbatim}
-## Variable excluded at Step 3 is - JobDemands
+## Removed at Step 3 is - JobDemands
 \end{verbatim}
 
 \begin{verbatim}
-## Variable excluded at Step 4 is - Gender
+## Removed at Step 4 is - Gender
 \end{verbatim}
 
 \begin{verbatim}
-## Variable excluded at Step 5 is - factor(Satisfaction)
+## Removed at Step 5 is - SocialSupport
 \end{verbatim}
 
 \begin{verbatim}
-## Variable excluded at Step 6 is - SocialSupport
+## Removed at Step 6 is - factor(Satisfaction)
 \end{verbatim}
 
 \begin{verbatim}
-## Variable excluded at Step 7 is - Function
+## Removed at Step 7 is - Function
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Selection correctly terminated, 
+## No more variables removed from the model
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pool_lr}\OperatorTok{$}\NormalTok{RR_Model}
+\NormalTok{pool_lr}\OperatorTok{$}\NormalTok{RR_model}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## $`Step 1`
-##                           est std.err signif   lower  upper     OR   L.OR
-## (Intercept)           -2.2989  2.7095 0.3962 -7.6115 3.0138 0.1004 0.0005
-## Gender                -0.2877  0.4580 0.5299 -1.1855 0.6101 0.7500 0.3056
-## Smoking               -0.0245  0.3761 0.9481 -0.7617 0.7128 0.9758 0.4669
-## Function              -0.0811  0.0505 0.1088 -0.1802 0.0180 0.9221 0.8351
-## JobControl             0.0027  0.0215 0.8996 -0.0394 0.0448 1.0027 0.9614
-## JobDemands             0.0171  0.0412 0.6772 -0.0636 0.0979 1.0173 0.9384
-## SocialSupport          0.0681  0.0610 0.2637 -0.0514 0.1876 1.0705 0.9499
-## factor(Carrying)2      1.3724  0.5369 0.0108  0.3184 2.4264 3.9448 1.3749
-## factor(Carrying)3      2.2255  0.5642 0.0001  1.1195 3.3315 9.2581 3.0632
-## factor(Satisfaction)2 -0.5350  0.4849 0.2704 -1.4877 0.4176 0.5857 0.2259
-## factor(Satisfaction)3 -1.0488  0.6013 0.0818 -2.2306 0.1330 0.3504 0.1075
-##                          U.OR
-## (Intercept)           20.3636
-## Gender                 1.8406
-## Smoking                2.0396
-## Function               1.0182
-## JobControl             1.0458
-## JobDemands             1.1028
-## SocialSupport          1.2064
-## factor(Carrying)2     11.3180
-## factor(Carrying)3     27.9807
-## factor(Satisfaction)2  1.5184
-## factor(Satisfaction)3  1.1422
+## $`Step 1 - removal - Smoking`
+##                     term     estimate  std.error   statistic        df
+## 1            (Intercept) -2.298884156 2.70946463 -0.84846435 131.80215
+## 2                 Gender -0.287716530 0.45800040 -0.62820147 138.79112
+## 3                Smoking -0.024470165 0.37611364 -0.06506056 141.52168
+## 4               Function -0.081066575 0.05051515 -1.60479742 123.41654
+## 5             JobControl  0.002706353 0.02145167  0.12616047 119.96270
+## 6             JobDemands  0.017142705 0.04116611  0.41642764 124.59855
+## 7          SocialSupport  0.068131905 0.06095760  1.11769335 139.47522
+## 8      factor(Carrying)2  1.372404083 0.53685785  2.55636402 109.96849
+## 9      factor(Carrying)3  2.225494978 0.56415125  3.94485517 135.14483
+## 10 factor(Satisfaction)2 -0.535017938 0.48487281 -1.10341914 100.59601
+## 11 factor(Satisfaction)3 -1.048782938 0.60133404 -1.74409374  97.98729
+##         p.value        OR   lower.EXP upper.EXP
+## 1  0.3977177144 0.1003708 0.000495752 20.321238
+## 2  0.5309043257 0.7499742 0.305624724  1.840366
+## 3  0.9482175928 0.9758268 0.466894062  2.039516
+## 4  0.1110943286 0.9221323 0.835206515  1.018105
+## 5  0.8998160992 1.0027100 0.961424801  1.045768
+## 6  0.6778135681 1.0172905 0.938433891  1.102773
+## 7  0.2656195026 1.0705065 0.949950888  1.206361
+## 8  0.0119415357 3.9448230 1.377351846 11.298223
+## 9  0.0001277054 9.2580642 3.064114210 27.972767
+## 10 0.2724777817 0.5856588 0.226418857  1.514875
+## 11 0.0842786793 0.3503639 0.107808620  1.138637
 ## 
-## $`Step 2`
-##                           est std.err signif   lower  upper     OR   L.OR
-## (Intercept)           -2.3053  2.7050 0.3942 -7.6092 2.9986 0.0997 0.0005
-## Gender                -0.2891  0.4575 0.5275 -1.1859 0.6078 0.7490 0.3055
-## Function              -0.0813  0.0505 0.1075 -0.1802 0.0177 0.9219 0.8351
-## JobControl             0.0027  0.0214 0.9001 -0.0394 0.0448 1.0027 0.9614
-## JobDemands             0.0171  0.0412 0.6776 -0.0636 0.0978 1.0173 0.9384
-## SocialSupport          0.0682  0.0609 0.2634 -0.0513 0.1876 1.0705 0.9500
-## factor(Carrying)2      1.3668  0.5319 0.0104  0.3225 2.4112 3.9230 1.3806
-## factor(Carrying)3      2.2220  0.5629 0.0001  1.1185 3.3254 9.2255 3.0602
-## factor(Satisfaction)2 -0.5316  0.4818 0.2704 -1.4782 0.4150 0.5877 0.2280
-## factor(Satisfaction)3 -1.0427  0.5942 0.0799 -2.2102 0.1248 0.3525 0.1097
-##                          U.OR
-## (Intercept)           20.0575
-## Gender                 1.8363
-## Function               1.0179
-## JobControl             1.0458
-## JobDemands             1.1028
-## SocialSupport          1.2064
-## factor(Carrying)2     11.1474
-## factor(Carrying)3     27.8114
-## factor(Satisfaction)2  1.5143
-## factor(Satisfaction)3  1.1329
+## $`Step 2 - removal - JobControl`
+##                     term     estimate  std.error  statistic       df
+## 1            (Intercept) -2.305291511 2.70502030 -0.8522271 132.7674
+## 2                 Gender -0.289071210 0.45750446 -0.6318435 139.7058
+## 3               Function -0.081272411 0.05045719 -1.6107202 123.8316
+## 4             JobControl  0.002692794 0.02143825  0.1256069 120.6760
+## 5             JobDemands  0.017116963 0.04115819  0.4158823 125.4520
+## 6          SocialSupport  0.068160926 0.06094494  1.1184017 140.4387
+## 7      factor(Carrying)2  1.366848152 0.53193989  2.5695538 110.2454
+## 8      factor(Carrying)3  2.221969432 0.56285759  3.9476583 136.1990
+## 9  factor(Satisfaction)2 -0.531622312 0.48184969 -1.1032949 102.7084
+## 10 factor(Satisfaction)3 -1.042673978 0.59418183 -1.7548062 100.6774
+##         p.value         OR    lower.EXP upper.EXP
+## 1  0.3956227615 0.09972972 0.0004968953 20.016327
+## 2  0.5285217348 0.74895887 0.3055078041  1.836089
+## 3  0.1097868616 0.92194251 0.8351294808  1.017780
+## 4  0.9002520845 1.00269642 0.9614370526  1.045726
+## 5  0.6782067036 1.01726430 0.9384242901  1.102728
+## 6  0.2653048850 1.07053757 0.9500020251  1.206367
+## 7  0.0115181418 3.92296659 1.3829874332 11.127843
+## 8  0.0001259448 9.22548194 3.0610823023 27.803734
+## 9  0.2724774479 0.58765084 0.2285391595  1.511047
+## 10 0.0823346846 0.35251081 0.1100005014  1.129666
 ## 
-## $`Step 3`
-##                           est std.err signif   lower  upper     OR   L.OR
-## (Intercept)           -2.1078  2.2395 0.3467 -6.5001 2.2846 0.1215 0.0015
-## Gender                -0.3039  0.4472 0.4969 -1.1807 0.5729 0.7379 0.3071
-## Function              -0.0800  0.0496 0.1072 -0.1773 0.0173 0.9231 0.8375
-## JobDemands             0.0169  0.0412 0.6819 -0.0639 0.0976 1.0170 0.9381
-## SocialSupport          0.0666  0.0598 0.2649 -0.0505 0.1838 1.0689 0.9507
-## factor(Carrying)2      1.3628  0.5318 0.0106  0.3186 2.4070 3.9072 1.3752
-## factor(Carrying)3      2.2206  0.5623 0.0001  1.1181 3.3230 9.2124 3.0590
-## factor(Satisfaction)2 -0.5278  0.4806 0.2726 -1.4719 0.4163 0.5899 0.2295
-## factor(Satisfaction)3 -1.0482  0.5936 0.0781 -2.2147 0.1184 0.3506 0.1092
-##                          U.OR
-## (Intercept)            9.8213
-## Gender                 1.7735
-## Function               1.0175
-## JobDemands             1.1026
-## SocialSupport          1.2018
-## factor(Carrying)2     11.1008
-## factor(Carrying)3     27.7439
-## factor(Satisfaction)2  1.5163
-## factor(Satisfaction)3  1.1256
+## $`Step 3 - removal - JobDemands`
+##                    term    estimate  std.error  statistic       df      p.value
+## 1           (Intercept) -2.10777898 2.23946055 -0.9411994 127.2701 0.3483857231
+## 2                Gender -0.30388145 0.44724067 -0.6794584 136.6301 0.4979969233
+## 3              Function -0.07997909 0.04960562 -1.6122990 121.6983 0.1094872554
+## 4            JobDemands  0.01687441 0.04116528  0.4099186 124.2023 0.6825718579
+## 5         SocialSupport  0.06664849 0.05977564  1.1149774 140.9667 0.2667573500
+## 6     factor(Carrying)2  1.36281048 0.53184025  2.5624433 110.3218 0.0117418616
+## 7     factor(Carrying)3  2.22055062 0.56233236  3.9488224 136.6557 0.0001252143
+## 8 factor(Satisfaction)2 -0.52782215 0.48058337 -1.0982947 103.4591 0.2746252649
+## 9 factor(Satisfaction)3 -1.04815781 0.59363812 -1.7656511 100.3204 0.0804968712
+##          OR   lower.EXP upper.EXP
+## 1 0.1215075 0.001507773  9.791980
+## 2 0.7379483 0.307133379  1.773066
+## 3 0.9231356 0.837607126  1.017398
+## 4 1.0170176 0.938183672  1.102476
+## 5 1.0689197 0.950742742  1.201786
+## 6 3.9071589 1.377683690 11.080839
+## 7 9.2124020 3.059890696 27.735746
+## 8 0.5898883 0.229979395  1.513041
+## 9 0.3505830 0.109515573  1.122292
 ## 
-## $`Step 4`
-##                           est std.err signif   lower  upper     OR   L.OR
-## (Intercept)           -1.4903  1.6242 0.3589 -4.6740 1.6935 0.2253 0.0093
-## Gender                -0.3338  0.4380 0.4461 -1.1925 0.5249 0.7162 0.3035
-## Function              -0.0815  0.0495 0.0998 -0.1785 0.0156 0.9218 0.8365
-## SocialSupport          0.0665  0.0598 0.2656 -0.0506 0.1837 1.0688 0.9507
-## factor(Carrying)2      1.3448  0.5262 0.0108  0.3120 2.3775 3.8373 1.3661
-## factor(Carrying)3      2.1994  0.5569 0.0001  1.1076 3.2911 9.0192 3.0271
-## factor(Satisfaction)2 -0.5116  0.4773 0.2842 -1.4491 0.4258 0.5995 0.2348
-## factor(Satisfaction)3 -1.0310  0.5934 0.0830 -2.1972 0.1352 0.3567 0.1111
-##                          U.OR
-## (Intercept)            5.4383
-## Gender                 1.6903
-## Function               1.0157
-## SocialSupport          1.2016
-## factor(Carrying)2     10.7782
-## factor(Carrying)3     26.8724
-## factor(Satisfaction)2  1.5309
-## factor(Satisfaction)3  1.1448
+## $`Step 4 - removal - Gender`
+##                    term    estimate  std.error  statistic        df
+## 1           (Intercept) -1.49026863 1.62421415 -0.9175321 143.10301
+## 2                Gender -0.33380360 0.43803902 -0.7620408 140.12403
+## 3              Function -0.08145016 0.04945028 -1.6471123 121.73159
+## 4         SocialSupport  0.06652752 0.05975615  1.1133167 142.13039
+## 5     factor(Carrying)2  1.34476016 0.52615210  2.5558392 114.70848
+## 6     factor(Carrying)3  2.19935239 0.55690548  3.9492382 139.54866
+## 7 factor(Satisfaction)2 -0.51163883 0.47725869 -1.0720367 105.16687
+## 8 factor(Satisfaction)3 -1.03097451 0.59335708 -1.7375280  98.73457
+##        p.value        OR   lower.EXP upper.EXP
+## 1 0.3604076635 0.2253121 0.009337391  5.436802
+## 2 0.4473164214 0.7161944 0.303504122  1.690041
+## 3 0.1021140654 0.9217786 0.836630547  1.015593
+## 4 0.2674517413 1.0687904 0.950664059  1.201595
+## 5 0.0119008226 3.8372661 1.368208271 10.761966
+## 6 0.0001238953 9.0191707 3.027743606 26.866687
+## 7 0.2861574758 0.5995123 0.235259561  1.527738
+## 8 0.0854121555 0.3566592 0.111475061  1.141114
 ## 
-## $`Step 5`
-##                           est std.err signif   lower  upper     OR   L.OR
-## (Intercept)           -1.8343  1.5512 0.2370 -4.8747 1.2062 0.1597 0.0076
-## Function              -0.0846  0.0492 0.0854 -0.1811 0.0118 0.9189 0.8344
-## SocialSupport          0.0694  0.0590 0.2397 -0.0463 0.1852 1.0719 0.9547
-## factor(Carrying)2      1.4174  0.5153 0.0061  0.4060 2.4287 4.1263 1.5008
-## factor(Carrying)3      2.2117  0.5567 0.0001  1.1203 3.3030 9.1311 3.0659
-## factor(Satisfaction)2 -0.4831  0.4739 0.3084 -1.4138 0.4477 0.6169 0.2432
-## factor(Satisfaction)3 -0.9882  0.5877 0.0934 -2.1433 0.1668 0.3722 0.1173
-##                          U.OR
-## (Intercept)            3.3408
-## Function               1.0119
-## SocialSupport          1.2034
-## factor(Carrying)2     11.3443
-## factor(Carrying)3     27.1947
-## factor(Satisfaction)2  1.5646
-## factor(Satisfaction)3  1.1816
+## $`Step 5 - removal - SocialSupport`
+##                    term    estimate  std.error statistic       df      p.value
+## 1           (Intercept) -1.83426824 1.55119482 -1.182487 145.7793 0.2389374534
+## 2              Function -0.08461791 0.04915512 -1.721446 123.9954 0.0876637699
+## 3         SocialSupport  0.06943358 0.05904870  1.175870 144.0310 0.2415868450
+## 4     factor(Carrying)2  1.41737344 0.51529645  2.750598 117.0798 0.0068942977
+## 5     factor(Carrying)3  2.21168140 0.55667467  3.973023 139.3247 0.0001133678
+## 6 factor(Satisfaction)2 -0.48309188 0.47389039 -1.019417 107.0790 0.3103028134
+## 7 factor(Satisfaction)3 -0.98823853 0.58774671 -1.681402 100.1208 0.0958017791
+##          OR   lower.EXP upper.EXP
+## 1 0.1597303 0.007638072  3.340343
+## 2 0.9188633 0.834467104  1.011795
+## 3 1.0719009 0.954753715  1.203422
+## 4 4.1262683 1.502893718 11.328872
+## 5 9.1310564 3.066690708 27.187675
+## 6 0.6168731 0.243675697  1.561635
+## 7 0.3722318 0.117628718  1.177914
 ## 
-## $`Step 6`
-##                       est std.err signif   lower  upper     OR   L.OR    U.OR
-## (Intercept)       -2.2040  1.5100 0.1444 -5.1639 0.7559 0.1104 0.0057  2.1296
-## Function          -0.0722  0.0474 0.1280 -0.1653 0.0208 0.9303 0.8477  1.0210
-## SocialSupport      0.0632  0.0578 0.2743 -0.0501 0.1764 1.0652 0.9511  1.1930
-## factor(Carrying)2  1.3758  0.5069 0.0068  0.3810 2.3705 3.9581 1.4638 10.7023
-## factor(Carrying)3  2.0069  0.5361 0.0002  0.9559 3.0579 7.4401 2.6009 21.2827
+## $`Step 6 - removal - factor(Satisfaction)`
+##                    term   estimate  std.error  statistic       df      p.value
+## 1           (Intercept) -0.2562418 0.80887524 -0.3167878 129.2721 0.7519156211
+## 2              Function -0.0800438 0.04892178 -1.6361587 123.5788 0.1043507473
+## 3     factor(Carrying)2  1.3950528 0.51127910  2.7285544 120.4119 0.0073142359
+## 4     factor(Carrying)3  2.1630529 0.55215055  3.9175056 142.2884 0.0001384142
+## 5 factor(Satisfaction)2 -0.4668701 0.46837359 -0.9967901 111.6805 0.3210212648
+## 6 factor(Satisfaction)3 -0.9566312 0.58102627 -1.6464508 104.6421 0.1026711663
+##          OR lower.EXP upper.EXP
+## 1 0.7739548 0.1585576  3.777845
+## 2 0.9230759 0.8386763  1.015969
+## 3 4.0351878 1.4813381 10.991914
+## 4 8.6976501 2.9471476 25.668588
+## 5 0.6269615 0.2503532  1.570104
+## 6 0.3841850 0.1230158  1.199831
 ## 
-## $`Step 7`
-##                       est std.err signif   lower  upper     OR   L.OR    U.OR
-## (Intercept)       -0.7522  0.7209 0.2969 -2.1660 0.6616 0.4713 0.1146  1.9380
-## Function          -0.0681  0.0472 0.1490 -0.1606 0.0244 0.9342 0.8517  1.0247
-## factor(Carrying)2  1.3518  0.5031 0.0073  0.3647 2.3390 3.8645 1.4400 10.3707
-## factor(Carrying)3  1.9632  0.5323 0.0002  0.9196 3.0068 7.1220 2.5083 20.2221
+## $`Step 7 - removal - Function`
+##                term    estimate  std.error statistic       df      p.value
+## 1       (Intercept) -0.75217049 0.72090546 -1.043369 133.0852 0.2986689258
+## 2          Function -0.06808302 0.04716385 -1.443542 133.8147 0.1512047478
+## 3 factor(Carrying)2  1.35182349 0.50310305  2.686971 123.4131 0.0082044805
+## 4 factor(Carrying)3  1.96318987 0.53229181  3.688184 140.7366 0.0003217835
+##          OR lower.EXP upper.EXP
+## 1 0.4713424 0.1147333  1.936349
+## 2 0.9341829 0.8516972  1.024657
+## 3 3.8644659 1.4415826 10.359516
+## 4 7.1220091 2.5090343 20.216150
 ## 
-## $`Step 8`
-##                       est std.err signif   lower   upper     OR   L.OR    U.OR
-## (Intercept)       -1.6359  0.3985  0.000 -2.4173 -0.8544 0.1948 0.0892  0.4255
-## factor(Carrying)2  1.4768  0.4956  0.003  0.5042  2.4495 4.3790 1.6556 11.5821
-## factor(Carrying)3  2.2751  0.4886  0.000  1.3174  3.2328 9.7289 3.7338 25.3501
+## $`Step 8 - removal - ended`
+##                term  estimate std.error statistic       df      p.value
+## 1       (Intercept) -1.635860 0.3984964 -4.105081 136.2077 6.928373e-05
+## 2 factor(Carrying)2  1.476823 0.4956309  2.979683 121.6077 3.484942e-03
+## 3 factor(Carrying)3  2.275099 0.4885529  4.656812 146.4497 7.141622e-06
+##          OR  lower.EXP  upper.EXP
+## 1 0.1947848 0.08919658  0.4253653
+## 2 4.3790126 1.65762629 11.5681996
+## 3 9.7288803 3.73420569 25.3470538
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pool_lr}\OperatorTok{$}\NormalTok{multiparm_p}
+\NormalTok{pool_lr}\OperatorTok{$}\NormalTok{multiparm}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## NULL
+## $`Step 1 - removal - Smoking`
+##                       p-values D1 F-statistic
+## Gender               0.5299231920 0.394637093
+## Smoking              0.9481280019 0.004232877
+## Function             0.1091413298 2.575374761
+## JobControl           0.8996644949 0.015916465
+## JobDemands           0.6772549331 0.173411982
+## SocialSupport        0.2637803526 1.249238433
+## factor(Carrying)     0.0005542759 7.527987156
+## factor(Satisfaction) 0.2067375869 1.579009536
+## 
+## $`Step 2 - removal - JobControl`
+##                       p-values D1 F-statistic
+## Gender               0.5275409424   0.3992262
+## Function             0.1078571780   2.5944195
+## JobControl           0.9001024794   0.0157771
+## JobDemands           0.6776530407   0.1729581
+## SocialSupport        0.2634774617   1.2508223
+## factor(Carrying)     0.0005565268   7.5250676
+## factor(Satisfaction) 0.2037151384   1.5936489
+## 
+## $`Step 3 - removal - JobDemands`
+##                       p-values D1 F-statistic
+## Gender               0.4969551605   0.4616638
+## Function             0.1076277995   2.5995080
+## JobDemands           0.6820414543   0.1680332
+## SocialSupport        0.2649497612   1.2431746
+## factor(Carrying)     0.0005640488   7.5138290
+## factor(Satisfaction) 0.1992050886   1.6160862
+## 
+## $`Step 4 - removal - Gender`
+##                       p-values D1 F-statistic
+## Gender               0.4461198510   0.5807062
+## Function             0.1002912385   2.7129788
+## SocialSupport        0.2656576474   1.2394741
+## factor(Carrying)     0.0005646679   7.5087416
+## factor(Satisfaction) 0.2089058935   1.5685193
+## 
+## $`Step 5 - removal - SocialSupport`
+##                       p-values D1 F-statistic
+## Function             0.0858545802    2.963378
+## SocialSupport        0.2397178007    1.382670
+## factor(Carrying)     0.0004580153    7.715752
+## factor(Satisfaction) 0.2316077904    1.465004
+## 
+## $`Step 6 - removal - factor(Satisfaction)`
+##                       p-values D1 F-statistic
+## Function             0.1025484398    2.677015
+## factor(Carrying)     0.0005943588    7.453469
+## factor(Satisfaction) 0.2472398361    1.399255
+## 
+## $`Step 7 - removal - Function`
+##                  p-values D1 F-statistic
+## Function         0.149295714    2.083815
+## factor(Carrying) 0.001286134    6.679181
+## 
+## $`Step 8 - removal - ended`
+##                   p-values D1 F-statistic
+## factor(Carrying) 3.177679e-05    10.40568
 \end{verbatim}
 
 See \texttt{?psfmi::psfmi\_lr} for other possibilities during variable selection with the \texttt{psfmi\_lr}function like forcing variables in the model during variable selection or variable selection with interaction terms.
@@ -4820,162 +4696,331 @@ See \texttt{?psfmi::psfmi\_lr} for other possibilities during variable selection
 \hypertarget{variable-selection-with-cox-regression-models-in-r}{%
 \subsection{Variable Selection with Cox Regression models in R}\label{variable-selection-with-cox-regression-models-in-r}}
 
-Variable selection with Cox regression models can be applied with the \texttt{psfmi} package, that was introduced in paragraph 6.2 (see that paragraph of how to install the package). The package contains the function \texttt{psfmi\_coxr} that was used in paragraph 6.3 to pool a multivariable Cox regression model. We can apply variable selection in that model by the next code using the ``D1'' method to obtain pooled p-values for categorical variables and Rubin's Rules for dichotomous and continuous variables and using a p-value of 0.05 as selection criterium.
+We can apply backward variable selection for a Cox regression model using the ``D1'' method, a p-value of 0.05 as selection criterium and direction = ``BW'' for backward selection.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(foreign)}
 \KeywordTok{library}\NormalTok{(psfmi)}
 
 \NormalTok{pool_coxr <-}\StringTok{ }\KeywordTok{psfmi_coxr}\NormalTok{(}\DataTypeTok{data=}\NormalTok{lbpmicox, }\DataTypeTok{nimp=}\DecValTok{10}\NormalTok{, }\DataTypeTok{impvar=}\StringTok{"Impnr"}\NormalTok{, }\DataTypeTok{time=}\StringTok{"Time"}\NormalTok{, }\DataTypeTok{status=}\StringTok{"Status"}\NormalTok{,}
   \DataTypeTok{predictors=}\KeywordTok{c}\NormalTok{(}\StringTok{"Duration"}\NormalTok{, }\StringTok{"Radiation"}\NormalTok{, }\StringTok{"Onset"}\NormalTok{, }\StringTok{"Function"}\NormalTok{, }\StringTok{"Age"}\NormalTok{,}
   \StringTok{"Previous"}\NormalTok{, }\StringTok{"Tampascale"}\NormalTok{, }\StringTok{"JobControl"}\NormalTok{, }\StringTok{"JobDemand"}\NormalTok{, }\StringTok{"Social"}\NormalTok{), }
-  \DataTypeTok{cat.predictors=}\KeywordTok{c}\NormalTok{(}\StringTok{"Expect_cat"}\NormalTok{), }\DataTypeTok{p.crit =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{method=}\StringTok{"D1"}\NormalTok{, }\DataTypeTok{print.method =} \OtherTok{FALSE}\NormalTok{)}
+  \DataTypeTok{cat.predictors=}\KeywordTok{c}\NormalTok{(}\StringTok{"Expect_cat"}\NormalTok{), }\DataTypeTok{p.crit =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{method=}\StringTok{"D1"}\NormalTok{, }\DataTypeTok{direction =} \StringTok{"BW"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Variable excluded at Step 1 is - Radiation
+## Removed at Step 1 is - Radiation
 \end{verbatim}
 
 \begin{verbatim}
-## Variable excluded at Step 2 is - Previous
+## Removed at Step 2 is - Previous
 \end{verbatim}
 
 \begin{verbatim}
-## Variable excluded at Step 3 is - Onset
+## Removed at Step 3 is - Onset
 \end{verbatim}
 
 \begin{verbatim}
-## Variable excluded at Step 4 is - factor(Expect_cat)
+## Removed at Step 4 is - factor(Expect_cat)
 \end{verbatim}
 
 \begin{verbatim}
-## Variable excluded at Step 5 is - JobControl
+## Removed at Step 5 is - JobControl
 \end{verbatim}
 
 \begin{verbatim}
-## Variable excluded at Step 6 is - Age
+## Removed at Step 6 is - Age
 \end{verbatim}
 
 \begin{verbatim}
-## Variable excluded at Step 7 is - JobDemand
+## Removed at Step 7 is - JobDemand
 \end{verbatim}
 
 \begin{verbatim}
-## Variable excluded at Step 8 is - Tampascale
+## Removed at Step 8 is - Tampascale
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Selection correctly terminated, 
+## No more variables removed from the model
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pool_coxr}\OperatorTok{$}\NormalTok{RR_Model}
+\NormalTok{pool_coxr}\OperatorTok{$}\NormalTok{RR_model}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## $`Step 1`
-##                         est std.err signif   lower   upper     HR   L.HR   U.HR
-## Duration            -0.0078  0.0040 0.0513 -0.0156  0.0000 0.9922 0.9845 1.0000
-## Radiation           -0.0748  0.1534 0.6258 -0.3754  0.2258 0.9279 0.6870 1.2533
-## Onset               -0.0937  0.1759 0.5944 -0.4385  0.2511 0.9106 0.6450 1.2854
-## Function             0.0439  0.0169 0.0092  0.0109  0.0769 1.0449 1.0110 1.0799
-## Age                 -0.0089  0.0077 0.2485 -0.0240  0.0062 0.9911 0.9763 1.0062
-## Previous            -0.0995  0.1992 0.6176 -0.4899  0.2910 0.9053 0.6127 1.3378
-## Tampascale          -0.0235  0.0138 0.0893 -0.0506  0.0036 0.9768 0.9507 1.0036
-## JobControl          -0.0083  0.0083 0.3168 -0.0247  0.0080 0.9917 0.9756 1.0080
-## JobDemand           -0.0218  0.0155 0.1597 -0.0522  0.0086 0.9784 0.9491 1.0086
-## Social              -0.0515  0.0249 0.0387 -0.1002 -0.0027 0.9498 0.9047 0.9973
-## factor(Expect_cat)2  0.2435  0.2308 0.2914 -0.2088  0.6958 1.2757 0.8116 2.0053
-## factor(Expect_cat)3  0.2279  0.2002 0.2549 -0.1644  0.6203 1.2560 0.8484 1.8595
+## $`Step 1 - removal - Radiation`
+##                   term     estimate   std.error  statistic       df     p.value
+## 1             Duration -0.007783573 0.003994353 -1.9486444 178.4911 0.052905679
+## 2            Radiation -0.074780449 0.153355337 -0.4876286 178.9568 0.626409768
+## 3                Onset -0.093662790 0.175923953 -0.5324050 178.9837 0.595105843
+## 4             Function  0.043898605 0.016858458  2.6039514 177.8688 0.009994408
+## 5                  Age -0.008894365 0.007706700 -1.1541081 178.4243 0.249999346
+## 6             Previous -0.099450041 0.199199462 -0.4992485 178.2878 0.618219792
+## 7           Tampascale -0.023507309 0.013833192 -1.6993409 167.8956 0.091106980
+## 8           JobControl -0.008335826 0.008327722 -1.0009731 178.8756 0.318191958
+## 9            JobDemand -0.021797568 0.015502737 -1.4060465 178.7206 0.161446545
+## 10              Social -0.051460196 0.024886468 -2.0677983 178.7147 0.040099732
+## 11 factor(Expect_cat)2  0.243470041 0.230764671  1.0550577 178.5326 0.292824622
+## 12 factor(Expect_cat)3  0.227934593 0.200197639  1.1385479 178.8455 0.256414596
+##           HR lower.EXP upper.EXP
+## 1  0.9922466 0.9845087 1.0000454
+## 2  0.9279472 0.6870440 1.2533200
+## 3  0.9105898 0.6450201 1.2855005
+## 4  1.0448764 1.0109152 1.0799786
+## 5  0.9911451 0.9762862 1.0062301
+## 6  0.9053352 0.6126993 1.3377390
+## 7  0.9767668 0.9506395 1.0036123
+## 8  0.9916988 0.9756434 1.0080185
+## 9  0.9784383 0.9491552 1.0086248
+## 10 0.9498415 0.9046224 0.9973209
+## 11 1.2756681 0.8115342 2.0052501
+## 12 1.2560032 0.8483578 1.8595266
 ## 
-## $`Step 2`
-##                         est std.err signif   lower   upper     HR   L.HR   U.HR
-## Duration            -0.0079  0.0040 0.0474 -0.0157 -0.0001 0.9921 0.9844 0.9999
-## Onset               -0.0907  0.1756 0.6057 -0.4349  0.2536 0.9133 0.6473 1.2887
-## Function             0.0456  0.0165 0.0056  0.0133  0.0778 1.0467 1.0134 1.0809
-## Age                 -0.0089  0.0077 0.2495 -0.0240  0.0062 0.9911 0.9763 1.0062
-## Previous            -0.0893  0.1981 0.6520 -0.4777  0.2990 0.9146 0.6202 1.3485
-## Tampascale          -0.0235  0.0138 0.0883 -0.0506  0.0035 0.9768 0.9507 1.0035
-## JobControl          -0.0087  0.0083 0.2947 -0.0248  0.0075 0.9913 0.9755 1.0075
-## JobDemand           -0.0216  0.0155 0.1627 -0.0519  0.0087 0.9786 0.9494 1.0087
-## Social              -0.0509  0.0248 0.0405 -0.0996 -0.0022 0.9504 0.9052 0.9978
-## factor(Expect_cat)2  0.2666  0.2262 0.2385 -0.1767  0.7099 1.3055 0.8380 2.0338
-## factor(Expect_cat)3  0.2440  0.1976 0.2168 -0.1432  0.6313 1.2763 0.8666 1.8801
+## $`Step 2 - removal - Previous`
+##                   term     estimate   std.error  statistic       df     p.value
+## 1             Duration -0.007911303 0.003990849 -1.9823609 179.4621 0.048965042
+## 2                Onset -0.090681699 0.175646663 -0.5162734 179.9838 0.606297177
+## 3             Function  0.045581711 0.016456535  2.7698244 178.8970 0.006200509
+## 4                  Age -0.008886199 0.007716358 -1.1516053 179.3925 0.251015778
+## 5             Previous -0.089344066 0.198134429 -0.4509265 179.2517 0.652587517
+## 6           Tampascale -0.023515751 0.013796782 -1.7044374 169.0769 0.090136296
+## 7           JobControl -0.008656570 0.008261454 -1.0478264 179.8551 0.296124640
+## 8            JobDemand -0.021603021 0.015474101 -1.3960760 179.7177 0.164413739
+## 9               Social -0.050888762 0.024839258 -2.0487231 179.6993 0.041943257
+## 10 factor(Expect_cat)2  0.266587552 0.226163448  1.1787385 179.4493 0.240062927
+## 11 factor(Expect_cat)3  0.244048620 0.197600903  1.2350582 179.8196 0.218420136
+##           HR lower.EXP upper.EXP
+## 1  0.9921199 0.9843898 0.9999108
+## 2  0.9133084 0.6472976 1.2886379
+## 3  1.0466365 1.0134161 1.0809459
+## 4  0.9911532 0.9762757 1.0062574
+## 5  0.9145309 0.6202160 1.3485088
+## 6  0.9767586 0.9506993 1.0035322
+## 7  0.9913808 0.9754572 1.0075643
+## 8  0.9786287 0.9493932 1.0087644
+## 9  0.9503844 0.9052232 0.9977986
+## 10 1.3055019 0.8380372 2.0337226
+## 11 1.2764064 0.8665381 1.8801403
 ## 
-## $`Step 3`
-##                         est std.err signif   lower   upper     HR   L.HR   U.HR
-## Duration            -0.0077  0.0040 0.0524 -0.0154  0.0001 0.9923 0.9847 1.0001
-## Onset               -0.0859  0.1753 0.6239 -0.4294  0.2576 0.9177 0.6509 1.2938
-## Function             0.0454  0.0164 0.0057  0.0132  0.0776 1.0464 1.0133 1.0807
-## Age                 -0.0093  0.0077 0.2277 -0.0243  0.0058 0.9907 0.9760 1.0058
-## Tampascale          -0.0231  0.0138 0.0933 -0.0500  0.0039 0.9772 0.9512 1.0039
-## JobControl          -0.0091  0.0082 0.2685 -0.0252  0.0070 0.9909 0.9751 1.0070
-## JobDemand           -0.0221  0.0154 0.1530 -0.0523  0.0082 0.9781 0.9490 1.0082
-## Social              -0.0516  0.0248 0.0373 -0.1002 -0.0030 0.9497 0.9047 0.9970
-## factor(Expect_cat)2  0.2640  0.2258 0.2424 -0.1786  0.7066 1.3021 0.8364 2.0271
-## factor(Expect_cat)3  0.2530  0.1964 0.1979 -0.1321  0.6380 1.2879 0.8763 1.8927
+## $`Step 3 - removal - Onset`
+##                   term     estimate   std.error  statistic       df     p.value
+## 1             Duration -0.007670615 0.003954661 -1.9396391 180.4776 0.053982519
+## 2                Onset -0.085934310 0.175259961 -0.4903248 180.9868 0.624497956
+## 3             Function  0.045425448 0.016419427  2.7665672 180.0073 0.006256421
+## 4                  Age -0.009251228 0.007668918 -1.2063278 180.3254 0.229271416
+## 5           Tampascale -0.023083288 0.013751202 -1.6786379 171.5059 0.095043723
+## 6           JobControl -0.009078357 0.008203584 -1.1066330 180.8938 0.269922092
+## 7            JobDemand -0.022054011 0.015433231 -1.4289951 180.7873 0.154731207
+## 8               Social -0.051613208 0.024787910 -2.0821928 180.6802 0.038733647
+## 9  factor(Expect_cat)2  0.263984652 0.225835616  1.1689239 180.5173 0.243975561
+## 10 factor(Expect_cat)3  0.252951520 0.196441942  1.2876655 180.7735 0.199508426
+##           HR lower.EXP upper.EXP
+## 1  0.9923587 0.9846966 1.0000805
+## 2  0.9176545 0.6508710 1.2937891
+## 3  1.0464730 1.0133315 1.0806984
+## 4  0.9907914 0.9760101 1.0057966
+## 5  0.9771811 0.9511955 1.0038766
+## 6  0.9909627 0.9751564 1.0070252
+## 7  0.9781874 0.9490411 1.0082288
+## 8  0.9496961 0.9046587 0.9969757
+## 9  1.3021082 0.8363959 2.0271330
+## 10 1.2878208 0.8762755 1.8926496
 ## 
-## $`Step 4`
-##                         est std.err signif   lower   upper     HR   L.HR   U.HR
-## Duration            -0.0078  0.0039 0.0488 -0.0155  0.0000 0.9922 0.9846 1.0000
-## Function             0.0453  0.0164 0.0058  0.0131  0.0776 1.0463 1.0132 1.0807
-## Age                 -0.0090  0.0077 0.2406 -0.0241  0.0060 0.9910 0.9762 1.0060
-## Tampascale          -0.0233  0.0137 0.0892 -0.0502  0.0036 0.9770 0.9510 1.0036
-## JobControl          -0.0088  0.0082 0.2825 -0.0248  0.0072 0.9912 0.9755 1.0072
-## JobDemand           -0.0220  0.0154 0.1544 -0.0522  0.0083 0.9782 0.9491 1.0083
-## Social              -0.0525  0.0247 0.0334 -0.1008 -0.0041 0.9489 0.9041 0.9959
-## factor(Expect_cat)2  0.2655  0.2258 0.2396 -0.1771  0.7081 1.3041 0.8377 2.0301
-## factor(Expect_cat)3  0.2523  0.1963 0.1987 -0.1324  0.6370 1.2870 0.8760 1.8908
+## $`Step 4 - removal - factor(Expect_cat)`
+##                  term     estimate   std.error statistic       df     p.value
+## 1            Duration -0.007780265 0.003947974 -1.970698 181.4407 0.050279458
+## 2            Function  0.045346889 0.016439010  2.758493 180.9830 0.006403233
+## 3                 Age -0.009010544 0.007677657 -1.173606 181.3178 0.242092185
+## 4          Tampascale -0.023328570 0.013725411 -1.699663 172.5549 0.090996269
+## 5          JobControl -0.008772204 0.008162829 -1.074652 181.8930 0.283953857
+## 6           JobDemand -0.021960209 0.015421007 -1.424045 181.7750 0.156147775
+## 7              Social -0.052455019 0.024656573 -2.127425 181.6638 0.034733741
+## 8 factor(Expect_cat)2  0.265521832 0.225807983  1.175874 181.5127 0.241185025
+## 9 factor(Expect_cat)3  0.252304256 0.196302201  1.285285 181.7729 0.200327923
+##          HR lower.EXP upper.EXP
+## 1 0.9922499 0.9846015 0.9999578
+## 2 1.0463908 1.0132130 1.0806550
+## 3 0.9910299 0.9762284 1.0060559
+## 4 0.9769414 0.9510103 1.0035796
+## 5 0.9912662 0.9755329 1.0072531
+## 6 0.9782792 0.9491529 1.0082992
+## 7 0.9488970 0.9041302 0.9958804
+## 8 1.3041113 0.8377280 2.0301415
+## 9 1.2869876 0.8759484 1.8909069
 ## 
-## $`Step 5`
-##                est std.err signif   lower   upper     HR   L.HR   U.HR
-## Duration   -0.0075  0.0039 0.0553 -0.0151  0.0002 0.9925 0.9850 1.0002
-## Function    0.0476  0.0165 0.0039  0.0152  0.0799 1.0488 1.0153 1.0832
-## Age        -0.0081  0.0076 0.2811 -0.0229  0.0067 0.9919 0.9774 1.0067
-## Tampascale -0.0211  0.0136 0.1200 -0.0476  0.0055 0.9791 0.9535 1.0055
-## JobControl -0.0083  0.0082 0.3074 -0.0243  0.0077 0.9917 0.9760 1.0077
-## JobDemand  -0.0209  0.0154 0.1744 -0.0511  0.0093 0.9793 0.9502 1.0093
-## Social     -0.0525  0.0244 0.0311 -0.1003 -0.0048 0.9489 0.9046 0.9952
+## $`Step 5 - removal - JobControl`
+##         term     estimate   std.error statistic       df     p.value        HR
+## 1   Duration -0.007482473 0.003904692 -1.916277 183.5758 0.056883350 0.9925455
+## 2   Function  0.047555491 0.016491699  2.883602 183.3303 0.004402089 1.0487044
+## 3        Age -0.008142310 0.007553982 -1.077883 183.4896 0.282500924 0.9918907
+## 4 Tampascale -0.021077061 0.013554581 -1.554977 177.0415 0.121737375 0.9791435
+## 5 JobControl -0.008336947 0.008167415 -1.020757 183.9129 0.308710372 0.9916977
+## 6  JobDemand -0.020908601 0.015394478 -1.358188 183.8088 0.176068636 0.9793085
+## 7     Social -0.052535961 0.024367155 -2.156015 183.7044 0.032382844 0.9488202
+##   lower.EXP upper.EXP
+## 1 0.9849783 1.0001707
+## 2 1.0153484 1.0831562
+## 3 0.9773132 1.0066857
+## 4 0.9534731 1.0055050
+## 5 0.9759489 1.0077007
+## 6 0.9502010 1.0093076
+## 7 0.9045700 0.9952351
 ## 
-## $`Step 6`
-##                est std.err signif   lower   upper     HR   L.HR   U.HR
-## Duration   -0.0071  0.0039 0.0688 -0.0147  0.0005 0.9929 0.9854 1.0005
-## Function    0.0475  0.0165 0.0040  0.0151  0.0799 1.0486 1.0152 1.0832
-## Age        -0.0080  0.0076 0.2931 -0.0228  0.0069 0.9920 0.9775 1.0069
-## Tampascale -0.0211  0.0136 0.1222 -0.0477  0.0056 0.9791 0.9534 1.0056
-## JobDemand  -0.0192  0.0154 0.2112 -0.0493  0.0109 0.9810 0.9519 1.0110
-## Social     -0.0609  0.0229 0.0078 -0.1057 -0.0161 0.9409 0.8997 0.9840
+## $`Step 6 - removal - Age`
+##         term     estimate   std.error statistic       df     p.value        HR
+## 1   Duration -0.007053937 0.003875984 -1.819909 184.5632 0.070393010 0.9929709
+## 2   Function  0.047528931 0.016535905  2.874287 184.2430 0.004525734 1.0486765
+## 3        Age -0.007973471 0.007584308 -1.051312 184.4663 0.294490761 0.9920582
+## 4 Tampascale -0.021050280 0.013619183 -1.545635 177.2980 0.123975890 0.9791697
+## 5  JobDemand -0.019220676 0.015372253 -1.250349 184.7943 0.212753181 0.9809629
+## 6     Social -0.060880870 0.022865188 -2.662601 184.6947 0.008438263 0.9409353
+##   lower.EXP upper.EXP
+## 1 0.9854559 1.0005431
+## 2 1.0152334 1.0832213
+## 3 0.9774201 1.0069156
+## 4 0.9533779 1.0056593
+## 5 0.9518476 1.0109687
+## 6 0.8996975 0.9840633
 ## 
-## $`Step 7`
-##                est std.err signif   lower   upper     HR   L.HR   U.HR
-## Duration   -0.0079  0.0038 0.0385 -0.0153 -0.0004 0.9921 0.9848 0.9996
-## Function    0.0481  0.0166 0.0038  0.0155  0.0806 1.0493 1.0156 1.0839
-## Tampascale -0.0185  0.0133 0.1647 -0.0446  0.0076 0.9817 0.9564 1.0076
-## JobDemand  -0.0177  0.0153 0.2450 -0.0477  0.0122 0.9825 0.9534 1.0123
-## Social     -0.0603  0.0229 0.0085 -0.1052 -0.0154 0.9415 0.9001 0.9847
+## $`Step 7 - removal - JobDemand`
+##         term     estimate   std.error statistic       df     p.value        HR
+## 1   Duration -0.007865649 0.003799883 -2.069971 185.6839 0.039839147 0.9921652
+## 2   Function  0.048080451 0.016611851  2.894346 185.4604 0.004255196 1.0492551
+## 3 Tampascale -0.018502738 0.013317643 -1.389340 180.2673 0.166443021 0.9816674
+## 4  JobDemand -0.017743416 0.015260646 -1.162691 185.8081 0.246445996 0.9824131
+## 5     Social -0.060274490 0.022898863 -2.632205 185.8169 0.009196667 0.9415061
+##   lower.EXP upper.EXP
+## 1 0.9848032 0.9995822
+## 2 1.0156423 1.0839802
+## 3 0.9563749 1.0076288
+## 4 0.9534634 1.0122418
+## 5 0.9001838 0.9847251
 ## 
-## $`Step 8`
-##                est std.err signif   lower   upper     HR   L.HR   U.HR
-## Duration   -0.0081  0.0038 0.0325 -0.0155 -0.0007 0.9919 0.9846 0.9993
-## Function    0.0484  0.0164 0.0032  0.0162  0.0805 1.0496 1.0163 1.0838
-## Tampascale -0.0211  0.0132 0.1095 -0.0470  0.0047 0.9791 0.9541 1.0047
-## Social     -0.0565  0.0227 0.0128 -0.1010 -0.0120 0.9451 0.9039 0.9881
+## $`Step 8 - removal - Tampascale`
+##         term     estimate   std.error statistic       df     p.value        HR
+## 1   Duration -0.008092142 0.003783744 -2.138660 186.5610 0.033763716 0.9919405
+## 2   Function  0.048380567 0.016396389  2.950684 186.3046 0.003577911 1.0495700
+## 3 Tampascale -0.021112332 0.013189846 -1.600650 180.8169 0.111200083 0.9791090
+## 4     Social -0.056501637 0.022696621 -2.489429 186.6223 0.013669630 0.9450649
+##   lower.EXP upper.EXP
+## 1 0.9846114 0.9993242
+## 2 1.0163763 1.0838478
+## 3 0.9541213 1.0047510
+## 4 0.9039448 0.9880556
 ## 
-## $`Step 9`
-##              est std.err signif   lower   upper     HR   L.HR   U.HR
-## Duration -0.0076  0.0037 0.0421 -0.0149 -0.0003 0.9924 0.9852 0.9997
-## Function  0.0565  0.0154 0.0002  0.0263  0.0867 1.0581 1.0266 1.0906
-## Social   -0.0520  0.0226 0.0215 -0.0963 -0.0077 0.9493 0.9082 0.9923
+## $`Step 9 - removal - ended`
+##       term     estimate   std.error statistic       df      p.value        HR
+## 1 Duration -0.007605055 0.003742491 -2.032084 188.0122 0.0435521395 0.9924238
+## 2 Function  0.056490633 0.015414714  3.664722 188.0122 0.0003219893 1.0581167
+## 3   Social -0.051992380 0.022611457 -2.299382 188.0122 0.0225821313 0.9493361
+##   lower.EXP upper.EXP
+## 1 0.9851707 0.9997303
+## 2 1.0266261 1.0905732
+## 3 0.9081817 0.9923554
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pool_coxr}\OperatorTok{$}\NormalTok{multiparm_p}
+\NormalTok{pool_coxr}\OperatorTok{$}\NormalTok{multiparm}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## NULL
+## $`Step 1 - removal - Radiation`
+##                    p-values D1 F-statistic
+## Duration            0.05133866   3.7972150
+## Radiation           0.62581293   0.2377817
+## Onset               0.59444553   0.2834551
+## Function            0.00921711   6.7805627
+## Age                 0.24845677   1.3319656
+## Previous            0.61760484   0.2492491
+## Tampascale          0.08939452   2.8877596
+## JobControl          0.31683987   1.0019472
+## JobDemand           0.15971062   1.9769667
+## Social              0.03865924   4.2757898
+## factor(Expect_cat)  0.48303066   0.7276753
+## 
+## $`Step 2 - removal - Previous`
+##                    p-values D1 F-statistic
+## Duration           0.047439666   3.9297548
+## Onset              0.605663477   0.2665382
+## Function           0.005609748   7.6719271
+## Age                0.249484299   1.3261948
+## Previous           0.652043040   0.2033347
+## Tampascale         0.088433945   2.9051067
+## JobControl         0.294718661   1.0979402
+## JobDemand          0.162691906   1.9490282
+## Social             0.040489472   4.1972664
+## factor(Expect_cat) 0.413557823   0.8829582
+## 
+## $`Step 3 - removal - Onset`
+##                    p-values D1 F-statistic
+## Duration           0.052424344   3.7621998
+## Onset              0.623904064   0.2404184
+## Function           0.005665895   7.6538941
+## Age                0.227692389   1.4552266
+## Tampascale         0.093331539   2.8178252
+## JobControl         0.268452683   1.2246366
+## JobDemand          0.153005830   2.0420269
+## Social             0.037325158   4.3355268
+## factor(Expect_cat) 0.398682504   0.9195901
+## 
+## $`Step 4 - removal - factor(Expect_cat)`
+##                    p-values D1 F-statistic
+## Duration           0.048759275   3.8836508
+## Function           0.005807806   7.6092824
+## Age                0.240554119   1.3773510
+## Tampascale         0.089300761   2.8888534
+## JobControl         0.282530421   1.1548778
+## JobDemand          0.154433617   2.0279044
+## Social             0.033385062   4.5259387
+## factor(Expect_cat) 0.397814846   0.9217688
+## 
+## $`Step 5 - removal - JobControl`
+##            p-values D1 F-statistic
+## Duration   0.055330339    3.672119
+## Function   0.003931908    8.315158
+## Age        0.281086598    1.161832
+## Tampascale 0.120018618    2.417953
+## JobControl 0.307369556    1.041945
+## JobDemand  0.174404049    1.844676
+## Social     0.031082697    4.648402
+## 
+## $`Step 6 - removal - Age`
+##            p-values D1 F-statistic
+## Duration   0.068773491    3.312068
+## Function   0.004049852    8.261523
+## Age        0.293116188    1.105256
+## Tampascale 0.122270111    2.388986
+## JobDemand  0.211172366    1.563372
+## Social     0.007754059    7.089443
+## 
+## $`Step 7 - removal - JobDemand`
+##            p-values D1 F-statistic
+## Duration   0.038455309    4.284781
+## Function   0.003799714    8.377242
+## Tampascale 0.164776983    1.930266
+## JobDemand  0.244955007    1.351850
+## Social     0.008483332    6.928501
+## 
+## $`Step 8 - removal - Tampascale`
+##            p-values D1 F-statistic
+## Duration   0.032463658    4.573867
+## Function   0.003171026    8.706537
+## Tampascale 0.109508478    2.562082
+## Social     0.012795066    6.197259
+## 
+## $`Step 9 - removal - ended`
+##           p-values D1 F-statistic
+## Duration 0.0421452034    4.129363
+## Function 0.0002476079   13.430184
+## Social   0.0214832491    5.287158
 \end{verbatim}
 
 \hypertarget{interaction-terms-in-model}{%
@@ -5384,19 +5429,19 @@ In Paragraph 4.9 the meaning and use of the predictormatrix in the \texttt{mice}
 
 \caption{\label{tab:unnamed-chunk-111}Predictormatrix settings for Multilevel Multiple Imputation models}
 \centering
-\begin{tabular}[t]{>{\bfseries}l||>{\raggedright\arraybackslash\columncolor{white}}p{30em}}
+\begin{tabular}[t]{>{}l||>{\raggedright\arraybackslash}p{30em}}
 \hline
 Setting & Description\\
 \hline
--2 & to indicate the cluster variable\\
+\textbf{-2} & \cellcolor{white}{to indicate the cluster variable}\\
 \hline
-1 & imputation model with a fixed effect and a random intercept.\\
+\textbf{1} & \cellcolor{white}{imputation model with a fixed effect and a random intercept.}\\
 \hline
-2 & imputation model with a fixed effect, random intercept and random slope.\\
+\textbf{2} & \cellcolor{white}{imputation model with a fixed effect, random intercept and random slope.}\\
 \hline
-3 & imputation model with a fixed effect, random intercept and cluster means.\\
+\textbf{3} & \cellcolor{white}{imputation model with a fixed effect, random intercept and cluster means.}\\
 \hline
-4 & imputation model with a fixed effect, random intercept and random slope and cluster means.\\
+\textbf{4} & \cellcolor{white}{imputation model with a fixed effect, random intercept and random slope and cluster means.}\\
 \hline
 \end{tabular}
 \end{table}
@@ -5426,31 +5471,31 @@ As default imputation method for continuous variables, \texttt{mice} uses \textt
 
 \caption{\label{tab:unnamed-chunk-113}Multilevel Imputation methods for continuous variables}
 \centering
-\begin{tabular}[t]{>{\bfseries}l||>{}l||>{\raggedright\arraybackslash\columncolor{white}}p{20em}|>{}l||>{}l||>{}l||>{}l||>{\raggedright\arraybackslash\columncolor{white}}p{30em}}
+\begin{tabular}[t]{>{}l||>{}l||>{\raggedright\arraybackslash}p{20em}|>{}l||>{}l||>{}l||>{}l||>{\raggedright\arraybackslash}p{30em}}
 \hline
 Package & Method & Description & SP\textsuperscript{*} & SY\textsuperscript{*} & HO\textsuperscript{\dag} & HE\textsuperscript{\dag} & Notes\\
 \hline
-`mice` & 2l.norm & Linear Mixed model &  &  &  & X & Does not handle predictors that are specified as fixed effects (1 in the                 predictormatrix). The current advice is to specify all predictors as random effects (2 in the predictormatrix).\\
+\textbf{`mice`} & 2l.norm & \cellcolor{white}{Linear Mixed model} &  &  &  & X & \cellcolor{white}{Does not handle predictors that are specified as fixed effects (1 in the                 predictormatrix). The current advice is to specify all predictors as random effects (2 in the predictormatrix).}\\
 \hline
- & 2l.lmer & Linear Mixed model & X & X &  &  & \\
+\textbf{} & 2l.lmer & \cellcolor{white}{Linear Mixed model} & X & X &  &  & \cellcolor{white}{}\\
 \hline
- & 2l.pan & Linear Mixed model (PAN method) &  &  & X &  & \\
+\textbf{} & 2l.pan & \cellcolor{white}{Linear Mixed model (PAN method)} &  &  & X &  & \cellcolor{white}{}\\
 \hline
-`micemd` & 2l.glm.norm & Linear Mixed model & X & X & X &  & \\
+\textbf{`micemd`} & 2l.glm.norm & \cellcolor{white}{Linear Mixed model} & X & X & X &  & \cellcolor{white}{}\\
 \hline
- & 2l.jomo & Generalized Linear Mixed model &  &  &  & X & For continuous or binary variables.\\
+\textbf{} & 2l.jomo & \cellcolor{white}{Generalized Linear Mixed model} &  &  &  & X & \cellcolor{white}{For continuous or binary variables.}\\
 \hline
  & 2l.2stage.norm & Two-level normal model & X & X &  & X & Two-stage imputation: at step 1, a linear regression model is fitted to each
 observed cluster; at step 2, estimates obtained from each cluster are combined according to a linear
-random effects model.\\
+\textbf{random effects model.} & NA & \cellcolor{white}{NA} & NA & NA & NA & NA & \cellcolor{white}{NA}\\
 \hline
- & 2l.2stage.pmm & Two-level normal model with PMM & X & X &  & X & Same as 2l.2stage.norm but with PMM.\\
+\textbf{} & 2l.2stage.pmm & \cellcolor{white}{Two-level normal model with PMM} & X & X &  & X & \cellcolor{white}{Same as 2l.2stage.norm but with PMM.}\\
 \hline
-`miceadds` & 2l.continuous & Linear Mixed model & X & X &  &  & \\
+\textbf{`miceadds`} & 2l.continuous & \cellcolor{white}{Linear Mixed model} & X & X &  &  & \cellcolor{white}{}\\
 \hline
- & 2l.pmm & Linear Mixed model with PMM & X & X &  &  & Same as 2l.continuous but with PMM.\\
+\textbf{} & 2l.pmm & \cellcolor{white}{Linear Mixed model with PMM} & X & X &  &  & \cellcolor{white}{Same as 2l.continuous but with PMM.}\\
 \hline
-\multicolumn{8}{l}{\textsuperscript{*} SP; sporadically missing, SY: systematically missing \textsuperscript{\dag} HO; homogeneous error variance, HE: heterogeneous error variance}\\
+\multicolumn{8}{l}{\rule{0pt}{1em}\textsuperscript{*} SP; sporadically missing, SY: systematically missing \textsuperscript{\dag} HO; homogeneous error variance, HE: heterogeneous error variance}\\
 \end{tabular}
 \end{table}
 
@@ -5590,19 +5635,19 @@ To impute multilevel missing values in dichotomous variables several methods hav
 
 \caption{\label{tab:unnamed-chunk-115}Multilevel Imputation methods for dichotomous variables}
 \centering
-\begin{tabular}[t]{>{\bfseries}l||>{}l||>{\raggedright\arraybackslash\columncolor{white}}p{20em}|>{}l||>{}l||>{\raggedright\arraybackslash\columncolor{white}}p{30em}}
+\begin{tabular}[t]{>{}l||>{}l||>{\raggedright\arraybackslash}p{20em}|>{}l||>{}l||>{\raggedright\arraybackslash}p{30em}}
 \hline
 Package & Method & Description & SP\textsuperscript{*} & SY\textsuperscript{*} & Notes\\
 \hline
-`mice` & 2l.bin & Generalized Linear Mixed model & X & X & 20-50 iterations are recommended and may be hard to run in small datasets\\
+\textbf{`mice`} & 2l.bin & \cellcolor{white}{Generalized Linear Mixed model} & X & X & \cellcolor{white}{20-50 iterations are recommended and may be hard to run in small datasets}\\
 \hline
-`micemd` & 2l.2stage.bin & Generalized Linear Mixed model & X & X & \\
+\textbf{`micemd`} & 2l.2stage.bin & \cellcolor{white}{Generalized Linear Mixed model} & X & X & \cellcolor{white}{}\\
 \hline
- & 2l.glm.bin & Two-level model & X & X & \\
+\textbf{} & 2l.glm.bin & \cellcolor{white}{Two-level model} & X & X & \cellcolor{white}{}\\
 \hline
-`miceadds` & 2l.binary & Generalized Linear Mixed model & X & X & \\
+\textbf{`miceadds`} & 2l.binary & \cellcolor{white}{Generalized Linear Mixed model} & X & X & \cellcolor{white}{}\\
 \hline
-\multicolumn{6}{l}{\textsuperscript{*} SP; sporadically missing, SY: systematically missing}\\
+\multicolumn{6}{l}{\rule{0pt}{1em}\textsuperscript{*} SP; sporadically missing, SY: systematically missing}\\
 \end{tabular}
 \end{table}
 
@@ -5904,7 +5949,7 @@ Before analyzing the imputed data, the convergence of the imputations should be 
 
 }
 
-\caption{Examples of convergenge plots}\label{fig:fig8-51}
+\caption{Examples of convergenge plots}\label{fig:fig8-5-1}
 \end{figure}
 \begin{figure}
 
@@ -5912,7 +5957,7 @@ Before analyzing the imputed data, the convergence of the imputations should be 
 
 }
 
-\caption{Examples of convergenge plots}\label{fig:fig8-52}
+\caption{Examples of convergenge plots}\label{fig:fig8-5-2}
 \end{figure}
 
 After convergence is checked and accepted, the total score needs to be calculated in the imputed data. In \ref{fig:fig8-6} an example is shown of how the total score can be obtained (via Transform \textgreater{} Compute). The total score will automatically be calculated in all imputed datasets and will turn yellow if its based on imputed item scores. Afterwards, the analysis can be performed using the total score that is calculated from the imputed item scores.
@@ -7464,8 +7509,8 @@ The RE value is only provided by SPSS and is calculated by filling in the values
 
 The RE gives information about the precision of the parameter estimate as the standard error of a regression coefficient.
 
-\hypertarget{pooling-correlation-coefficients-1}{%
-\chapter{Pooling correlation coefficients}\label{pooling-correlation-coefficients-1}}
+\hypertarget{pooling-correlation-coefficients}{%
+\chapter{Pooling correlation coefficients}\label{pooling-correlation-coefficients}}
 
 To pool correlation coefficients Fishers Z transformation is used. The following formulas are used (\citet{raghunathan2016}, \citet{VanBuuren2018} and \citet{enders2010applied}):
 

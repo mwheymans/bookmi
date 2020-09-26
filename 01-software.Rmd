@@ -602,6 +602,10 @@ In RStudio updating packages can be done in the Package tab as well. You can cli
 
 The main package that we will use in this manual is mice which stand for Multivariate Imputation by Chained Equations (MICE) (Van Buuren, 2009). Other packages that can be used to impute data or that can be used to do analyses after imputation are listed below.
 
+**psfmi**
+Prediction Model Selection and Performance Evaluation in Multiple Imputed data sets. Package to pool and select variables for logistic and Cox regression models. Validation with cross-validation and bootstrapping in Multiply Imputed data sets is also possible. 
+[See for more information.](https://mwheymans.github.io/psfmi/)
+
 **miceadds**
 Package contains some additional multiple imputation functions (Robitzsch et al., 2017).
 [See for more information.](https://cran.r-project.org/web/packages/miceadds/index.html)
@@ -625,10 +629,6 @@ Package is for the Analysis of multivariate normal datasets with missing values.
 **vim (visualization and imputation of missing values)**
 Package includes tools for the visualization of missing and/or imputed values. In addition, the quality of imputation can be visually explored using various univariate, bivariate, multiple and multivariate plot methods (Templ et al., 2017).
 [See for more information.](https://cran.r-project.org/web/packages/mi/index.html)
-
-**BaylorEdPsych**
-Package for Baylor University Educational Psychology Quantitative Courses. This package included Little’s MCAR test (Beaujean, 2015).
-[See for more information.](https://cran.r-project.org/web/packages/BaylorEdPsych/index.html)
 
 **MKmisc**
 Contains several functions for statistical data analysis; e.g. for sample size and power calculations, computation of confidence intervals, and generation of similarity matrices. This package contains the mi.t.test function for pooling t-tests after multiple imputation (Kohl, 2016).

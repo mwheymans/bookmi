@@ -16,92 +16,76 @@ For categorical covariates, SPSS does not generate a pooled p-value for the over
 knitr::include_graphics("images/fig6.1_logistic.png")
 ```
 
-There are several procedures to derive a pooled p-value for categorical variables, the pooled sampling variance or D1 method, the multiple parameter Wald test or D2 method, and the Meng and Rubin pooling procedure (@VanBuuren2018; @enders2010applied; @Eekhout2017; @Meng1992; @Mistler2013; @Marshall2009MedResMeth). A more simple procedures to derive a pooled p-value for the overall Wald test is just taking the median of the p-values from the overall Wald test of all imputed datasets, this rule is called the Median P Rule (MPR) (@Eekhout2017). These methods can be performed in R.
+There are several procedures to derive a pooled p-value for categorical variables, the pooled sampling variance or D1 method, the multiple parameter Wald test or D2 method, and the Meng and Rubin pooling procedure (@VanBuuren2018; @enders2010applied; @Eekhout2017; @Meng1992; @Mistler2013; @Marshall2009MedResMeth). A more simple procedures to derive a pooled p-value for the overall Wald test is just taking the median of the p-values from the overall Wald test of all imputed data sets, this rule is called the Median P Rule (MPR) (@Eekhout2017). These methods can be performed in R.
 
 ## Logistic regression with a categorical variable in R
 
-Pooling of categorical variables can be done by using the psfmi package that is downloadable via Github. The package needs R version 3.4.0 or higher. The package contains a function called `psfmi_lr` for pooling of logistic regression models and `psfmi_coxr`, to pool right censored Cox regression models. Install the package by first running:
-
-`install.packages("devtools")`
-
-`library(devtools)`
-
-`devtools::install_github("mwheymans/psfmi")`
-
-`library(psfmi)`
-
-Than run the following code to pool the logistic regression model with as independent variable the categorical Tampa scale variable and as outcome the Radiation variable. To derive the pooled p-value for the overall Wald test, the D1 method is used. Other settings that can be used for `method=`, are "D2" for the D2 pooling method, "D3" for the Meng and Rubin method and "MPR" for the Median P Rule. 
+Pooling of categorical variables can be done by using the [psfmi](https://mwheymans.github.io/psfmi/) package. The package contains a function called `psfmi_lr` for pooling of logistic regression models and `psfmi_coxr`, to pool right censored Cox regression models. Install the package and run the following code to pool the logistic regression model with as independent variable the categorical Tampa scale variable and as outcome the Radiation variable. To derive the pooled p-value for the overall Wald test, the D1 method is used. Other settings that can be used for `method=`, are "D2" for the D2 pooling method, "D3" for the Meng and Rubin method and "MPR" for the Median P Rule. 
 
 ```{r }
-library(foreign)
+library(haven)
 library(psfmi)
-data <- read.spss(file="Backpain 150 Missing_Tampa_Cat Imp.sav", to.data.frame = TRUE) 
+data <- read_sav(file="Backpain 150 Missing_Tampa_Cat Imp.sav") 
 
 pool_lr <- psfmi_lr(data=data, nimp=5, impvar="Imputation_", Outcome="Radiation",
   cat.predictors=c("Tampa_Cat"), method="D1")
-pool_lr$RR_Model
-pool_lr$multiparm_p
+pool_lr$RR_model
 
 ```
 
-Pooling a multivariable regression model that contains a mix of continuous, dichotomous and categorical variables can easily be performed with the `psfmi_lr` function. With the next code example, pooling is done in 10 multiple imputed datasets that are stored in the file `lbpmilr` (see `?lbpmilr` for more information about the dataset) . The relationship with the outcome variable "Chronic" is estimated, using a model with 2 dichotomous, 4 continuous and 2 categorical variables. The method to obtain a pooled p-value for the categorical variables is the Meng and Rubin or D3 method, indicated by `method="D3"`. To obtain a pooled p-value for continuous and dichotomous variables Rubin's Rules are used. 
+Pooling a multivariable regression model that contains a mix of continuous, dichotomous and categorical variables can easily be performed with the `psfmi_lr` function. With the next code example, pooling is done in 10 multiple imputed datasets that are stored in the file `lbpmilr` (see `?lbpmilr` for more information about the data set) . The relationship with the outcome variable "Chronic" is estimated, using a model with 2 dichotomous, 4 continuous and 2 categorical variables. The method to obtain a pooled p-value for the categorical variables is the D3 or Meng and Rubin method, indicated by `method="D3"`. To obtain a pooled p-value for continuous and dichotomous variables Rubin's Rules are used. 
 
 ```{r }
-library(foreign)
 library(psfmi)
 
 pool_lr <- psfmi_lr(data=lbpmilr, nimp=10, impvar="Impnr", Outcome="Chronic",
   predictors=c("Gender", "Smoking", "Function", "JobControl", "JobDemands",
   "SocialSupport"), cat.predictors = c("Carrying", "Satisfaction"), 
-  method="D3", print.method = FALSE)
-pool_lr$RR_Model
-pool_lr$multiparm_p
+  method="D3")
+pool_lr$RR_model
+pool_lr$multiparm
 
 ```
 
-In the final table that is called "Mixed p-values (D3 & RR)", the pooled p-values can be found for all variables, including the categorical variables that are pooled by the Meng and Rubin or D3 method. For the dichotomous and continuous variables the pooled p-value estimated by Rubin's Rules is reported. These are equal to the p-values in the first table under "Pooled model (Rubin's Rules)". You can set `print.method = TRUE`, to obtain the table with the pooled p-values by the D3 method for all variables.
+In the table that is the pooled p-values can be found for all variables, including the categorical variables that are pooled by the Meng and Rubin or D3 method. 
 
 ## Cox Regression with a categorical variable in R
 
-In the psfmi package, a function that is called `psfmi_coxr`is also available to obtain overall pooled p-values for categorical variables in Cox regression models, because this is also not possible in SPSS. All pooling methods can be applied, except for the Meng and Rubin procedure. The Meng and Rubin procedure is not recommended to use for Cox regression models (@Marshall2009MedResMeth). 
+With the function `psfmi_coxr`it is also available to obtain overall pooled p-values for categorical variables in Cox regression models. All pooling methods can be applied, except for the Meng and Rubin procedure. The Meng and Rubin procedure is not recommended to use for Cox regression models (@Marshall2009MedResMeth). 
 
-To pool a Cox regression model with a mix of continuous and dichotomous variables and 1 categorical variable over 10 impted datasets (see `?psfmi::lbpmicox` for more information on the dataset) and pooling method "D1" use:
+To pool a Cox regression model with a mix of continuous and dichotomous variables and 1 categorical variable over 10 imputed datasets (see `?psfmi::lbpmicox` for more information on the dataset) use the following code:
 
 ```{r }
-library(foreign)
 library(psfmi)
 
 pool_coxr <- psfmi_coxr(data=lbpmicox, nimp=10, impvar="Impnr", time="Time", status="Status",
   predictors=c("Duration", "Radiation", "Onset", "Function", "Age",
   "Previous", "Tampascale", "JobControl", "JobDemand", "Social"), 
-  cat.predictors=c("Expect_cat"), method="D1", print.method = FALSE)
-pool_coxr$RR_Model
-pool_coxr$multiparm_p
+  cat.predictors=c("Expect_cat"), method="D1")
+pool_coxr$RR_model
+pool_coxr$multiparm
 
 ```
  
-The pooled p-values are shown in the table that is called "Pooled p-values (D1 & RR)". For the categorical variable `factor(Expect_cat)`, the p-value is pooled using method "D1" and for all other variables Rubin's ules are used. These p-values are the same as the p-values in the "Pooled model (Rubin's Rules)" table above in the output. You can set `print.method = TRUE` to obtain the pooled p-values by method "D1" for all variables.  
- 
-For more information about pooling possibilities of logistic and Cox regression models with the psfmi package see `?psfmi::psfmi_lr` or `?psfmi::psfmi_coxr`.
+The pooled p-values according to method "D1" are shown in the last table.For more information about pooling possibilities of logistic and Cox regression models with the psfmi package see `?psfmi::psfmi_lr` or `?psfmi::psfmi_coxr`.
 
 ## Variable selection
 
-Prediction models are frequently developed by using selection procedures in logistic and Cox regression models. As a selection procedure, backward selection is generally recommended (@Moons2015). However, variable selection in multiple imputed datasets may be challenging. When you apply variable selection in each imputed dataset, different variables may be selected between imputed datasets. The question is than what is the best procedure to merge these different selected models into one final model. Wood (@Wood2008) showed that the best choice to select variables from multiply imputed datasets is to start your selection procedure in the pooled model. It is possible to do this in SPSS when the model includes continuous and dichotomous variables. This is however not possible in SPSS when the model contains categorical variables. Because categorical variables are estimated and selected by using an overall Wald Chi-square value and as we have seen in the previous paragraphs that that is not possible in SPSS. For that reason we have developed the R `psfmi` package, that contains functions to pool and select variables in multiple imputed datasets. 
+Prediction models are frequently developed by using selection procedures in logistic and Cox regression models. As a selection procedure, backward selection is generally recommended (@Moons2015). Variable selection in multiple imputed data sets may be challenging. When you apply variable selection in each imputed data set, different variables may be selected between imputed data sets. The question is than what is the best procedure to merge these different selected models into one final model. Wood (@Wood2008) showed that the best choice to select variables from multiply imputed data sets is to start your selection procedure from the pooled model. It is possible to do this in SPSS when the model includes continuous and dichotomous variables. This is however not possible in SPSS when the model contains categorical variables. Because categorical variables are estimated and selected by using an overall Wald Chi-square value and as we have seen in the previous paragraphs that that is not possible in SPSS. This is possible with the `psfmi` package, where you can choose between backward or forward selection. 
 
 ### Variable Selection with Logistic Regression models in R
 
-For variable selection we use the `psfmi` package that was introduced in paragraph 6.2 (see that paragraph of how to install the package). With this package variable selection can be applied by using different methods to obtain pooled p-values and to select on basis of these pooled p-values. These methods were introduced in paragraph 6.1 and 6.2 and are called the "D1", "D2", "D3" (Meng and Rubin) and "MPR" (Median P Rule). Variable selection of the multivariable model that was pooled in paragraph 6.2 can be done by using the following code, where method "D1" is used and a p-value of 0.05 as selection criterium. 
+Variable selection can be applied by using different methods to obtain pooled p-values and to select on basis of these pooled p-values. These methods were introduced in paragraph 6.1 and 6.2 and are called the "D1", "D2", "D3" (Meng and Rubin) and "MPR" (Median P Rule). Variable selection from the multivariable model that was pooled in paragraph 6.2 can be done by using the following settings in the `psfmi` function, method is "D1", a p-value of 0.05 as selection criterion and direction="BW" for backward selection. 
 
 ```{r }
-library(foreign)
 library(psfmi)
 
 pool_lr <- psfmi_lr(data=lbpmilr, nimp=10, impvar="Impnr", Outcome="Chronic",
   predictors=c("Gender", "Smoking", "Function", "JobControl", "JobDemands",
   "SocialSupport"), cat.predictors = c("Carrying", "Satisfaction"), 
-  p.crit = 0.05, method="D1", print.method = FALSE)
-pool_lr$RR_Model
-pool_lr$multiparm_p
+  p.crit = 0.05, method="D1", direction="BW")
+pool_lr$RR_model
+pool_lr$multiparm
 
 ```
 
@@ -109,18 +93,17 @@ See `?psfmi::psfmi_lr` for other possibilities during variable selection with th
 
 ### Variable Selection with Cox Regression models in R
 
-Variable selection with Cox regression models can be applied with the `psfmi` package, that was introduced in paragraph 6.2 (see that paragraph of how to install the package). The package contains the function `psfmi_coxr` that was used in paragraph 6.3 to pool a multivariable Cox regression model. We can apply variable selection in that model by the next code using the "D1" method to obtain pooled p-values for categorical variables and Rubin's Rules for dichotomous and continuous variables and using a p-value of 0.05 as selection criterium.  
+We can apply backward variable selection for a Cox regression model using the "D1" method, a p-value of 0.05 as selection criterium and direction = "BW" for backward selection.  
 
 ```{r }
-library(foreign)
 library(psfmi)
 
 pool_coxr <- psfmi_coxr(data=lbpmicox, nimp=10, impvar="Impnr", time="Time", status="Status",
   predictors=c("Duration", "Radiation", "Onset", "Function", "Age",
   "Previous", "Tampascale", "JobControl", "JobDemand", "Social"), 
-  cat.predictors=c("Expect_cat"), p.crit = 0.05, method="D1", print.method = FALSE)
-pool_coxr$RR_Model
-pool_coxr$multiparm_p
+  cat.predictors=c("Expect_cat"), p.crit = 0.05, method="D1", direction = "BW")
+pool_coxr$RR_model
+pool_coxr$multiparm
 
 ```
 
