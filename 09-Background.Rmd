@@ -58,7 +58,7 @@ $$V_W = \frac{1}{3}(0.896^2 + 0.882^2 + 0.898^2)=0.7957147$$
 This reflects the extra variance due to the missing data. This is estimated by taking the variance of the parameter of interest estimated over imputed datasets. This formula is equal to the formula for the (sample) variance which is commonly used in statistics. This value is large when the level of missing data is high and smaller when the level of missing data is small.
 
 \begin{equation}
-V_B\sqrt{\frac{\sum_{i=1}^m (\theta_i - \overline{\theta})^2}{N-1} }
+V_B\sqrt{\frac{\sum_{i=1}^m (\theta_i - \overline{\theta})^2}{m-1} }
   (\#eq:var-b)
 \end{equation}
 

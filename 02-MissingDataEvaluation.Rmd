@@ -69,7 +69,7 @@ In this menu, transfer all continuous variables to the Quantitative variables wi
 knitr::include_graphics("images/fig2.4.png")
 ```
 
-By default, univariate statistics are presented that include output information about the number and percentages of missing data and  descriptive statistics for each variable (Figure \@ref(fig:tab2-1)). 
+By default, univariate statistics are presented that include output information about the number and percentages of missing data and descriptive statistics for each variable (Figure \@ref(fig:tab2-1)). 
 
 Information about the missing data patterns is provided in the Tabulated patterns table. On the left column of that table, named “Number of Cases”, the number of cases are presented with that specific missing data pattern. In our example, there are 75 cases without any missing value and 13 cases with a missing value in only the Tampa scale variable (see row 1 and 2 in (Figure \@ref(fig:tab2-1)). In the right column of that table named “Complete if…”, the total number of subjects is presented if the variables that contain missing data in that pattern are not used in the analysis. Those variables are marked with the “X” symbol. For example, 88 subjects remain in the analysis when the variable tampa scale is not used in the analysis, these are the 75 subjects that have completely observed data on top of the 13 subjects with missing data in the Tampa scale variable only.
 
@@ -257,15 +257,14 @@ knitr::include_graphics("images/fig2.14.png")
 
 ### Little's MCAR test in R
 
-Little´s MCAR test is available in the `MissMech` package as the `TestMCARNormality` function. To apply the test, we select only the continuous variables. We use it for the same dataset as in the previous paragraph. The p-value for the test is siginificant, indicating that the missings does not seem to be compeletely at random. 
+Little´s MCAR test is available in the `naniar` package as the `mcar_test` function. To apply the test, we select only the continuous variables. We use it for the same dataset as in the previous paragraph. The p-value for the test is siginificant, indicating that the missings does not seem to be compeletely at random. 
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
 library(haven)
 dt <- read_sav("data/Backpain_test.sav")
 df_select <- dt[,c("Pain", "Tampascale","Disability", "Age")]
-library(MissMech)
-res <- TestMCARNormality(data=df_select)
-print(res)
+library(naniar)
+mcar_test(data=df_select)
 
 ``` 
 
