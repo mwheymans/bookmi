@@ -197,7 +197,7 @@ The following default settings are used in the `mice` function to start MI, `m=5
 ```{r }
 library(mice)
 library(foreign)
-data <- read.spss(file="Backpain50 MI missing.sav", to.data.frame=T)[, -1] # Read in dataset an exclude ID variable
+data <- read.spss(file="data/Backpain50 MI missing.sav", to.data.frame=T)[, -1] # Read in dataset an exclude ID variable
 imp <- mice(data, m=5, maxit=10, method="pmm")
 ```
 
@@ -227,7 +227,7 @@ For example, we assume that we have missing data in two continuous and one dicho
 library(mice)
 library(haven)
 # Read in dataset an exclude ID variable
-data <- read_sav(file="Backpain50 MI missing all.sav")[, -1] 
+data <- read_sav(file="data/Backpain50 MI missing all.sav")[, -1] 
 data$Radiation <- factor(data$Radiation) 
 imp <- mice(data, m=5, maxit=10, printFlag = FALSE)
 imp$method
@@ -282,7 +282,7 @@ To define the imputation model for variables with missing data `mice` makes use 
 ```{r }
 library(mice)
 library(foreign)
-data <- read.spss(file="Backpain50 MI missing.sav", to.data.frame=T)[, -1] # Read in dataset an exclude ID variable
+data <- read.spss(file="data/Backpain50 MI missing.sav", to.data.frame=T)[, -1] # Read in dataset an exclude ID variable
 imp <- mice(data, m=5, maxit=10, method="pmm", printFlag = FALSE)
 ```
 
@@ -393,7 +393,7 @@ We take as an example a dataset with 10 cases with 3 missing values in the Tampa
 ```{r echo=FALSE}
 
 library(foreign)
-dataset <- suppressWarnings(suppressMessages(read.spss(file="PMM 10 missing.sav", to.data.frame = T)))
+dataset <- suppressWarnings(suppressMessages(read.spss(file="data/PMM 10 missing.sav", to.data.frame = T)))
 dataset
 
 ```
@@ -423,7 +423,7 @@ library(foreign)
 library(mice)
 library(knitr)
 library(kableExtra)
-dataset <- suppressWarnings(suppressMessages(read.spss(file="PMM 10 missing.sav", to.data.frame = T)))
+dataset <- suppressWarnings(suppressMessages(read.spss(file="data/PMM 10 missing.sav", to.data.frame = T)))
 
 y <- dataset$Tampascale
 ry <- !is.na(y)
@@ -473,7 +473,7 @@ Find the closest donor for the first missing value by subtracting the first $Tam
 ```{r , echo=FALSE}
 library(foreign)
 library(mice)
-dataset <- suppressWarnings(suppressMessages(read.spss(file="PMM 10 missing.sav", to.data.frame = T)))
+dataset <- suppressWarnings(suppressMessages(read.spss(file="data/PMM 10 missing.sav", to.data.frame = T)))
 
 y <- dataset$Tampascale
 
@@ -547,7 +547,7 @@ Coding of the level of the variable `Radiation` from continous to categorical is
 library(mice)
 library(foreign)
 # Read in dataset an exclude ID variable
-data <- read.spss(file="Backpain50 MI missing radiation.sav", to.data.frame=T)[, -1] 
+data <- read.spss(file="data/Backpain50 MI missing radiation.sav", to.data.frame=T)[, -1] 
 imp <- mice(data, m=5, maxit=10, printFlag = FALSE)
 imp
 ```
@@ -560,7 +560,7 @@ See the correct imputation method `logreg` for the variable Radiation.
 library(mice)
 library(foreign)
 # Read in dataset an exclude ID variable
-data <- read.spss(file="Backpain50 MI missing radiation.sav", to.data.frame=T)[, -1] 
+data <- read.spss(file="data/Backpain50 MI missing radiation.sav", to.data.frame=T)[, -1] 
 data$Radiation <- factor(data$Radiation)
 imp <- mice(data, m=5, maxit=10, printFlag = FALSE)
 imp
@@ -572,7 +572,7 @@ It seems that you can not completely solve the problem by using `logreg` as impu
 library(mice)
 library(foreign)
 # Read in dataset an exclude ID variable
-data <- read.spss(file="Backpain50 MI missing radiation.sav", to.data.frame=T)[, -1] 
+data <- read.spss(file="data/Backpain50 MI missing radiation.sav", to.data.frame=T)[, -1] 
 imp <- mice(data, m=5, maxit=10, method=c("", "pmm", "pmm", "logreg"), printFlag = FALSE)
 ```
 

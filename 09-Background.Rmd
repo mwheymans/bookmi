@@ -1,7 +1,7 @@
 ---
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 # (PART) Part VII: Background information to Multiple Imputation Methods {-}
 
@@ -44,9 +44,9 @@ The pooled standard error is derived from different components that reflect the 
 
 *Within imputation variance*
 This is the average of the mean of the within variance estimate, i.e. squared standard error, in each imputed dataset. This reflects the sampling variance, i.e. the precision of the parameter of interest in each completed dataset. This value will be large in small samples and small in large samples.
-$$\frac{1}{m} \sum_{i=1}^m{SE_i^2}$$
+
 \begin{equation}
-V_W = \frac{1}{m}\left \sum_{i=1}^m{SE_i^2}\right
+V_W = \frac{1}{m} \sum_{i=1}^m{SE_i^2}
   (\#eq:var-w)
 \end{equation}
 

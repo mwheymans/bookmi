@@ -58,7 +58,7 @@ suppressWarnings(suppressMessages(library(mice)))
 ```{r }
 # Read in the SPSS dataset
 library(foreign)
-dataset <- read.spss(file="Backpain 150 Missing MI datasets.sav", to.data.frame=T)
+dataset <- read.spss(file="data/Backpain 150 Missing MI datasets.sav", to.data.frame=T)
 
 library(mice)
 # Apply multiple imputation
@@ -103,7 +103,7 @@ suppressWarnings(suppressMessages(library(miceadds)))
 
 ```{r }
 # Read in the dataset 
-dataset <- read_sav(file="Backpain 150 Missing.sav")
+dataset <- read_sav(file="data/Backpain 150 Missing.sav")
 
 # Impute missing data using the mice function, with printFlag is FALSE, 
 # which means that the imp and iter information is hided (called silent 
@@ -156,7 +156,7 @@ The `mice` package itself does not have a pooled t-test option. Instead a linear
 library(foreign)
 library(mice)
 
-dataset <- read.spss(file="Backpain 150 Missing.sav", to.data.frame=T)
+dataset <- read.spss(file="data/Backpain 150 Missing.sav", to.data.frame=T)
 
 # Impute the missing values using the mice function 
 imp <- mice(dataset, m=3, maxit=50, seed=2375, printFlag=F)
@@ -178,7 +178,7 @@ you can also use the `mi.t.test` function in the `MKmisc` package. Note that the
 
 ```{r }
 # Read in the dataset
-dataset <- read.spss(file="Backpain 150 Missing.sav", to.data.frame=TRUE)
+dataset <- read.spss(file="data/Backpain 150 Missing.sav", to.data.frame=TRUE)
 
 # Use the mice function to impute the missing data
 imp <- mice(dataset, m=3, maxit=50, seed=2375, printFlag=FALSE)
@@ -247,7 +247,7 @@ To compare the Function means between three Tampascale variable groups, you use:
 
 ```{r }
 # Read in the dataset
-dataset <- read.spss(file="Backpain 150 Missing_Tampa_Cat.sav", to.data.frame=TRUE)
+dataset <- read.spss(file="data/Backpain 150 Missing_Tampa_Cat.sav", to.data.frame=TRUE)
 
 # Generate 5 impued datasets 
 # and set printFlag = F for a silent imputation
@@ -282,7 +282,7 @@ Information is provided in the row called Pooled about the parameter estimates, 
 A pooled linear regression analyses can be produced by using the `with` and `pool` functions in the `mice` package.  
 
 ```{r }
-dataset <- read.spss(file="Backpain 150 Missing.sav", to.data.frame=TRUE)
+dataset <- read.spss(file="data/Backpain 150 Missing.sav", to.data.frame=TRUE)
 
 imp <- mice(dataset, m=3, maxit=50, seed=3715, printFlag=FALSE)
 
@@ -321,7 +321,7 @@ information is provided in the row called Pooled about the parameter estimates, 
 You can use the `mice` package to get pooled results after logistic regression. In combination with the `pool` function you have to use the following R code.
 
 ```{r }
-dataset <- read.spss(file="Backpain 150 Missing.sav", to.data.frame=T)
+dataset <- read.spss(file="data/Backpain 150 Missing.sav", to.data.frame=T)
 
 imp.LR <- mice(dataset, m=3, maxit=50, seed=2268, printFlag = FALSE)
 fit <- with(data=imp.LR, exp=glm(Radiation ~ Function, family = binomial))
@@ -356,7 +356,7 @@ Another procedure to get the pooled estimates from a logistic regression model i
 ```{r }
 
 library(mitools)
-dataset <- read.spss(file="Backpain 150 Missing.sav", to.data.frame=T)
+dataset <- read.spss(file="data/Backpain 150 Missing.sav", to.data.frame=T)
  
 imp <- mice(dataset, m=3, maxit=50, seed=2268, printFlag = F)
 dataset1 <- complete(imp,1)
@@ -446,7 +446,7 @@ We start by using the `mice` function to impute missing data in the Pain variabl
 ```{r }
 # Read in the dataset
 library(survival)
-dataset <- read.spss(file="Backpain 150 Survival Missing.sav", to.data.frame=T)
+dataset <- read.spss(file="data/Backpain 150 Survival Missing.sav", to.data.frame=T)
 
 # Compute the cumulative hazard, attach it to the dataset
 # and omit the ID variable (first column)
