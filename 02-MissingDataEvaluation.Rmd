@@ -20,7 +20,7 @@ Missing data in SPSS can be defined in two ways, as a system missing or user mis
 knitr::include_graphics("images/fig2.1.png")
 ```
 
-For the female patients in this dataset the duration of a previous pregnancy was regisered in the Gestational Age (GA) variable. This variable consists of different values: pregenancy durations in weeks, such as 36 and 29, but also the value 8 and empty cells. The value 8 is specified by the user to exclude males from further analysis because males cannot be pregnant. The system missing values are recognizable by the empty cells (or dots) in the dataset, and these indicate the missing GA values for women who did not report the GA for their pregnancy. It makes no difference if we code the missing values as a system or user missing value in SPSS, because both kinds of missing values will be excluded from further analyses.
+For the female patients in this dataset the duration of a previous pregnancy was registered in the Gestational Age (GA) variable. This variable consists of different values: pregnancy duration in weeks, such as 36 and 29, but also the value 8 and empty cells. The value 8 is specified by the user to exclude males from further analysis because males cannot be pregnant. The system missing values are recognizable by the empty cells (or dots) in the dataset, and these indicate the missing GA values for women who did not report the GA for their pregnancy. It makes no difference if we code the missing values as a system or user missing value in SPSS, because both kinds of missing values will be excluded from further analyses.
 
 ###	Missing data in R
 
