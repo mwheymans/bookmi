@@ -305,7 +305,7 @@ Accordingly, for the imputation of the item scores of questionnaire1, we include
 predmat2 <- imp0$predictorMatrix
 predmat2[paste0("Q1_I", 1:12),] <- 0
 predmat2[paste0("Q1_I", 1:12),paste0("Q1_I", 1:12)] <- 1
-predmat2[paste0("Q2_I", 1:12),c("Q2_TS","Q3_TS","Q4_TS","Q5_TS")] <- 1
+predmat2[paste0("Q1_I", 1:12),c("Q2_TS","Q3_TS","Q4_TS","Q5_TS")] <- 1
 predmat2[paste0("Q2_I", 1:12),] <- 0
 predmat2[paste0("Q2_I", 1:12),paste0("Q2_I", 1:12)] <- 1
 predmat2[paste0("Q2_I", 1:12),c("Q1_TS","Q3_TS","Q4_TS","Q5_TS")] <- 1
