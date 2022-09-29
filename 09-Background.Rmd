@@ -121,7 +121,7 @@ knitr::include_graphics("images/table5.2.png")
 The (older method) to calculate the df for the t-distribution is defined as (@Rubin1987, @VanBuuren2018):
 
 \begin{equation}
-df_{Old} = \frac{m-1}{lambda^2} = (m-1) * (1 + \frac{1}{r^2})
+df_{Old} = \frac{m-1}{lambda^2} = (m-1) * (1 + \frac{1}{r})^2
   (\#eq:df-old)
 \end{equation}
 
